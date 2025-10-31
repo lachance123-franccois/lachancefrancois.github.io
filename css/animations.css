@@ -1,6 +1,6 @@
 :root {
   /* Primitive Color Tokens */
-  --color-white: rgb(202, 169, 169);
+  --color-white: rgba(255, 255, 255, 1);
   --color-black: rgba(0, 0, 0, 1);
   --color-cream-50: rgba(252, 252, 249, 1);
   --color-cream-100: rgba(255, 255, 253, 1);
@@ -542,7 +542,6 @@ select.form-control {
   overflow: hidden;
   transition: box-shadow var(--duration-normal) var(--ease-standard);
 }
-V
 
 .card:hover {
   box-shadow: var(--shadow-md);
@@ -962,7 +961,4 @@ html {
     .grid .card:nth-child(4) {
         animation-delay: 0s;
     }
-}
-.fade-in {
-    animation: fadeInUp 0.6s ease-out forwards;
 }

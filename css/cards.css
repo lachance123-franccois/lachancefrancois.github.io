@@ -370,9 +370,14 @@ code,
 pre {
   font-family: var(--font-family-mono);
   font-size: calc(var(--font-size-base) * 0.95);
-  background-color: var(--color-secondary);
+  background-color: var(--rose, #e85d9a);
+  color: var(--bleu-navy, #0d1b2a);
   border-radius: var(--radius-sm);
+  padding: 1rem;
+  border: 1px solid rgba(232, 93, 154, 0.5);
+  box-shadow: 0 4px 10px rgba(232, 93, 154, 0.25);
 }
+
 
 code {
   padding: var(--space-1) var(--space-4);
