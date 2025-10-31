@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <!-- Polices modernes -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- AOS CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ingénieur IA & Développeur Web</title>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Cfichier d'animation du site -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-icon"><i class="fas fa-code"></i></span> [TonNom]
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">Machine Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">MATLAB</a></li>
+                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Animated Background -->
+    <section class="hero-section">
+        <div class="animated-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
+        <div class="container position-relative z-index-10">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                    <h1 class="display-3 fw-bold text-navy mb-3 animate__animated animate__fadeInLeft">
+                        Bienvenue, je suis <span class="text-gradient">Francois Lachance Awounang-Ngounou</span>
+                    </h1>
+                    <p class="lead text-muted mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        Ingénieur passionné en <span class="badge bg-danger">Intelligence Artificielle, precisement de Machine learning</span>, 
+                        <span class="badge bg-info">Développement web(à mes temps perdus)</span> et <span class="badge bg-primary">Traitement du Signal et d'Image en rapport avec l'ingenierie spatial </span>.
+                    </p>
+                    <p class="subtitle text-navy-light mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        Je  forme à pouvoir créer  des solutions innovantes qui unissent <strong>rigueur technique</strong>, <strong>design moderne</strong> et <strong>performance</strong>.
+                    </p>
+                    
+                    <div class="cta-buttons animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                        <a href="cv.html" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-file-pdf"></i> Voir mon CV
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-envelope"></i> Me Contacter
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 text-center">
+                    <div class="profile-container animate__animated animate__fadeInRight">
+                        <img src="assets/photo.jpg" alt="Photo de profil" class="profile-photo">
+                        <div class="floating-badges">
+                            <span class="badge-float badge-1">Python</span>
+                            <span class="badge-float badge-2">React</span>
+                            <span class="badge-float badge-3">TensorFlow</span>
+                            <span class="badge-float badge-4">Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Domains -->
+    <section class="py-5 bg-light-navy">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">
+                <span class="title-underline"></span>
+                Domaines d'Expertise
+                <span class="title-underline"></span>
+            </h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="expertise-card">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                        <p>Modèles prédictifs, deep learning, NLP et vision par ordinateur avec TensorFlow & PyTorch(en cours d'Apprentissage).</p>
+                        <a href="machine-learning.html" class="card-link">Découvrir mes projets →</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-web">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Développement Web</h3>
+                        <p>Applications modernes, responsive et performantes pour des besoins professionnels.</p>
+                        <a href="web.html" class="card-link">Voir mes réalisations →</a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-matlab">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3>Traitement d'Image</h3>
+                        <p>Filtrage, segmentation et analyse d'images médicales avec MATLAB et OpenCV.</p>
+                        <a href="matlab.html" class="card-link">Explorer les codes →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 mb-4">
+                    <h3 class="stat-number">15+</h3>
+                    <p class="stat-label">Projets Réalisés</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="stat-number">0+</h3>
+                    <p class="stat-label">Ans d'Expérience</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="stat-number">1+</h3>
+                    <p class="stat-label">Clients Satisfaits</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h3 class="stat-number">100%</h3>
+                    <p class="stat-label">Dédication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Prêt à transformer tes idées en réalité ?</h2>
+            <a href="contact.html" class="btn btn-light btn-lg">
+                <i class="fas fa-rocket"></i> Commençons !
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 <strong>Francois lchance Awounang-Ngounou</strong> - Ingénieur  genie &  build data scientist</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

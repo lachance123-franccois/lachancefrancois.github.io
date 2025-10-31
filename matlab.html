@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATLAB - Traitement d'Image | Portfolio Ingénieur</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-icon"><i class="fas fa-code"></i></span> [TonNom]
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">Machine Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="matlab.html">MATLAB</a></li>
+                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 bg-light-navy" style="margin-top: 80px;">
+        <div class="container">
+            <h1 class="display-4 text-navy fw-bold mb-4 animate__animated animate__fadeInDown">
+                <i class="fas fa-image text-sky-blue me-3"></i>MATLAB - Traitement d'Image
+            </h1>
+            <p class="lead text-muted animate__animated animate__fadeInUp">
+                Découvrez mes projets avancés en traitement et analyse d'images.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projets MATLAB -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-underline"></span>
+                Codes & Projets MATLAB
+                <span class="title-underline"></span>
+            </h2>
+
+            <div class="row g-4 mt-5">
+                <!-- Projet 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--sky-blue), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Filtrage</span>
+                            <h3>Filtres Adaptatifs</h3>
+                            <p>Implémentation de filtres Wiener et adaptatifs pour réduction de bruit optimale.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">MATLAB</span>
+                                <span class="tech-badge">DSP</span>
+                                <span class="tech-badge">Image Processing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--red), #c62828); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Segmentation</span>
+                            <h3>Segmentation Morphologique</h3>
+                            <p>Algorithme de watershed et opérateurs morphologiques pour extraction de régions.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">Morphology</span>
+                                <span class="tech-badge">Watershed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--navy-light), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Histogramme</span>
+                            <h3>Amélioration de Contraste</h3>
+                            <p>CLAHE et égalisation d'histogramme adaptatif pour optimiser la visibilité.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">CLAHE</span>
+                                <span class="tech-badge">Contrast</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, #00d084, #008c5f); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Edge Detection</span>
+                            <h3>Détection de Contours</h3>
+                            <p>Sobel, Canny et détecteurs multiples pour analyse de frontières.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">Sobel</span>
+                                <span class="tech-badge">Canny</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, #ff9500, #ff6b00); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-random"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Déconvolution</span>
+                            <h3>Déconvolution d'Images</h3>
+                            <p>Filtrage inverse et déconvolution aveugle pour restauration d'images.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">Deconvolution</span>
+                                <span class="tech-badge">Restoration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, #9c27b0, #6a1b9a); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-dna"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Code Source</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Machine Learning</span>
+                            <h3>Extraction de Features</h3>
+                            <p>Descripteurs SIFT, HOG et Color Histograms pour classification.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">SIFT</span>
+                                <span class="tech-badge">HOG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="py-5 bg-light-navy">
+        <div class="container">
+            <h2 class="section-title mb-5">
+                <i class="fas fa-code text-sky-blue me-2"></i>Exemple de Code
+            </h2>
+
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="bg-white p-4 rounded" style="overflow-x: auto;">
+                        <pre><code class="language-matlab">% Filtre Adaptatif Wiener - Exemple MATLAB
+clear; clc;
+
+% Charger l'image
+img = imread('image.jpg');
+img_gray = rgb2gray(img);
+
+% Ajouter du bruit
+img_noisy = imnoise(img_gray, 'gaussian', 0, 0.01);
+
+% Appliquer filtre Wiener
+windowSize = [5, 5];
+img_filtered = wiener2(img_noisy, windowSize);
+
+% Afficher résultats
+figure;
+subplot(1,3,1), imshow(img_gray), title('Original');
+subplot(1,3,2), imshow(img_noisy), title('Avec Bruit');
+subplot(1,3,3), imshow(img_filtered), title('Filtré (Wiener)');
+
+% Calculer PSNR (Peak Signal-to-Noise Ratio)
+psnr_value = psnr(img_gray, img_filtered);
+fprintf('PSNR: %.2f dB\n', psnr_value);
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title mb-5">
+                <i class="fas fa-toolbox text-sky-blue me-2"></i>Compétences MATLAB
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3>Image Processing Toolbox</h3>
+                        <p>Filtrage, segmentation, extraction de features, et transformations.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-web">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <h3>Signal Processing</h3>
+                        <p>FFT, filtres numériques, analyse spectrale avancée.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-matlab">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Computer Vision</h3>
+                        <p>Détection de formes, tracking, reconstruction 3D, calibration.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>Optimisation & Algorithmes</h3>
+                        <p>Optimisation non-convexe, algorithmes parallélisés, GPU computing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Besoin d'un expert en traitement d'image ?</h2>
+            <a href="contact.html" class="btn btn-light btn-lg">
+                <i class="fas fa-envelope"></i> Me Contacter
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 <strong>[Ton Nom]</strong> - Ingénieur IA & Développeur Web</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

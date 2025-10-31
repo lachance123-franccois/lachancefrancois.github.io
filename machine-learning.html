@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning | Portfolio Ingénieur IA</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-icon"><i class="fas fa-code"></i></span> [TonNom]
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="machine-learning.html">Machine Learning</a></li>
+                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">MATLAB</a></li>
+                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 bg-light-navy" style="margin-top: 80px;">
+        <div class="container">
+            <h1 class="display-4 text-navy fw-bold mb-4 animate__animated animate__fadeInDown">
+                <i class="fas fa-brain text-sky-blue me-3"></i>Machine Learning
+            </h1>
+            <p class="lead text-muted animate__animated animate__fadeInUp">
+                Découvrez mes projets en intelligence artificielle, deep learning et data science.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projets ML -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-underline"></span>
+                Mes Projets ML
+                <span class="title-underline"></span>
+            </h2>
+
+            <div class="row g-4 mt-5">
+                <!-- Projet 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--sky-blue), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Détails</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Deep Learning</span>
+                            <h3>Prédiction LSTM</h3>
+                            <p>Modèle LSTM pour la prévision de séries temporelles économiques avec une précision de 94%.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">TensorFlow</span>
+                                <span class="tech-badge">LSTM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--red), #c62828); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Détails</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Vision</span>
+                            <h3>Classification d'Images Médicales</h3>
+                            <p>CNN pour la détection de maladies pulmonaires via radiographies avec une sensibilité de 97%.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">CNN</span>
+                                <span class="tech-badge">OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div style="background: linear-gradient(135deg, var(--navy-light), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <button class="btn btn-light">Détails</button>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">NLP</span>
+                            <h3>Analyse de Sentiment</h3>
+                            <p>Modèle BERT fine-tuné pour l'analyse de sentiment sur les réseaux sociaux avec 89% de précision.</p>
+                            <div class="project-meta">
+                                <span class="tech-badge">Transformers</span>
+                                <span class="tech-badge">NLP</span>
+                                <span class="tech-badge">BERT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Technologies -->
+    <section class="py-5 bg-light-navy">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">
+                <i class="fas fa-tools text-sky-blue me-2"></i>Technologies & Frameworks
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3>Python Avancé</h3>
+                        <p>Maîtrise complète de Python pour la data science : NumPy, Pandas, Scikit-learn, etc.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-web">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>Deep Learning</h3>
+                        <p>Expertise en TensorFlow, PyTorch et architectures modernes (CNN, RNN, Transformers).</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon icon-matlab">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Data Visualization</h3>
+                        <p>Création de dashboards interactifs avec Matplotlib, Plotly et PowerBI.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="expertise-card">
+                        <div class="card-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Big Data</h3>
+                        <p>Gestion de larges bases de données : SQL, NoSQL, Spark, Hadoop.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Intéressé par mes projets ML ?</h2>
+            <a href="contact.html" class="btn btn-light btn-lg">
+                <i class="fas fa-envelope"></i> Me Contacter
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy;  since 2025 <strong>Francois lachancae awounang-ngounou</strong> - Ingénieur IA & Développeur Web</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
