@@ -3,25 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine Learning | Portfolio Ingénieur </title>
+    <title>Machine Learning | François Lachance A.N</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
     
-    <link rel="stylesheet" href="css/colors.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        :root {
+            --accent-green: #00d084;
+            --navy-deep: #0a192f;
+        }
+        
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+        
+        .hero-ml {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, #172a45 100%);
+            padding: 100px 0 60px;
+            color: white;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-image-placeholder {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay { opacity: 1; }
+
+        .tech-badge {
+            background: #e9ecef;
+            color: var(--navy-deep);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .section-title-line {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-green);
+            margin: 10px auto 30px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <span class="brand-icon"><i class="fas fa-code"></i></span> Francois Lachance A.N
+                <i class="fas fa-code me-2"></i>F. Lachance A.N
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -30,111 +96,91 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link active" href="machine-learning.html">Machine Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
-                    <li class="nav-item"><a class="nav-link" href="matlab.html">MATLAB</a></li>
-                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">Signal & Image</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-lg-3" href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-        <style>
-     .text-blanc{color:#f8f2f3;
-                }
-     .text-color{color:#00d084}
-    </style>
 
-    <!-- Hero Section -->
-    <section class="py-5 bg-light-navy" style="margin-top: 80px;">
+    <header class="hero-ml">
         <div class="container">
-            <h1 class="display-4 text-navy fw-bold mb-4 animate__animated animate__fadeInDown">
-                <i class="fas fa-brain text-sky-blue me-3"></i>Machine Learning
-            </h1>
-            <p class="lead text-muted animate__animated animate__fadeInUp">
-                <strong class="text-color">
-                Découvrez mes projets en intelligence artificielle, deep learning et data science.
-                </strong>
-            </p>
+            <div class="row align-items-center">
+                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-brain text-info me-3"></i>Machine Learning
+                    </h1>
+                    <p class="lead" style="color: var(--accent-green);">
+                        Conception de modèles intelligents et analyse prédictive de données complexes.
+                    </p>
+                </div>
+            </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Projets ML -->
     <section class="py-5">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-underline"></span>
-                Mes Projets ML
-                <span class="title-underline"></span>
-            </h2>
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Mes Réalisations ML</h2>
+                <div class="section-title-line"></div>
+            </div>
 
-            <div class="row g-4 mt-5">
-                <!-- Projet 1 -->
+            <div class="row g-4">
                 <div class="col-md-6 col-lg-4" data-aos="fade-up">
                     <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--sky-blue), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #007bff, #00d084);">
+                            <i class="fas fa-chart-line fa-3x"></i>
                             <div class="project-overlay">
-                                <button class="btn btn-light"><li class="nav-item"><a class="nav-link" href="LSTM.py">Détails</a></li></button>
+                                <a href="LSTM.py" class="btn btn-light rounded-pill px-4">Voir le code</a>
                             </div>
                         </div>
-                        <div class="project-body">
-                            <span class="project-category">Deep Learning</span>
-                            <h3>Prédiction LSTM</h3>
-                            <p>Modèle LSTM pour la prévision de séries temporelles économiques avec une précision de 94%.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">Python</span>
+                        <div class="p-4">
+                            <small class="text-primary fw-bold text-uppercase">Séries Temporelles</small>
+                            <h4 class="mt-2">Prédiction LSTM</h4>
+                            <p class="text-muted small">Modélisation de flux économiques avec réseaux de neurones récurrents. Précision : 94%.</p>
+                            <div class="mt-3">
                                 <span class="tech-badge">TensorFlow</span>
-                                <span class="tech-badge">LSTM</span>
+                                <span class="tech-badge">Python</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 2 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--red), #c62828); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-image"></i>
-                            </div>
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #ff4b2b, #ff416c);">
+                            <i class="fas fa-microscope fa-3x"></i>
                             <div class="project-overlay">
-                                <button><li class="nav-item"><a class="nav-link" href="LSTM.py">Détails</a></li></botton>
+                                <a href="#" class="btn btn-light rounded-pill px-4">Détails</a>
                             </div>
                         </div>
-                        <div class="project-body">
-                            <span class="project-category">Vision</span>
-                            <h3>Classification d'Images Médicales</h3>
-                            <p>CNN pour la détection de maladies pulmonaires via radiographies avec une sensibilité de 97%.</p>
-                            <div class="project-meta">
+                        <div class="p-4">
+                            <small class="text-danger fw-bold text-uppercase">Computer Vision</small>
+                            <h4 class="mt-2">Imagerie Médicale</h4>
+                            <p class="text-muted small">Classification de radiographies pulmonaires via architectures CNN (ResNet).</p>
+                            <div class="mt-3">
                                 <span class="tech-badge">PyTorch</span>
-                                <span class="tech-badge">CNN</span>
                                 <span class="tech-badge">OpenCV</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 3 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--navy-light), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-comments"></i>
-                            </div>
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #4b6cb7, #182848);">
+                            <i class="fas fa-language fa-3x"></i>
                             <div class="project-overlay">
-                                <button class="btn btn-light"><li class="nav-item"><a class="nav-link" href="LSTM.py">Détails</a></li></button>
+                                <a href="#" class="btn btn-light rounded-pill px-4">Détails</a>
                             </div>
                         </div>
-                        <div class="project-body">
-                            <span class="project-category">NLP</span>
-                            <h3>Analyse de Sentiment</h3>
-                            <p>Modèle BERT fine-tuné pour l'analyse de sentiment sur les réseaux sociaux avec 89% de précision.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">Transformers</span>
-                                <span class="tech-badge">NLP</span>
+                        <div class="p-4">
+                            <small class="text-info fw-bold text-uppercase">NLP</small>
+                            <h4 class="mt-2">Analyse BERT</h4>
+                            <p class="text-muted small">Analyse de sentiment multi-classe sur datasets textuels massifs.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">HuggingFace</span>
                                 <span class="tech-badge">BERT</span>
                             </div>
                         </div>
@@ -144,85 +190,52 @@
         </div>
     </section>
 
-    <!-- Skills & Technologies -->
-    <section class="py-5 bg-light-navy">
+    <section class="py-5 bg-white">
         <div class="container">
-            <h2 class="section-title text-center mb-5">
-                <i class="fas fa-tools text-sky-blue me-2"></i>Technologies & Frameworks
-            </h2>
-
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <h3>Python Avancé</h3>
-                        <p>Maîtrise complète de Python pour la data science : NumPy, Pandas, Scikit-learn, etc.</p>
+            <h3 class="text-center fw-bold mb-5">Stack Technique ML</h3>
+            <div class="row text-center g-4">
+                <div class="col-6 col-md-3">
+                    <div class="p-3 border rounded shadow-sm">
+                        <i class="fab fa-python fa-2x text-primary mb-2"></i>
+                        <h6>Scikit-Learn</h6>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon icon-web">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <h3>Deep Learning</h3>
-                        <p>Expertise en TensorFlow, PyTorch et architectures modernes (CNN, RNN, Transformers).</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 border rounded shadow-sm">
+                        <i class="fas fa-fire fa-2x text-orange mb-2"></i>
+                        <h6>PyTorch</h6>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon icon-matlab">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3>Data Visualization</h3>
-                        <p>Création de dashboards interactifs avec Matplotlib, Plotly et PowerBI.</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 border rounded shadow-sm">
+                        <i class="fas fa-database fa-2x text-secondary mb-2"></i>
+                        <h6>SQL / Spark</h6>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3>Big Data</h3>
-                        <p>Gestion de larges bases de données : SQL, NoSQL, Spark, Hadoop.</p>
+                <div class="col-6 col-md-3">
+                    <div class="p-3 border rounded shadow-sm">
+                        <i class="fas fa-vial fa-2x text-success mb-2"></i>
+                        <h6>MLOps</h6>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section py-5">
+    <footer class="bg-dark text-white py-5 mt-5">
         <div class="container text-center">
-            <h2 class="text-white mb-4">Intéressé par mes projets ML ?</h2>
-            <a href="contact.html" class="btn btn-light btn-lg">
-                <i class="fas fa-envelope"></i> Me Contacter
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-navy text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; since 2025 <strong>Francois lachancae awounang-ngounou</strong>-Ingénieur GESI & Etudiant et Autodicdate</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-                </div>
+            <p>© 2025 François Lachance Awounang-Ngounou</p>
+            <div class="h4">
+                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
 </body>
 </html>
