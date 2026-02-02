@@ -1261,7 +1261,43 @@ footer a:hover {
   color: #00bfff !important;
   text-shadow: 0 0 10px #00bfff;
 }
+:root {
+    --sky-blue: #87CEEB;
+    --off-white: #F5F5F5; /* Blanc cassé */
+    --navy-tech: #1A3A5A;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+}
 
+body {
+    background-color: var(--off-white);
+    color: var(--navy-tech);
+    position: relative;
+}
+
+/* Le canvas pour les signaux animés */
+#signalCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Tout au fond */
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.math-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    color: var(--sky-blue);
+    opacity: 0.15;
+    font-size: 1.2rem;
+}
 /*=============================================
     end of main.css
     ==============================================*/

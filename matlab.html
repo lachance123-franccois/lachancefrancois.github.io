@@ -3,353 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATLAB - Traitement d'Image | Portfolio Ingénieur</title>
+    <title>Projets Ingénierie | François Lachance A.N</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
-    <link rel="stylesheet" href="css/colors.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        :root {
+            --sky-blue: #87CEEB;
+            --off-white: #F5F5F5;
+            --navy-dark: #1A3A5A;
+        }
+        body { background-color: var(--off-white); font-family: 'Poppins', sans-serif; }
+        .text-blanc { color: #D6CFC4; }
+        .text-color { color: #00d084; }
+        
+        /* Style du Slider */
+        .carousel-item {
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .carousel-caption {
+            background: rgba(26, 58, 90, 0.85); /* Navy transparent */
+            border-radius: 15px;
+            padding: 30px;
+            bottom: 10%;
+            backdrop-filter: blur(10px);
+        }
+        .project-slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        .carousel-indicators [data-bs-target] {
+            background-color: var(--sky-blue);
+        }
+    </style>
 </head>
 <body>
-    <style>
-     .text-blanc{color:#f8f2f3;
-                }
-     .text-color{color:#00d084}
-    </style>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--navy-dark);">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <span class="brand-icon"><i class="fas fa-code"></i></span>Francois lachance A.N
+                <span class="brand-icon"><i class="fas fa-microchip"></i></span> F. Lachance A.N
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">Machine Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="matlab.html">MATLAB</a></li>
-                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">IA & ML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Webs</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="py-5 bg-light-navy" style="margin-top: 80px;">
-        <div class="container">
-            <h1 class="display-4 text-navy fw-bold mb-4 animate__animated animate__fadeInDown">
-                <style>
-                    .text-blanc{color:#D6CFC4;
-                }
-                </style>
-                <strong class="text-blanc">
-                <i class="fas fa-image text-sky-blue me-3"></i>MATLAB - Traitement d'Image
-                </strong>
+    <section class="py-5" style="background: linear-gradient(rgba(26, 58, 90, 0.9), rgba(26, 58, 90, 0.9)), url('assets/tech-bg.jpg'); background-size: cover;">
+        <div class="container text-center py-5">
+            <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInDown">
+                Portfolio Technique & Réalisations
             </h1>
-            <strong class="text-blanc">
-            <p class="lead text-muted animate__animated animate__fadeInUp">
-                Découvrez mes projets avancés en traitement et analyse d'images.
-            </strong>
+            <p class="lead text-blanc animate__animated animate__fadeInUp">
+                Exploration de mes travaux en Signal, Image et Robotique mobile.
             </p>
         </div>
     </section>
-    <!-- Projets MATLAB -->
+
     <section class="py-5">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-underline"></span>
-                Codes & Projets MATLAB
-                <span class="title-underline"></span>
-            </h2>
+            <h2 class="text-center mb-5 fw-bold"><i class="fas fa-rocket text-primary me-2"></i>Réalisations Phares</h2>
+            
+            <div id="projectCarousel" class="carousel slide shadow-lg" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+                </div>
 
-            <div class="row g-4 mt-5">
-                <!-- Projet 1 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--sky-blue), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-filter"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
+                <div class="carousel-inner border-radius-20">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200" class="project-slide-img" alt="Traitement d'image">
+                        <div class="carousel-caption d-none d-md-block text-start">
+                            <span class="badge bg-info mb-2">Traitement d'Image</span>
+                            <h3>Analyse de Télédétection Satellitaire</h3>
+                            <p>Développement d'algorithmes de segmentation pour l'identification automatique de zones urbaines sur images multispectrales.</p>
+                            <a href="#" class="btn btn-primary">Consulter le dossier</a>
                         </div>
-                        <div class="project-body">
-                            <span class="project-category">Filtrage</span>
-                            <h3>Filtres Adaptatifs</h3>
-                            <strong class="text-blanc">
-                            <p>Implémentation de filtres Wiener et adaptatifs pour réduction de bruit optimale.</p>
-                            </strong>
-                            <div class="project-meta">
-                                <span class="tech-badge">MATLAB</span>
-                                <span class="tech-badge">DSP</span>
-                                <span class="tech-badge">Image Processing</span>
-                            </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1200" class="project-slide-img" alt="Signal Processing">
+                        <div class="carousel-caption d-none d-md-block text-start">
+                            <span class="badge bg-success mb-2">Signal & DSP</span>
+                            <h3>Filtrage Adaptatif de Signaux ECG</h3>
+                            <p>Élimination des bruits de ligne 50Hz et des artefacts musculaires sur des signaux cardiaques réels via filtres de Kalman.</p>
+                            <a href="#" class="btn btn-primary">Voir les résultats</a>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200" class="project-slide-img" alt="Robotique">
+                        <div class="carousel-caption d-none d-md-block text-start">
+                            <span class="badge bg-warning text-dark mb-2">Robotique</span>
+                            <h3>Navigation Autonome & SLAM</h3>
+                            <p>Asservissement visuel et cartographie simultanée (Lidar + Caméra) pour un robot mobile en environnement encombré.</p>
+                            <a href="#" class="btn btn-primary">Démo Vidéo</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Projet 2 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--red), #c62828); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-cube"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <span class="project-category">Segmentation</span>
-                            <h3>Segmentation Morphologique</h3>
-                            <p>Algorithme de watershed et opérateurs morphologiques pour extraction de régions.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">Morphology</span>
-                                <span class="tech-badge">Watershed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 3 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, var(--navy-light), var(--navy)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <span class="project-category">Histogramme</span>
-                            <h3>Amélioration de Contraste</h3>
-                            <p>CLAHE et égalisation d'histogramme adaptatif pour optimiser la visibilité.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">CLAHE</span>
-                                <span class="tech-badge">Contrast</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 4 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, #00d084, #008c5f); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-network-wired"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <span class="project-category">Edge Detection</span>
-                            <h3>Détection de Contours</h3>
-                            <p>Sobel, Canny et détecteurs multiples pour analyse de frontières.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">Sobel</span>
-                                <span class="tech-badge">Canny</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 5 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, #ff9500, #ff6b00); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-random"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <span class="project-category">Déconvolution</span>
-                            <h3>Déconvolution d'Images</h3>
-                            <p>Filtrage inverse et déconvolution aveugle pour restauration d'images.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">Deconvolution</span>
-                                <span class="tech-badge">Restoration</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet 6 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div style="background: linear-gradient(135deg, #9c27b0, #6a1b9a); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                <i class="fas fa-dna"></i>
-                            </div>
-                            <div class="project-overlay">
-                                <button class="btn btn-light">Code Source</button>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <span class="project-category">Machine Learning</span>
-                            <h3>Extraction de Features</h3>
-                            <p>Descripteurs SIFT, HOG et Color Histograms pour classification.</p>
-                            <div class="project-meta">
-                                <span class="tech-badge">SIFT</span>
-                                <span class="tech-badge">HOG</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Code Example Section -->
-    <section class="py-5 bg-light-navy">
+   <style>
+    /* Style spécifique pour l'interactivité des cartes */
+    .skill-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .skill-card-link:hover {
+        transform: translateY(-10px); /* Soulèvement de la carte */
+    }
+
+    .interactive-card {
+        border: 2px solid transparent; /* Bordure initiale invisible */
+        background-color: #ffffff;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    /* Effet au survol et à la sélection */
+    .skill-card-link:hover .interactive-card,
+    .skill-card-link:focus .interactive-card {
+        border-color: var(--sky-blue); /* Ta variable bleu ciel */
+        box-shadow: 0 15px 30px rgba(135, 206, 235, 0.3) !important;
+        background-color: #fcfdfe;
+    }
+
+    .interactive-card i {
+        transition: transform 0.4s ease;
+    }
+
+    .skill-card-link:hover i {
+        transform: scale(1.2) rotate(5deg); /* Animation de l'icône */
+        color: var(--sky-blue) !important;
+    }
+</style>
+
+    <section class="py-5 bg-white">
         <div class="container">
-            <h2 class="section-title mb-5">
-                <i class="fas fa-code text-sky-blue me-2"></i>Exemple de Code
-            </h2>
-
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="bg-white p-4 rounded" style="overflow-x: auto;">
-                        <pre><code class="language-matlab">% Filtre Adaptatif Wiener - Exemple MATLAB
-clear; clc;
-
-% Charger l'image
-img = imread('image.jpg');
-img_gray = rgb2gray(img);
-
-% Ajouter du bruit
-img_noisy = imnoise(img_gray, 'gaussian', 0, 0.01);
-
-% Appliquer filtre Wiener
-windowSize = [5, 5];
-img_filtered = wiener2(img_noisy, windowSize);
-
-% Afficher résultats
-figure;
-subplot(1,3,1), imshow(img_gray), title('Original');
-subplot(1,3,2), imshow(img_noisy), title('Avec Bruit');
-subplot(1,3,3), imshow(img_filtered), title('Filtré (Wiener)');
-
-% Calculer PSNR (Peak Signal-to-Noise Ratio)
-psnr_value = psnr(img_gray, img_filtered);
-fprintf('PSNR: %.2f dB\n', psnr_value);
-</code></pre>
-                    </div>
+            <div class="row g-4 text-center">
+                
+                <div class="col-md-4" data-aos="fade-up">
+                    <a href="ALOGRITHM.html" class="skill-card-link">
+                        <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
+                            <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                            <h4 class="text-color fw-bold">Algorithmie</h4>
+                            <p class="small text-muted">Conception d'architectures mathématiques complexes sous MATLAB & Python.</p>
+                        </div>
+                    </a>
                 </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <a href="traitement.html" class="skill-card-link">
+                        <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
+                            <i class="fas fa-satellite fa-3x text-primary mb-3"></i>
+                            <h4 class="text-color fw-bold">Analyse</h4>
+                            <p class="small text-muted">Traitement massif de données issues de capteurs (Radar, Lidar, Optique).</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="robotique.html" class="skill-card-link">
+                        <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
+                            <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                            <h4 class="text-color fw-bold">Robotique</h4>
+                            <p class="small text-muted">Implémentation de boucles de contrôle et de systèmes asservis.</p>
+                        </div>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Skills -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="section-title mb-5">
-                <i class="fas fa-toolbox text-sky-blue me-2"></i>Compétences MATLAB
-            </h2>
-
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <strong class="text-color">
-                        <h3>Image Processing Toolbox</h3>
-                        </strong>
-                        <strong class="text-blanc">
-                        <p>Filtrage, segmentation, extraction de features, et transformations.</p>
-                        </strong>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon icon-web">
-                            <i class="fas fa-wave-square"></i>
-                        </div>
-                        <strong class="text-color">
-                        <h3>Signal Processing</h3>
-                        </strong>
-                        <strong class=""text-blanc>
-                        <p>FFT, filtres numériques, analyse spectrale avancée.</p>
-                        </strong>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon icon-matlab">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-
-                        <h3>Computer Vision</h3>
-                        <p>Détection de formes, tracking, reconstruction 3D, calibration.</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="expertise-card">
-                        <div class="card-icon">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <strong class="text-color">
-                        <h3>Optimisation & Algorithmes</h3>
-                        </strong>
-                        <strong class="text-blanc">
-                        <p>Optimisation non-convexe, algorithmes parallélisés, GPU computing.</p>
-                        </strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section py-5">
+    <footer class="py-4" style="background-color: var(--navy-dark); color: white;">
         <div class="container text-center">
-            <h2 class="text-white mb-4">Besoin d'un expert en traitement d'image ?</h2>
-            <a href="contact.html" class="btn btn-light btn-lg">
-                <i class="fas fa-envelope"></i> Me Contacter
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-navy text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2025 <strong>Francois lachancae awounang-ngounou</strong>-Ingénieur GESI & Etudiant et Autodicdate</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
+            <p>&copy; 2025 <strong>François Lachance A.N</strong> | Ingénieur GESI & Expert Signal</p>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/main.js"></script>
+    <script>AOS.init();</script>
 </body>
 </html>

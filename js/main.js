@@ -21,7 +21,105 @@ document.addEventListener('DOMContentLoaded', function() {
             once: true,
             offset: 100
         });
+    }/* ============================================================
+   JS PREMIUM - Interactions Fluides & Performance
+   ============================================================ */
+
+const portfolioApp = {
+    init() {
+        this.navbar = document.getElementById('mainNavbar');
+        this.navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        this.scrollBtn = document.querySelector('.scroll-to-top');
+        
+        this.bindEvents();
+        this.initObservers();
+        this.initTypewriter();
+        this.initMagneticButtons(); // ✨ Nouvelle fonction
+    },
+
+    bindEvents() {
+        // Scroll optimisé avec RequestAnimationFrame
+        window.addEventListener('scroll', () => {
+            window.requestAnimationFrame(() => this.handleScroll());
+        });
+
+        // Smooth Scroll moderne
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => this.handleSmoothScroll(e));
+        });
+    },
+
+    handleScroll() {
+        const scrolled = window.scrollY > 50;
+        this.navbar.classList.toggle('scrolled', scrolled);
+        
+        if (this.scrollBtn) {
+            this.scrollBtn.classList.toggle('show', window.scrollY > 300);
+        }
+
+        // Effet Parallaxe sur les orbes (optimisé)
+        const orbs = document.querySelectorAll('.gradient-orb');
+        orbs.forEach((orb, i) => {
+            const speed = (i + 1) * 0.2;
+            orb.style.transform = `translateY(${window.scrollY * speed}px)`;
+        });
+    },
+
+    // 🎯 1. Menu Actif Intelligent (Intersection Observer)
+    initObservers() {
+        const options = { threshold: 0.6 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = `#${entry.target.id}`;
+                    this.navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === id);
+                    });
+                }
+            });
+        }, options);
+
+        document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+    },
+
+    // ⚡ 2. Boutons Magnétiques (Effet Apple/Stripe)
+    initMagneticButtons() {
+        const buttons = document.querySelectorAll('.btn--primary, .btn--secondary');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0, 0)`;
+            });
+        });
+    },
+
+    // ✍️ 3. Typewriter avec curseur clignotant
+    initTypewriter() {
+        const heroTitle = document.querySelector('.display-3');
+        if (!heroTitle) return;
+
+        const text = heroTitle.innerText;
+        heroTitle.innerHTML = `<span class="text-content"></span><span class="cursor">|</span>`;
+        const container = heroTitle.querySelector('.text-content');
+        let i = 0;
+
+        const type = () => {
+            if (i < text.length) {
+                container.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 60);
+            }
+        };
+        type();
     }
+};
+
+document.addEventListener('DOMContentLoaded', () => portfolioApp.init());
 
     // === Smooth Scroll for Anchor Links ===
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -1,68 +1,66 @@
 :root {
-  /* Couleurs de base — plus lumineuses */
-  --color-white: rgba(255, 255, 255, 1);
-  --color-black: rgba(0, 0, 0, 1);
-  --color-cream-50: rgba(255, 255, 252, 1);
-  --color-cream-100: rgba(255, 255, 254, 1);
-  --color-gray-200: rgba(250, 250, 250, 1);
-  --color-gray-300: rgba(210, 212, 212, 1);
-  --color-gray-400: rgba(150, 155, 155, 1);
-  --color-slate-500: rgba(115, 125, 130, 1);
-  --color-brown-600: rgba(140, 125, 100, 1);
-  --color-charcoal-700: rgba(45, 47, 47, 1);
-  --color-charcoal-800: rgba(55, 58, 58, 1);
-  --color-slate-900: rgba(28, 60, 68, 1);
+  /* === 1. PRIMITIVES (Matières premières) === */
+  --color-white: #ffffff;
+  --color-cream-50: #fffffb;
+  --color-slate-900: #1c3c44;
+  
+  /* Palette Teal - Plus saturée */
+  --teal-300: #55d2dc;
+  --teal-500: #32a0af;
+  --teal-600: #288c9b;
+  
+  /* Valeurs RGB pour calculs d'opacité (Centralisées) */
+  --rgb-teal: 50, 160, 175;
+  --rgb-brown: 140, 125, 100;
+  --rgb-slate: 28, 60, 68;
 
-  /* Teintes principales — plus claires et plus saturées */
-  --color-teal-300: rgba(85, 210, 220, 1);
-  --color-teal-400: rgba(65, 185, 200, 1);
-  --color-teal-500: rgba(50, 160, 175, 1);
-  --color-teal-600: rgba(40, 140, 155, 1);
-  --color-teal-700: rgba(33, 120, 135, 1);
-  --color-teal-800: rgba(30, 135, 150, 1);
+  /* === 2. SYSTÈME DE FOND (Dyna-Colors) === */
+  /* Utilisation de l'opacité moderne 10% */
+  --color-bg-blue:    rgb(100 180 255 / 0.1);
+  --color-bg-yellow:  rgb(255 220 120 / 0.1);
+  --color-bg-green:   rgb(80 220 150 / 0.1);
+  --color-bg-red:     rgb(255 120 120 / 0.1);
 
-  --color-red-400: rgba(255, 105, 110, 1);
-  --color-red-500: rgba(210, 45, 65, 1);
-  --color-orange-400: rgba(245, 150, 110, 1);
-  --color-orange-500: rgba(200, 90, 55, 1);
-
-  /* Arrière-plans plus lumineux */
-  --color-bg-1: rgba(100, 180, 255, 0.1);
-  --color-bg-2: rgba(255, 220, 120, 0.1);
-  --color-bg-3: rgba(80, 220, 150, 0.1);
-  --color-bg-4: rgba(255, 120, 120, 0.1);
-  --color-bg-5: rgba(210, 120, 255, 0.1);
-  --color-bg-6: rgba(255, 160, 90, 0.1);
-  --color-bg-7: rgba(255, 120, 180, 0.1);
-  --color-bg-8: rgba(80, 220, 250, 0.1);
-
-  /* Thème clair général */
+  /* === 3. SÉMANTIQUE (Rôles) === */
   --color-background: var(--color-cream-50);
-  --color-surface: var(--color-white);
-  --color-text: var(--color-slate-900);
-  --color-text-secondary: rgba(50, 80, 90, 0.7);
-  --color-primary: var(--color-teal-500);
-  --color-primary-hover: var(--color-teal-600);
-  --color-primary-active: var(--color-teal-700);
-  --color-secondary: rgba(140, 125, 100, 0.1);
-  --color-secondary-hover: rgba(140, 125, 100, 0.18);
-  --color-secondary-active: rgba(140, 125, 100, 0.25);
-  --color-border: rgba(140, 125, 100, 0.2);
-  --color-btn-primary-text: var(--color-white);
-  --color-card-border: rgba(140, 125, 100, 0.12);
-  --color-card-border-inner: rgba(140, 125, 100, 0.1);
+  --color-surface:    var(--color-white);
+  --color-text:       var(--color-slate-900);
+  
+  /* Texte secondaire avec opacité calculée sur la variable slate */
+  --color-text-secondary: rgb(var(--rgb-slate) / 0.7);
 
-  /* Statuts */
-  --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
-  --color-warning: var(--color-orange-500);
-  --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(50, 160, 175, 0.4);
-  --color-select-caret: rgba(30, 60, 70, 0.8);
+  --color-primary:        var(--teal-500);
+  --color-primary-hover:  var(--teal-600);
+  
+  /* Bordures et États basés sur le brun centralisé */
+  --color-border:           rgb(var(--rgb-brown) / 0.2);
+  --color-secondary-hover:  rgb(var(--rgb-brown) / 0.18);
+  --color-card-border:      rgb(var(--rgb-brown) / 0.12);
 
-  /* Effets visuels adoucis et lumineux */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+  /* === 4. ÉLÉVATION (Ombres plus douces) === */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.03);
+  --shadow-sm: 0 2px 4px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 6px 12px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 25px rgb(0 0 0 / 0.08);
+
+  /* Focus & Interact */
+  --color-focus-ring:  rgb(var(--rgb-teal) / 0.4);
+}
+
+/* === APPLICATION DE BASE === */
+html {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
 }

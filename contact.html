@@ -3,66 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Portfolio Ingénieur IA</title>
+    <title>Contact | François Lachance A.N</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
-    <link rel="stylesheet" href="css/colors.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/main.css">
-    
-    <style>
-        .contact-form-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(20, 33, 61, 0.1);
+    <link rel="stylesheet" href="css/main.css"> <style>
+        :root {
+            --navy-deep: #0a192f;
+            --accent-blue: #0077b5;
+            --accent-green: #00d084;
+            --light-bg: #f4f7f6;
         }
-        
-        .contact-info {
+
+        body { font-family: 'Poppins', sans-serif; background-color: var(--light-bg); }
+
+        /* Hero Contact */
+        /* Hero Contact - Nouveau Design */
+        .hero-contact {
+            /* Dégradé doux du blanc vers un bleu ciel très léger */
+            background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 100%);
+            padding: 100px 0 80px;
+            color: var(--navy-deep); /* Texte en bleu marine pour rester lisible */
+            border-bottom: 1px solid rgba(0, 119, 181, 0.1);
+        }
+
+        /* On supprime la marge négative pour que le blanc soit uniforme */
+        section.py-5.mt-n5 {
+            margin-top: 0 !important;
+            background-color: #f8f9fa; /* Gris très clair pour détacher le formulaire */
+        }
+
+        /* Ajustement de la Navbar si elle est sombre */
+        .navbar-dark.bg-dark {
+            background-color: #0a192f !important; /* On garde un contraste fort pour la navigation */
+        }
+
+        /* Modernisation de la carte de formulaire */
+        .contact-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+       
+
+        .form-control {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 5px;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 0.25rem rgba(0, 208, 132, 0.1);
+        }
+
+        /* Info Blocks */
+        .contact-info-item {
             display: flex;
             align-items: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: var(--light-navy);
-            border-radius: 8px;
-            border-left: 4px solid var(--sky-blue);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
         }
-        
-        .contact-info i {
+
+        .contact-info-item:hover { transform: translateX(10px); }
+
+        .contact-info-item i {
             font-size: 1.5rem;
-            color: var(--sky-blue);
-            margin-right: 20px;
-            min-width: 30px;
+            color: var(--accent-green);
+            width: 50px;
         }
-        
-        .contact-info p {
-            margin: 0;
+
+        .contact-info-item h5 { margin-bottom: 2px; font-weight: 700; color: var(--navy-deep); }
+        .contact-info-item a { text-decoration: none; color: #6c757d; }
+
+        /* Expertise Card for Testimonials */
+        .testimonial-card {
+            background: white;
+            border-left: 5px solid var(--accent-green);
+            padding: 25px;
+            border-radius: 10px;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        
-        .form-group label {
-            color: var(--navy);
-            font-weight: 600;
-            margin-bottom: 8px;
+                /* Force la section de contact à être au-dessus du décor du header */
+        section.py-5.mt-n5 {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Amélioration du style des liens pour qu'ils soient plus cliquables */
+        .contact-info-item a {
+            display: block; /* Rend toute la zone cliquable */
+            width: 100%;
         }
     </style>
 </head>
 <body>
-     <style>
-     .text-blanc{color:#f8f2f3;
-                }
-     .text-color{color:white}
-    </style>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <span class="brand-icon"><i class="fas fa-code"></i></span>Francois Lachance A.N
+                <i class="fas fa-code me-2 text-info"></i>F. Lachance A.N
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -71,128 +122,94 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="machine-learning.html">Machine Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="web.html">Développement Web</a></li>
-                    <li class="nav-item"><a class="nav-link" href="matlab.html">MATLAB</a></li>
-                    <li class="nav-item"><a class="nav-link" href="actualites.html">Actualités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">Curiculum Vitae</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">Signal & Image</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold text-info" href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="py-5 bg-light-navy" style="margin-top: 80px;">
-        <div class="container">
-            <h1 class="display-4 text-navy fw-bold mb-4 animate__animated animate__fadeInDown">
-                <i class="fas fa-envelope text-sky-blue me-3"></i>Nous Contacter
-            </h1>
-            <p class="lead text-muted animate__animated animate__fadeInUp"> 
-                <strong class="text-color">
-                N'hésitez pas à m'écrire pour toute question ou proposition de collaboration.
-                je suis toujours ouvert aux nouvelles opportunites et aux discussions passionnate sur la technolohie et l'inovation.
-                </strong>
+    <header class="hero-contact">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Discutons de votre projet</h1>
+            <p class="lead animate__animated animate__fadeInUp" style="max-width: 700px; margin: auto;">
+                Ouvert aux opportunités de collaboration en <strong>IA</strong>, <strong>Machine Learning</strong> et <strong>Systèmes Intelligents</strong>.
             </p>
         </div>
-    </section>
+    </header>
 
-    <!-- Contact Section -->
-    <section class="py-5">
+    <section class="py-5 mt-n5">
         <div class="container">
             <div class="row g-5">
-                <!-- Contact Form -->
+                
                 <div class="col-lg-7">
                     <div class="contact-form-card animate__animated animate__fadeInLeft">
-                        <h2 class="text-navy fw-bold mb-4">Envoyez-moi un message</h2>
-                        <form id="contact-form">
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">Noms et prenoms*</label>
-                                        <input type="text" class="form-control" id="name" name="nom" placeholder="Jean Dupont" required>
-                                    </div>
+                        <h3 class="fw-bold mb-4">Envoyez-moi un message</h3>
+                        <form action="https://formspree.io/f/VOTRE_ID" method="POST"> <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Noms </label>
+                                    <input type="text" name="name" class="form-control" placeholder="francois lachance" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="email">Votre Email *</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="vous@example.com" required>
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <input type="email" name="email" class="form-control" placeholder="francois@exemple.com" required>
                                 </div>
                             </div>
-
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Sujet</label>
+                                <input type="text" name="subject" class="form-control" placeholder="Ex: Projet Machine Learning" required>
+                            </div>
                             <div class="mb-4">
-                                <div class="form-group">
-                                    <label for="subject">Sujet *</label>
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Collaboration / Question" required>
-                                </div>
+                                <label class="form-label fw-bold">Votre Message</label>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Décrivez votre besoin..." required></textarea>
                             </div>
-
-                            <div class="mb-4">
-                                <div class="form-group">
-                                    <label for="message">Message *</label>
-                                    <textarea class="form-control" id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg w-100">
-                                <i class="fas fa-paper-plane me-2"></i>Envoyer le Message
+                            <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">
+                                <i class="fas fa-paper-plane me-2"></i>Envoyer
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <!-- Contact Info -->
                 <div class="col-lg-5">
-                    <div class="animate__animated animate__fadeInRight">
-                        <h2 class="text-navy fw-bold mb-5">Informations de Contact</h2>
-
-                        <div class="contact-info">
+                    <div class="ps-lg-4">
+                        <h3 class="fw-bold mb-4 text-navy-deep">Mes coordonnées</h3>
+                        
+                        <div class="contact-info-item animate__animated animate__fadeInRight">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
-                                <strong class="'text-color">
-                                <h5 class="text-navy mb-1"><strong class="text-color">Adresse</strong></h5>
-                                <p class="text-muted"><strong class="text-color">Toulouse, France</strong></p>
-                                </strong>
+                                <h5>Localisation</h5>
+                                <p class="text-muted mb-0">Toulouse, France</p>
                             </div>
                         </div>
 
-                        <div class="contact-info">
-                            <i class="fas fa-phone"></i>
+                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.1s;">
+                            <i class="fab fa-whatsapp"></i>
                             <div>
-                                <h5 class="text-navy mb-1"><strong class="text-color">Téléphone</strong></h5>
-                                <p class="text-muted"><a href="https://wa.me/33618600123" style="color: inherit; text-decoration: none;"><strong class="text-color">Whatsapp</strong></a></p>
+                                <h5>WhatsApp</h5>
+                                <a href="https://wa.me/33618600123" target="_blank">+33 6 18 60 01 23</a>
                             </div>
                         </div>
 
-                        <div class="contact-info">
+                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <h5 class="text-navy mb-1"><strong class="text-color">Email</strong></h5>
-                                <strong class="'text-color">
-                                <p class="text-muted"><strong class="text-color"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=lachanceawounang@icloud.com&su=Demande%20de%20contact&body=Bonjour%20Lachance%2C%0A%0AJe%20viens%20de%20ton%20site%20web%20et%20je%20souhaite%20te%20contacter%20pour%20plus%20d'informations.%0A%0AMerci%20!%0A" 
-   target="_blank">
-   ✉️ Écrire via Gmail
-</a>
-</strong></p>
-                                </strong>
+                                <h5>Email Professionnel</h5>
+                                <a href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a>
                             </div>
                         </div>
 
-                        <div class="contact-info">
-                            <i class="fas fa-linkedin"></i>
+                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.3s;">
+                            <i class="fab fa-linkedin"></i>
                             <div>
-                                <h5 class="text-navy mb-1"><strong class="text-color">LinkedIn</strong></h5>
-                                <strong class="text-color">
-                                <p class="text-muted"><a href="https://www.linkedin.com/in/francois-l-a35723204?
-                                " style="color: inherit; text-decoration: none;"><strong class="text-color">francois lachance</strong></a></p>
-                                </strong>
+                                <h5>LinkedIn</h5>
+                                <a href="https://www.linkedin.com/in/francois-l-a35723204?/" target="_blank">François Lachance</a>
                             </div>
                         </div>
 
-                        <!-- Response Time -->
-                        <div class="mt-5 p-4 bg-light-navy rounded">
-                            <h5 class="text-navy mb-3"><i class="fas fa-clock text-sky-blue me-2"></i><strong class="text-blanc">Temps de Réponse</strong></h5>
-                            <p class="text-muted mb-0">Nous nous m'efforcons de répondre à tous les messages dans un délai de <strong>24-48 heures: n'hesitez pas à nous relancer</strong>.</p>
+                        <div class="alert alert-info border-0 shadow-sm mt-4">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Temps de réponse estimé : <strong>24h à 48h</strong>.
                         </div>
                     </div>
                 </div>
@@ -200,83 +217,53 @@
         </div>
     </section>
 
-    <!-- Comments Section -->
-    <section class="py-5 bg-light-navy">
+    <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="section-title mb-5">
-                <i class="fas fa-comments text-sky-blue me-2"></i>Ces Avis sont justes a titre d'illustrations
-            </h2>
-
+            <h2 class="text-center fw-bold mb-5">Témoignages <small class="text-muted d-block fs-6 fw-normal mt-2">(Exemples d'illustration)</small></h2>
             <div class="row g-4">
-                <!-- Comment 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="expertise-card">
-                        <div style="margin-bottom: 15px;">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                        <p>"Excellent développeur, projet réalisé avec rigueur et professionnalisme. Très recommandé !"</p>
-                        <h5 class="text-navy fw-bold mt-3">Marc Dubois</h5>
-                        <small class="text-muted">Directeur Technique, Tech Corp</small>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="fst-italic text-muted">"Un ingénieur rigoureux avec une solide base mathématique. Très recommandé pour les projets ML."</p>
+                        <h6 class="fw-bold mb-0">Marc Dubois</h6>
+                        <small class="text-primary">Tech Lead</small>
                     </div>
                 </div>
-
-                <!-- Comment 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="expertise-card">
-                        <div style="margin-bottom: 15px;">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                        <p>"Capacités exceptionnelles en ML. Le projet a dépassé toutes nos attentes."</p>
-                        <h5 class="text-navy fw-bold mt-3">Sophie Martin</h5>
-                        <small class="text-muted">Data Science Manager</small>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="fst-italic text-muted">"Communication fluide et travail de haute qualité sur l'analyse de données complexes."</p>
+                        <h6 class="fw-bold mb-0">Sophie Martin</h6>
+                        <small class="text-primary">Data Scientist</small>
                     </div>
                 </div>
-
-                <!-- Comment 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="expertise-card">
-                        <div style="margin-bottom: 15px;">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                        <p>"Travail soigné, communication exemplaire. Un professionnel de haut niveau."</p>
-                        <h5 class="text-navy fw-bold mt-3">Thomas Laurent</h5>
-                        <small class="text-muted">Founder, StartupAI</small>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="fst-italic text-muted">"Excellente compréhension des enjeux métiers liés à l'intelligence artificielle."</p>
+                        <h6 class="fw-bold mb-0">Thomas Laurent</h6>
+                        <small class="text-primary">Chef de Projet</small>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-navy text-white py-4">
+    <footer class="bg-dark text-white py-5 mt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; since 2025 <strong>Francois lachance awounang-ngounou</strong> -->Ingénieur Polytechnicien de Genie Electrique et Systemes Intelligents, Etudiant en Signal, Image et Apprentissage automatique, build data scientist</p>
+            <div class="row align-items-center text-center text-md-start">
+                <div class="col-md-8">
+                    <p class="mb-0">© 2025 <strong>François Lachance Awounang-Ngounou</strong></p>
+                    <small class="text-muted">Ingénieur Polytechnicien | Spécialiste Signal, Image & Apprentissage Automatique</small>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-github fa-lg"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>

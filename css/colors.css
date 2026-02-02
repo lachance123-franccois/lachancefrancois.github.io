@@ -1,225 +1,71 @@
 :root {
-  /* === PALETTE PRINCIPALE === */
+  /* === PALETTE BLEU CIEL & BLANC TERNE === */
   --bleu-navy: #0d1b2a;
-  --bleu-ciel: #4fc3f7;
-  --beige: #f5f3e7;
-  --beige-clair: #faf8f2;
-  --texte-principal: #0d1b2a;
-  --texte-secondaire: #3d4d5d;
-  --accent: #4fc3f7;
-  --accent-fonce: #2196f3;
-  --accent-clair: #81d4fa;
+  --bleu-ciel: #70d6ff;       /* Plus vibrant, plus "ciel" */
+  --blanc-terne: #f1f4f9;     /* Blanc cassé avec une pointe de bleu/gris */
+  --blanc-pur: #ffffff;
+  --gris-froid: #e2e8f0;      /* Pour les bordures et séparations */
+  
+  --texte-principal: #1e293b; /* Bleu-gris très foncé */
+  --texte-secondaire: #64748b;
+  
+  --accent: var(--bleu-ciel);
+  --accent-fonce: #00b4d8;
+  --accent-clair: #caf0f8;
 
-  /* === TYPOGRAPHIE === */
-  --font-base: "Inter", "Geist", "FKGroteskNeue", sans-serif;
-  --font-size-xs: 10px;
-  --font-size-sm: 12px;
-  --font-size-base: 13px;
-  --font-size-lg: 15px;
-  --font-size-xl: 18px;
-  --font-size-2xl: 22px;
-  --font-size-3xl: 26px;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 600;
-  --line-height: 1.5;
+  /* === TYPOGRAPHIE (Affinement) === */
+  --font-base: "Inter", "Geist", sans-serif;
+  --font-size-base: 14px;
+  --line-height: 1.6;
 
-  /* === EFFETS ET MISE EN PAGE === */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
-  --transition: all 0.25s ease;
-  --focus-outline: 2px solid var(--accent);
-
-  /* === ESPACEMENT === */
-  --space-4: 4px;
-  --space-8: 8px;
-  --space-12: 12px;
-  --space-16: 16px;
-  --space-24: 24px;
-  --space-32: 32px;
+  /* === EFFETS === */
+  --radius-md: 12px;
+  --shadow: 0 4px 12px rgba(15, 23, 42, 0.05); /* Ombre plus froide */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* === STRUCTURE GÉNÉRALE === */
+/* === RÉVISION DE LA STRUCTURE === */
 html {
   font-family: var(--font-base);
   font-size: var(--font-size-base);
   line-height: var(--line-height);
   color: var(--texte-principal);
-  background-color: var(--beige-clair);
+  background-color: var(--blanc-terne); /* Fond principal terne */
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   margin: 0;
-  padding: 0;
-  background: linear-gradient(180deg, var(--beige), var(--beige-clair));
+  /* Dégradé très subtil pour éviter le côté "plat" */
+  background: linear-gradient(180deg, var(--blanc-pur) 0%, var(--blanc-terne) 100%);
+  min-height: 100vh;
 }
 
-/* === TITRES === */
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 var(--space-16);
-  color: var(--bleu-navy);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.01em;
-  transition: color var(--transition);
-}
-
-h1 { font-size: var(--font-size-3xl); }
-h2 { font-size: var(--font-size-2xl); }
-h3 { font-size: var(--font-size-xl); }
-h4, h5, h6 { font-size: var(--font-size-lg); }
-
-p {
-  margin: 0 0 var(--space-16);
-  color: var(--texte-secondaire);
-  font-size: var(--font-size-base);
-}
-
-/* === LIENS === */
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: var(--transition);
-}
-a:hover {
-  color: var(--accent-fonce);
-  text-decoration: underline;
-}
-
-/* === BOUTONS === */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-8) var(--space-16);
+/* === CARTES AMÉLIORÉES === */
+.card {
+  background: var(--blanc-pur);
+  border: 1px solid var(--gris-froid);
   border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
+  box-shadow: var(--shadow);
+  padding: var(--space-24);
   transition: var(--transition);
-  border: none;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
 }
 
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 25px rgba(112, 214, 255, 0.2);
+}
+
+/* === BOUTONS (Effet Soft Sky) === */
 .btn--primary {
   background: var(--accent);
-  color: white;
-  box-shadow: var(--shadow);
+  color: var(--bleu-navy); /* Meilleur contraste que blanc sur bleu ciel */
+  font-weight: 700;
 }
-.btn--primary:hover {
-  background: var(--accent-fonce);
-  box-shadow: var(--shadow-hover);
-}
+
 .btn--secondary {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-}
-.btn--secondary:hover {
   background: var(--accent-clair);
-  color: var(--bleu-navy);
-}
-
-/* === CARTES === */
-.card {
-  background: var(--beige);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
-  padding: var(--space-16);
-  transition: var(--transition);
-}
-.card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-3px);
-}
-
-/* === STATUTS === */
-.status {
-  display: inline-block;
-  padding: var(--space-4) var(--space-12);
-  border-radius: 9999px;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  transition: var(--transition);
-}
-.status--success {
-  background: rgba(79, 195, 247, 0.15);
   color: var(--accent-fonce);
-  border: 1px solid var(--accent);
-}
-.status--warning {
-  background: rgba(255, 204, 102, 0.15);
-  color: #b57400;
-  border: 1px solid #ffb74d;
-}
-.status--error {
-  background: rgba(255, 82, 82, 0.15);
-  color: #d32f2f;
-  border: 1px solid #ef5350;
-}
-
-/* === FORMULAIRES === */
-input, select, textarea {
-  width: 100%;
-  padding: var(--space-8) var(--space-12);
-  border: 1px solid rgba(13, 27, 42, 0.2);
-  border-radius: var(--radius-sm);
-  background-color: white;
-  font-size: var(--font-size-sm);
-  transition: var(--transition);
-}
-input:focus, select:focus, textarea:focus {
-  outline: var(--focus-outline);
-  border-color: var(--accent);
-}
-
-/* === CONTENEURS === */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-16);
-}
-
-/* === TEXTE GRADIENT === */
-.text-gradient {
-  background: linear-gradient(135deg, var(--accent), var(--bleu-navy));
-  -webkit-text-fill-color: transparent;
-  font-weight: var(--font-weight-bold);
-  transition: background var(--transition);
-}
-
-/* === COULEURS UTILES === */
-.bg-navy { background: var(--bleu-navy) !important; color: white !important; }
-.bg-sky { background: var(--accent) !important; color: white !important; }
-.bg-beige { background: var(--beige) !important; color: var(--bleu-navy) !important; }
-
-.text-navy { color: var(--bleu-navy) !important; }
-.text-sky { color: var(--accent) !important; }
-.text-beige { color: var(--beige) !important; }
-
-/* === ANIMATIONS DYNAMIQUES === */
-.fade-in {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.6s var(--transition) forwards;
-}
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  h1 { font-size: 22px; }
-  h2 { font-size: 18px; }
-  h3 { font-size: 16px; }
-  p { font-size: 12px; }
-  .btn { padding: var(--space-6) var(--space-12); font-size: 12px; }
-  .card { padding: var(--space-12); }
+  border: none;
 }
