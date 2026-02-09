@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trouvez rapidement des offres de stage sur LinkedIn avec LinkedIn Stage Tracker">
+    <meta name="keywords" content="LinkedIn, stage, internship, recherche emploi, alternance">
+    <meta name="author" content="Contratdevie Stage ">
+    
+    <title>🐵 Contratdevie LinkedIn Stage - Trouvez votre stage facilement</title>
+    
+    <link rel="stylesheet" href="css/styles1.css">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>">
+</head>
+<body>
+    <!-- Toggle Theme Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">🐵</div>
+            <h1>Contratdevie LinkedIn Stage </h1>
+            <p>Votre assistant intelligent pour trouver des offres de stage</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Alert Info -->
+            <div class="alert alert-warning">
+                <strong>⚠️ Important :</strong> Cet outil génère des URLs de recherche LinkedIn optimisées. 
+                Vous devrez cliquer manuellement sur les liens pour respecter les conditions d'utilisation de LinkedIn.
+            </div>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <h2>🔍 Configurez votre recherche</h2>
+                
+                <form id="searchForm" onsubmit="event.preventDefault(); generateSearchLinks();">
+                    <div class="form-group">
+                        <label for="keywords">
+                            <span class="label-icon">💼</span>
+                            Mots-clés (domaine, compétences) *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="keywords" 
+                            placeholder="Ex: Développement web, Marketing digital, Data science"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">
+                            <span class="label-icon">📍</span>
+                            Localisation
+                        </label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            placeholder="Ex: Paris, France"
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience">
+                                <span class="label-icon">⭐</span>
+                                Niveau d'expérience
+                            </label>
+                            <select id="experience">
+                                <option value="">Tous les niveaux</option>
+                                <option value="1">Débutant</option>
+                                <option value="2">Intermédiaire</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datePosted">
+                                <span class="label-icon">📅</span>
+                                Date de publication
+                            </label>
+                            <select id="datePosted">
+                                <option value="">À tout moment</option>
+                                <option value="r86400">Dernières 24 heures</option>
+                                <option value="r604800">Dernière semaine</option>
+                                <option value="r2592000">Dernier mois</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                         Générer les recherches
+                    </button>
+                </form>
+            </section>
+
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Génération des liens de recherche...</p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats" id="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="linkCount">0</div>
+                    <div class="stat-label">Liens générés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="savedSearches">0</div>
+                    <div class="stat-label">Recherches sauvegardées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSearches">0</div>
+                    <div class="stat-label">Total effectué</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs" id="tabsContainer">
+                <button class="tab active" onclick="showTab('results')">
+                    Résultats
+                </button>
+                <button class="tab" onclick="showTab('history')">
+                    Historique
+                </button>
+                <button class="tab" onclick="showTab('favorites')">
+                    Favoris
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <section class="results tab-content active" id="results"></section>
+
+            <!-- History Section -->
+            <section class="history tab-content" id="history"></section>
+
+            <!-- Favorites Section -->
+            <section class="favorites tab-content" id="favorites"></section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with 🐵 Francois lachance</p>
+            <p>Utilisez cet outil de manière responsable | <a href="https://www.linkedin.com/legal/user-agreement" target="_blank">Conditions LinkedIn</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

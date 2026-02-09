@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projets Machine Learning de François Lachance">
     <title>Machine Learning | François Lachance A.N</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
-    
-    <link rel="stylesheet" href="css/main.css">
     
     <style>
         :root {
@@ -25,6 +25,52 @@
             background: linear-gradient(135deg, var(--navy-deep) 0%, #172a45 100%);
             padding: 100px 0 60px;
             color: white;
+            position: relative;
+        }
+
+        /* Bouton Admin discret */
+        .admin-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--navy-deep);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .admin-trigger:hover {
+            transform: scale(1.1);
+            background: var(--accent-green);
+        }
+
+        /* Modal Admin */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .admin-modal.active { display: flex; align-items: center; justify-content: center; }
+
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .project-card {
@@ -35,6 +81,7 @@
             height: 100%;
             border: none;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         .project-card:hover {
@@ -72,6 +119,8 @@
             font-size: 0.8rem;
             font-weight: 600;
             margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
         }
 
         .section-title-line {
@@ -80,6 +129,29 @@
             background: var(--accent-green);
             margin: 10px auto 30px;
         }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .project-card:hover .delete-btn { opacity: 1; }
+        .delete-btn:hover { background: #dc3545; }
+
+        .form-control:focus { border-color: var(--accent-green); box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25); }
+        .btn-primary { background: var(--navy-deep); border: none; }
+        .btn-primary:hover { background: var(--accent-green); }
     </style>
 </head>
 <body>
@@ -87,7 +159,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fas fa-code me-2"></i>F. Lachance A.N
+                <i class="fas fa-code me-2"></i>Francois Lachance
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -107,7 +179,7 @@
     <header class="hero-ml">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                <div class="col-lg-8">
                     <h1 class="display-4 fw-bold mb-3">
                         <i class="fas fa-brain text-info me-3"></i>Machine Learning
                     </h1>
@@ -126,66 +198,8 @@
                 <div class="section-title-line"></div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #007bff, #00d084);">
-                            <i class="fas fa-chart-line fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="LSTM.py" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-primary fw-bold text-uppercase">Séries Temporelles</small>
-                            <h4 class="mt-2">Prédiction LSTM</h4>
-                            <p class="text-muted small">Modélisation de flux économiques avec réseaux de neurones récurrents. Précision : 94%.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">TensorFlow</span>
-                                <span class="tech-badge">Python</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #ff4b2b, #ff416c);">
-                            <i class="fas fa-microscope fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="#" class="btn btn-light rounded-pill px-4">Détails</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-danger fw-bold text-uppercase">Computer Vision</small>
-                            <h4 class="mt-2">Imagerie Médicale</h4>
-                            <p class="text-muted small">Classification de radiographies pulmonaires via architectures CNN (ResNet).</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">PyTorch</span>
-                                <span class="tech-badge">OpenCV</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #4b6cb7, #182848);">
-                            <i class="fas fa-language fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="#" class="btn btn-light rounded-pill px-4">Détails</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-info fw-bold text-uppercase">NLP</small>
-                            <h4 class="mt-2">Analyse BERT</h4>
-                            <p class="text-muted small">Analyse de sentiment multi-classe sur datasets textuels massifs.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">HuggingFace</span>
-                                <span class="tech-badge">BERT</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row g-4" id="projectsContainer">
+                <!-- Les projets seront injectés ici dynamiquement -->
             </div>
         </div>
     </section>
@@ -226,16 +240,287 @@
         <div class="container text-center">
             <p>© 2025 François Lachance Awounang-Ngounou</p>
             <div class="h4">
-                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/françois-lachance-awounang-ngounou-7022851b4/" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/lachance123-franccois" class="text-white mx-2"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- Bouton Admin (discret) -->
+    <button class="admin-trigger" id="adminBtn" title="Admin Panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Modal Admin -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-panel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold mb-0"><i class="fas fa-shield-alt me-2"></i>Admin Panel</h3>
+                <button class="btn-close" id="closeModal"></button>
+            </div>
+
+            <!-- Authentification -->
+            <div id="authSection">
+                <div class="alert alert-info">
+                    <i class="fas fa-lock me-2"></i>Entrez le code secret pour accéder
+                </div>
+                <input type="password" class="form-control mb-3" id="secretCode" placeholder="Code secret">
+                <button class="btn btn-primary w-100" id="unlockBtn">Déverrouiller</button>
+            </div>
+
+            <!-- Formulaire d'ajout (caché par défaut) -->
+            <div id="projectForm" style="display: none;">
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>Accès autorisé
+                </div>
+
+                <form id="addProjectForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Titre du projet</label>
+                        <input type="text" class="form-control" id="projectTitle" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Catégorie</label>
+                        <input type="text" class="form-control" id="projectCategory" placeholder="ex: Computer Vision">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Description</label>
+                        <textarea class="form-control" id="projectDesc" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Icône (FontAwesome)</label>
+                        <input type="text" class="form-control" id="projectIcon" placeholder="ex: fa-chart-line" value="fa-project-diagram">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Gradient (CSS)</label>
+                        <input type="text" class="form-control" id="projectGradient" value="linear-gradient(135deg, #667eea, #764ba2)">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Technologies (séparées par virgule)</label>
+                        <input type="text" class="form-control" id="projectTechs" placeholder="ex: Python, TensorFlow, Keras">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Lien (optionnel)</label>
+                        <input type="url" class="form-control" id="projectLink" placeholder="https://github.com/...">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-plus-circle me-2"></i>Ajouter le projet
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
     <script>
+        // ========== CONFIGURATION ==========
+        const SECRET_CODE = "FL2025ML"; //  code secret  !
+        const STORAGE_KEY = "ml_projects";
+
+        // ========== PROJETS PAR DÉFAUT ==========
+        const DEFAULT_PROJECTS = [
+            {
+                id: 1,
+                title: "Prédiction LSTM",
+                category: "Séries Temporelles",
+                categoryColor: "primary",
+                description: "Modélisation de flux économiques avec réseaux de neurones récurrents. Précision : 94%.",
+                icon: "fa-chart-line",
+                gradient: "linear-gradient(135deg, #007bff, #00d084)",
+                techs: ["TensorFlow", "Python"],
+                link: "LSTM.py"
+            },
+            {
+                id: 2,
+                title: "Imagerie",
+                category: "Computer Vision",
+                categoryColor: "danger",
+                description: "Classification de radiographies pulmonaires via architectures CNN (ResNet).",
+                icon: "fa-microscope",
+                gradient: "linear-gradient(135deg, #ff4b2b, #ff416c)",
+                techs: ["PyTorch", "OpenCV"],
+                link: "https://github.com/lachance123-franccois/classification_trash"
+            },
+            {
+                id: 3,
+                title: "Analyse BERT",
+                category: "NLP",
+                categoryColor: "info",
+                description: "Analyse de sentiment multi-classe sur datasets textuels massifs.",
+                icon: "fa-language",
+                gradient: "linear-gradient(135deg, #4b6cb7, #182848)",
+                techs: ["HuggingFace", "BERT"],
+                link: "https://github.com/lachance123-franccois/analyse_bert"
+            },
+            {
+                id: 4,
+                title: "Classification des graines",
+                category: "Computer Vision",
+                categoryColor: "warning",
+                description: "Classification de graines à partir d'images avec réseaux de neurones convolutionnels.",
+                icon: "fa-seedling",
+                gradient: "linear-gradient(135deg, #f093fb, #f5576c)",
+                techs: ["Scikit-Learn", "Pandas"],
+                link: "https://github.com/lachance123-franccois/riceclassification2.0"
+            },
+            {
+                id: 5,
+                title: "Regression lineaire",
+                category: "Systèmes de Recommandation",
+                categoryColor: "success",
+                description: "Moteur de recommandation basé sur le filtrage collaboratif et la factorisation matricielle.",
+                icon: "fa-users",
+                gradient: "linear-gradient(135deg, #00b09b, #96c93d)",
+                techs: ["Scikit-learn", "ALS"],
+                link: "https://github.com/lachance123-franccois/regression-lineaire"
+            },
+            {
+                id: 6,
+                title: "Prévision Météo",
+                category: "Time Series Forecasting",
+                categoryColor: "secondary",
+                description: "Prédiction de données climatiques avec modèles ARIMA et Prophet.",
+                icon: "fa-cloud-sun",
+                gradient: "linear-gradient(135deg, #56ccf2, #2f80ed)",
+                techs: ["Prophet", "Statsmodels"],
+                link: "https://github.com/lachance123-franccois/pipeline_serie-temporelle"
+            }
+        ];
+
+        // ========== ÉTAT ==========
+        let isAuthenticated = false;
+        let projects = [];
+
+        // ========== INITIALISATION ==========
+        function initProjects() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            projects = stored ? JSON.parse(stored) : DEFAULT_PROJECTS;
+            renderProjects();
+        }
+
+        // ========== RENDU DES PROJETS ==========
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            container.innerHTML = '';
+
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', index * 100);
+
+                const techBadges = project.techs.map(tech => 
+                    `<span class="tech-badge">${tech}</span>`
+                ).join('');
+
+                card.innerHTML = `
+                    <div class="project-card">
+                        ${isAuthenticated ? `<button class="delete-btn" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i></button>` : ''}
+                        <div class="project-image-placeholder" style="background: ${project.gradient};">
+                            <i class="fas ${project.icon} fa-3x"></i>
+                            <div class="project-overlay">
+                                <a href="${project.link}" class="btn btn-light rounded-pill px-4">
+                                    ${project.link && project.link !== '#' ? 'Voir le code' : 'Détails'}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-${project.categoryColor || 'primary'} fw-bold text-uppercase">${project.category}</small>
+                            <h4 class="mt-2">${project.title}</h4>
+                            <p class="text-muted small">${project.description}</p>
+                            <div class="mt-3">${techBadges}</div>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            AOS.refresh();
+        }
+
+        // ========== SUPPRESSION ==========
+        function deleteProject(id) {
+            if (!confirm('Supprimer ce projet ?')) return;
+            projects = projects.filter(p => p.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+            renderProjects();
+        }
+
+        // ========== ADMIN PANEL ==========
+        const adminBtn = document.getElementById('adminBtn');
+        const adminModal = document.getElementById('adminModal');
+        const closeModal = document.getElementById('closeModal');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const secretCodeInput = document.getElementById('secretCode');
+        const authSection = document.getElementById('authSection');
+        const projectForm = document.getElementById('projectForm');
+
+        adminBtn.addEventListener('click', () => {
+            adminModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            adminModal.classList.remove('active');
+        });
+
+        adminModal.addEventListener('click', (e) => {
+            if (e.target === adminModal) {
+                adminModal.classList.remove('active');
+            }
+        });
+
+        unlockBtn.addEventListener('click', () => {
+            if (secretCodeInput.value === SECRET_CODE) {
+                isAuthenticated = true;
+                authSection.style.display = 'none';
+                projectForm.style.display = 'block';
+                renderProjects(); // Re-render pour afficher les boutons delete
+            } else {
+                alert('❌ Code incorrect !');
+                secretCodeInput.value = '';
+            }
+        });
+
+        // ========== AJOUT DE PROJET ==========
+        document.getElementById('addProjectForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newProject = {
+                id: Date.now(),
+                title: document.getElementById('projectTitle').value,
+                category: document.getElementById('projectCategory').value,
+                categoryColor: 'primary',
+                description: document.getElementById('projectDesc').value,
+                icon: document.getElementById('projectIcon').value,
+                gradient: document.getElementById('projectGradient').value,
+                techs: document.getElementById('projectTechs').value.split(',').map(t => t.trim()),
+                link: document.getElementById('projectLink').value || '#'
+            };
+
+            projects.push(newProject);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+            renderProjects();
+
+            // Reset form
+            e.target.reset();
+            adminModal.classList.remove('active');
+
+            alert('✅ Projet ajouté avec succès !');
+        });
+
+        // ========== DÉMARRAGE ==========
         AOS.init({ duration: 800, once: true });
+        initProjects();
     </script>
 </body>
 </html>

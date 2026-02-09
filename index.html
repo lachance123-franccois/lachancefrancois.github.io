@@ -3,215 +3,847 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | François Lachance  - Ingénieur IA & Signal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Portfolio de François Lachance - Ingénieur IA & Traitement du Signal, expert en Machine Learning, vision par ordinateur et analyse spatiale à Toulouse">
+    <meta name="keywords" content="IA, Machine Learning, Traitement Signal, Deep Learning, Ingénieur, Toulouse">
+    <meta name="author" content="François Lachance">
     
+    <!-- Open Graph -->
+    <meta property="og:title" content="François Lachance - Ingénieur IA & Signal">
+    <meta property="og:description" content="Expert en Machine Learning et Traitement du Signal appliqué au spatial">
+    <meta property="og:type" content="website">
+    
+    <title>François Lachance - Ingénieur IA & Signal | Portfolio</title>
+    
+    <!-- Preconnect pour optimisation -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts optimisées -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS optimisé - Un seul framework -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-    <link rel="stylesheet" href="css/main.css">
-   <style>
-    :root {
-        --navy-deep: #0a192f;
-        --light-sky: #b8d4e9;
-    }
+    <style>
+        :root {
+            --navy-deep: #0a192f;
+            --navy-light: #112240;
+            --light-sky: #b8d4e9;
+            --sky-hover: #d4e8f5;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-    /* SECTION HERO AVEC BANDES INTERACTIVES */
-    .hero-section {
-        position: relative;
-        /* Bande 2 : Bleu ciel vers Blanc */
-        background: linear-gradient(180deg, var(--light-sky) 0%, #ffffff 100%);
-        padding: 100px 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Bande 1 : Le rectangle Marine (15px) */
-    .hero-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 15px; /* Taille demandée */
-        background-color: var(--navy-deep);
-        transition: background-color 0.4s ease, height 0.3s ease;
-        z-index: 100;
-    }
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    /* INTERACTION : Change en blanc/bleu ciel au survol de la section */
-    .hero-section:hover::before {
-        background-color: #ffffff; /* Devient blanc */
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+        /* ====================
+           NAVIGATION AMÉLIORÉE
+           ==================== */
+        .navbar {
+            background: var(--navy-deep) !important;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-base);
+            padding: 1rem 0;
+        }
 
-    /* PHOTO CIRCULAIRE (Style Image) */
-    .profile-photo {
-        width: 320px;
-        height: 320px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 8px solid #ffffff;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        display: block;
-        margin: 0 auto;
-        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .profile-photo:hover {
-        transform: scale(1.05);
-    }
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-lg);
+        }
 
-    /* DERNIÈRE BANDE : Marine en bas de page (Footer) */
-    footer {
-        position: relative;
-        background-color: var(--navy-deep); /* Bande Marine finale */
-        border-top: 15px solid var(--navy-deep); /* Rectangle miroir */
-        transition: border-color 0.4s ease;
-    }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            transition: var(--transition-base);
+        }
 
-    footer:hover {
-        border-top-color: var(--light-sky); /* Change en bleu ciel au survol */
-    }
-</style>
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .brand-icon {
+            color: var(--light-sky);
+            transition: var(--transition-base);
+        }
+
+        .navbar-brand:hover .brand-icon {
+            transform: rotate(360deg);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem !important;
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--light-sky);
+            transition: var(--transition-base);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        /* ====================
+           HERO SECTION INTERACTIVE
+           ==================== */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(180deg, var(--light-sky) 0%, var(--white) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Bande supérieure interactive */
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-color: var(--navy-deep);
+            transition: var(--transition-base);
+            z-index: 100;
+        }
+
+        .hero-section:hover::before {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Effet de particules en arrière-plan */
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(10, 25, 47, 0.05) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(184, 212, 233, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--navy-deep);
+        }
+
+        .hero-section h1 span {
+            background: linear-gradient(135deg, var(--navy-deep), var(--light-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section .lead {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Photo de profil améliorée */
+        .profile-photo-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-photo {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--white);
+            box-shadow: var(--shadow-lg);
+            display: block;
+            margin: 0 auto;
+            transition: var(--transition-smooth);
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cercle décoratif animé */
+        .profile-photo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--light-sky), var(--navy-deep));
+            opacity: 0.2;
+            z-index: -1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        /* Boutons CTA améliorés */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--navy-deep);
+            border: none;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: var(--navy-light);
+        }
+
+        .btn-outline-dark {
+            border: 2px solid var(--navy-deep);
+            color: var(--navy-deep);
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            transition: var(--transition-base);
+        }
+
+        .btn-outline-dark:hover {
+            background: var(--navy-deep);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ====================
+           SECTION EXPERTISE
+           ==================== */
+        #expertise {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, #f8fafc 0%, var(--white) 100%);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 1rem;
+        }
+
+        .title-underline {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--navy-deep), var(--light-sky));
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .expertise-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--navy-deep), var(--light-sky));
+            transform: scaleX(0);
+            transition: var(--transition-base);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .expertise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .expertise-card i {
+            transition: var(--transition-smooth);
+        }
+
+        .expertise-card:hover i {
+            transform: scale(1.2) rotateY(360deg);
+        }
+
+        .expertise-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: var(--navy-deep);
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .expertise-card a {
+            color: var(--navy-deep);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .expertise-card a::after {
+            content: '→';
+            transition: var(--transition-base);
+        }
+
+        .expertise-card a:hover {
+            color: var(--light-sky);
+            gap: 1rem;
+        }
+
+        /* ====================
+           SECTION STATISTIQUES
+           ==================== */
+        .stats-section {
+            background: var(--white);
+            padding: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            transition: var(--transition-base);
+            border-radius: 12px;
+        }
+
+        .stat-item:hover {
+            background: var(--light-sky);
+            transform: scale(1.05);
+        }
+
+        .stat-item h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* ====================
+           FOOTER INTERACTIF
+           ==================== */
+        footer {
+            position: relative;
+            background-color: var(--navy-deep);
+            border-top: 15px solid var(--navy-deep);
+            transition: var(--transition-base);
+            padding: 3rem 0;
+        }
+
+        footer:hover {
+            border-top-color: var(--light-sky);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition-base);
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            background: var(--light-sky);
+            color: var(--navy-deep) !important;
+            transform: translateY(-5px) rotate(5deg);
+            border-color: var(--white);
+        }
+
+        /* ====================
+           ANIMATIONS OPTIMISÉES
+           ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-zoomIn {
+            animation: zoomIn 1s ease-out;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+            animation-fill-mode: backwards;
+        }
+
+        /* ====================
+           RESPONSIVE DESIGN
+           ==================== */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .hero-section {
+                padding: 3rem 0;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .profile-photo {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary,
+            .btn-outline-dark {
+                width: 100%;
+                text-align: center;
+            }
+
+            .expertise-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+        }
+
+        /* ====================
+           ACCESSIBILITÉ
+           ==================== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus visible pour navigation clavier */
+        :focus-visible {
+            outline: 3px solid var(--light-sky);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Skip to main content (accessibilité) */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--navy-deep);
+            color: var(--white);
+            padding: 8px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Impression */
+        @media print {
+            nav, footer, .cta-buttons {
+                display: none;
+            }
+            
+            .hero-section::before,
+            .hero-section::after {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="mainNavbar">
+    <!-- Lien d'accessibilité -->
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar" role="navigation" aria-label="Navigation principale">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <span class="brand-icon me-2"><i class="fas fa-code"></i></span>Francois Lachance</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand fw-bold" href="index.html" aria-label="Retour à l'accueil">
+                <span class="brand-icon me-2" aria-hidden="true"><i class="fas fa-code"></i></span>
+                François Lachance
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">IA & ML</a></li>
-                    <li class="nav-item"><a class="nav-link" href="matlab.html"> Traitement Signal & Image</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Webs</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
-
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html" aria-current="page">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="machine-learning.html">IA & ML</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matlab.html">Traitement Signal & Image</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="web.html">Automatisme</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="cv-op.html">Mon CV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero-section py-5">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInLeft">
-                        Bienvenue, je suis <br><span class="">François Lachance</span>
-
-                    </h1>
-                    <p class="lead mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-                        Ingénieur passionné d'<strong>IA (Machine Learning)</strong>, 
-                        expert en <strong>Traitement du Signal/Image</strong> appliqué au spatial, et Automaticien rigoureux.
-                    </p>
-                    <div class="cta-buttons animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-                        <a href="cv.html" class="btn btn-primary btn-lg me-3 shadow">
-                            <i class="fas fa-file-download me-2"></i>Télécharger CV
-                        </a>
-                        <a href="#expertise" class="btn btn-outline-dark btn-lg">
-                            Explorer mes travaux
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-5 text-center mt-5 mt-lg-0">
-                    <div class="position-relative animate__animated animate__zoomIn">
-                        <img src="assets/aaa.png" alt="François Lachance" class="profile-photo shadow-lg">
-
+    <!-- Hero Section -->
+    <main id="main-content">
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 text-center text-lg-start hero-content">
+                        <h1 id="hero-title" class="animate-fadeInLeft">
+                            Bienvenue, je suis<br>
+                            <span>François Lachance</span>
+                        </h1>
+                        <p class="lead animate-fadeInUp delay-200">
+                            Ingénieur passionné d'<strong>Intelligence Artificielle</strong> et de <strong>Machine Learning</strong>, 
+                            expert en <strong>Traitement du Signal et de l'Image</strong> appliqué au spatial, 
+                            et automaticien rigoureux.
+                        </p>
+                        <div class="cta-buttons animate-fadeInUp delay-400">
+                            <a href="cv.html" class="btn btn-primary btn-lg shadow" aria-label="Télécharger mon CV">
+                                <i class="fas fa-file-download me-2" aria-hidden="true"></i>
+                                Télécharger CV
+                            </a>
+                            <a href="#expertise" class="btn btn-outline-dark btn-lg">
+                                Explorer mes travaux
+                            </a>
                         </div>
+                    </div>
+                    
+                    <div class="col-lg-5 text-center mt-5 mt-lg-0">
+                        <div class="profile-photo-wrapper animate-zoomIn">
+                            <img src="assets/aaa.png" 
+                                 alt="Photo de profil de François Lachance, ingénieur en IA et traitement du signal" 
+                                 class="profile-photo"
+                                 loading="eager">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="expertise" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Mes Domaines d'interventions</h2>
-                <div class="mx-auto" style="width: 60px; height: 4px; background: #007bff;"></div>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up">
-                    <div class="expertise-card shadow-sm text-center">
-                        <i class="fas fa-brain fa-3x text-primary mb-3"></i>
-                        <h3>Machine Learning</h3>
-
-                        <p class="text-muted">Deep Learning, Classification et  vision par ordinateur avec TensorFlow & PyTorch.</p>
-                        <a href="machine-learning.html" class="text-decoration-none fw-bold">Projets IA →</a>
-                    </div>
+        <!-- Section Expertise -->
+        <section id="expertise" class="py-5" aria-labelledby="expertise-title">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2 id="expertise-title">Mes Domaines d'interventions</h2>
+                    <div class="title-underline"></div>
                 </div>
                 
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="expertise-card shadow-sm text-center">
-                        <i class="fas fa-satellite fa-3x text-info mb-3"></i>
-                        <h3>Traitements Signal & Image</h3> 
-                        <p class="text-muted">Analyse spatiale, filtrage et segmentation sous MATLAB & OpenCV.</p>
-                        <a href="matlab.html" class="text-decoration-none fw-bold">Voir les analyses →</a>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <article class="expertise-card">
+                            <i class="fas fa-brain fa-3x text-primary" aria-hidden="true"></i>
+                            <h3>Machine Learning & IA</h3>
+                            <p>
+                                Deep Learning, classification et vision par ordinateur 
+                                avec TensorFlow, PyTorch et scikit-learn.
+                            </p>
+                            <a href="machine-learning.html" aria-label="Voir mes projets en Intelligence Artificielle">
+                                Projets IA
+                            </a>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <article class="expertise-card">
+                            <i class="fas fa-satellite fa-3x text-info" aria-hidden="true"></i>
+                            <h3>Traitement Signal & Image</h3> 
+                            <p>
+                                Analyse spatiale, filtrage avancé et segmentation 
+                                sous MATLAB, OpenCV et Python.
+                            </p>
+                            <a href="matlab.html" aria-label="Voir mes analyses en traitement du signal">
+                                Voir les analyses
+                            </a>
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <article class="expertise-card">
+                            <i class="fas fa-microchip fa-3x text-secondary" aria-hidden="true"></i>
+                            <h3>Automatisme Industriel</h3>
+                            <p>
+                                TIA Portal, Simulink et maintenance 
+                                des systèmes industriels complexes.
+                            </p>
+                            <a href="web.html" aria-label="Voir les détails techniques en automatisme">
+                                Détails techniques
+                            </a>
+                        </article>
                     </div>
                 </div>
-                
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="expertise-card shadow-sm text-center">
-                        <i class="fas fa-microchip fa-3x text-secondary mb-3"></i>
-                        <h3>Automatisme Industriel</h3>
-                        <p class="text-muted">TIA Portal, Simulink et maintenance des systèmes industriels complexes.</p>
-                        <a href="web.html" class="text-decoration-none fw-bold">Détails techniques →</a>
+            </div>
+        </section>
+
+        <!-- Section Statistiques -->
+        <section class="stats-section" aria-label="Statistiques du portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item">
+                            <h2>10+</h2>
+                            <p>Projets Réalisés</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item">
+                            <h2>2025</h2>
+                            <p>Année de Lancement</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item">
+                            <h2>100%</h2>
+                            <p>Passion & Engagement</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item">
+                            <h2><i class="fas fa-map-marker-alt"></i></h2>
+                            <p>Toulouse, France</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="py-5 bg-white text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <h2 class="fw-bold text-primary">15+</h2>
-                    <p>Projets</p>
-                </div>
-                <div class="col-6 col-md-3">
-                    <h2 class="fw-bold text-primary">2025</h2>
-                    <p>Lancement</p>
-                </div>
-                <div class="col-6 col-md-3">
-                    <h2 class="fw-bold text-primary">100%</h2>
-                    <p>Passion</p>
-                </div>
-                <div class="col-6 col-md-3">
-                    <h2 class="fw-bold text-primary">Toulouse</h2>
-                    <p>Localisation</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-dark text-white py-5">
-        <div class="container text-center">
-            <p class="mb-1">© 2025 François Lachance Awounang-Ngounou</p>
-            <p class="small text-muted">Ingénieur GESI & Data Scientist | Toulouse, France</p>
-            <div class="mt-3"></div>
-                <a href="https://www.linkedin.com/in/francois-l-a35723204?" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/lachance123-francois/" class="text-white mx-2"><i class="fab fa-github fa-lg"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-            </div>
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container text-center text-white">
+            <p class="mb-1">&copy; 2025 François Lachance Awounang-Ngounou</p>
+            <p class="small text-muted">Ingénieur GESI & Computer Vision | Toulouse, France</p>
+            <nav class="social-links" aria-label="Réseaux sociaux">
+                <a href="https://www.linkedin.com/in/francois-l-a35723204" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Visitez mon profil LinkedIn">
+                    <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/lachance123-francois" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Visitez mon profil GitHub">
+                    <i class="fab fa-github fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:votre.email@example.com" 
+                   aria-label="Envoyez-moi un email">
+                    <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+                </a>
+            </nav>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Scripts optimisés -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+    
     <script>
-        AOS.init({ duration: 1000, once: true });
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Lazy loading pour les images (si besoin d'autres images)
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        }
     </script>
 </body>
 </html>

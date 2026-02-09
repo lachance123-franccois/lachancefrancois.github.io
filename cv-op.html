@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CV de François Lachance - Ingénieur Polytechnicien & Master 1 Signal, Image & ML">
+    <title>Mon CV | François Lachance A.N</title>
+    
+    <!-- Preconnect pour optimiser le chargement des fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts avec display=swap pour éviter FOIT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS critiques inline pour améliorer FCP -->
+    <style>
+        :root {
+            --navy-deep: #0a192f;
+            --sky-blue: #e3f2fd;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        /* Navigation optimisée */
+        .navbar {
+            background-color: #343a40 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand { font-weight: 600; }
+
+        /* Header CV */
+        .cv-header {
+            background: linear-gradient(180deg, #ffffff 0%, var(--sky-blue) 100%);
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Conteneur PDF optimisé */
+        .cv-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* PDF Viewer avec aspect-ratio pour éviter CLS */
+        .pdf-wrapper {
+            width: 100%;
+            aspect-ratio: 8.5 / 11; /* Ratio A4 standard */
+            max-height: 900px;
+            position: relative;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Loader pendant chargement du PDF */
+        .pdf-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .spinner {
+            border: 4px solid var(--sky-blue);
+            border-top: 4px solid var(--navy-deep);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Fallback mobile-friendly */
+        .pdf-fallback {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        /* Bouton téléchargement */
+        .btn-download {
+            background-color: var(--navy-deep);
+            color: white;
+            border-radius: 30px;
+            padding: 12px 30px;
+            border: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(10, 25, 47, 0.3);
+            color: var(--sky-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cv-header { padding: 3rem 0 2rem; }
+            .pdf-wrapper { aspect-ratio: 1 / 1.4; max-height: 600px; }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Utilitaires */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .text-center { text-align: center; }
+        .text-muted { color: #6c757d; }
+        .fw-bold { font-weight: 600; }
+        .mt-3 { margin-top: 1rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .py-5 { padding: 3rem 0; }
+    </style>
+    
+    <!-- Bootstrap & FontAwesome chargés de façon asynchrone -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" aria-label="Retour à l'accueil">
+                <i class="fas fa-code me-2 text-info" aria-hidden="true"></i>François Lachance 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" href="cv-op.html" aria-current="page">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="cv-header text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Curriculum Vitae</h1>
+            <p class="lead text-muted">Ingénieur Polytechnicien & Master 1 Signal, Image & ML</p>
+            
+            <a href="assets/pdf/CV_Francois_Lachance1.pdf" download="CV_Francois_Lachance1.pdf" class="btn btn-download mt-3" aria-label="Télécharger le CV en PDF">
+                <i class="fas fa-file-download me-2" aria-hidden="true"></i>Télécharger le PDF
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="cv-container">
+                    
+                    <!-- Loader pendant chargement -->
+                    <div class="pdf-loader" id="pdfLoader">
+                        <div class="spinner"></div>
+                        <p class="text-muted">Chargement du CV...</p>
+                    </div>
+
+                    <!-- Wrapper pour maintenir le ratio -->
+                    <div class="pdf-wrapper">
+                        <object id="pdfObject" 
+                                data="assets/pdf/CV_Francois_Lachance1.pdf" 
+                                type="application/pdf" 
+                                class="pdf-viewer"
+                                aria-label="CV de François Lachance"
+                                style="display: none;">
+                            
+                            <!-- Fallback si le PDF ne charge pas -->
+                            <div class="pdf-fallback">
+                                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3" aria-hidden="true"></i>
+                                <h2 class="fw-bold h4 mb-3">Impossible d'afficher le CV</h2>
+                                <p class="text-muted mb-4">Votre navigateur ne supporte pas l'affichage des PDF intégrés.</p>
+                                <a href="assets/pdf/CV_Francois_Lachance1.pdf" class="btn btn-download" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt me-2" aria-hidden="true"></i>Ouvrir le PDF
+                                </a>
+                            </div>
+                        </object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <small>&copy; 2025 François Lachance Awounang-Ngounou. Tous droits réservés.</small>
+        </div>
+    </footer>
+
+    <!-- Script optimisé -->
+    <script>
+        // Gestion du chargement du PDF
+        (function() {
+            const pdfObject = document.getElementById('pdfObject');
+            const loader = document.getElementById('pdfLoader');
+            const pdfPath = 'assets/pdf/CV_Francois_Lachance1.pdf';
+
+            // Vérifier si le PDF existe
+            fetch(pdfPath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // PDF trouvé - afficher l'object
+                        pdfObject.style.display = 'block';
+                        loader.style.display = 'none';
+                        
+                        // Cacher le loader après chargement complet
+                        pdfObject.addEventListener('load', () => {
+                            loader.style.display = 'none';
+                        });
+                    } else {
+                        // PDF non trouvé - afficher le fallback
+                        showFallback();
+                    }
+                })
+                .catch(() => {
+                    // Erreur réseau - afficher le fallback
+                    showFallback();
+                });
+
+            function showFallback() {
+                loader.style.display = 'none';
+                pdfObject.style.display = 'none';
+                pdfObject.insertAdjacentHTML('afterend', pdfObject.querySelector('.pdf-fallback').outerHTML);
+            }
+
+            // Timeout de sécurité (5 secondes)
+            setTimeout(() => {
+                if (loader.style.display !== 'none') {
+                    loader.innerHTML = '<p class="text-muted">Le chargement prend plus de temps que prévu...</p>';
+                }
+            }, 5000);
+        })();
+    </script>
+
+    <!-- Bootstrap JS (déféré pour ne pas bloquer le rendu) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+
+</body>
+</html>
