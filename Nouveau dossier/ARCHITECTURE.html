@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Tracker - Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00ff9d 0%, #00b8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .architecture {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .layer {
+            background: rgba(22, 22, 42, 0.8);
+            border: 1px solid #2d2d44;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .layer-title {
+            font-size: 1.5rem;
+            color: #00ff9d;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .layer-icon {
+            font-size: 2rem;
+        }
+
+        .components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .component {
+            background: #1e1e38;
+            border: 1px solid #2d2d44;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .component:hover {
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.2);
+        }
+
+        .component-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .component-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-desc {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .component-file {
+            margin-top: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #00ff9d;
+            opacity: 0.8;
+        }
+
+        .flow-diagram {
+            background: rgba(22, 22, 42, 0.8);
+            border: 1px solid #2d2d44;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .flow-title {
+            font-size: 1.5rem;
+            color: #00ff9d;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flow-step {
+            background: #1e1e38;
+            border: 2px solid #2d2d44;
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #00ff9d;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #00ff9d 0%, #00b8ff 100%);
+            color: #0a0a0f;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(22, 22, 42, 0.8);
+            border: 1px solid #2d2d44;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00ff9d;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-step::after {
+                content: '↓';
+                right: auto;
+                top: auto;
+                bottom: -1.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Academic Tracker</h1>
+        <p class="subtitle">Architecture & Workflow du Système de Veille Académique</p>
+
+        <!-- Workflow -->
+        <div class="flow-diagram">
+            <h2 class="flow-title">📋 Workflow Quotidien</h2>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">GitHub Actions</div>
+                    <div class="step-desc">Déclenchement à 8h</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Scraping Multi-Sources</div>
+                    <div class="step-desc">CROUS, ABG, theses.fr, etc.</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Filtrage Intelligent</div>
+                    <div class="step-desc">Mots-clés + Toulouse</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Base de Données</div>
+                    <div class="step-desc">Stockage & Déduplication</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Email Notification</div>
+                    <div class="step-desc">Nouvelles offres uniquement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Layers -->
+        <div class="architecture">
+            <!-- Layer 1: Scrapers -->
+            <div class="layer">
+                <h2 class="layer-title">
+                    <span class="layer-icon">🔍</span>
+                    Scrapers (Collecte de Données)
+                </h2>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-icon">🏠</div>
+                        <div class="component-name">CROUS Scraper</div>
+                        <div class="component-desc">
+                            Scrape les logements étudiants sur trouverunlogement.lescrous.fr avec filtrage par prix et zone Toulouse.
+                        </div>
+                        <div class="component-file">crous_scraper.py</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-icon">🎓</div>
+                        <div class="component-name">PhD Scraper</div>
+                        <div class="component-desc">
+                            Collecte les offres de thèses depuis ABG, theses.fr, ADUM et les sites des labos toulousains (IRIT, LAAS, TéSA).
+                        </div>
+                        <div class="component-file">phd_scraper.py</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-icon">💼</div>
+                        <div class="component-name">Internship Scraper</div>
+                        <div class="component-desc">
+                            Recherche les stages M2/Ingénieur sur Indeed, HelloWork et les portails universitaires.
+                        </div>
+                        <div class="component-file">internship_scraper.py</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Data Management -->
+            <div class="layer">
+                <h2 class="layer-title">
+                    <span class="layer-icon">💾</span>
+                    Gestion des Données
+                </h2>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-icon">🗄️</div>
+                        <div class="component-name">Database Manager</div>
+                        <div class="component-desc">
+                            Base SQLite avec tables pour logements, thèses et stages. Gère la déduplication, l'historique et les statistiques.
+                        </div>
+                        <div class="component-file">database.py</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-icon">🔄</div>
+                        <div class="component-name">Main Orchestrator</div>
+                        <div class="component-desc">
+                            Coordonne tous les scrapers, gère les erreurs, les logs et l'envoi des notifications.
+                        </div>
+                        <div class="component-file">main.py</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Notifications -->
+            <div class="layer">
+                <h2 class="layer-title">
+                    <span class="layer-icon">📧</span>
+                    Système de Notifications
+                </h2>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-icon">✉️</div>
+                        <div class="component-name">Email Notifier</div>
+                        <div class="component-desc">
+                            Génère et envoie des emails HTML premium avec design futuriste. Statistiques visuelles et liens directs.
+                        </div>
+                        <div class="component-file">email_notifier.py</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 4: Frontend -->
+            <div class="layer">
+                <h2 class="layer-title">
+                    <span class="layer-icon">🎨</span>
+                    Interface Utilisateur
+                </h2>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-icon">📊</div>
+                        <div class="component-name">React Dashboard</div>
+                        <div class="component-desc">
+                            Interface web "Research Command Center" avec statistiques en temps réel, navigation par onglets et design ultra-stylé.
+                        </div>
+                        <div class="component-file">frontend/index.html</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 5: Automation -->
+            <div class="layer">
+                <h2 class="layer-title">
+                    <span class="layer-icon">⚙️</span>
+                    Automatisation
+                </h2>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-icon">🤖</div>
+                        <div class="component-name">GitHub Actions</div>
+                        <div class="component-desc">
+                            Workflow automatisé qui s'exécute quotidiennement, commit les résultats et nettoie les anciennes données chaque semaine.
+                        </div>
+                        <div class="component-file">.github/workflows/daily-scrape.yml</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <h2 class="flow-title">✨ Fonctionnalités Clés</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Filtrage Intelligent</div>
+                <div class="feature-desc">
+                    Focus automatique sur image, vidéo, signal, télécommunications et domaines connexes.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚫</div>
+                <div class="feature-title">Déduplication</div>
+                <div class="feature-desc">
+                    Détection et suppression automatique des offres en double via hash intelligent.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Statistiques</div>
+                <div class="feature-desc">
+                    Tracking complet avec historique, nombre d'offres, durée des scraping et taux de réussite.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <div class="feature-title">Notifications Ciblées</div>
+                <div class="feature-desc">
+                    Email uniquement pour les nouvelles offres, pas de spam avec les anciennes.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧹</div>
+                <div class="feature-title">Auto-Nettoyage</div>
+                <div class="feature-desc">
+                    Suppression automatique des offres de plus de 90 jours pour garder la base propre.
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Performance</div>
+                <div class="feature-desc">
+                    Cache intelligent, rate limiting et gestion d'erreurs pour un scraping rapide et fiable.
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem; padding: 2rem; border-top: 1px solid #2d2d44;">
+            <p style="color: #888; font-size: 0.9rem;">
+                © 2025 Francois lachance. Tout droit reservé.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
