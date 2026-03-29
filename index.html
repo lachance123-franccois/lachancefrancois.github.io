@@ -421,7 +421,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1 rem
+            padding: 1rem
             overflow : hidden;
             position: relative;
         }
@@ -769,7 +769,9 @@
                 How Does Facial Recognition Work?
             </div>
             <span class="viewer-counter" id="slideCounter">Slide 1 / 13</span>
-
+                <button class="viewer-close" id="viewerCloseBtn" aria-label="Quitter la présentation">
+                    <i class="fas fa-times"></i>
+                </button>
         </div>
 
         <!-- Zone principale -->
@@ -1010,7 +1012,7 @@
             if (e.key === 'ArrowLeft')  goTo(currentPage - 1);
             if (e.key === 'Escape')     closeViewer();
         });
-
+        document.getElementById('slideFrame').addEventListener('click', () => goTo(currentPage + 1));
         function closeViewer() {
             viewerOverlay.classList.remove('active');
             document.body.style.overflow = '';
