@@ -6,23 +6,14 @@
     <meta name="description" content="Portfolio de François Lachance - Ingénieur IA & Traitement du Signal, expert en Machine Learning, vision par ordinateur et analyse spatiale à Toulouse">
     <meta name="keywords" content="IA, Machine Learning, Traitement Signal, Deep Learning, Ingénieur, Toulouse">
     <meta name="author" content="François Lachance">
-    
-    <!-- Open Graph -->
     <meta property="og:title" content="François Lachance - Ingénieur IA & Signal">
     <meta property="og:description" content="Expert en Machine Learning et Traitement du Signal appliqué au spatial">
     <meta property="og:type" content="website">
-    
     <title>François Lachance - Ingénieur IA & Signal | Portfolio</title>
-    
-    <!-- Preconnect pour optimisation -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Fonts optimisées -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS optimisé - Un seul framework -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -42,11 +33,7 @@
             --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -55,571 +42,497 @@
             overflow-x: hidden;
         }
 
-        /* ====================
-           NAVIGATION AMÉLIORÉE
-           ==================== */
+        /* NAVIGATION */
         .navbar {
             background: var(--navy-deep) !important;
             box-shadow: var(--shadow-md);
             transition: var(--transition-base);
             padding: 1rem 0;
         }
-
-        .navbar.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: var(--shadow-lg);
-        }
-
+        .navbar.scrolled { padding: 0.5rem 0; box-shadow: var(--shadow-lg); }
         .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px;
             transition: var(--transition-base);
         }
-
-        .navbar-brand:hover {
-            transform: translateY(-2px);
-        }
-
-        .brand-icon {
-            color: var(--light-sky);
-            transition: var(--transition-base);
-        }
-
-        .navbar-brand:hover .brand-icon {
-            transform: rotate(360deg);
-        }
-
+        .navbar-brand:hover { transform: translateY(-2px); }
+        .brand-icon { color: var(--light-sky); transition: var(--transition-base); }
+        .navbar-brand:hover .brand-icon { transform: rotate(360deg); }
         .nav-link {
-            position: relative;
-            padding: 0.5rem 1rem !important;
-            font-weight: 500;
-            transition: var(--transition-base);
+            position: relative; padding: 0.5rem 1rem !important;
+            font-weight: 500; transition: var(--transition-base);
         }
-
         .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--light-sky);
-            transition: var(--transition-base);
-            transform: translateX(-50%);
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 2px; background: var(--light-sky);
+            transition: var(--transition-base); transform: translateX(-50%);
         }
+        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 80%;
-        }
-
-        /* ====================
-           HERO SECTION INTERACTIVE
-           ==================== */
+        /* HERO */
         .hero-section {
             position: relative;
             background: linear-gradient(180deg, var(--light-sky) 0%, var(--white) 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center; overflow: hidden;
         }
-
-        /* Bande supérieure interactive */
         .hero-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background-color: var(--navy-deep);
-            transition: var(--transition-base);
-            z-index: 100;
+            content: ""; position: absolute; top: 0; left: 0;
+            width: 100%; height: 15px; background-color: var(--navy-deep);
+            transition: var(--transition-base); z-index: 100;
         }
-
-        .hero-section:hover::before {
-            background-color: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Effet de particules en arrière-plan */
+        .hero-section:hover::before { background-color: var(--white); box-shadow: var(--shadow-sm); }
         .hero-section::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
                 radial-gradient(circle at 20% 50%, rgba(10, 25, 47, 0.05) 1px, transparent 1px),
                 radial-gradient(circle at 80% 80%, rgba(184, 212, 233, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            opacity: 0.5;
+            background-size: 50px 50px; pointer-events: none; opacity: 0.5;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
-
+        .hero-content { position: relative; z-index: 10; }
         .hero-section h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            color: var(--navy-deep);
+            font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+            line-height: 1.2; margin-bottom: 1.5rem; color: var(--navy-deep);
         }
-
         .hero-section h1 span {
             background: linear-gradient(135deg, var(--navy-deep), var(--light-sky));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
         .hero-section .lead {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.8;
+            font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary);
+            max-width: 600px; line-height: 1.8;
         }
-
-        /* Photo de profil améliorée */
-        .profile-photo-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
+        .profile-photo-wrapper { position: relative; display: inline-block; }
         .profile-photo {
-            width: 100%;
-            max-width: 320px;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 8px solid var(--white);
-            box-shadow: var(--shadow-lg);
-            display: block;
-            margin: 0 auto;
-            transition: var(--transition-smooth);
+            width: 100%; max-width: 320px; aspect-ratio: 1; object-fit: cover;
+            border-radius: 50%; border: 8px solid var(--white); box-shadow: var(--shadow-lg);
+            display: block; margin: 0 auto; transition: var(--transition-smooth);
         }
-
-        .profile-photo:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Cercle décoratif animé */
+        .profile-photo:hover { transform: scale(1.05) rotate(3deg); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
         .profile-photo-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -10px;
-            border-radius: 50%;
+            content: ''; position: absolute; inset: -10px; border-radius: 50%;
             background: linear-gradient(135deg, var(--light-sky), var(--navy-deep));
-            opacity: 0.2;
-            z-index: -1;
-            animation: pulse 3s ease-in-out infinite;
+            opacity: 0.2; z-index: -1; animation: pulse 3s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.2; }
             50% { transform: scale(1.1); opacity: 0.3; }
         }
-
-        /* Boutons CTA améliorés */
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
+        .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
         .btn-primary {
-            background: var(--navy-deep);
-            border: none;
-            padding: 0.875rem 2rem;
-            font-weight: 600;
-            transition: var(--transition-base);
-            position: relative;
-            overflow: hidden;
+            background: var(--navy-deep); border: none; padding: 0.875rem 2rem;
+            font-weight: 600; transition: var(--transition-base);
+            position: relative; overflow: hidden;
         }
-
         .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 0; height: 0; border-radius: 50%;
+            background: rgba(255,255,255,0.2); transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
-
-        .btn-primary:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            background: var(--navy-light);
-        }
-
+        .btn-primary:hover::before { width: 300px; height: 300px; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); background: var(--navy-light); }
         .btn-outline-dark {
-            border: 2px solid var(--navy-deep);
-            color: var(--navy-deep);
-            padding: 0.875rem 2rem;
-            font-weight: 600;
-            transition: var(--transition-base);
+            border: 2px solid var(--navy-deep); color: var(--navy-deep);
+            padding: 0.875rem 2rem; font-weight: 600; transition: var(--transition-base);
+        }
+        .btn-outline-dark:hover { background: var(--navy-deep); color: var(--white); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+        /* EXPERTISE */
+        #expertise { padding: 5rem 0; background: linear-gradient(180deg, #f8fafc 0%, var(--white) 100%); }
+        .section-title { position: relative; margin-bottom: 3rem; }
+        .section-title h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; color: var(--navy-deep); margin-bottom: 1rem; }
+        .title-underline { width: 60px; height: 4px; background: linear-gradient(90deg, var(--navy-deep), var(--light-sky)); margin: 0 auto; border-radius: 2px; }
+        .expertise-card {
+            background: var(--white); border-radius: 16px; padding: 2.5rem 2rem;
+            transition: var(--transition-smooth); border: 1px solid rgba(0,0,0,0.05);
+            height: 100%; position: relative; overflow: hidden;
+        }
+        .expertise-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--navy-deep), var(--light-sky));
+            transform: scaleX(0); transition: var(--transition-base);
+        }
+        .expertise-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .expertise-card:hover::before { transform: scaleX(1); }
+        .expertise-card i { transition: var(--transition-smooth); }
+        .expertise-card:hover i { transform: scale(1.2) rotateY(360deg); }
+        .expertise-card h3 { font-size: 1.5rem; font-weight: 600; margin: 1.5rem 0 1rem; color: var(--navy-deep); }
+        .expertise-card p { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
+        .expertise-card a {
+            color: var(--navy-deep); font-weight: 600; text-decoration: none;
+            transition: var(--transition-base); display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .expertise-card a::after { content: '→'; transition: var(--transition-base); }
+        .expertise-card a:hover { color: var(--light-sky); gap: 1rem; }
+
+        /* STATS */
+        .stats-section { background: var(--white); padding: 4rem 0; }
+        .stat-item { text-align: center; padding: 1.5rem; transition: var(--transition-base); border-radius: 12px; }
+        .stat-item:hover { background: var(--light-sky); transform: scale(1.05); }
+        .stat-item h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--navy-deep); margin-bottom: 0.5rem; }
+        .stat-item p { color: var(--text-secondary); font-weight: 500; margin: 0; }
+
+        /* FOOTER */
+        footer {
+            position: relative; background-color: var(--navy-deep);
+            border-top: 15px solid var(--navy-deep); transition: var(--transition-base); padding: 3rem 0;
+        }
+        footer:hover { border-top-color: var(--light-sky); }
+        footer p { margin-bottom: 0.5rem; }
+        .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1.5rem; }
+        .social-links a {
+            width: 45px; height: 45px; display: inline-flex; align-items: center;
+            justify-content: center; background: rgba(255,255,255,0.1);
+            border-radius: 50%; transition: var(--transition-base); border: 2px solid transparent;
+        }
+        .social-links a:hover { background: var(--light-sky); color: var(--navy-deep) !important; transform: translateY(-5px) rotate(5deg); border-color: var(--white); }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        .animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out; }
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out; }
+        .animate-zoomIn { animation: zoomIn 1s ease-out; }
+        .delay-200 { animation-delay: 0.2s; animation-fill-mode: backwards; }
+        .delay-400 { animation-delay: 0.4s; animation-fill-mode: backwards; }
+
+        /* ============================
+           DOCUMENTS PERSONNELS MODAL
+           ============================ */
+
+        /* Overlay sombre */
+        .docs-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .docs-overlay.active { display: flex; }
+
+        /* Panneau principal */
+        .docs-panel {
+            background: var(--white);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 520px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .btn-outline-dark:hover {
+        .docs-panel-header {
+            background: var(--navy-deep);
+            padding: 1.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .docs-panel-header h4 {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .docs-panel-header h4 i { color: var(--light-sky); }
+
+        .docs-close-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--white);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition-base);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .docs-close-btn:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
+
+        /* Écran de connexion */
+        #docs-login-screen { padding: 2.5rem 2rem; }
+        #docs-login-screen p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .code-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .code-digit {
+            width: 56px; height: 64px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--navy-deep);
+            outline: none;
+            transition: var(--transition-base);
+            background: #f8fafc;
+        }
+        .code-digit:focus {
+            border-color: var(--navy-deep);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(10,25,47,0.1);
+        }
+        .code-digit.filled { border-color: var(--navy-deep); background: var(--sky-hover); }
+
+        .btn-unlock {
+            width: 100%;
             background: var(--navy-deep);
             color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* ====================
-           SECTION EXPERTISE
-           ==================== */
-        #expertise {
-            padding: 5rem 0;
-            background: linear-gradient(180deg, #f8fafc 0%, var(--white) 100%);
-        }
-
-        .section-title {
-            position: relative;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 700;
-            color: var(--navy-deep);
-            margin-bottom: 1rem;
-        }
-
-        .title-underline {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--navy-deep), var(--light-sky));
-            margin: 0 auto;
-            border-radius: 2px;
-        }
-
-        .expertise-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            transition: var(--transition-smooth);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .expertise-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--navy-deep), var(--light-sky));
-            transform: scaleX(0);
-            transition: var(--transition-base);
-        }
-
-        .expertise-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .expertise-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .expertise-card i {
-            transition: var(--transition-smooth);
-        }
-
-        .expertise-card:hover i {
-            transform: scale(1.2) rotateY(360deg);
-        }
-
-        .expertise-card h3 {
-            font-size: 1.5rem;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem;
-            color: var(--navy-deep);
+            cursor: pointer;
+            transition: var(--transition-base);
+            display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+        }
+        .btn-unlock:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .error-msg {
+            display: none;
+            color: #ef4444;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 0.75rem;
+            animation: shake 0.4s ease;
+        }
+        .error-msg.show { display: block; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
-        .expertise-card p {
+        /* Écran documents */
+        #docs-content-screen { display: none; padding: 2rem; }
+        #docs-content-screen.active { display: block; }
+
+        .docs-section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .expertise-card a {
-            color: var(--navy-deep);
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition-base);
-            display: inline-flex;
+        .doc-item {
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .expertise-card a::after {
-            content: '→';
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: var(--text-primary);
             transition: var(--transition-base);
+            cursor: pointer;
+            background: #f8fafc;
+        }
+        .doc-item:hover {
+            background: var(--sky-hover);
+            border-color: var(--light-sky);
+            transform: translateX(4px);
+            color: var(--navy-deep);
+        }
+        .doc-icon {
+            width: 46px; height: 46px;
+            background: var(--navy-deep);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--light-sky);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .doc-info { flex: 1; min-width: 0; }
+        .doc-name { font-weight: 600; font-size: 0.95rem; color: var(--navy-deep); }
+        .doc-meta { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.15rem; }
+        .doc-arrow { color: var(--text-secondary); font-size: 0.9rem; transition: var(--transition-base); }
+        .doc-item:hover .doc-arrow { color: var(--navy-deep); transform: translateX(4px); }
+
+        /* ============================
+           VIEWER DE PRÉSENTATION
+           ============================ */
+        .viewer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0a0f1a;
+            z-index: 3000;
+            flex-direction: column;
+        }
+        .viewer-overlay.active { display: flex; }
+
+        .viewer-topbar {
+            background: #0d1b2a;
+            border-bottom: 1px solid rgba(184,212,233,0.15);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .viewer-title {
+            color: var(--light-sky);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .viewer-counter {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .viewer-close {
+            background: rgba(255,255,255,0.08);
+            border: none; color: var(--white);
+            width: 36px; height: 36px; border-radius: 50%;
+            cursor: pointer; font-size: 1rem;
+            transition: var(--transition-base);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .viewer-close:hover { background: rgba(239,68,68,0.3); transform: rotate(90deg); }
+
+        /* Zone de la slide */
+        .viewer-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 5rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide-frame {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16/9;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .slide-frame iframe {
+            width: 100%; height: 100%; border: none; display: block;
         }
 
-        .expertise-card a:hover {
-            color: var(--light-sky);
+        /* Boutons de navigation */
+        .viewer-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--white);
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition-base);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10;
+        }
+        .viewer-nav-btn:hover { background: rgba(184,212,233,0.2); border-color: var(--light-sky); transform: translateY(-50%) scale(1.1); }
+        .viewer-nav-btn:disabled { opacity: 0.25; cursor: default; }
+        .viewer-nav-btn:disabled:hover { background: rgba(255,255,255,0.08); transform: translateY(-50%) scale(1); }
+        #btn-prev { left: 1rem; }
+        #btn-next { right: 1rem; }
+
+        /* Barre du bas */
+        .viewer-bottombar {
+            background: #0d1b2a;
+            border-top: 1px solid rgba(184,212,233,0.1);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        .slide-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: var(--transition-base);
+            border: none;
+        }
+        .slide-dot.active { background: var(--light-sky); transform: scale(1.4); }
+        .slide-dot:hover { background: rgba(184,212,233,0.6); }
+
+        /* Loading state */
+        .viewer-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
             gap: 1rem;
         }
+        .viewer-loading p { color: var(--text-secondary); font-size: 0.9rem; }
+        .spinner { width: 40px; height: 40px; border: 3px solid #e2e8f0; border-top-color: var(--navy-deep); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ====================
-           SECTION STATISTIQUES
-           ==================== */
-        .stats-section {
-            background: var(--white);
-            padding: 4rem 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem;
-            transition: var(--transition-base);
-            border-radius: 12px;
-        }
-
-        .stat-item:hover {
-            background: var(--light-sky);
-            transform: scale(1.05);
-        }
-
-        .stat-item h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: var(--navy-deep);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin: 0;
-        }
-
-        /* ====================
-           FOOTER INTERACTIF
-           ==================== */
-        footer {
-            position: relative;
-            background-color: var(--navy-deep);
-            border-top: 15px solid var(--navy-deep);
-            transition: var(--transition-base);
-            padding: 3rem 0;
-        }
-
-        footer:hover {
-            border-top-color: var(--light-sky);
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        .social-links {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transition: var(--transition-base);
-            border: 2px solid transparent;
-        }
-
-        .social-links a:hover {
-            background: var(--light-sky);
-            color: var(--navy-deep) !important;
-            transform: translateY(-5px) rotate(5deg);
-            border-color: var(--white);
-        }
-
-        /* ====================
-           ANIMATIONS OPTIMISÉES
-           ==================== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .animate-fadeInLeft {
-            animation: fadeInLeft 0.8s ease-out;
-        }
-
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .animate-zoomIn {
-            animation: zoomIn 1s ease-out;
-        }
-
-        .delay-200 {
-            animation-delay: 0.2s;
-            animation-fill-mode: backwards;
-        }
-
-        .delay-400 {
-            animation-delay: 0.4s;
-            animation-fill-mode: backwards;
-        }
-
-        /* ====================
-           RESPONSIVE DESIGN
-           ==================== */
+        /* RESPONSIVE */
         @media (max-width: 991px) {
-            .navbar-nav {
-                padding: 1rem 0;
-            }
-
-            .nav-link {
-                padding: 0.75rem 1rem !important;
-            }
-
-            .hero-section {
-                padding: 3rem 0;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-
-            .profile-photo {
-                max-width: 250px;
-            }
+            .navbar-nav { padding: 1rem 0; }
+            .nav-link { padding: 0.75rem 1rem !important; }
+            .hero-section { padding: 3rem 0; }
+            .cta-buttons { justify-content: center; }
+            .profile-photo { max-width: 250px; }
         }
-
         @media (max-width: 768px) {
-            .cta-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn-primary,
-            .btn-outline-dark {
-                width: 100%;
-                text-align: center;
-            }
-
-            .expertise-card {
-                margin-bottom: 1.5rem;
-            }
-
-            .social-links {
-                gap: 1rem;
-            }
+            .cta-buttons { flex-direction: column; align-items: stretch; }
+            .btn-primary, .btn-outline-dark { width: 100%; text-align: center; }
+            .expertise-card { margin-bottom: 1.5rem; }
+            .social-links { gap: 1rem; }
+            .viewer-stage { padding: 1rem 3.5rem; }
+            .viewer-nav-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+            #btn-prev { left: 0.4rem; }
+            #btn-next { right: 0.4rem; }
+            .code-digit { width: 48px; height: 56px; font-size: 1.5rem; }
         }
-
-        /* ====================
-           ACCESSIBILITÉ
-           ==================== */
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
-
-        /* Focus visible pour navigation clavier */
-        :focus-visible {
-            outline: 3px solid var(--light-sky);
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-
-        /* Skip to main content (accessibilité) */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--navy-deep);
-            color: var(--white);
-            padding: 8px;
-            z-index: 1000;
-            text-decoration: none;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Impression */
-        @media print {
-            nav, footer, .cta-buttons {
-                display: none;
-            }
-            
-            .hero-section::before,
-            .hero-section::after {
-                display: none;
-            }
-        }
+        :focus-visible { outline: 3px solid var(--light-sky); outline-offset: 3px; border-radius: 4px; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--navy-deep); color: var(--white); padding: 8px; z-index: 1000; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        @media print { nav, footer, .cta-buttons { display: none; } .hero-section::before, .hero-section::after { display: none; } }
     </style>
 </head>
 
 <body>
-    <!-- Lien d'accessibilité -->
     <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
     <!-- Navigation -->
@@ -629,7 +542,7 @@
                 <span class="brand-icon me-2" aria-hidden="true"><i class="fas fa-code"></i></span>
                 François Lachance
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -646,12 +559,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="web.html">Automatisme</a>
-                    </li> 
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cv-op.html">Mon CV</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <!-- ✅ NOUVEAU : Documents Personnels -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="docsNavLink" aria-label="Accéder aux documents personnels">
+                            <i class="fas fa-lock me-1" style="font-size:0.8rem; opacity:0.7;"></i>
+                            Documents
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -669,8 +589,8 @@
                             <span>François Lachance</span>
                         </h1>
                         <p class="lead animate-fadeInUp delay-200">
-                            Ingénieur passionné d'<strong>Intelligence Artificielle</strong> et de <strong>Machine Learning</strong>, 
-                            expert en <strong>Traitement du Signal et de l'Image</strong> appliqué au spatial, 
+                            Ingénieur passionné d'<strong>Intelligence Artificielle</strong> et de <strong>Machine Learning</strong>,
+                            expert en <strong>Traitement du Signal et de l'Image</strong> appliqué au spatial,
                             et automaticien rigoureux.
                         </p>
                         <div class="cta-buttons animate-fadeInUp delay-400">
@@ -683,11 +603,10 @@
                             </a>
                         </div>
                     </div>
-                    
                     <div class="col-lg-5 text-center mt-5 mt-lg-0">
                         <div class="profile-photo-wrapper animate-zoomIn">
-                            <img src="assets/aaa.png" 
-                                 alt="Photo de profil de François Lachance, ingénieur en Systeme automatises et traitement du signal" 
+                            <img src="assets/aaa.png"
+                                 alt="Photo de profil de François Lachance, ingénieur en Systeme automatises et traitement du signal"
                                  class="profile-photo"
                                  loading="eager">
                         </div>
@@ -703,47 +622,29 @@
                     <h2 id="expertise-title">Mes Domaines d'interventions</h2>
                     <div class="title-underline"></div>
                 </div>
-                
                 <div class="row g-4">
                     <div class="col-md-4">
                         <article class="expertise-card">
                             <i class="fas fa-brain fa-3x text-primary" aria-hidden="true"></i>
                             <h3>Machine Learning & IA</h3>
-                            <p>
-                                Deep Learning, classification et vision par ordinateur 
-                                avec TensorFlow, PyTorch et scikit-learn.
-                            </p>
-                            <a href="machine-learning.html" aria-label="Voir mes projets en Intelligence Artificielle">
-                                Projets IA
-                            </a>
+                            <p>Deep Learning, classification et vision par ordinateur avec TensorFlow, PyTorch et scikit-learn.</p>
+                            <a href="machine-learning.html" aria-label="Voir mes projets en Intelligence Artificielle">Projets IA</a>
                         </article>
                     </div>
-                    
                     <div class="col-md-4">
                         <article class="expertise-card">
                             <i class="fas fa-satellite fa-3x text-info" aria-hidden="true"></i>
-                            <h3>Traitement Signal & Image</h3> 
-                            <p>
-                                Analyse spatiale, filtrage avancé et segmentation 
-                                sous MATLAB, OpenCV et Python.
-                            </p>
-                            <a href="matlab.html" aria-label="Voir mes analyses en traitement du signal">
-                                Voir les analyses
-                            </a>
+                            <h3>Traitement Signal & Image</h3>
+                            <p>Analyse spatiale, filtrage avancé et segmentation sous MATLAB, OpenCV et Python.</p>
+                            <a href="matlab.html" aria-label="Voir mes analyses en traitement du signal">Voir les analyses</a>
                         </article>
                     </div>
-                    
                     <div class="col-md-4">
                         <article class="expertise-card">
                             <i class="fas fa-microchip fa-3x text-secondary" aria-hidden="true"></i>
                             <h3>Automatisme Industriel</h3>
-                            <p>
-                                TIA Portal, Simulink et maintenance 
-                                des systèmes industriels complexes.
-                            </p>
-                            <a href="web.html" aria-label="Voir les détails techniques en automatisme">
-                                Détails techniques
-                            </a>
+                            <p>TIA Portal, Simulink et maintenance des systèmes industriels complexes.</p>
+                            <a href="web.html" aria-label="Voir les détails techniques en automatisme">Détails techniques</a>
                         </article>
                     </div>
                 </div>
@@ -755,28 +656,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-6 col-md-3">
-                        <div class="stat-item">
-                            <h2>10+</h2>
-                            <p>Projets Réalisés</p>
-                        </div>
+                        <div class="stat-item"><h2>10+</h2><p>Projets Réalisés</p></div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item">
-                            <h2>2025</h2>
-                            <p>Année de Lancement</p>
-                        </div>
+                        <div class="stat-item"><h2>2025</h2><p>Année de Lancement</p></div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item">
-                            <h2>100%</h2>
-                            <p>Passion & Engagement</p>
-                        </div>
+                        <div class="stat-item"><h2>100%</h2><p>Passion & Engagement</p></div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item">
-                            <h2><i class="fas fa-map-marker-alt"></i></h2>
-                            <p>Toulouse, France</p>
-                        </div>
+                        <div class="stat-item"><h2><i class="fas fa-map-marker-alt"></i></h2><p>Toulouse, France</p></div>
                     </div>
                 </div>
             </div>
@@ -789,61 +678,366 @@
             <p class="mb-1">&copy; 2025 François Lachance Awounang-Ngounou</p>
             <p class="small text-muted">Ingénieur GESI & Computer Vision | Toulouse, France</p>
             <nav class="social-links" aria-label="Réseaux sociaux">
-                <a href="https://www.linkedin.com/in/francois-l-a35723204" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Visitez mon profil LinkedIn">
+                <a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener noreferrer" aria-label="Visitez mon profil LinkedIn">
                     <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
                 </a>
-                <a href="https://github.com/lachance123-francois" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Visitez mon profil GitHub">
+                <a href="https://github.com/lachance123-francois" target="_blank" rel="noopener noreferrer" aria-label="Visitez mon profil GitHub">
                     <i class="fab fa-github fa-lg" aria-hidden="true"></i>
                 </a>
-                <a href="mailto:votre.email@example.com" 
-                   aria-label="Envoyez-moi un email">
+                <a href="mailto:votre.email@example.com" aria-label="Envoyez-moi un email">
                     <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
                 </a>
             </nav>
         </div>
     </footer>
 
-    <!-- Scripts optimisés -->
+
+    <!-- ============================================================
+         MODAL : DOCUMENTS PERSONNELS (Écran de connexion)
+         ============================================================ -->
+    <div class="docs-overlay" id="docsOverlay" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title">
+        <div class="docs-panel">
+            <div class="docs-panel-header">
+                <h4 id="docs-dialog-title">
+                    <i class="fas fa-folder-lock"></i>
+                    Documents Personnels
+                </h4>
+                <button class="docs-close-btn" id="docsCloseBtn" aria-label="Fermer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Écran de connexion -->
+            <div id="docs-login-screen">
+                <p style="margin-top:0.5rem;">
+                    <i class="fas fa-shield-alt me-1" style="color:#b8d4e9;"></i>
+                    Entrez votre code d'accès à 4 chiffres
+                </p>
+                <div class="code-input-wrapper" role="group" aria-label="Code d'accès">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 1" id="d1">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 2" id="d2">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 3" id="d3">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 4" id="d4">
+                </div>
+                <button class="btn-unlock" id="btnUnlock">
+                    <i class="fas fa-unlock-alt"></i>
+                    Déverrouiller
+                </button>
+                <p class="error-msg" id="errorMsg" role="alert">
+                    <i class="fas fa-exclamation-circle me-1"></i>
+                    Code incorrect. Réessayez.
+                </p>
+            </div>
+
+            <!-- Écran contenu (après connexion réussie) -->
+            <div id="docs-content-screen">
+                <p class="docs-section-label">
+                    <i class="fas fa-presentation-screen me-1"></i>
+                    Présentations
+                </p>
+                <div class="doc-item" id="openPresentation" role="button" tabindex="0"
+                     aria-label="Ouvrir la présentation Reconnaissance Faciale">
+                    <div class="doc-icon">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="doc-info">
+                        <div class="doc-name">How Does Facial Recognition Work?</div>
+                        <div class="doc-meta">
+                            <i class="fas fa-layer-group me-1" style="font-size:0.7rem;"></i>
+                            13 slides &nbsp;·&nbsp;
+                            <i class="fas fa-calendar me-1" style="font-size:0.7rem;"></i>
+                            2025/2026 &nbsp;·&nbsp;
+                            Signal, Image & ML
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right doc-arrow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================================
+         VIEWER DE PRÉSENTATION PLEIN ÉCRAN
+         ============================================================ -->
+    <div class="viewer-overlay" id="viewerOverlay" role="dialog" aria-modal="true" aria-label="Viewer de présentation">
+
+        <!-- Barre supérieure -->
+        <div class="viewer-topbar">
+            <div class="viewer-title">
+                <i class="fas fa-presentation-screen"></i>
+                How Does Facial Recognition Work?
+            </div>
+            <span class="viewer-counter" id="slideCounter">Slide 1 / 13</span>
+            <button class="viewer-close" id="viewerCloseBtn" aria-label="Quitter la présentation">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Zone principale -->
+        <div class="viewer-stage">
+            <button class="viewer-nav-btn" id="btn-prev" aria-label="Slide précédente">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <div class="slide-frame" id="slideFrame">
+                <div class="viewer-loading" id="viewerLoading">
+                    <div class="spinner"></div>
+                    <p>Chargement de la présentation…</p>
+                </div>
+                <!-- Les slides sont rendues ici -->
+                <canvas id="pdfCanvas" style="width:100%;height:100%;display:none;"></canvas>
+            </div>
+
+            <button class="viewer-nav-btn" id="btn-next" aria-label="Slide suivante">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Barre de points -->
+        <div class="viewer-bottombar" id="slideDots" role="tablist" aria-label="Navigation par slide"></div>
+    </div>
+
+
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
-    
+    <!-- PDF.js pour rendre les slides du PPTX (converti en PDF côté serveur, ou via Google Slides embed) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('mainNavbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        // ─── Navbar scroll ────────────────────────────────────────
+        window.addEventListener('scroll', function () {
+            document.getElementById('mainNavbar').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Smooth scroll pour les ancres
+        // ─── Smooth scroll ────────────────────────────────────────
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return; // laisser passer les modals
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Lazy loading pour les images (si besoin d'autres images)
-        if ('loading' in HTMLImageElement.prototype) {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-                img.src = img.dataset.src;
+        // ─── Documents Personnels – Logique ───────────────────────
+        const CORRECT_CODE = '1234';
+
+        const docsOverlay   = document.getElementById('docsOverlay');
+        const docsCloseBtn  = document.getElementById('docsCloseBtn');
+        const docsNavLink   = document.getElementById('docsNavLink');
+        const btnUnlock     = document.getElementById('btnUnlock');
+        const errorMsg      = document.getElementById('errorMsg');
+        const loginScreen   = document.getElementById('docs-login-screen');
+        const contentScreen = document.getElementById('docs-content-screen');
+        const digits        = [document.getElementById('d1'), document.getElementById('d2'),
+                               document.getElementById('d3'), document.getElementById('d4')];
+
+        // Ouvrir le modal
+        docsNavLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openDocsModal();
+        });
+
+        function openDocsModal() {
+            docsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            resetLogin();
+            setTimeout(() => digits[0].focus(), 100);
+        }
+
+        function closeDocsModal() {
+            docsOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        docsCloseBtn.addEventListener('click', closeDocsModal);
+        docsOverlay.addEventListener('click', (e) => { if (e.target === docsOverlay) closeDocsModal(); });
+
+        // Navigation entre champs
+        digits.forEach((d, i) => {
+            d.addEventListener('input', () => {
+                d.classList.toggle('filled', d.value !== '');
+                if (d.value && i < 3) digits[i + 1].focus();
+                // Auto-unlock quand les 4 chiffres sont remplis
+                if (digits.every(x => x.value !== '')) tryUnlock();
+            });
+            d.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !d.value && i > 0) digits[i - 1].focus();
+                if (e.key === 'Enter') tryUnlock();
+            });
+        });
+
+        btnUnlock.addEventListener('click', tryUnlock);
+
+        function tryUnlock() {
+            const code = digits.map(d => d.value).join('');
+            if (code === CORRECT_CODE) {
+                loginScreen.style.display = 'none';
+                contentScreen.classList.add('active');
+            } else {
+                errorMsg.classList.add('show');
+                digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
+                // Reset animation pour re-déclencher le shake
+                errorMsg.style.animation = 'none';
+                errorMsg.offsetHeight; // reflow
+                errorMsg.style.animation = '';
+                setTimeout(() => digits[0].focus(), 100);
+            }
+        }
+
+        function resetLogin() {
+            loginScreen.style.display = 'block';
+            contentScreen.classList.remove('active');
+            errorMsg.classList.remove('show');
+            digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
+        }
+
+        // ─── Viewer PDF ───────────────────────────────────────────
+        const PPTX_PATH     = 'assets/facial_recognition_improved.pptx';
+        // On utilise Google Slides viewer : il accepte une URL publique
+        // Pour une utilisation locale, on convertit le PPTX en PDF via PDF.js
+        // Le fichier doit être: assets/facial_recognition_improved.pdf
+        // (tu peux le générer une fois avec LibreOffice ou en exportant depuis PowerPoint)
+        const PDF_PATH      = 'assets/facial_recognition_improved.pdf';
+        const TOTAL_SLIDES  = 13;
+
+        const viewerOverlay = document.getElementById('viewerOverlay');
+        const viewerClose   = document.getElementById('viewerCloseBtn');
+        const btnPrev       = document.getElementById('btn-prev');
+        const btnNext       = document.getElementById('btn-next');
+        const slideCounter  = document.getElementById('slideCounter');
+        const slideDots     = document.getElementById('slideDots');
+        const pdfCanvas     = document.getElementById('pdfCanvas');
+        const loadingEl     = document.getElementById('viewerLoading');
+        const openPres      = document.getElementById('openPresentation');
+
+        let pdfDoc      = null;
+        let currentPage = 1;
+        let totalPages  = TOTAL_SLIDES;
+        let rendering   = false;
+
+        // Configurer PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        // Ouvrir le viewer
+        openPres.addEventListener('click', openViewer);
+        openPres.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openViewer(); });
+
+        async function openViewer() {
+            closeDocsModal();
+            viewerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            if (!pdfDoc) {
+                await loadPDF();
+            } else {
+                renderSlide(currentPage);
+            }
+        }
+
+        async function loadPDF() {
+            try {
+                loadingEl.style.display = 'flex';
+                pdfCanvas.style.display = 'none';
+
+                pdfDoc = await pdfjsLib.getDocument(PDF_PATH).promise;
+                totalPages = pdfDoc.numPages;
+
+                buildDots();
+                currentPage = 1;
+                await renderSlide(currentPage);
+            } catch (err) {
+                loadingEl.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:#f59e0b;"></i>
+                    <p style="color:#64748b;text-align:center;max-width:300px;">
+                        Impossible de charger la présentation.<br>
+                        <small>Assurez-vous que <code>assets/facial_recognition_improved.pdf</code> est bien présent sur votre serveur.</small>
+                    </p>`;
+                console.error('PDF load error:', err);
+            }
+        }
+
+        async function renderSlide(pageNum) {
+            if (rendering || !pdfDoc) return;
+            rendering = true;
+
+            loadingEl.style.display = 'flex';
+            pdfCanvas.style.display = 'none';
+
+            const page    = await pdfDoc.getPage(pageNum);
+            const stage   = document.getElementById('slideFrame');
+            const scale   = stage.clientWidth / page.getViewport({ scale: 1 }).width;
+            const viewport = page.getViewport({ scale });
+
+            pdfCanvas.width  = viewport.width;
+            pdfCanvas.height = viewport.height;
+
+            await page.render({
+                canvasContext: pdfCanvas.getContext('2d'),
+                viewport
+            }).promise;
+
+            loadingEl.style.display = 'none';
+            pdfCanvas.style.display = 'block';
+
+            // Update UI
+            updateUI();
+            rendering = false;
+        }
+
+        function updateUI() {
+            slideCounter.textContent = `Slide ${currentPage} / ${totalPages}`;
+            btnPrev.disabled = currentPage === 1;
+            btnNext.disabled = currentPage === totalPages;
+            document.querySelectorAll('.slide-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i + 1 === currentPage);
+                dot.setAttribute('aria-selected', i + 1 === currentPage);
             });
         }
+
+        function buildDots() {
+            slideDots.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'slide-dot' + (i === 1 ? ' active' : '');
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-label', `Slide ${i}`);
+                dot.setAttribute('aria-selected', i === 1);
+                dot.addEventListener('click', () => goTo(i));
+                slideDots.appendChild(dot);
+            }
+        }
+
+        async function goTo(n) {
+            if (n < 1 || n > totalPages || n === currentPage || rendering) return;
+            currentPage = n;
+            await renderSlide(currentPage);
+        }
+
+        btnPrev.addEventListener('click', () => goTo(currentPage - 1));
+        btnNext.addEventListener('click', () => goTo(currentPage + 1));
+
+        viewerClose.addEventListener('click', closeViewer);
+        viewerOverlay.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') goTo(currentPage + 1);
+            if (e.key === 'ArrowLeft')  goTo(currentPage - 1);
+            if (e.key === 'Escape')     closeViewer();
+        });
+
+        function closeViewer() {
+            viewerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Rendre le viewer focusable pour les raccourcis clavier
+        viewerOverlay.setAttribute('tabindex', '0');
+        viewerOverlay.addEventListener('click', (e) => {
+            if (e.target === viewerOverlay) return;
+            viewerOverlay.focus();
+        });
     </script>
 </body>
 </html>
