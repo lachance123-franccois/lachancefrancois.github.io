@@ -1,0 +1,31 @@
+{
+  "database": "francois_tracker.db",
+  "email": {
+    "enabled": true,
+    "recipient": "lachanceawounang@icloud.com",
+    "smtp_server": "smtp.icloud.com",
+    "smtp_port": 587,
+    "email": "lachanceawounang@icloud.com",
+    "password": "qktu-rusa-hqjt-wzim"
+  },
+  "scraping": {
+    "housing_max_price": 600,
+    "enable_housing": true,
+    "enable_phd": true,
+    "enable_internship": true,
+    "cleanup_days": 90
+  },
+  "filters": {
+    "keywords": [
+      "image",
+      "video",
+      "signal",
+      "télécommunication",
+      "computer vision",
+      "traitement d'image",
+      "deep learning",
+      "machine learning"
+    ],
+    "toulouse_only": false
+  }
+}

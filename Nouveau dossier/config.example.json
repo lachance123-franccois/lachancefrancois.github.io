@@ -1,0 +1,231 @@
+{
+  "_comment": "Francois Tracker - Configuration complète",
+  "_version": "1.0.0",
+  
+  "database": "francois_tracker.db",
+  
+  "email": {
+    "_comment": "Configuration des notifications email",
+    "enabled": true,
+    "recipient": "lachanceawounang@icloud.com",
+    
+    "_smtp_comment": "Pour Gmail, utilisez un App Password (https://myaccount.google.com/apppasswords)",
+    "smtp_server": "smtp.mail.icloud.com",
+    "smtp_port": 587,
+    "email": "lachanceawounang@icloud.com",
+    "password": "qktu-rusa-hqjt-wzim",
+    
+    "_other_providers": {
+      "outlook": {
+        "smtp_server": "smtp-mail.outlook.com",
+        "smtp_port": 587
+      },
+      "yahoo": {
+        "smtp_server": "smtp.mail.yahoo.com",
+        "smtp_port": 587
+      },
+      "custom": {
+        "smtp_server": "smtp.votre-serveur.com",
+        "smtp_port": 587
+      }
+    }
+  },
+  
+  "scraping": {
+    "_comment": "Configuration du scraping",
+    
+    "housing_max_price": 450,
+    "_housing_comment": "Prix maximum en euros pour les logements CROUS",
+    
+    "enable_housing": true,
+    "enable_phd": true,
+    "enable_internship": true,
+    "_enable_comment": "Activer/désactiver chaque type de scraping",
+    
+    "cleanup_days": 10,
+    "_cleanup_comment": "Nombre de jours avant suppression automatique des anciennes offres",
+    
+    "rate_limit_delay": 4,
+    "_rate_limit_comment": "Délai en secondes entre chaque requête (pour respecter les sites)",
+    
+    "max_retries": 3,
+    "_retry_comment": "Nombre de tentatives en cas d'échec d'une requête"
+  },
+  
+  "filters": {
+    "_comment": "Filtres pour les offres de thèses et stages",
+    
+    "keywords": [
+      "image",
+      "video",
+      "computer vision",
+      "vision par ordinateur",
+      "traitement d'image",
+      "signal",
+      "traitement du signal",
+      "telecommunication",
+      "télécommunication",
+      "radio",
+      "5G",
+      "6G",
+      "deep learning",
+      "machine learning",
+      "neural network",
+      "compression",
+      "codage",
+      "multimedia",
+      "detection",
+      "segmentation",
+      "classification",
+      "reconnaissance",
+      "reconstruction",
+      "radar",
+      "lidar",
+      "satellite",
+      "remote sensing",
+      "optical",
+      "photonics",
+      "wireless",
+      "antenna",
+      "modulation"
+    ],
+    
+    "toulouse_only": false,
+    "_location_comment": "Si true, filtre uniquement les offres à Toulouse",
+    
+    "min_keywords_match": 2,
+    "_match_comment": "Nombre minimum de mots-clés à matcher pour retenir une offre"
+  },
+  
+  "sources": {
+    "_comment": "Configuration des sources de scraping",
+    
+    "housing": {
+      "crous": {
+        "enabled": true,
+        "url": "https://trouverunlogement.lescrous.fr"
+      }
+    },
+    
+    "phd": {
+      "abg": {
+        "enabled": true,
+        "url": "https://www.abg.asso.fr/fr/candidats/offres"
+      },
+      "theses_fr": {
+        "enabled": true,
+        "url": "https://www.theses.fr/fr/annonces"
+      },
+      "adum": {
+        "enabled": true,
+        "url": "https://www.adum.fr/as/ed/voirpropositions.pl"
+      },
+      "toulouse_labs": {
+        "enabled": true,
+        "labs": [
+          {
+            "name": "IRIT",
+            "url": "https://www.irit.fr/departement/ispr/offres/"
+          },
+          {
+            "name": "LAAS-CNRS",
+            "url": "https://www.laas.fr/public/fr/recrutement"
+          },
+          {
+            "name": "TéSA",
+            "url": "https://www.tesa.prd.fr/fr/recrutement/offres"
+          }
+        ]
+      }
+    },
+    
+    "internship": {
+      "abg": {
+        "enabled": true,
+        "url": "https://www.abg.asso.fr/fr/candidats/offres"
+      },
+      "hellowork": {
+        "enabled": true,
+        "url": "https://www.hellowork.com/fr-fr/emplois/recherche.html"
+      },
+      "indeed": {
+        "enabled": true,
+        "url": "https://fr.indeed.com/jobs"
+      }
+    }
+  },
+  
+  "notifications": {
+    "_comment": "Configuration des notifications",
+    
+    "daily_digest": {
+      "enabled": true,
+      "time": "08:00",
+      "_time_comment": "Heure d'envoi (format 24h)"
+    },
+    
+    "instant_alerts": {
+      "enabled": false,
+      "_instant_comment": "Envoyer un email immédiatement à chaque nouvelle offre"
+    },
+    
+    "summary_only": false,
+    "_summary_comment": "Si true, envoie uniquement les stats sans détails des offres"
+  },
+  
+  "logging": {
+    "_comment": "Configuration des logs",
+    
+    "level": "INFO",
+    "_level_options": ["DEBUG", "INFO", "WARNING", "ERROR"],
+    
+    "file": "francois_tracker.log",
+    "max_size_mb": 10,
+    "backup_count": 5
+  },
+  
+  "github_actions": {
+    "_comment": "Configuration pour GitHub Actions (utilise les Secrets GitHub)",
+    "_secrets_needed": [
+      "EMAIL_RECIPIENT",
+      "EMAIL_SENDER",
+      "EMAIL_PASSWORD"
+    ],
+    
+    "schedule": {
+      "cron": "0 7 * * *",
+      "_cron_comment": "Tous les jours à 8h Paris (7h UTC en hiver, 6h UTC en été)"
+    },
+    
+    "cleanup_schedule": {
+      "cron": "0 7 * * 0",
+      "_cleanup_cron_comment": "Tous les dimanches à 8h"
+    }
+  },
+  
+  "advanced": {
+    "_comment": "Paramètres avancés - modifier avec précaution",
+    
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "timeout_seconds": 15,
+    "max_concurrent_requests": 5,
+    "respect_robots_txt": true,
+    
+    "cache": {
+      "enabled": true,
+      "duration_hours": 1
+    },
+    
+    "database": {
+      "vacuum_on_cleanup": true,
+      "_vacuum_comment": "Optimise la base de données après nettoyage"
+    }
+  },
+  
+  "_help": {
+    "documentation": "README.md",
+    "quick_start": "QUICKSTART.md",
+    "architecture": "ARCHITECTURE.html",
+    "repository": "https://github.com/lachance123-franccois/francois-tracker"
+  }
+}
