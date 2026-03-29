@@ -421,8 +421,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 5rem;
-            overflow: hidden;
+            padding: 1 rem
+            overflow : hidden;
             position: relative;
         }
         .slide-frame {
@@ -895,8 +895,6 @@
 
         const viewerOverlay = document.getElementById('viewerOverlay');
         const viewerClose   = document.getElementById('viewerCloseBtn');
-        const btnPrev       = document.getElementById('btn-prev');
-        const btnNext       = document.getElementById('btn-next');
         const slideCounter  = document.getElementById('slideCounter');
         const slideDots     = document.getElementById('slideDots');
         const pdfCanvas     = document.getElementById('pdfCanvas');
@@ -980,8 +978,6 @@
 
         function updateUI() {
             slideCounter.textContent = `Slide ${currentPage} / ${totalPages}`;
-            btnPrev.disabled = currentPage === 1;
-            btnNext.disabled = currentPage === totalPages;
             document.querySelectorAll('.slide-dot').forEach((dot, i) => {
                 dot.classList.toggle('active', i + 1 === currentPage);
                 dot.setAttribute('aria-selected', i + 1 === currentPage);
@@ -1007,8 +1003,6 @@
             await renderSlide(currentPage);
         }
 
-        btnPrev.addEventListener('click', () => goTo(currentPage - 1));
-        btnNext.addEventListener('click', () => goTo(currentPage + 1));
 
         viewerClose.addEventListener('click', closeViewer);
         viewerOverlay.addEventListener('keydown', (e) => {
