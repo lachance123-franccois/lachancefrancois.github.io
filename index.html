@@ -920,13 +920,10 @@
             closeDocsModal();
             viewerOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            setTimeout(() => viewerOverlay.focus(), 100); // ← AJOUT
 
-            if (!pdfDoc) {
-                await loadPDF();
-            } else {
-                renderSlide(currentPage);
-            }
-        }
+            if (!pdfDoc) {   }
+                }
 
         async function loadPDF() {
             try {
@@ -1019,7 +1016,8 @@
         }
 
         // Rendre le viewer focusable pour les raccourcis clavier
-        viewerOverlay.setAttribute('tabindex', '0');
+       // Rendre le viewer focusable pour les raccourcis clavier
+        viewerOverlay.setAttribute('tabindex', '-1'); // ← -1 au lieu de 0 (pas navigable au Tab mais focusable via JS)
         viewerOverlay.addEventListener('click', (e) => {
             if (e.target === viewerOverlay) return;
             viewerOverlay.focus();
