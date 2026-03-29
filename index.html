@@ -938,12 +938,13 @@
                 await renderSlide(currentPage);
             } catch (err) {
                 loadingEl.innerHTML = `
-                    <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:#f59e0b;"></i>
-                    <p style="color:#64748b;text-align:center;max-width:300px;">
-                        Impossible de charger la présentation.<br>
-                        <small>Assurez-vous que <code>assets/facial_recognition_improved.pdf</code> est bien présent sur votre serveur.</small>
-                    </p>`;
-                console.error('PDF load error:', err);
+                        <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:#f59e0b;"></i>
+                        <p style="color:#64748b;text-align:center;max-width:300px;">
+                            Erreur : <strong>${err.message}</strong><br><br>
+                            <small>Vérifiez que le fichier existe à :<br>
+                            <code>assets/pdf/facial_recognition_improved.pdf</code></small>
+                        </p>`;
+                    console.error('PDF load error:', err);
             }
         }
 
