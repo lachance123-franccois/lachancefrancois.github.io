@@ -920,10 +920,14 @@
             closeDocsModal();
             viewerOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            setTimeout(() => viewerOverlay.focus(), 100); // ← AJOUT
+            setTimeout(() => viewerOverlay.focus(), 100);
 
-            if (!pdfDoc) {   }
-                }
+            if (!pdfDoc) {
+                await loadPDF();
+            } else {
+                renderSlide(currentPage);
+            }
+        }
 
         async function loadPDF() {
             try {
