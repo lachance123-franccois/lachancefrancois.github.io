@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assistant intelligent pour trouver des offres de stage sur LinkedIn - Génération de liens de recherche optimisés">
+    <meta name="keywords" content="LinkedIn, stage, internship, recherche emploi, alternance, Toulouse, Academic Tracker">
+    <meta name="author" content="François Lachance">
+    <meta property="og:title" content="Academic Tracker - LinkedIn Stage Finder">
+    <meta property="og:description" content="Générez des liens de recherche LinkedIn optimisés pour trouver votre stage">
+    <meta property="og:type" content="website">
+    
+    <title>Academic Tracker - LinkedIn Stage Finder | François Lachance</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+    
+    <style>
+        :root {
+            --navy: #0b1d35;
+            --navy-mid: #142b4e;
+            --navy-soft: #1c3a63;
+            --accent: #4fa8d5;
+            --accent-warm: #e8a44a;
+            --text-main: #1a2535;
+            --text-muted: #5e7898;
+            --surface: #ffffff;
+            --surface-2: #f4f7fb;
+            --border: rgba(11, 29, 53, 0.08);
+            --shadow-sm: 0 2px 8px rgba(11, 29, 53, 0.07);
+            --shadow-md: 0 6px 20px rgba(11, 29, 53, 0.12);
+            --shadow-lg: 0 16px 40px rgba(11, 29, 53, 0.16);
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-main: #dde8f5;
+                --text-muted: #8bacc8;
+                --surface: #0d1a2d;
+                --surface-2: #0b1d35;
+                --border: rgba(79, 168, 213, 0.1);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+                --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+            }
+            body { background: #0a1628; color: var(--text-main); }
+            .search-card, .stat-card, .alert, .search-section { background: var(--navy-mid) !important; border-color: var(--border) !important; }
+            input, select { background: var(--navy) !important; color: var(--text-main) !important; border-color: #2a3f5f !important; }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--surface-2);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR (identique au portfolio) ── */
+        .navbar {
+            background: var(--navy) !important;
+            box-shadow: var(--shadow-md);
+            transition: padding 0.3s var(--ease);
+            padding: 1rem 0;
+        }
+        .navbar.scrolled { padding: 0.5rem 0; }
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem; font-weight: 800;
+            letter-spacing: -0.5px;
+            transition: 0.3s var(--ease);
+        }
+        .navbar-brand:hover { transform: translateY(-2px); }
+        .brand-icon { color: var(--accent); }
+        .nav-link {
+            position: relative; padding: 0.5rem 1rem !important;
+            font-weight: 500; font-size: 0.9rem;
+            transition: 0.3s var(--ease);
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 2px; background: var(--accent);
+            transition: 0.3s var(--ease); transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
+
+        /* Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--navy);
+            border-radius: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+        }
+        .page-header .logo-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: var(--accent);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s var(--ease);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: var(--navy);
+        }
+
+        /* Alert */
+        .alert {
+            background: rgba(232, 164, 74, 0.1);
+            border-left: 4px solid var(--accent-warm);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+        }
+        .alert-warning strong {
+            color: var(--accent-warm);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        .search-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .label-icon {
+            margin-right: 0.5rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--ease);
+            background: var(--surface-2);
+            color: var(--text-main);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 168, 213, 0.2);
+        }
+        .btn-primary {
+            width: 100%;
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            margin-top: 0.5rem;
+        }
+        .btn-primary:hover {
+            background: var(--navy-soft);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .loading.active {
+            display: block;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        .stats.active {
+            display: grid;
+        }
+        .stat-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s var(--ease);
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            display: none;
+        }
+        .tabs.active {
+            display: flex;
+        }
+        .tab {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.3s var(--ease);
+            border-radius: 8px;
+        }
+        .tab:hover {
+            color: var(--accent);
+        }
+        .tab.active {
+            color: var(--accent);
+            background: rgba(79, 168, 213, 0.1);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s var(--ease);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Search Cards */
+        .search-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s var(--ease);
+        }
+        .search-card:hover {
+            transform: translateX(5px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+        .search-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+        .search-type {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(79, 168, 213, 0.1);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+        .search-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0.75rem 0;
+        }
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .btn-secondary {
+            background: rgba(79, 168, 213, 0.1);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            color: var(--text-main);
+        }
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.7rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Footer (identique au portfolio) */
+        footer {
+            background: var(--navy);
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(90deg, var(--navy-soft), var(--accent), var(--accent-warm)) 1;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; }
+        .social-links a {
+            width: 42px; height: 42px; display: inline-flex; align-items: center;
+            justify-content: center; background: rgba(255,255,255,0.08);
+            border-radius: 12px; transition: all 0.3s var(--ease);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .social-links a:hover {
+            background: var(--accent); color: var(--navy) !important;
+            transform: translateY(-4px); border-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-wrap: wrap;
+            }
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar identique au portfolio -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-icon me-2"><i class="fas fa-code"></i></span>
+                François Lachance
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../machine-learning.html">IA & ML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../matlab.html">Traitement Signal & Image</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../web.html">Automatisme</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contratdevie.html">📊 Academic Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../cv-op.html">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="logo-icon">🎯</div>
+            <h1>Academic Tracker - Stage Finder</h1>
+            <p>Générez des liens de recherche LinkedIn optimisés pour trouver votre stage</p>
+        </div>
+
+        <main>
+            <div class="alert alert-warning">
+                <strong>⚠️ Important :</strong> Cet outil génère des URLs de recherche LinkedIn optimisées. 
+                Vous devrez cliquer manuellement sur les liens pour respecter les conditions d'utilisation de LinkedIn.
+            </div>
+
+            <section class="search-section">
+                <h2>🔍 Configurez votre recherche</h2>
+                
+                <form id="searchForm" onsubmit="event.preventDefault(); generateSearchLinks();">
+                    <div class="form-group">
+                        <label for="keywords">
+                            <span class="label-icon">💼</span>
+                            Mots-clés (domaine, compétences) *
+                        </label>
+                        <input type="text" id="keywords" placeholder="Ex: Computer Vision, Deep Learning, Traitement du signal" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">
+                            <span class="label-icon">📍</span>
+                            Localisation
+                        </label>
+                        <input type="text" id="location" placeholder="Ex: Toulouse, France" value="Toulouse">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience">
+                                <span class="label-icon">⭐</span>
+                                Niveau d'expérience
+                            </label>
+                            <select id="experience">
+                                <option value="">Tous les niveaux</option>
+                                <option value="1">Débutant</option>
+                                <option value="2">Intermédiaire</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datePosted">
+                                <span class="label-icon">📅</span>
+                                Date de publication
+                            </label>
+                            <select id="datePosted">
+                                <option value="">À tout moment</option>
+                                <option value="r86400">Dernières 24 heures</option>
+                                <option value="r604800">Dernière semaine</option>
+                                <option value="r2592000">Dernier mois</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-search"></i> Générer les recherches
+                    </button>
+                </form>
+            </section>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Génération des liens de recherche...</p>
+            </div>
+
+            <div class="stats" id="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="linkCount">0</div>
+                    <div class="stat-label">Liens générés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="savedSearches">0</div>
+                    <div class="stat-label">Recherches sauvegardées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSearches">0</div>
+                    <div class="stat-label">Total effectué</div>
+                </div>
+            </div>
+
+            <div class="tabs" id="tabsContainer">
+                <button class="tab active" onclick="showTab('results')">📋 Résultats</button>
+                <button class="tab" onclick="showTab('history')">📜 Historique</button>
+                <button class="tab" onclick="showTab('favorites')">⭐ Favoris</button>
+            </div>
+
+            <section class="tab-content active" id="results"></section>
+            <section class="tab-content" id="history"></section>
+            <section class="tab-content" id="favorites"></section>
+        </main>
+    </div>
+
+    <!-- Footer identique au portfolio -->
+    <footer>
+        <div class="container text-center text-white">
+            <p class="mb-1 fw-600" style="font-family:'Poppins',sans-serif; font-weight:700;">&copy; 2025 François Lachance Awounang-Ngounou</p>
+            <p class="small" style="color:rgba(255,255,255,0.45);">Toulouse, France</p>
+            <nav class="social-links" aria-label="Réseaux sociaux">
+                <a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/lachance123-francois" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fab fa-github fa-lg" aria-hidden="true"></i>
+                </a>
+                <a href="mailto:lachanceaeounang@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+                </a>
+            </nav>
+        </div>
+    </footer>
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Configuration
+        const CONFIG = {
+            STORAGE_KEYS: {
+                SEARCHES: 'academic_searches',
+                FAVORITES: 'academic_favorites',
+                HISTORY: 'academic_history',
+                THEME: 'academic_theme',
+                STATS: 'academic_stats'
+            },
+            MAX_HISTORY: 50,
+            MAX_FAVORITES: 20
+        };
+
+        let state = {
+            currentResults: [],
+            searchHistory: [],
+            favorites: [],
+            stats: { totalSearches: 0, linksGenerated: 0, savedSearches: 0 }
+        };
+
+        // Navbar scroll
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    document.getElementById('mainNavbar').classList.toggle('scrolled', window.scrollY > 50);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromStorage();
+            updateStats();
+            renderHistory();
+            renderFavorites();
+            initializeTheme();
+        });
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME);
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.querySelector('.theme-icon').textContent = '☀️';
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, 'light');
+                document.querySelector('.theme-icon').textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, 'dark');
+                document.querySelector('.theme-icon').textContent = '☀️';
+            }
+        }
+
+        function loadFromStorage() {
+            try {
+                state.searchHistory = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.HISTORY) || '[]');
+                state.favorites = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.FAVORITES) || '[]');
+                state.stats = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.STATS) || JSON.stringify(state.stats));
+            } catch(e) { console.error(e); }
+        }
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem(CONFIG.STORAGE_KEYS.HISTORY, JSON.stringify(state.searchHistory));
+                localStorage.setItem(CONFIG.STORAGE_KEYS.FAVORITES, JSON.stringify(state.favorites));
+                localStorage.setItem(CONFIG.STORAGE_KEYS.STATS, JSON.stringify(state.stats));
+            } catch(e) { console.error(e); }
+        }
+
+        function generateSearchLinks() {
+            const keywords = document.getElementById('keywords').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const experience = document.getElementById('experience').value;
+            const datePosted = document.getElementById('datePosted').value;
+
+            if (!keywords) {
+                showAlert('Veuillez entrer au moins un mot-clé !', 'warning');
+                return;
+            }
+
+            showLoading(true);
+            
+            setTimeout(() => {
+                const searches = [];
+                const types = [
+                    { prefix: 'stage', icon: '🎓', label: 'Stage' },
+                    { prefix: 'internship', icon: '💼', label: 'Internship' },
+                    { prefix: 'alternance', icon: '🔄', label: 'Alternance' }
+                ];
+
+                types.forEach(t => {
+                    const fullKeywords = `${t.prefix} ${keywords}`;
+                    let url = 'https://www.linkedin.com/jobs/search/?';
+                    let params = [];
+                    if (fullKeywords) params.push('keywords=' + encodeURIComponent(fullKeywords));
+                    if (location) params.push('location=' + encodeURIComponent(location));
+                    if (experience) params.push('f_E=' + experience);
+                    if (datePosted) params.push('f_TPR=' + datePosted);
+                    params.push('f_JT=I');
+                    url += params.join('&');
+                    
+                    searches.push({
+                        id: Date.now().toString(36) + Math.random().toString(36).substr(2, 6),
+                        title: `${t.icon} ${t.label} - ${keywords.substring(0, 50)}`,
+                        url: url,
+                        type: t.label,
+                        keywords: fullKeywords,
+                        location, experience, datePosted,
+                        timestamp: new Date().toISOString()
+                    });
+                });
+
+                state.currentResults = searches;
+                state.stats.totalSearches++;
+                state.stats.linksGenerated += searches.length;
+                
+                state.searchHistory.unshift({
+                    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 6),
+                    keywords, location, experience, datePosted,
+                    timestamp: new Date().toISOString()
+                });
+                if (state.searchHistory.length > CONFIG.MAX_HISTORY) state.searchHistory.pop();
+                
+                displaySearchResults(searches);
+                renderHistory();
+                showLoading(false);
+                updateStats();
+                showTabs();
+                showTab('results');
+                saveToStorage();
+                showAlert(`✅ ${searches.length} liens générés !`, 'success');
+            }, 500);
+        }
+
+        function displaySearchResults(searches) {
+            const div = document.getElementById('results');
+            if (!searches.length) {
+                div.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>Aucun résultat</h3><p>Effectuez une recherche</p></div>';
+                return;
+            }
+            let html = '';
+            searches.forEach(s => {
+                html += `
+                    <div class="search-card">
+                        <div class="search-title">${escapeHtml(s.title)}</div>
+                        <div class="search-meta">${s.location ? `📍 ${escapeHtml(s.location)}` : '🌍 Toutes localisations'}</div>
+                        <div class="card-actions">
+                            <button class="btn-secondary" onclick="window.open('${escapeHtml(s.url)}', '_blank')"><i class="fab fa-linkedin"></i> Ouvrir</button>
+                            <button class="btn-secondary btn-small" onclick="copyToClipboard('${escapeHtml(s.url)}')"><i class="fas fa-copy"></i> Copier</button>
+                            <button class="btn-secondary btn-small" onclick="addToFavorites('${s.id}')"><i class="fas fa-star"></i> Favoris</button>
+                        </div>
+                    </div>
+                `;
+            });
+            div.innerHTML = html;
+        }
+
+        function renderHistory() {
+            const div = document.getElementById('history');
+            if (!state.searchHistory.length) {
+                div.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📜</div><h3>Aucun historique</h3><p>Vos recherches apparaîtront ici</p></div>';
+                return;
+            }
+            let html = '';
+            state.searchHistory.slice(0, 20).forEach(h => {
+                html += `
+                    <div class="search-card">
+                        <div class="search-title">🔍 ${escapeHtml(h.keywords)}</div>
+                        <div class="search-meta">${h.location ? `📍 ${escapeHtml(h.location)}` : '🌍 Toutes localisations'} • ${formatDate(h.timestamp)}</div>
+                        <div class="card-actions">
+                            <button class="btn-secondary btn-small" onclick="repeatSearch('${h.id}')"><i class="fas fa-repeat"></i> Répéter</button>
+                            <button class="btn-secondary btn-small" onclick="deleteFromHistory('${h.id}')"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+                `;
+            });
+            div.innerHTML = html;
+        }
+
+        function renderFavorites() {
+            const div = document.getElementById('favorites');
+            if (!state.favorites.length) {
+                div.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⭐</div><h3>Aucun favori</h3><p>Ajoutez des recherches favorites</p></div>';
+                return;
+            }
+            let html = '';
+            state.favorites.forEach(f => {
+                html += `
+                    <div class="search-card">
+                        <div class="search-title">${escapeHtml(f.title)}</div>
+                        <div class="search-meta">${f.location ? `📍 ${escapeHtml(f.location)}` : '🌍 Toutes localisations'}</div>
+                        <div class="card-actions">
+                            <button class="btn-secondary" onclick="window.open('${escapeHtml(f.url)}', '_blank')"><i class="fab fa-linkedin"></i> Ouvrir</button>
+                            <button class="btn-secondary btn-small" onclick="removeFromFavorites('${f.id}')"><i class="fas fa-trash"></i> Retirer</button>
+                        </div>
+                    </div>
+                `;
+            });
+            div.innerHTML = html;
+        }
+
+        function addToFavorites(id) {
+            const search = state.currentResults.find(s => s.id === id);
+            if (!search) return;
+            if (state.favorites.some(f => f.id === id)) { showAlert('Déjà dans les favoris', 'warning'); return; }
+            if (state.favorites.length >= CONFIG.MAX_FAVORITES) { showAlert(`Max ${CONFIG.MAX_FAVORITES} favoris`, 'warning'); return; }
+            state.favorites.unshift({ ...search, savedAt: new Date().toISOString() });
+            state.stats.savedSearches = state.favorites.length;
+            saveToStorage();
+            updateStats();
+            renderFavorites();
+            showAlert('✅ Ajouté aux favoris', 'success');
+        }
+
+        function removeFromFavorites(id) {
+            state.favorites = state.favorites.filter(f => f.id !== id);
+            state.stats.savedSearches = state.favorites.length;
+            saveToStorage();
+            updateStats();
+            renderFavorites();
+            showAlert('Retiré des favoris', 'info');
+        }
+
+        function deleteFromHistory(id) {
+            state.searchHistory = state.searchHistory.filter(h => h.id !== id);
+            saveToStorage();
+            renderHistory();
+        }
+
+        function repeatSearch(id) {
+            const search = state.searchHistory.find(h => h.id === id);
+            if (search) {
+                document.getElementById('keywords').value = search.keywords;
+                document.getElementById('location').value = search.location || '';
+                document.getElementById('experience').value = search.experience || '';
+                document.getElementById('datePosted').value = search.datePosted || '';
+                document.querySelector('.search-section').scrollIntoView({ behavior: 'smooth' });
+                showAlert('Formulaire rempli', 'info');
+            }
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabName)?.classList.add('active');
+        }
+
+        function showTabs() {
+            document.getElementById('tabsContainer').classList.add('active');
+            document.getElementById('stats').classList.add('active');
+        }
+
+        function updateStats() {
+            document.getElementById('linkCount').textContent = state.stats.linksGenerated;
+            document.getElementById('savedSearches').textContent = state.stats.savedSearches;
+            document.getElementById('totalSearches').textContent = state.stats.totalSearches;
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('active', show);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => showAlert('✅ Lien copié !', 'success')).catch(() => showAlert('❌ Erreur copie', 'danger'));
+        }
+
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.style.cssText = 'position:fixed;top:80px;right:20px;z-index:9999;min-width:250px;animation:fadeIn 0.3s ease;';
+            alert.innerHTML = `<strong>${message}</strong>`;
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        function formatDate(iso) {
+            const d = new Date(iso);
+            const now = new Date();
+            const diff = Math.floor((now - d) / 60000);
+            if (diff < 1) return 'À l\'instant';
+            if (diff < 60) return `Il y a ${diff} min`;
+            if (diff < 1440) return `Il y a ${Math.floor(diff / 60)}h`;
+            return `Il y a ${Math.floor(diff / 1440)}j`;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        window.toggleTheme = toggleTheme;
+        window.generateSearchLinks = generateSearchLinks;
+        window.showTab = showTab;
+        window.copyToClipboard = copyToClipboard;
+        window.addToFavorites = addToFavorites;
+        window.removeFromFavorites = removeFromFavorites;
+        window.deleteFromHistory = deleteFromHistory;
+        window.repeatSearch = repeatSearch;
+    </script>
+</body>
+</html>

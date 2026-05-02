@@ -224,8 +224,6 @@
   
   "_help": {
     "documentation": "README.md",
-    "quick_start": "QUICKSTART.md",
-    "architecture": "ARCHITECTURE.html",
-    "repository": "https://github.com/lachance123-franccois/francois-tracker"
+    "architecture": "ARCHITECTURE.html"
   }
 }
