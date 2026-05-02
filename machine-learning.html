@@ -96,6 +96,21 @@
             position: relative;
         }
 
+        /* Vidéo démo */
+        .project-video-wrapper {
+            height: 200px;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .project-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .project-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -150,6 +165,14 @@
         .form-control:focus { border-color: var(--accent-green); box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25); }
         .btn-primary { background: var(--navy-deep); border: none; }
         .btn-primary:hover { background: var(--accent-green); }
+
+        /* Séparateur de section */
+        .section-separator {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--accent-green), transparent);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -179,32 +202,176 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <h1 class="display-4 fw-bold mb-3">
-                        <i class="fas fa-brain text-info me-3"></i>Machine Learning
+                        <i class="fas fa-brain text-info me-3"></i>Machine Learning & Python
                     </h1>
                     <p class="lead" style="color: var(--accent-green);">
-                        Conception de modèles intelligents et analyse prédictive de données complexes.
+                        Modèles intelligents, traitement du signal Python, vision par ordinateur et analyse prédictive.
                     </p>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- ── SECTION 1 : Projets ML classiques ── -->
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Mes Réalisations ML</h2>
+                <h2 class="fw-bold">Apprentissage Automatique</h2>
                 <div class="section-title-line"></div>
+                <p class="text-muted">Modèles prédictifs, séries temporelles, NLP et classification</p>
             </div>
 
             <div class="row g-4" id="projectsContainer">
-                <!-- Les projets seront injectés ici dynamiquement -->
+                <!-- injecté dynamiquement -->
             </div>
         </div>
     </section>
 
+    <hr class="section-separator">
+
+    <!-- ── SECTION 2 : Projets Signal & Vision Python ── -->
+    <section class="py-5" style="background-color: #f0f4f8;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Signal & Vision — Python</h2>
+                <div class="section-title-line"></div>
+                <p class="text-muted">Traitement du signal biomédical, maintenance prédictive, télécoms numériques et vision par ordinateur</p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Détection Crises Épileptiques -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="project-card">
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #8e44ad, #c0392b);">
+                            <i class="fas fa-brain fa-3x"></i>
+                            <div class="project-overlay">
+                                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-danger fw-bold text-uppercase">Signal Biomédical</small>
+                            <h4 class="mt-2">Détection Crises Épileptiques</h4>
+                            <p class="text-muted small">Chaîne complète de traitement du signal EEG pour la détection automatique de crises via transformée en ondelettes discrètes.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Ondelettes</span>
+                                <span class="tech-badge">EEG</span>
+                                <span class="tech-badge">DWT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classification Défauts de Roulement -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card">
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #2c3e50, #4ca1af);">
+                            <i class="fas fa-cogs fa-3x"></i>
+                            <div class="project-overlay">
+                                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-secondary fw-bold text-uppercase">Maintenance Prédictive</small>
+                            <h4 class="mt-2">Classification Défauts de Roulement</h4>
+                            <p class="text-muted small">Détection et classification automatique de défauts mécaniques sur roulements à billes par analyse vibratoire et machine learning.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Scikit-learn</span>
+                                <span class="tech-badge">Vibration</span>
+                                <span class="tech-badge">Signal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Démodulation QAM-16 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card">
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                            <i class="fas fa-broadcast-tower fa-3x"></i>
+                            <div class="project-overlay">
+                                <a href="https://github.com/lachance123-franccois/Demodultion-QM16" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-danger fw-bold text-uppercase">Télécoms Numériques</small>
+                            <h4 class="mt-2">Démodulation QAM-16</h4>
+                            <p class="text-muted small">Implémentation complète d'une chaîne de démodulation QAM-16 : synchronisation de porteuse, égalisation de canal et analyse du TEB.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">QAM-16</span>
+                                <span class="tech-badge">DSP</span>
+                                <span class="tech-badge">Télécoms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VisionGuard -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card">
+                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #e94560);">
+                            <i class="fas fa-eye fa-3x"></i>
+                            <div class="project-overlay">
+                                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-danger fw-bold text-uppercase">Computer Vision</small>
+                            <h4 class="mt-2">VisionGuard</h4>
+                            <p class="text-muted small">Surveillance intelligente par vision par ordinateur : détection d'objets en temps réel avec YOLOv8, interface graphique, overlay FPS et latence.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">YOLOv8</span>
+                                <span class="tech-badge">OpenCV</span>
+                                <span class="tech-badge">CNN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Vision Mini — avec vidéo -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <!-- Lecteur vidéo pointant vers la future vidéo démo -->
+                        <div class="project-video-wrapper">
+                            <video
+                                src="https://raw.githubusercontent.com/lachance123-franccois/cameravisionmini/main/demo.mp4"
+                                autoplay
+                                muted
+                                loop
+                                playsinline
+                                poster=""
+                                onerror="this.parentElement.innerHTML='<div style=\'height:200px;background:linear-gradient(135deg,#373b44,#f7b733);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;\'><i class=\'fas fa-video\'></i></div>'"
+                            ></video>
+                            <div class="project-overlay">
+                                <a href="https://github.com/lachance123-franccois/cameravisionmini" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <small class="text-warning fw-bold text-uppercase">Embedded Vision</small>
+                            <h4 class="mt-2">Camera Vision Mini</h4>
+                            <p class="text-muted small">Vision temps réel avec OpenCV : détection de personnes, analyse de mouvement, suivi de main et enregistrement automatique des séquences pertinentes.</p>
+                            <div class="mt-3">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">OpenCV</span>
+                                <span class="tech-badge">Embarqué</span>
+                                <span class="tech-badge">Temps réel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack Technique -->
     <section class="py-5 bg-white">
         <div class="container">
-            <h3 class="text-center fw-bold mb-5">Stack Technique ML</h3>
+            <h3 class="text-center fw-bold mb-5">Stack Technique</h3>
             <div class="row text-center g-4">
                 <div class="col-6 col-md-3">
                     <div class="p-3 border rounded shadow-sm">
@@ -238,13 +405,13 @@
         <div class="container text-center">
             <p>© 2025 François Lachance Awounang-Ngounou</p>
             <div class="h4">
-                <a href="https://www.linkedin.com/in/françois-lachance-awounang-ngounou-7022851b4/" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/fran%C3%A7ois-lachance-awounang-ngounou-7022851b4/" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/lachance123-franccois" class="text-white mx-2"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Bouton Admin (discret) -->
+    <!-- Bouton Admin -->
     <button class="admin-trigger" id="adminBtn" title="Admin Panel">
         <i class="fas fa-cog"></i>
     </button>
@@ -380,28 +547,6 @@
                 gradient: "linear-gradient(135deg, #56ccf2, #2f80ed)",
                 techs: ["Prophet", "Statsmodels"],
                 link: "https://github.com/lachance123-franccois/pipeline_serie-temporelle"
-            },
-            {
-                id: 7,
-                title: "VisionGuard",
-                category: "Computer Vision",
-                categoryColor: "danger",
-                description: "Système de surveillance intelligente par vision par ordinateur : détection d'intrusions, suivi d'objets et alertes en temps réel.",
-                icon: "fa-eye",
-                gradient: "linear-gradient(135deg, #1a1a2e, #e94560)",
-                techs: ["Python", "OpenCV", "YOLO"],
-                link: "https://github.com/lachance123-franccois/VisionGuard"
-            },
-            {
-                id: 8,
-                title: "Camera Vision Mini",
-                category: "Embedded Vision",
-                categoryColor: "warning",
-                description: "Application de vision embarquée pour systèmes à ressources limitées : détection et reconnaissance d'objets en temps réel sur caméra miniature.",
-                icon: "fa-video",
-                gradient: "linear-gradient(135deg, #373b44, #f7b733)",
-                techs: ["Python", "OpenCV", "Embarqué"],
-                link: "https://github.com/lachance123-franccois/cameravisionmini"
             }
         ];
 
@@ -410,10 +555,8 @@
 
         function initProjects() {
             const stored = localStorage.getItem(STORAGE_KEY);
-            // Si des projets sont en localStorage, on fusionne avec les nouveaux par défaut
             if (stored) {
                 const storedProjects = JSON.parse(stored);
-                // Ajouter les nouveaux projets par défaut qui ne sont pas encore dans le storage
                 const storedIds = storedProjects.map(p => p.id);
                 const newDefaults = DEFAULT_PROJECTS.filter(p => !storedIds.includes(p.id));
                 projects = [...storedProjects, ...newDefaults];
