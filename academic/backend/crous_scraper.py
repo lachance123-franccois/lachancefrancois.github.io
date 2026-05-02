@@ -1,8 +1,3 @@
-"""
-Housing Scraper - Multi-sources (CROUS, LeBonCoin, SeLoger, PAP, Logic-Immo)
-Version stealth avec rotation et délais aléatoires
-"""
-
 import re
 import logging
 import random
@@ -29,9 +24,6 @@ class HousingOffer:
 
 
 class HousingScraper:
-    """
-    Scraper multi-sources pour logements (priorité aux APIs quand disponibles)
-    """
     
     TOULOUSE_CODES = ['31000', '31100', '31200', '31300', '31400', '31500']
     

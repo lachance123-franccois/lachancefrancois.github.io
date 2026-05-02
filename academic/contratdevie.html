@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Assistant intelligent pour trouver des offres de stage sur LinkedIn - Génération de liens de recherche optimisés">
-    <meta name="keywords" content="LinkedIn, stage, internship, recherche emploi, alternance, Toulouse, Academic Tracker">
+    <meta name="keywords" content="LinkedIn, stage, internship, recherche emploi, alternance, Toulouse, Academic Tracker, thèse, PhD">
     <meta name="author" content="François Lachance">
-    <meta property="og:title" content="Academic Tracker - LinkedIn Stage Finder">
-    <meta property="og:description" content="Générez des liens de recherche LinkedIn optimisés pour trouver votre stage">
+    <meta property="og:title" content="Academic Tracker - Stage & PhD Finder">
+    <meta property="og:description" content="Générez des liens de recherche LinkedIn et consultez les offres de thèse">
     <meta property="og:type" content="website">
     
-    <title>LinkedIn Stage | François Lachance</title>
+    <title>Academic Tracker | François Lachance</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -309,6 +309,7 @@
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.5rem;
             display: none;
+            flex-wrap: wrap;
         }
         .tabs.active {
             display: flex;
@@ -404,6 +405,28 @@
             font-size: 0.7rem;
         }
 
+        /* Styles spécifiques pour les offres de thèse */
+        .offer-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+        .keyword {
+            background: rgba(79, 168, 213, 0.1);
+            border: 1px solid rgba(79, 168, 213, 0.2);
+            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+        .offer-description {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0.75rem 0;
+            line-height: 1.5;
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -465,7 +488,7 @@
     <!-- Navbar identique au portfolio -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
+            <a class="navbar-brand fw-bold" href="../index.html">
                 <span class="brand-icon me-2"><i class="fas fa-code"></i></span>
                 François Lachance
             </a>
@@ -491,18 +514,19 @@
         <!-- Header -->
         <div class="page-header">
             <div class="logo-icon">🎯</div>
-            <h1>Academic Tracker - Stage Finder</h1>
-            <p>Générez des liens de recherche LinkedIn optimisés pour trouver votre stage</p>
+            <h1>Academic Tracker</h1>
+            <p>Recherche de stages LinkedIn + Offres de thèse collectées automatiquement</p>
         </div>
 
         <main>
             <div class="alert alert-warning">
-                <strong>⚠️ Important :</strong> Cet outil génère des URLs de recherche LinkedIn optimisées. 
-                Vous devrez cliquer manuellement sur les liens pour respecter les conditions d'utilisation de LinkedIn.
+                <strong>⚠️ Important :</strong> Les offres de thèse proviennent d'un scraping automatique quotidien. 
+                Les liens LinkedIn sont générés à la demande.
             </div>
 
+            <!-- SECTION RECHERCHE LINKEDIN -->
             <section class="search-section">
-                <h2>🔍 Configurez votre recherche</h2>
+                <h2>🔍 Recherche LinkedIn</h2>
                 
                 <form id="searchForm" onsubmit="event.preventDefault(); generateSearchLinks();">
                     <div class="form-group">
@@ -574,13 +598,16 @@
                 </div>
             </div>
 
+            <!-- TABS : Stages LinkedIn + Thèses + Historique + Favoris -->
             <div class="tabs" id="tabsContainer">
-                <button class="tab active" onclick="showTab('results')">📋 Résultats</button>
-                <button class="tab" onclick="showTab('history')">📜 Historique</button>
-                <button class="tab" onclick="showTab('favorites')">⭐ Favoris</button>
+                <button class="tab active" onclick="showTab('results', this)">📋 Stages LinkedIn</button>
+                <button class="tab" onclick="showTab('phd', this)">🎓 Thèses</button>
+                <button class="tab" onclick="showTab('history', this)">📜 Historique</button>
+                <button class="tab" onclick="showTab('favorites', this)">⭐ Favoris</button>
             </div>
 
             <section class="tab-content active" id="results"></section>
+            <section class="tab-content" id="phd"></section>
             <section class="tab-content" id="history"></section>
             <section class="tab-content" id="favorites"></section>
         </main>
@@ -611,7 +638,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Configuration
+        // ========== CONFIGURATION ==========
         const CONFIG = {
             STORAGE_KEYS: {
                 SEARCHES: 'academic_searches',
@@ -631,7 +658,7 @@
             stats: { totalSearches: 0, linksGenerated: 0, savedSearches: 0 }
         };
 
-        // Navbar scroll
+        // ========== NAVBAR SCROLL ==========
         let ticking = false;
         window.addEventListener('scroll', function() {
             if (!ticking) {
@@ -643,7 +670,7 @@
             }
         });
 
-        // Initialisation
+        // ========== INITIALISATION ==========
         document.addEventListener('DOMContentLoaded', function() {
             loadFromStorage();
             updateStats();
@@ -673,6 +700,7 @@
             }
         }
 
+        // ========== STORAGE ==========
         function loadFromStorage() {
             try {
                 state.searchHistory = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.HISTORY) || '[]');
@@ -689,6 +717,7 @@
             } catch(e) { console.error(e); }
         }
 
+        // ========== GÉNÉRATION LIENS LINKEDIN ==========
         function generateSearchLinks() {
             const keywords = document.getElementById('keywords').value.trim();
             const location = document.getElementById('location').value.trim();
@@ -777,149 +806,51 @@
             div.innerHTML = html;
         }
 
-        function renderHistory() {
-            const div = document.getElementById('history');
-            if (!state.searchHistory.length) {
-                div.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📜</div><h3>Aucun historique</h3><p>Vos recherches apparaîtront ici</p></div>';
-                return;
-            }
-            let html = '';
-            state.searchHistory.slice(0, 20).forEach(h => {
-                html += `
-                    <div class="search-card">
-                        <div class="search-title">🔍 ${escapeHtml(h.keywords)}</div>
-                        <div class="search-meta">${h.location ? `📍 ${escapeHtml(h.location)}` : '🌍 Toutes localisations'} • ${formatDate(h.timestamp)}</div>
-                        <div class="card-actions">
-                            <button class="btn-secondary btn-small" onclick="repeatSearch('${h.id}')"><i class="fas fa-repeat"></i> Répéter</button>
-                            <button class="btn-secondary btn-small" onclick="deleteFromHistory('${h.id}')"><i class="fas fa-trash"></i> Supprimer</button>
-                        </div>
+        // ========== AFFICHAGE DES THÈSES (JSON) ==========
+        async function loadAndDisplayPhdOffers() {
+            const phdContainer = document.getElementById('phd');
+            phdContainer.innerHTML = '<div class="text-center py-5"><div class="spinner"></div><p>Chargement des offres de thèse...</p></div>';
+            
+            try {
+                const response = await fetch('phd_offers.json?t=' + Date.now());
+                if (!response.ok) throw new Error('Fichier non trouvé');
+                const offers = await response.json();
+                displayPhdOffers(offers);
+            } catch (err) {
+                phdContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎓</div>
+                        <h3>Aucune offre de thèse disponible</h3>
+                        <p>Les offres apparaîtront après le prochain scraping automatique (tous les jours à 8h).</p>
                     </div>
                 `;
-            });
-            div.innerHTML = html;
+            }
         }
 
-        function renderFavorites() {
-            const div = document.getElementById('favorites');
-            if (!state.favorites.length) {
-                div.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⭐</div><h3>Aucun favori</h3><p>Ajoutez des recherches favorites</p></div>';
+        function displayPhdOffers(offers) {
+            const container = document.getElementById('phd');
+            
+            if (!offers || offers.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎓</div><h3>Aucune offre récente</h3><p>Revenez plus tard pour de nouvelles offres.</p></div>';
                 return;
             }
+            
             let html = '';
-            state.favorites.forEach(f => {
+            offers.forEach(offer => {
+                const keywords = offer.keywords || [];
+                const keywordsHtml = keywords.map(kw => `<span class="keyword">${escapeHtml(kw)}</span>`).join('');
+                
                 html += `
                     <div class="search-card">
-                        <div class="search-title">${escapeHtml(f.title)}</div>
-                        <div class="search-meta">${f.location ? `📍 ${escapeHtml(f.location)}` : '🌍 Toutes localisations'}</div>
-                        <div class="card-actions">
-                            <button class="btn-secondary" onclick="window.open('${escapeHtml(f.url)}', '_blank')"><i class="fab fa-linkedin"></i> Ouvrir</button>
-                            <button class="btn-secondary btn-small" onclick="removeFromFavorites('${f.id}')"><i class="fas fa-trash"></i> Retirer</button>
+                        <div class="search-title">🎓 ${escapeHtml(offer.title || 'Sans titre')}</div>
+                        <div class="search-meta">
+                            🏛️ ${escapeHtml(offer.institution || 'N/A')} &nbsp;|&nbsp;
+                            🔬 ${escapeHtml(offer.laboratory || 'N/A')} &nbsp;|&nbsp;
+                            📍 ${escapeHtml(offer.location || 'France')}
                         </div>
-                    </div>
-                `;
-            });
-            div.innerHTML = html;
-        }
-
-        function addToFavorites(id) {
-            const search = state.currentResults.find(s => s.id === id);
-            if (!search) return;
-            if (state.favorites.some(f => f.id === id)) { showAlert('Déjà dans les favoris', 'warning'); return; }
-            if (state.favorites.length >= CONFIG.MAX_FAVORITES) { showAlert(`Max ${CONFIG.MAX_FAVORITES} favoris`, 'warning'); return; }
-            state.favorites.unshift({ ...search, savedAt: new Date().toISOString() });
-            state.stats.savedSearches = state.favorites.length;
-            saveToStorage();
-            updateStats();
-            renderFavorites();
-            showAlert('✅ Ajouté aux favoris', 'success');
-        }
-
-        function removeFromFavorites(id) {
-            state.favorites = state.favorites.filter(f => f.id !== id);
-            state.stats.savedSearches = state.favorites.length;
-            saveToStorage();
-            updateStats();
-            renderFavorites();
-            showAlert('Retiré des favoris', 'info');
-        }
-
-        function deleteFromHistory(id) {
-            state.searchHistory = state.searchHistory.filter(h => h.id !== id);
-            saveToStorage();
-            renderHistory();
-        }
-
-        function repeatSearch(id) {
-            const search = state.searchHistory.find(h => h.id === id);
-            if (search) {
-                document.getElementById('keywords').value = search.keywords;
-                document.getElementById('location').value = search.location || '';
-                document.getElementById('experience').value = search.experience || '';
-                document.getElementById('datePosted').value = search.datePosted || '';
-                document.querySelector('.search-section').scrollIntoView({ behavior: 'smooth' });
-                showAlert('Formulaire rempli', 'info');
-            }
-        }
-
-        function showTab(tabName) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            if (event && event.target) event.target.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(tabName)?.classList.add('active');
-        }
-
-        function showTabs() {
-            document.getElementById('tabsContainer').classList.add('active');
-            document.getElementById('stats').classList.add('active');
-        }
-
-        function updateStats() {
-            document.getElementById('linkCount').textContent = state.stats.linksGenerated;
-            document.getElementById('savedSearches').textContent = state.stats.savedSearches;
-            document.getElementById('totalSearches').textContent = state.stats.totalSearches;
-        }
-
-        function showLoading(show) {
-            document.getElementById('loading').classList.toggle('active', show);
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => showAlert('✅ Lien copié !', 'success')).catch(() => showAlert('❌ Erreur copie', 'danger'));
-        }
-
-        function showAlert(message, type) {
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type}`;
-            alert.style.cssText = 'position:fixed;top:80px;right:20px;z-index:9999;min-width:250px;animation:fadeIn 0.3s ease;';
-            alert.innerHTML = `<strong>${message}</strong>`;
-            document.body.appendChild(alert);
-            setTimeout(() => alert.remove(), 3000);
-        }
-
-        function formatDate(iso) {
-            const d = new Date(iso);
-            const now = new Date();
-            const diff = Math.floor((now - d) / 60000);
-            if (diff < 1) return 'À l\'instant';
-            if (diff < 60) return `Il y a ${diff} min`;
-            if (diff < 1440) return `Il y a ${Math.floor(diff / 60)}h`;
-            return `Il y a ${Math.floor(diff / 1440)}j`;
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        window.toggleTheme = toggleTheme;
-        window.generateSearchLinks = generateSearchLinks;
-        window.showTab = showTab;
-        window.copyToClipboard = copyToClipboard;
-        window.addToFavorites = addToFavorites;
-        window.removeFromFavorites = removeFromFavorites;
-        window.deleteFromHistory = deleteFromHistory;
-        window.repeatSearch = repeatSearch;
-    </script>
-</body>
-</html>
+                        <div class="offer-description">${escapeHtml((offer.description || '').substring(0, 300))}${(offer.description || '').length > 300 ? '...' : ''}</div>
+                        ${keywordsHtml ? `<div class="offer-keywords">${keywordsHtml}</div>` : ''}
+                        <div class="card-actions">
+                            <button class="btn-secondary" onclick="window.open('${escapeHtml(offer.url)}', '_blank')">
+                                <i class="fas fa-external-link-alt"></i> Voir l'offre
+                            </button
