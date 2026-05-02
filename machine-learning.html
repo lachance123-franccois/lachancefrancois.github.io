@@ -28,7 +28,6 @@
             position: relative;
         }
 
-        /* Bouton Admin discret */
         .admin-trigger {
             position: fixed;
             bottom: 20px;
@@ -50,7 +49,6 @@
             background: var(--accent-green);
         }
 
-        /* Modal Admin */
         .admin-modal {
             display: none;
             position: fixed;
@@ -259,7 +257,6 @@
                 <button class="btn-close" id="closeModal"></button>
             </div>
 
-            <!-- Authentification -->
             <div id="authSection">
                 <div class="alert alert-info">
                     <i class="fas fa-lock me-2"></i>Entrez le code secret pour accéder
@@ -268,7 +265,6 @@
                 <button class="btn btn-primary w-100" id="unlockBtn">Déverrouiller</button>
             </div>
 
-            <!-- Formulaire d'ajout (caché par défaut) -->
             <div id="projectForm" style="display: none;">
                 <div class="alert alert-success">
                     <i class="fas fa-check-circle me-2"></i>Accès autorisé
@@ -279,37 +275,30 @@
                         <label class="form-label fw-bold">Titre du projet</label>
                         <input type="text" class="form-control" id="projectTitle" required>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Catégorie</label>
                         <input type="text" class="form-control" id="projectCategory" placeholder="ex: Computer Vision">
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Description</label>
                         <textarea class="form-control" id="projectDesc" rows="3" required></textarea>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Icône (FontAwesome)</label>
                         <input type="text" class="form-control" id="projectIcon" placeholder="ex: fa-chart-line" value="fa-project-diagram">
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Gradient (CSS)</label>
                         <input type="text" class="form-control" id="projectGradient" value="linear-gradient(135deg, #667eea, #764ba2)">
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Technologies (séparées par virgule)</label>
                         <input type="text" class="form-control" id="projectTechs" placeholder="ex: Python, TensorFlow, Keras">
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-bold">Lien (optionnel)</label>
                         <input type="url" class="form-control" id="projectLink" placeholder="https://github.com/...">
                     </div>
-
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="fas fa-plus-circle me-2"></i>Ajouter le projet
                     </button>
@@ -322,11 +311,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     
     <script>
-        // ========== CONFIGURATION ==========
-        const SECRET_CODE = "FL2025ML"; //  code secret  !
+        const SECRET_CODE = "FL2025ML";
         const STORAGE_KEY = "ml_projects";
 
-        // ========== PROJETS PAR DÉFAUT ==========
         const DEFAULT_PROJECTS = [
             {
                 id: 1,
@@ -341,7 +328,7 @@
             },
             {
                 id: 2,
-                title: "Imagerie",
+                title: "Imagerie Médicale",
                 category: "Computer Vision",
                 categoryColor: "danger",
                 description: "Classification de radiographies pulmonaires via architectures CNN (ResNet).",
@@ -374,7 +361,7 @@
             },
             {
                 id: 5,
-                title: "Regression lineaire",
+                title: "Regression Linéaire",
                 category: "Systèmes de Recommandation",
                 categoryColor: "success",
                 description: "Moteur de recommandation basé sur le filtrage collaboratif et la factorisation matricielle.",
@@ -393,21 +380,49 @@
                 gradient: "linear-gradient(135deg, #56ccf2, #2f80ed)",
                 techs: ["Prophet", "Statsmodels"],
                 link: "https://github.com/lachance123-franccois/pipeline_serie-temporelle"
+            },
+            {
+                id: 7,
+                title: "VisionGuard",
+                category: "Computer Vision",
+                categoryColor: "danger",
+                description: "Système de surveillance intelligente par vision par ordinateur : détection d'intrusions, suivi d'objets et alertes en temps réel.",
+                icon: "fa-eye",
+                gradient: "linear-gradient(135deg, #1a1a2e, #e94560)",
+                techs: ["Python", "OpenCV", "YOLO"],
+                link: "https://github.com/lachance123-franccois/VisionGuard"
+            },
+            {
+                id: 8,
+                title: "Camera Vision Mini",
+                category: "Embedded Vision",
+                categoryColor: "warning",
+                description: "Application de vision embarquée pour systèmes à ressources limitées : détection et reconnaissance d'objets en temps réel sur caméra miniature.",
+                icon: "fa-video",
+                gradient: "linear-gradient(135deg, #373b44, #f7b733)",
+                techs: ["Python", "OpenCV", "Embarqué"],
+                link: "https://github.com/lachance123-franccois/cameravisionmini"
             }
         ];
 
-        // ========== ÉTAT ==========
         let isAuthenticated = false;
         let projects = [];
 
-        // ========== INITIALISATION ==========
         function initProjects() {
             const stored = localStorage.getItem(STORAGE_KEY);
-            projects = stored ? JSON.parse(stored) : DEFAULT_PROJECTS;
+            // Si des projets sont en localStorage, on fusionne avec les nouveaux par défaut
+            if (stored) {
+                const storedProjects = JSON.parse(stored);
+                // Ajouter les nouveaux projets par défaut qui ne sont pas encore dans le storage
+                const storedIds = storedProjects.map(p => p.id);
+                const newDefaults = DEFAULT_PROJECTS.filter(p => !storedIds.includes(p.id));
+                projects = [...storedProjects, ...newDefaults];
+            } else {
+                projects = DEFAULT_PROJECTS;
+            }
             renderProjects();
         }
 
-        // ========== RENDU DES PROJETS ==========
         function renderProjects() {
             const container = document.getElementById('projectsContainer');
             container.innerHTML = '';
@@ -428,7 +443,7 @@
                         <div class="project-image-placeholder" style="background: ${project.gradient};">
                             <i class="fas ${project.icon} fa-3x"></i>
                             <div class="project-overlay">
-                                <a href="${project.link}" class="btn btn-light rounded-pill px-4">
+                                <a href="${project.link}" target="_blank" class="btn btn-light rounded-pill px-4">
                                     ${project.link && project.link !== '#' ? 'Voir le code' : 'Détails'}
                                 </a>
                             </div>
@@ -448,7 +463,6 @@
             AOS.refresh();
         }
 
-        // ========== SUPPRESSION ==========
         function deleteProject(id) {
             if (!confirm('Supprimer ce projet ?')) return;
             projects = projects.filter(p => p.id !== id);
@@ -456,7 +470,6 @@
             renderProjects();
         }
 
-        // ========== ADMIN PANEL ==========
         const adminBtn = document.getElementById('adminBtn');
         const adminModal = document.getElementById('adminModal');
         const closeModal = document.getElementById('closeModal');
@@ -465,18 +478,10 @@
         const authSection = document.getElementById('authSection');
         const projectForm = document.getElementById('projectForm');
 
-        adminBtn.addEventListener('click', () => {
-            adminModal.classList.add('active');
-        });
-
-        closeModal.addEventListener('click', () => {
-            adminModal.classList.remove('active');
-        });
-
+        adminBtn.addEventListener('click', () => { adminModal.classList.add('active'); });
+        closeModal.addEventListener('click', () => { adminModal.classList.remove('active'); });
         adminModal.addEventListener('click', (e) => {
-            if (e.target === adminModal) {
-                adminModal.classList.remove('active');
-            }
+            if (e.target === adminModal) { adminModal.classList.remove('active'); }
         });
 
         unlockBtn.addEventListener('click', () => {
@@ -484,14 +489,13 @@
                 isAuthenticated = true;
                 authSection.style.display = 'none';
                 projectForm.style.display = 'block';
-                renderProjects(); // Re-render pour afficher les boutons delete
+                renderProjects();
             } else {
                 alert('❌ Code incorrect !');
                 secretCodeInput.value = '';
             }
         });
 
-        // ========== AJOUT DE PROJET ==========
         document.getElementById('addProjectForm').addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -511,14 +515,11 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
             renderProjects();
 
-            // Reset form
             e.target.reset();
             adminModal.classList.remove('active');
-
             alert('✅ Projet ajouté avec succès !');
         });
 
-        // ========== DÉMARRAGE ==========
         AOS.init({ duration: 800, once: true });
         initProjects();
     </script>
