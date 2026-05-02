@@ -1,670 +1,909 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Projets Machine Learning de François Lachance">
     <title>Machine Learning | François Lachance A.N</title>
+
+```
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+
+<style>
+    :root {
+        --accent-green: #00d084;
+        --navy-deep: #0a192f;
+    }
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
     
-    <style>
-        :root {
-            --accent-green: #00d084;
-            --navy-deep: #0a192f;
-        }
-        
-        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
-        
-        .hero-ml {
-            background: linear-gradient(135deg, var(--navy-deep) 0%, #172a45 100%);
-            padding: 100px 0 60px;
-            color: white;
-            position: relative;
-        }
+    .hero-ml {
+        background: linear-gradient(135deg, var(--navy-deep) 0%, #172a45 100%);
+        padding: 100px 0 60px;
+        color: white;
+        position: relative;
+    }
 
-        .admin-trigger {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--navy-deep);
-            color: white;
-            border-radius: 50%;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+    .admin-trigger {
+        position: fixed; bottom: 20px; right: 20px;
+        width: 50px; height: 50px;
+        background: var(--navy-deep); color: white;
+        border-radius: 50%; border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        cursor: pointer; z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    .admin-trigger:hover { transform: scale(1.1); background: var(--accent-green); }
 
-        .admin-trigger:hover {
-            transform: scale(1.1);
-            background: var(--accent-green);
-        }
+    .admin-modal {
+        display: none; position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 2000; overflow-y: auto;
+    }
+    .admin-modal.active { display: flex; align-items: center; justify-content: center; }
+    .admin-panel {
+        background: white; border-radius: 15px; padding: 2rem;
+        max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto;
+    }
 
-        .admin-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            overflow-y: auto;
-        }
+    .project-card {
+        background: white; border-radius: 15px; overflow: hidden;
+        transition: all 0.3s ease; height: 100%;
+        border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        position: relative;
+    }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
-        .admin-modal.active { display: flex; align-items: center; justify-content: center; }
+    /* Canvas wrapper — même dimensions que project-image-placeholder */
+    .canvas-thumb {
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+    .canvas-thumb canvas {
+        width: 100%; height: 100%;
+        display: block;
+    }
 
-        .admin-panel {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
+    .project-image-placeholder {
+        height: 200px;
+        display: flex; align-items: center; justify-content: center;
+        color: white; position: relative;
+    }
 
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            height: 100%;
-            border: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            position: relative;
-        }
+    .project-video-wrapper {
+        height: 200px; position: relative;
+        background: #000; overflow: hidden;
+    }
+    .project-video-wrapper video {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+    }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
+    .project-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(10, 25, 47, 0.8);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s ease;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
 
-        .project-image-placeholder {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-        }
+    .tech-badge {
+        background: #e9ecef; color: var(--navy-deep);
+        padding: 4px 12px; border-radius: 20px;
+        font-size: 0.8rem; font-weight: 600;
+        margin-right: 5px; margin-bottom: 5px; display: inline-block;
+    }
 
-        /* Vidéo démo */
-        .project-video-wrapper {
-            height: 200px;
-            position: relative;
-            background: #000;
-            overflow: hidden;
-        }
+    .section-title-line {
+        width: 60px; height: 4px;
+        background: var(--accent-green);
+        margin: 10px auto 30px;
+    }
 
-        .project-video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    .delete-btn {
+        position: absolute; top: 10px; right: 10px;
+        background: rgba(220, 53, 69, 0.9); color: white;
+        border: none; width: 30px; height: 30px;
+        border-radius: 50%; cursor: pointer;
+        opacity: 0; transition: opacity 0.3s ease; z-index: 10;
+    }
+    .project-card:hover .delete-btn { opacity: 1; }
+    .delete-btn:hover { background: #dc3545; }
 
-        .project-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 25, 47, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .form-control:focus { border-color: var(--accent-green); box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25); }
+    .btn-primary { background: var(--navy-deep); border: none; }
+    .btn-primary:hover { background: var(--accent-green); }
 
-        .project-card:hover .project-overlay { opacity: 1; }
+    .section-separator {
+        border: none; height: 3px;
+        background: linear-gradient(to right, transparent, var(--accent-green), transparent);
+        margin: 0;
+    }
+</style>
+```
 
-        .tech-badge {
-            background: #e9ecef;
-            color: var(--navy-deep);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-
-        .section-title-line {
-            width: 60px;
-            height: 4px;
-            background: var(--accent-green);
-            margin: 10px auto 30px;
-        }
-
-        .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(220, 53, 69, 0.9);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-
-        .project-card:hover .delete-btn { opacity: 1; }
-        .delete-btn:hover { background: #dc3545; }
-
-        .form-control:focus { border-color: var(--accent-green); box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25); }
-        .btn-primary { background: var(--navy-deep); border: none; }
-        .btn-primary:hover { background: var(--accent-green); }
-
-        /* Séparateur de section */
-        .section-separator {
-            border: none;
-            height: 3px;
-            background: linear-gradient(to right, transparent, var(--accent-green), transparent);
-            margin: 0;
-        }
-    </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fas fa-code me-2"></i>Francois Lachance
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="machine-learning.html">Machine Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="matlab.html">Signal & Image</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-lg-3" href="contact.html">Contact</a></li>
-                </ul>
-            </div>
+```
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-code me-2"></i>Francois Lachance
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link active" href="machine-learning.html">Machine Learning</a></li>
+                <li class="nav-item"><a class="nav-link" href="matlab.html">Signal & Image</a></li>
+                <li class="nav-item"><a class="nav-link" href="cv.html">Mon CV</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-lg-3" href="contact.html">Contact</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <header class="hero-ml">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3">
-                        <i class="fas fa-brain text-info me-3"></i>Machine Learning & Python
-                    </h1>
-                    <p class="lead" style="color: var(--accent-green);">
-                        Modèles intelligents, traitement du signal Python, vision par ordinateur et analyse prédictive.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- ── SECTION 1 : Projets ML classiques ── -->
-    <section class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Apprentissage Automatique</h2>
-                <div class="section-title-line"></div>
-                <p class="text-muted">Modèles prédictifs, séries temporelles, NLP et classification</p>
-            </div>
-
-            <div class="row g-4" id="projectsContainer">
-                <!-- injecté dynamiquement -->
-            </div>
-        </div>
-    </section>
-
-    <hr class="section-separator">
-
-    <!-- ── SECTION 2 : Projets Signal & Vision Python ── -->
-    <section class="py-5" style="background-color: #f0f4f8;">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Signal & Vision — Python</h2>
-                <div class="section-title-line"></div>
-                <p class="text-muted">Traitement du signal biomédical, maintenance prédictive, télécoms numériques et vision par ordinateur</p>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- Détection Crises Épileptiques -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #8e44ad, #c0392b);">
-                            <i class="fas fa-brain fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-danger fw-bold text-uppercase">Signal Biomédical</small>
-                            <h4 class="mt-2">Détection Crises Épileptiques</h4>
-                            <p class="text-muted small">Chaîne complète de traitement du signal EEG pour la détection automatique de crises via transformée en ondelettes discrètes.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">Python</span>
-                                <span class="tech-badge">Ondelettes</span>
-                                <span class="tech-badge">EEG</span>
-                                <span class="tech-badge">DWT</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Classification Défauts de Roulement -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #2c3e50, #4ca1af);">
-                            <i class="fas fa-cogs fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-secondary fw-bold text-uppercase">Maintenance Prédictive</small>
-                            <h4 class="mt-2">Classification Défauts de Roulement</h4>
-                            <p class="text-muted small">Détection et classification automatique de défauts mécaniques sur roulements à billes par analyse vibratoire et machine learning.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">Python</span>
-                                <span class="tech-badge">Scikit-learn</span>
-                                <span class="tech-badge">Vibration</span>
-                                <span class="tech-badge">Signal</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Démodulation QAM-16 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                            <i class="fas fa-broadcast-tower fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="https://github.com/lachance123-franccois/Demodultion-QM16" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-danger fw-bold text-uppercase">Télécoms Numériques</small>
-                            <h4 class="mt-2">Démodulation QAM-16</h4>
-                            <p class="text-muted small">Implémentation complète d'une chaîne de démodulation QAM-16 : synchronisation de porteuse, égalisation de canal et analyse du TEB.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">Python</span>
-                                <span class="tech-badge">QAM-16</span>
-                                <span class="tech-badge">DSP</span>
-                                <span class="tech-badge">Télécoms</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VisionGuard -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-card">
-                        <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #e94560);">
-                            <i class="fas fa-eye fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-danger fw-bold text-uppercase">Computer Vision</small>
-                            <h4 class="mt-2">VisionGuard</h4>
-                            <p class="text-muted small">Surveillance intelligente par vision par ordinateur : détection d'objets en temps réel avec YOLOv8, interface graphique, overlay FPS et latence.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">Python</span>
-                                <span class="tech-badge">YOLOv8</span>
-                                <span class="tech-badge">OpenCV</span>
-                                <span class="tech-badge">CNN</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Camera Vision Mini — avec vidéo -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="project-card">
-                        <!-- Lecteur vidéo pointant vers la future vidéo démo -->
-                        <div class="project-video-wrapper">
-                            <video
-                                src="https://raw.githubusercontent.com/lachance123-franccois/cameravisionmini/main/demo.mp4"
-                                autoplay
-                                muted
-                                loop
-                                playsinline
-                                poster=""
-                                onerror="this.parentElement.innerHTML='<div style=\'height:200px;background:linear-gradient(135deg,#373b44,#f7b733);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;\'><i class=\'fas fa-video\'></i></div>'"
-                            ></video>
-                            <div class="project-overlay">
-                                <a href="https://github.com/lachance123-franccois/cameravisionmini" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-warning fw-bold text-uppercase">Embedded Vision</small>
-                            <h4 class="mt-2">Camera Vision Mini</h4>
-                            <p class="text-muted small">Vision temps réel avec OpenCV : détection de personnes, analyse de mouvement, suivi de main et enregistrement automatique des séquences pertinentes.</p>
-                            <div class="mt-3">
-                                <span class="tech-badge">Python</span>
-                                <span class="tech-badge">OpenCV</span>
-                                <span class="tech-badge">Embarqué</span>
-                                <span class="tech-badge">Temps réel</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Stack Technique -->
-    <section class="py-5 bg-white">
-        <div class="container">
-            <h3 class="text-center fw-bold mb-5">Stack Technique</h3>
-            <div class="row text-center g-4">
-                <div class="col-6 col-md-3">
-                    <div class="p-3 border rounded shadow-sm">
-                        <i class="fab fa-python fa-2x text-primary mb-2"></i>
-                        <h6>Scikit-Learn</h6>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="p-3 border rounded shadow-sm">
-                        <i class="fas fa-fire fa-2x text-orange mb-2"></i>
-                        <h6>PyTorch</h6>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="p-3 border rounded shadow-sm">
-                        <i class="fas fa-database fa-2x text-secondary mb-2"></i>
-                        <h6>SQL / Spark</h6>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="p-3 border rounded shadow-sm">
-                        <i class="fas fa-vial fa-2x text-success mb-2"></i>
-                        <h6>MLOps</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-dark text-white py-5 mt-5">
-        <div class="container text-center">
-            <p>© 2025 François Lachance Awounang-Ngounou</p>
-            <div class="h4">
-                <a href="https://www.linkedin.com/in/fran%C3%A7ois-lachance-awounang-ngounou-7022851b4/" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/lachance123-franccois" class="text-white mx-2"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bouton Admin -->
-    <button class="admin-trigger" id="adminBtn" title="Admin Panel">
-        <i class="fas fa-cog"></i>
-    </button>
-
-    <!-- Modal Admin -->
-    <div class="admin-modal" id="adminModal">
-        <div class="admin-panel">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold mb-0"><i class="fas fa-shield-alt me-2"></i>Admin Panel</h3>
-                <button class="btn-close" id="closeModal"></button>
-            </div>
-
-            <div id="authSection">
-                <div class="alert alert-info">
-                    <i class="fas fa-lock me-2"></i>Entrez le code secret pour accéder
-                </div>
-                <input type="password" class="form-control mb-3" id="secretCode" placeholder="Code secret">
-                <button class="btn btn-primary w-100" id="unlockBtn">Déverrouiller</button>
-            </div>
-
-            <div id="projectForm" style="display: none;">
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle me-2"></i>Accès autorisé
-                </div>
-
-                <form id="addProjectForm">
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Titre du projet</label>
-                        <input type="text" class="form-control" id="projectTitle" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Catégorie</label>
-                        <input type="text" class="form-control" id="projectCategory" placeholder="ex: Computer Vision">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Description</label>
-                        <textarea class="form-control" id="projectDesc" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Icône (FontAwesome)</label>
-                        <input type="text" class="form-control" id="projectIcon" placeholder="ex: fa-chart-line" value="fa-project-diagram">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Gradient (CSS)</label>
-                        <input type="text" class="form-control" id="projectGradient" value="linear-gradient(135deg, #667eea, #764ba2)">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Technologies (séparées par virgule)</label>
-                        <input type="text" class="form-control" id="projectTechs" placeholder="ex: Python, TensorFlow, Keras">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Lien (optionnel)</label>
-                        <input type="url" class="form-control" id="projectLink" placeholder="https://github.com/...">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-plus-circle me-2"></i>Ajouter le projet
-                    </button>
-                </form>
+<header class="hero-ml">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="fas fa-brain text-info me-3"></i>Machine Learning & Python
+                </h1>
+                <p class="lead" style="color: var(--accent-green);">
+                    Modèles intelligents, traitement du signal Python, vision par ordinateur et analyse prédictive.
+                </p>
             </div>
         </div>
     </div>
+</header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    
-    <script>
-        const SECRET_CODE = "FL2025ML";
-        const STORAGE_KEY = "ml_projects";
+<!-- SECTION 1 : Projets ML classiques -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Apprentissage Automatique</h2>
+            <div class="section-title-line"></div>
+            <p class="text-muted">Modèles prédictifs, séries temporelles, NLP et classification</p>
+        </div>
+        <div class="row g-4" id="projectsContainer"></div>
+    </div>
+</section>
 
-        const DEFAULT_PROJECTS = [
-            {
-                id: 1,
-                title: "Prédiction LSTM",
-                category: "Séries Temporelles",
-                categoryColor: "primary",
-                description: "Modélisation de flux économiques avec réseaux de neurones récurrents. Précision : 94%.",
-                icon: "fa-chart-line",
-                gradient: "linear-gradient(135deg, #007bff, #00d084)",
-                techs: ["TensorFlow", "Python"],
-                link: "LSTM.py"
-            },
-            {
-                id: 2,
-                title: "Imagerie Médicale",
-                category: "Computer Vision",
-                categoryColor: "danger",
-                description: "Classification de radiographies pulmonaires via architectures CNN (ResNet).",
-                icon: "fa-microscope",
-                gradient: "linear-gradient(135deg, #ff4b2b, #ff416c)",
-                techs: ["PyTorch", "OpenCV"],
-                link: "https://github.com/lachance123-franccois/classification_trash"
-            },
-            {
-                id: 3,
-                title: "Analyse BERT",
-                category: "NLP",
-                categoryColor: "info",
-                description: "Analyse de sentiment multi-classe sur datasets textuels massifs.",
-                icon: "fa-language",
-                gradient: "linear-gradient(135deg, #4b6cb7, #182848)",
-                techs: ["HuggingFace", "BERT"],
-                link: "https://github.com/lachance123-franccois/analyse_bert"
-            },
-            {
-                id: 4,
-                title: "Classification des graines",
-                category: "Computer Vision",
-                categoryColor: "warning",
-                description: "Classification de graines à partir d'images avec réseaux de neurones convolutionnels.",
-                icon: "fa-seedling",
-                gradient: "linear-gradient(135deg, #f093fb, #f5576c)",
-                techs: ["Scikit-Learn", "Pandas"],
-                link: "https://github.com/lachance123-franccois/riceclassification2.0"
-            },
-            {
-                id: 5,
-                title: "Regression Linéaire",
-                category: "Systèmes de Recommandation",
-                categoryColor: "success",
-                description: "Moteur de recommandation basé sur le filtrage collaboratif et la factorisation matricielle.",
-                icon: "fa-users",
-                gradient: "linear-gradient(135deg, #00b09b, #96c93d)",
-                techs: ["Scikit-learn", "ALS"],
-                link: "https://github.com/lachance123-franccois/regression-lineaire"
-            },
-            {
-                id: 6,
-                title: "Prévision Météo",
-                category: "Time Series Forecasting",
-                categoryColor: "secondary",
-                description: "Prédiction de données climatiques avec modèles ARIMA et Prophet.",
-                icon: "fa-cloud-sun",
-                gradient: "linear-gradient(135deg, #56ccf2, #2f80ed)",
-                techs: ["Prophet", "Statsmodels"],
-                link: "https://github.com/lachance123-franccois/pipeline_serie-temporelle"
-            }
-        ];
+<hr class="section-separator">
 
-        let isAuthenticated = false;
-        let projects = [];
+<!-- SECTION 2 : Signal & Vision Python -->
+<section class="py-5" style="background-color: #f0f4f8;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Signal & Vision — Python</h2>
+            <div class="section-title-line"></div>
+            <p class="text-muted">Traitement du signal biomédical, maintenance prédictive, télécoms numériques et vision par ordinateur</p>
+        </div>
 
-        function initProjects() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                const storedProjects = JSON.parse(stored);
-                const storedIds = storedProjects.map(p => p.id);
-                const newDefaults = DEFAULT_PROJECTS.filter(p => !storedIds.includes(p.id));
-                projects = [...storedProjects, ...newDefaults];
-            } else {
-                projects = DEFAULT_PROJECTS;
-            }
-            renderProjects();
-        }
+        <div class="row g-4">
 
-        function renderProjects() {
-            const container = document.getElementById('projectsContainer');
-            container.innerHTML = '';
-
-            projects.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'col-md-6 col-lg-4';
-                card.setAttribute('data-aos', 'fade-up');
-                card.setAttribute('data-aos-delay', index * 100);
-
-                const techBadges = project.techs.map(tech => 
-                    `<span class="tech-badge">${tech}</span>`
-                ).join('');
-
-                card.innerHTML = `
-                    <div class="project-card">
-                        ${isAuthenticated ? `<button class="delete-btn" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i></button>` : ''}
-                        <div class="project-image-placeholder" style="background: ${project.gradient};">
-                            <i class="fas ${project.icon} fa-3x"></i>
-                            <div class="project-overlay">
-                                <a href="${project.link}" target="_blank" class="btn btn-light rounded-pill px-4">
-                                    ${project.link && project.link !== '#' ? 'Voir le code' : 'Détails'}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <small class="text-${project.categoryColor || 'primary'} fw-bold text-uppercase">${project.category}</small>
-                            <h4 class="mt-2">${project.title}</h4>
-                            <p class="text-muted small">${project.description}</p>
-                            <div class="mt-3">${techBadges}</div>
+            <!-- Détection Crises Épileptiques — animation EEG -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="project-card">
+                    <div class="canvas-thumb">
+                        <canvas id="canvas-eeg"></canvas>
+                        <div class="project-overlay">
+                            <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
                         </div>
                     </div>
-                `;
+                    <div class="p-4">
+                        <small class="text-danger fw-bold text-uppercase">Signal Biomédical</small>
+                        <h4 class="mt-2">Détection Crises Épileptiques</h4>
+                        <p class="text-muted small">Chaîne complète de traitement du signal EEG pour la détection automatique de crises via transformée en ondelettes discrètes.</p>
+                        <div class="mt-3">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Ondelettes</span>
+                            <span class="tech-badge">EEG</span>
+                            <span class="tech-badge">DWT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                container.appendChild(card);
+            <!-- Classification Défauts de Roulement — animation vibrations -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card">
+                    <div class="canvas-thumb">
+                        <canvas id="canvas-roulement"></canvas>
+                        <div class="project-overlay">
+                            <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <small class="text-secondary fw-bold text-uppercase">Maintenance Prédictive</small>
+                        <h4 class="mt-2">Classification Défauts de Roulement</h4>
+                        <p class="text-muted small">Détection et classification automatique de défauts mécaniques sur roulements à billes par analyse vibratoire et machine learning.</p>
+                        <div class="mt-3">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                            <span class="tech-badge">Vibration</span>
+                            <span class="tech-badge">Signal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Démodulation QAM-16 — animation constellation -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card">
+                    <div class="canvas-thumb">
+                        <canvas id="canvas-qam"></canvas>
+                        <div class="project-overlay">
+                            <a href="https://github.com/lachance123-franccois/Demodultion-QM16" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <small class="text-danger fw-bold text-uppercase">Télécoms Numériques</small>
+                        <h4 class="mt-2">Démodulation QAM-16</h4>
+                        <p class="text-muted small">Implémentation complète d'une chaîne de démodulation QAM-16 : synchronisation de porteuse, égalisation de canal et analyse du TEB.</p>
+                        <div class="mt-3">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">QAM-16</span>
+                            <span class="tech-badge">DSP</span>
+                            <span class="tech-badge">Télécoms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VisionGuard — animation bounding boxes -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card">
+                    <div class="canvas-thumb">
+                        <canvas id="canvas-vision"></canvas>
+                        <div class="project-overlay">
+                            <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <small class="text-danger fw-bold text-uppercase">Computer Vision</small>
+                        <h4 class="mt-2">VisionGuard</h4>
+                        <p class="text-muted small">Surveillance intelligente par vision par ordinateur : détection d'objets en temps réel avec YOLOv8, interface graphique, overlay FPS et latence.</p>
+                        <div class="mt-3">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">YOLOv8</span>
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">CNN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camera Vision Mini — vidéo réelle (inchangé) -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-card">
+                    <div class="project-video-wrapper">
+                        <video
+                            src="https://raw.githubusercontent.com/lachance123-franccois/cameravisionmini/main/demo.mp4"
+                            autoplay muted loop playsinline
+                            onerror="this.parentElement.innerHTML='<div style=\'height:200px;background:linear-gradient(135deg,#373b44,#f7b733);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;\'><i class=\'fas fa-video\'></i></div>'"
+                        ></video>
+                        <div class="project-overlay">
+                            <a href="https://github.com/lachance123-franccois/cameravisionmini" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <small class="text-warning fw-bold text-uppercase">Embedded Vision</small>
+                        <h4 class="mt-2">Camera Vision Mini</h4>
+                        <p class="text-muted small">Vision temps réel avec OpenCV : détection de personnes, analyse de mouvement, suivi de main et enregistrement automatique des séquences pertinentes.</p>
+                        <div class="mt-3">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">Embarqué</span>
+                            <span class="tech-badge">Temps réel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Stack Technique -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h3 class="text-center fw-bold mb-5">Stack Technique</h3>
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded shadow-sm">
+                    <i class="fab fa-python fa-2x text-primary mb-2"></i>
+                    <h6>Scikit-Learn</h6>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded shadow-sm">
+                    <i class="fas fa-fire fa-2x text-orange mb-2"></i>
+                    <h6>PyTorch</h6>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded shadow-sm">
+                    <i class="fas fa-database fa-2x text-secondary mb-2"></i>
+                    <h6>SQL / Spark</h6>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded shadow-sm">
+                    <i class="fas fa-vial fa-2x text-success mb-2"></i>
+                    <h6>MLOps</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white py-5 mt-5">
+    <div class="container text-center">
+        <p>©️ 2025 François Lachance Awounang-Ngounou</p>
+        <div class="h4">
+            <a href="https://www.linkedin.com/in/fran%C3%A7ois-lachance-awounang-ngounou-7022851b4/" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/lachance123-franccois" class="text-white mx-2"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</footer>
+
+<button class="admin-trigger" id="adminBtn" title="Admin Panel">
+    <i class="fas fa-cog"></i>
+</button>
+
+<div class="admin-modal" id="adminModal">
+    <div class="admin-panel">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold mb-0"><i class="fas fa-shield-alt me-2"></i>Admin Panel</h3>
+            <button class="btn-close" id="closeModal"></button>
+        </div>
+        <div id="authSection">
+            <div class="alert alert-info"><i class="fas fa-lock me-2"></i>Entrez le code secret pour accéder</div>
+            <input type="password" class="form-control mb-3" id="secretCode" placeholder="Code secret">
+            <button class="btn btn-primary w-100" id="unlockBtn">Déverrouiller</button>
+        </div>
+        <div id="projectForm" style="display: none;">
+            <div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Accès autorisé</div>
+            <form id="addProjectForm">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Titre du projet</label>
+                    <input type="text" class="form-control" id="projectTitle" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Catégorie</label>
+                    <input type="text" class="form-control" id="projectCategory" placeholder="ex: Computer Vision">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Description</label>
+                    <textarea class="form-control" id="projectDesc" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Icône (FontAwesome)</label>
+                    <input type="text" class="form-control" id="projectIcon" placeholder="ex: fa-chart-line" value="fa-project-diagram">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Gradient (CSS)</label>
+                    <input type="text" class="form-control" id="projectGradient" value="linear-gradient(135deg, #667eea, #764ba2)">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Technologies (séparées par virgule)</label>
+                    <input type="text" class="form-control" id="projectTechs" placeholder="ex: Python, TensorFlow, Keras">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Lien (optionnel)</label>
+                    <input type="url" class="form-control" id="projectLink" placeholder="https://github.com/...">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-plus-circle me-2"></i>Ajouter le projet
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+// ══════════════════════════════════════════════════════
+// ANIMATION 1 — EEG + détection de crise (canvas-eeg)
+// ══════════════════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('canvas-eeg');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+    let seizureTimer = 0;
+    let inSeizure = false;
+    let seizureDuration = 0;
+
+    function resize() {
+        W = canvas.offsetWidth;
+        H = canvas.offsetHeight;
+        canvas.width  = W;
+        canvas.height = H;
+    }
+
+    function eegSample(t) {
+        if (inSeizure) {
+            // haute fréquence + amplitude pendant la crise
+            return Math.sin(t * 0.5) * 0.3
+                 + Math.sin(t * 1.8) * 0.6
+                 + Math.sin(t * 3.1) * 0.4
+                 + (Math.random() - 0.5) * 0.3;
+        }
+        // signal EEG calme
+        return Math.sin(t * 0.08) * 0.35
+             + Math.sin(t * 0.22) * 0.15
+             + Math.sin(t * 0.55) * 0.08
+             + (Math.random() - 0.5) * 0.05;
+    }
+
+    const buffer = [];
+    const BUFLEN = 300;
+
+    function draw() {
+        resize();
+        // transition crise / normal
+        seizureTimer++;
+        if (!inSeizure && seizureTimer > 140) {
+            inSeizure = true; seizureDuration = 0; seizureTimer = 0;
+        }
+        if (inSeizure) {
+            seizureDuration++;
+            if (seizureDuration > 60) { inSeizure = false; seizureTimer = 0; }
+        }
+
+        buffer.push(eegSample(t));
+        if (buffer.length > BUFLEN) buffer.shift();
+        t += 0.6;
+
+        // fond
+        ctx.fillStyle = '#150a2e';
+        ctx.fillRect(0, 0, W, H);
+
+        // grille légère
+        ctx.strokeStyle = 'rgba(140, 80, 220, 0.12)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < W; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 0; y < H; y += 30) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        // flash rouge si crise
+        if (inSeizure) {
+            const alpha = 0.12 + 0.08 * Math.sin(seizureDuration * 0.4);
+            ctx.fillStyle = `rgba(220, 40, 40, ${alpha})`;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        // tracé EEG
+        const mid = H / 2;
+        const amp = H * 0.32;
+        ctx.beginPath();
+        buffer.forEach((v, i) => {
+            const x = (i / BUFLEN) * W;
+            const y = mid - v * amp;
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        });
+        const lineColor = inSeizure ? '#ff4444' : '#7c3aed';
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 1.8;
+        ctx.shadowColor = lineColor;
+        ctx.shadowBlur = inSeizure ? 10 : 4;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // étiquette
+        if (inSeizure) {
+            ctx.fillStyle = '#ff4444';
+            ctx.font = 'bold 11px Poppins, sans-serif';
+            ctx.fillText('⚡ CRISE DÉTECTÉE', 10, 18);
+        }
+
+        // label canal
+        ctx.fillStyle = 'rgba(180,150,255,0.6)';
+        ctx.font = '10px Poppins, sans-serif';
+        ctx.fillText('EEG — Canal Fp1', 10, H - 8);
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// ANIMATION 2 — Roulement + spectre de vibration (canvas-roulement)
+// ══════════════════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('canvas-roulement');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+    let faultPhase = 0;
+    const FAULT_CYCLE = 200;
+
+    function resize() {
+        W = canvas.offsetWidth; H = canvas.offsetHeight;
+        canvas.width = W; canvas.height = H;
+    }
+
+    // fréquences caractéristiques d'un défaut de roulement
+    function vibration(t, hasFault) {
+        let s = Math.sin(t * 0.12) * 0.2 + Math.sin(t * 0.35) * 0.1 + (Math.random()-0.5)*0.04;
+        if (hasFault) {
+            // impulsion périodique du défaut BPFI
+            const imp = Math.exp(-((t % 18) * (t % 18)) / 4) * 0.9;
+            s += imp + Math.sin(t * 1.1) * 0.3;
+        }
+        return s;
+    }
+
+    const buf = [];
+    const BLEN = 280;
+    let gearAngle = 0;
+
+    function draw() {
+        resize();
+        t++;
+        faultPhase = (faultPhase + 1) % FAULT_CYCLE;
+        const hasFault = faultPhase > FAULT_CYCLE * 0.5;
+
+        buf.push(vibration(t, hasFault));
+        if (buf.length > BLEN) buf.shift();
+
+        gearAngle += hasFault ? 0.035 : 0.018;
+
+        ctx.fillStyle = '#0d1f2d';
+        ctx.fillRect(0, 0, W, H);
+
+        // engrenage animé (côté droit)
+        const cx = W * 0.78, cy = H * 0.45, R = H * 0.28;
+        const teeth = 12;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(gearAngle);
+        ctx.beginPath();
+        for (let i = 0; i < teeth * 2; i++) {
+            const angle = (i / (teeth * 2)) * Math.PI * 2;
+            const r = i % 2 === 0 ? R : R * 0.78;
+            const x = Math.cos(angle) * r, y = Math.sin(angle) * r;
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        const gColor = hasFault ? '#e74c3c' : '#4ca1af';
+        ctx.fillStyle = gColor + '33';
+        ctx.strokeStyle = gColor;
+        ctx.lineWidth = 1.5;
+        ctx.fill(); ctx.stroke();
+        // trou central
+        ctx.beginPath(); ctx.arc(0, 0, R * 0.22, 0, Math.PI * 2);
+        ctx.fillStyle = '#0d1f2d'; ctx.fill();
+        ctx.strokeStyle = gColor; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.restore();
+
+        // signal de vibration (côté gauche)
+        const mid = H * 0.55, amp = H * 0.28;
+        ctx.beginPath();
+        buf.forEach((v, i) => {
+            const x = (i / BLEN) * W * 0.58 + 8;
+            const y = mid - v * amp;
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        });
+        const sc = hasFault ? '#e74c3c' : '#4ca1af';
+        ctx.strokeStyle = sc; ctx.lineWidth = 1.6;
+        ctx.shadowColor = sc; ctx.shadowBlur = 5;
+        ctx.stroke(); ctx.shadowBlur = 0;
+
+        // label état
+        ctx.fillStyle = hasFault ? '#e74c3c' : '#4ca1af';
+        ctx.font = 'bold 10px Poppins, sans-serif';
+        ctx.fillText(hasFault ? '⚠ DÉFAUT BPFI' : '✓ Normal', 10, 16);
+        ctx.fillStyle = 'rgba(150,200,220,0.5)';
+        ctx.font = '9px Poppins, sans-serif';
+        ctx.fillText('Vibration axiale', 10, H - 8);
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// ANIMATION 3 — Constellation QAM-16 (canvas-qam)
+// ══════════════════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('canvas-qam');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+
+    function resize() {
+        W = canvas.offsetWidth; H = canvas.offsetHeight;
+        canvas.width = W; canvas.height = H;
+    }
+
+    // 16 points idéaux de la constellation QAM-16
+    const ideal = [];
+    const levels = [-3, -1, 1, 3];
+    for (const i of levels) for (const q of levels) ideal.push([i, q]);
+
+    // points reçus avec bruit
+    const received = ideal.map(p => ({ x: p[0], y: p[1], vx: 0, vy: 0 }));
+    let noiseLevel = 0.05;
+    let noiseDir = 1;
+
+    function draw() {
+        resize();
+        t++;
+        noiseLevel += noiseDir * 0.003;
+        if (noiseLevel > 0.55 || noiseLevel < 0.04) noiseDir *= -1;
+
+        ctx.fillStyle = '#0a1628';
+        ctx.fillRect(0, 0, W, H);
+
+        const scale = Math.min(W, H) * 0.1;
+        const ox = W / 2, oy = H / 2;
+
+        // axes I/Q
+        ctx.strokeStyle = 'rgba(100,160,255,0.18)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, H); ctx.stroke();
+
+        // grille de décision
+        for (const lv of [-2, 0, 2]) {
+            ctx.strokeStyle = 'rgba(100,160,255,0.08)';
+            ctx.beginPath(); ctx.moveTo(ox + lv * scale, 0); ctx.lineTo(ox + lv * scale, H); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, oy + lv * scale); ctx.lineTo(W, oy + lv * scale); ctx.stroke();
+        }
+
+        // points idéaux (petits)
+        for (const [ix, iy] of ideal) {
+            const px = ox + ix * scale, py = oy - iy * scale;
+            ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(100,180,255,0.3)'; ctx.fill();
+        }
+
+        // points reçus bruités
+        ideal.forEach(([ix, iy], idx) => {
+            const noise = noiseLevel;
+            const rx = ox + (ix + (Math.random()-0.5)*noise*2) * scale;
+            const ry = oy - (iy + (Math.random()-0.5)*noise*2) * scale;
+            ctx.beginPath(); ctx.arc(rx, ry, 3.5, 0, Math.PI * 2);
+            const hue = noiseLevel > 0.3 ? '#ff6b6b' : '#00d084';
+            ctx.fillStyle = hue + 'cc';
+            ctx.shadowColor = hue; ctx.shadowBlur = 6;
+            ctx.fill(); ctx.shadowBlur = 0;
+        });
+
+        // label TEB
+        const teb = (noiseLevel * noiseLevel * 0.5).toFixed(4);
+        ctx.fillStyle = noiseLevel > 0.3 ? '#ff6b6b' : '#00d084';
+        ctx.font = 'bold 10px Poppins, sans-serif';
+        ctx.fillText(`TEB ≈ ${teb}`, 10, 16);
+        ctx.fillStyle = 'rgba(140,180,255,0.5)';
+        ctx.font = '9px Poppins, sans-serif';
+        ctx.fillText('Constellation QAM-16', 10, H - 8);
+
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// ══════════════════════════════════════════════════════
+// ANIMATION 4 — Détection objets / bounding boxes (canvas-vision)
+// ══════════════════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('canvas-vision');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+
+    function resize() {
+        W = canvas.offsetWidth; H = canvas.offsetHeight;
+        canvas.width = W; canvas.height = H;
+    }
+
+    // objets simulés détectés par YOLO
+    const objects = [
+        { label: 'Person',  conf: 0.94, color: '#00d084', x: 0.18, y: 0.22, w: 0.22, h: 0.55, dx: 0.0012, dy: 0 },
+        { label: 'Car',     conf: 0.87, color: '#4fa8d5', x: 0.55, y: 0.42, w: 0.32, h: 0.28, dx:-0.0008, dy: 0 },
+        { label: 'Bicycle', conf: 0.76, color: '#e8a44a', x: 0.70, y: 0.18, w: 0.18, h: 0.35, dx: 0.001,  dy: 0 },
+    ];
+
+    // lignes de scan simulant un flux caméra
+    let scanY = 0;
+
+    function draw() {
+        resize();
+        t++;
+        scanY = (scanY + 1.5) % H;
+
+        // fond "caméra" sombre
+        ctx.fillStyle = '#111820';
+        ctx.fillRect(0, 0, W, H);
+
+        // bruit de fond (grain caméra)
+        const imgData = ctx.getImageData(0, 0, W, H);
+        for (let i = 0; i < 600; i++) {
+            const px = (Math.random() * W | 0) * 4 + (Math.random() * H | 0) * W * 4;
+            const v = Math.random() * 40 | 0;
+            imgData.data[px] = imgData.data[px+1] = imgData.data[px+2] = v;
+            imgData.data[px+3] = 255;
+        }
+        ctx.putImageData(imgData, 0, 0);
+
+        // ligne de scan
+        const grad = ctx.createLinearGradient(0, scanY - 8, 0, scanY + 2);
+        grad.addColorStop(0, 'rgba(0,208,132,0)');
+        grad.addColorStop(1, 'rgba(0,208,132,0.18)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, scanY - 8, W, 10);
+
+        // bounding boxes avec mouvement
+        objects.forEach(obj => {
+            obj.x += obj.dx;
+            if (obj.x < 0 || obj.x + obj.w > 1) obj.dx *= -1;
+
+            const bx = obj.x * W, by = obj.y * H;
+            const bw = obj.w * W, bh = obj.h * H;
+
+            // coin animé (style YOLO)
+            const cs = 10;
+            ctx.strokeStyle = obj.color;
+            ctx.lineWidth = 2;
+            ctx.shadowColor = obj.color; ctx.shadowBlur = 6;
+            // coins
+            [[bx,by],[bx+bw,by],[bx,by+bh],[bx+bw,by+bh]].forEach(([cx,cy],i) => {
+                ctx.beginPath();
+                const sx = i%2===0?1:-1, sy = i<2?1:-1;
+                ctx.moveTo(cx, cy + sy*cs); ctx.lineTo(cx,cy); ctx.lineTo(cx+sx*cs,cy);
+                ctx.stroke();
             });
+            ctx.shadowBlur = 0;
 
-            AOS.refresh();
-        }
-
-        function deleteProject(id) {
-            if (!confirm('Supprimer ce projet ?')) return;
-            projects = projects.filter(p => p.id !== id);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-            renderProjects();
-        }
-
-        const adminBtn = document.getElementById('adminBtn');
-        const adminModal = document.getElementById('adminModal');
-        const closeModal = document.getElementById('closeModal');
-        const unlockBtn = document.getElementById('unlockBtn');
-        const secretCodeInput = document.getElementById('secretCode');
-        const authSection = document.getElementById('authSection');
-        const projectForm = document.getElementById('projectForm');
-
-        adminBtn.addEventListener('click', () => { adminModal.classList.add('active'); });
-        closeModal.addEventListener('click', () => { adminModal.classList.remove('active'); });
-        adminModal.addEventListener('click', (e) => {
-            if (e.target === adminModal) { adminModal.classList.remove('active'); }
+            // étiquette
+            ctx.fillStyle = obj.color;
+            ctx.font = 'bold 10px Poppins, sans-serif';
+            ctx.fillText(`${obj.label} ${(obj.conf*100).toFixed(0)}%`, bx + 4, by - 4);
         });
 
-        unlockBtn.addEventListener('click', () => {
-            if (secretCodeInput.value === SECRET_CODE) {
-                isAuthenticated = true;
-                authSection.style.display = 'none';
-                projectForm.style.display = 'block';
-                renderProjects();
-            } else {
-                alert('❌ Code incorrect !');
-                secretCodeInput.value = '';
-            }
-        });
+        // overlay FPS
+        ctx.fillStyle = 'rgba(0,208,132,0.8)';
+        ctx.font = 'bold 10px monospace';
+        ctx.fillText(`FPS: ${24 + (t%6 | 0)}  |  YOLOv8n`, W - 130, H - 8);
 
-        document.getElementById('addProjectForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
 
-            const newProject = {
-                id: Date.now(),
-                title: document.getElementById('projectTitle').value,
-                category: document.getElementById('projectCategory').value,
-                categoryColor: 'primary',
-                description: document.getElementById('projectDesc').value,
-                icon: document.getElementById('projectIcon').value,
-                gradient: document.getElementById('projectGradient').value,
-                techs: document.getElementById('projectTechs').value.split(',').map(t => t.trim()),
-                link: document.getElementById('projectLink').value || '#'
-            };
+// ══════════════════════════════════════════════════════
+// ADMIN + PROJETS ML (inchangé)
+// ══════════════════════════════════════════════════════
+const SECRET_CODE = "FL2025ML";
+const STORAGE_KEY = "ml_projects";
 
-            projects.push(newProject);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-            renderProjects();
+const DEFAULT_PROJECTS = [
+    { id:1, title:"Prédiction LSTM", category:"Séries Temporelles", categoryColor:"primary", description:"Modélisation de flux économiques avec réseaux de neurones récurrents. Précision : 94%.", icon:"fa-chart-line", gradient:"linear-gradient(135deg, #007bff, #00d084)", techs:["TensorFlow","Python"], link:"LSTM.py" },
+    { id:2, title:"Imagerie Médicale", category:"Computer Vision", categoryColor:"danger", description:"Classification de radiographies pulmonaires via architectures CNN (ResNet).", icon:"fa-microscope", gradient:"linear-gradient(135deg, #ff4b2b, #ff416c)", techs:["PyTorch","OpenCV"], link:"https://github.com/lachance123-franccois/classification_trash" },
+    { id:3, title:"Analyse BERT", category:"NLP", categoryColor:"info", description:"Analyse de sentiment multi-classe sur datasets textuels massifs.", icon:"fa-language", gradient:"linear-gradient(135deg, #4b6cb7, #182848)", techs:["HuggingFace","BERT"], link:"https://github.com/lachance123-franccois/analyse_bert" },
+    { id:4, title:"Classification des graines", category:"Computer Vision", categoryColor:"warning", description:"Classification de graines à partir d'images avec réseaux de neurones convolutionnels.", icon:"fa-seedling", gradient:"linear-gradient(135deg, #f093fb, #f5576c)", techs:["Scikit-Learn","Pandas"], link:"https://github.com/lachance123-franccois/riceclassification2.0" },
+    { id:5, title:"Regression Linéaire", category:"Systèmes de Recommandation", categoryColor:"success", description:"Moteur de recommandation basé sur le filtrage collaboratif et la factorisation matricielle.", icon:"fa-users", gradient:"linear-gradient(135deg, #00b09b, #96c93d)", techs:["Scikit-learn","ALS"], link:"https://github.com/lachance123-franccois/regression-lineaire" },
+    { id:6, title:"Prévision Météo", category:"Time Series Forecasting", categoryColor:"secondary", description:"Prédiction de données climatiques avec modèles ARIMA et Prophet.", icon:"fa-cloud-sun", gradient:"linear-gradient(135deg, #56ccf2, #2f80ed)", techs:["Prophet","Statsmodels"], link:"https://github.com/lachance123-franccois/pipeline_serie-temporelle" }
+];
 
-            e.target.reset();
-            adminModal.classList.remove('active');
-            alert('✅ Projet ajouté avec succès !');
-        });
+let isAuthenticated = false;
+let projects = [];
 
-        AOS.init({ duration: 800, once: true });
-        initProjects();
-    </script>
+function initProjects() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+        const sp = JSON.parse(stored);
+        const ids = sp.map(p => p.id);
+        projects = [...sp, ...DEFAULT_PROJECTS.filter(p => !ids.includes(p.id))];
+    } else {
+        projects = DEFAULT_PROJECTS;
+    }
+    renderProjects();
+}
+
+function renderProjects() {
+    const container = document.getElementById('projectsContainer');
+    container.innerHTML = '';
+    projects.forEach((project, index) => {
+        const card = document.createElement('div');
+        card.className = 'col-md-6 col-lg-4';
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', index * 100);
+        const techBadges = project.techs.map(t => `<span class="tech-badge">${t}</span>`).join('');
+        card.innerHTML = `
+            <div class="project-card">
+                ${isAuthenticated ? `<button class="delete-btn" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i></button>` : ''}
+                <div class="project-image-placeholder" style="background: ${project.gradient};">
+                    <i class="fas ${project.icon} fa-3x"></i>
+                    <div class="project-overlay">
+                        <a href="${project.link}" target="_blank" class="btn btn-light rounded-pill px-4">
+                            ${project.link && project.link !== '#' ? 'Voir le code' : 'Détails'}
+                        </a>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <small class="text-${project.categoryColor||'primary'} fw-bold text-uppercase">${project.category}</small>
+                    <h4 class="mt-2">${project.title}</h4>
+                    <p class="text-muted small">${project.description}</p>
+                    <div class="mt-3">${techBadges}</div>
+                </div>
+            </div>`;
+        container.appendChild(card);
+    });
+    AOS.refresh();
+}
+
+function deleteProject(id) {
+    if (!confirm('Supprimer ce projet ?')) return;
+    projects = projects.filter(p => p.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    renderProjects();
+}
+
+const adminBtn   = document.getElementById('adminBtn');
+const adminModal = document.getElementById('adminModal');
+const closeModal = document.getElementById('closeModal');
+const unlockBtn  = document.getElementById('unlockBtn');
+const secretCodeInput = document.getElementById('secretCode');
+const authSection     = document.getElementById('authSection');
+const projectForm     = document.getElementById('projectForm');
+
+adminBtn.addEventListener('click', () => adminModal.classList.add('active'));
+closeModal.addEventListener('click', () => adminModal.classList.remove('active'));
+adminModal.addEventListener('click', e => { if (e.target === adminModal) adminModal.classList.remove('active'); });
+
+unlockBtn.addEventListener('click', () => {
+    if (secretCodeInput.value === SECRET_CODE) {
+        isAuthenticated = true;
+        authSection.style.display = 'none';
+        projectForm.style.display = 'block';
+        renderProjects();
+    } else {
+        alert('❌ Code incorrect !');
+        secretCodeInput.value = '';
+    }
+});
+
+document.getElementById('addProjectForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const newProject = {
+        id: Date.now(),
+        title:         document.getElementById('projectTitle').value,
+        category:      document.getElementById('projectCategory').value,
+        categoryColor: 'primary',
+        description:   document.getElementById('projectDesc').value,
+        icon:          document.getElementById('projectIcon').value,
+        gradient:      document.getElementById('projectGradient').value,
+        techs:         document.getElementById('projectTechs').value.split(',').map(t => t.trim()),
+        link:          document.getElementById('projectLink').value || '#'
+    };
+    projects.push(newProject);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    renderProjects();
+    e.target.reset();
+    adminModal.classList.remove('active');
+    alert('✅ Projet ajouté avec succès !');
+});
+
+AOS.init({ duration: 800, once: true });
+initProjects();
+</script>
+```
+
 </body>
 </html>
