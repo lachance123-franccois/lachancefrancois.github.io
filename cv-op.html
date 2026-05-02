@@ -3,84 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CV de François Lachance - Ingénieur Polytechnicien & Master 1 Signal, Image & ML">
-    <title>Mon CV | François Lachance A.N</title>
+    <meta name="description" content="CV de François Lachance - Ingénieur IA & Traitement du Signal, Master EEA-SIA2">
+    <meta name="keywords" content="CV, François Lachance, Ingénieur, IA, Traitement Signal, Toulouse">
+    <meta name="author" content="François Lachance">
+    <meta property="og:title" content="François Lachance - CV">
+    <meta property="og:description" content="Curriculum Vitae de François Lachance, ingénieur spécialisé en IA et traitement du signal">
+    <meta property="og:type" content="website">
+    <title>CV | François Lachance - Ingénieur IA & Signal</title>
     
-    <!-- Preconnect pour optimiser le chargement des fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Fonts avec display=swap pour éviter FOIT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- CSS critiques inline pour améliorer FCP -->
     <style>
+        /* ===== COULEURS DU PORTFOLIO ===== */
         :root {
-            --navy-deep: #0a192f;
-            --sky-blue: #e3f2fd;
+            --navy:        #0b1d35;
+            --navy-mid:    #142b4e;
+            --navy-soft:   #1c3a63;
+            --accent:      #4fa8d5;
+            --accent-warm: #e8a44a;
+            --text-main:   #1a2535;
+            --text-muted:  #5e7898;
+            --surface:     #ffffff;
+            --surface-2:   #f4f7fb;
+            --border:      rgba(11,29,53,0.08);
+            --shadow-sm:   0 2px 8px rgba(11,29,53,0.07);
+            --shadow-md:   0 6px 20px rgba(11,29,53,0.12);
+            --shadow-lg:   0 16px 40px rgba(11,29,53,0.16);
+            --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: #f8f9fa;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-main:   #dde8f5;
+                --text-muted:  #8bacc8;
+                --surface:     #0d1a2d;
+                --surface-2:   #0b1d35;
+                --border:      rgba(79,168,213,0.1);
+                --shadow-sm:   0 2px 8px rgba(0,0,0,0.4);
+                --shadow-md:   0 6px 20px rgba(0,0,0,0.5);
+                --shadow-lg:   0 16px 40px rgba(0,0,0,0.6);
+            }
+            body { background: #0a1628; color: var(--text-main); }
+            .cv-container { background: var(--surface) !important; }
+            .btn-download { background: var(--accent); color: var(--navy); }
+            .btn-download:hover { background: var(--accent-warm); color: var(--navy); }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--surface-2);
         }
 
-        /* Navigation optimisée */
+        /* ── NAVBAR (identique portfolio) ── */
         .navbar {
-            background-color: #343a40 !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--navy) !important;
+            box-shadow: var(--shadow-md);
+            transition: padding 0.3s var(--ease);
+            padding: 1rem 0;
         }
-
-        .navbar-brand { font-weight: 600; }
+        .navbar.scrolled { padding: 0.5rem 0; }
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem; font-weight: 800;
+            letter-spacing: -0.5px;
+            transition: 0.3s var(--ease);
+        }
+        .navbar-brand:hover { transform: translateY(-2px); }
+        .brand-icon { color: var(--accent); }
+        .nav-link {
+            position: relative; padding: 0.5rem 1rem !important;
+            font-weight: 500; font-size: 0.9rem;
+            transition: 0.3s var(--ease);
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 2px; background: var(--accent);
+            transition: 0.3s var(--ease); transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
 
         /* Header CV */
         .cv-header {
-            background: linear-gradient(180deg, #ffffff 0%, var(--sky-blue) 100%);
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
             padding: 4rem 0 3rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
         }
 
-        /* Conteneur PDF optimisé */
+        .cv-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-header .lead {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Conteneur PDF */
         .cv-container {
-            background: white;
-            border-radius: 15px;
+            background: var(--surface);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
             margin-top: -30px;
             position: relative;
             z-index: 10;
+            border: 1px solid var(--border);
         }
 
-        /* PDF Viewer avec aspect-ratio pour éviter CLS */
+        /* Wrapper avec ratio A4 pour éviter CLS */
         .pdf-wrapper {
             width: 100%;
-            aspect-ratio: 8.5 / 11; /* Ratio A4 standard */
+            aspect-ratio: 8.5 / 11; /* Rapport A4 */
             max-height: 900px;
             position: relative;
+            background: var(--surface-2);
         }
 
         .pdf-viewer {
             width: 100%;
             height: 100%;
             border: none;
+            background: transparent;
         }
 
-        /* Loader pendant chargement du PDF */
+        /* Loader */
         .pdf-loader {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            z-index: 1;
+            z-index: 2;
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
         }
 
         .spinner {
-            border: 4px solid var(--sky-blue);
-            border-top: 4px solid var(--navy-deep);
+            border: 4px solid rgba(79,168,213,0.2);
+            border-top: 4px solid var(--accent);
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -93,120 +169,130 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Fallback mobile-friendly */
+        /* Fallback */
         .pdf-fallback {
             padding: 3rem 2rem;
             text-align: center;
+            background: var(--surface);
+            border-radius: 16px;
         }
 
         /* Bouton téléchargement */
         .btn-download {
-            background-color: var(--navy-deep);
+            background-color: var(--navy);
             color: white;
             border-radius: 30px;
-            padding: 12px 30px;
+            padding: 0.75rem 2rem;
             border: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s var(--ease);
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-download:hover {
+            background-color: var(--navy-soft);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(10, 25, 47, 0.3);
-            color: var(--sky-blue);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+
+        /* Footer (identique portfolio) */
+        footer {
+            background: var(--navy);
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(90deg, var(--navy-soft), var(--accent), var(--accent-warm)) 1;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; }
+        .social-links a {
+            width: 42px; height: 42px; display: inline-flex; align-items: center;
+            justify-content: center; background: rgba(255,255,255,0.08);
+            border-radius: 12px; transition: all 0.3s var(--ease);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .social-links a:hover {
+            background: var(--accent); color: var(--navy) !important;
+            transform: translateY(-4px); border-color: var(--accent);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .cv-header { padding: 3rem 0 2rem; }
+            .cv-header { padding: 2rem 0; }
             .pdf-wrapper { aspect-ratio: 1 / 1.4; max-height: 600px; }
+            .btn-download { padding: 0.6rem 1.5rem; font-size: 0.9rem; }
         }
-
-        /* Footer */
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        /* Utilitaires */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        .text-center { text-align: center; }
-        .text-muted { color: #6c757d; }
-        .fw-bold { font-weight: 600; }
-        .mt-3 { margin-top: 1rem; }
-        .mb-3 { margin-bottom: 1rem; }
-        .py-5 { padding: 3rem 0; }
     </style>
-    
-    <!-- Bootstrap & FontAwesome chargés de façon asynchrone -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <!-- NAVBAR (identique portfolio) -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html" aria-label="Retour à l'accueil">
-                <i class="fas fa-code me-2 text-info" aria-hidden="true"></i>François Lachance 
+            <a class="navbar-brand fw-bold" href="index.html" aria-label="Retour à l'accueil">
+                <span class="brand-icon me-2"><i class="fas fa-code"></i></span>
+                François Lachance
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-bold" href="cv-op.html" aria-current="page">Mon CV</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">IA & ML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="matlab.html">Traitement Signal & Image</a></li>
+                    <li class="nav-item"><a class="nav-link" href="web.html">Automatisme</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academic/contratdevie.html">Academic Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cv-op.html">Mon CV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="docsNavLink" aria-label="Documents">
+                            <i class="fas fa-lock me-1" style="font-size:0.75rem;opacity:0.7;"></i>
+                            Documents
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="cv-header text-center">
+    <!-- HEADER CV -->
+    <header class="cv-header">
         <div class="container">
-            <h1 class="display-5 fw-bold">Curriculum Vitae</h1>
-            <p class="lead text-muted">Ingénieur Polytechnicien & Master 1 Signal, Image & ML</p>
-            
-            <a href="assets/pdf/CV_Francois_Lachance1.pdf" download="CV_Francois_Lachance1.pdf" class="btn btn-download mt-3" aria-label="Télécharger le CV en PDF">
-                <i class="fas fa-file-download me-2" aria-hidden="true"></i>Télécharger le PDF
+            <h1>Curriculum Vitae</h1>
+            <p class="lead">Ingénieur en Intelligence Artificielle & Traitement du Signal</p>
+            <a href="assets/pdf/CV_Francois_Lachance1.pdf" download="CV_Francois_Lachance1.pdf" class="btn-download mt-3">
+                <i class="fas fa-file-download"></i> Télécharger le PDF
             </a>
         </div>
     </header>
 
-    <!-- Contenu principal -->
-    <main class="container py-5">
+    <!-- CONTENEUR PDF -->
+    <main class="container py-4">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="cv-container">
-                    
-                    <!-- Loader pendant chargement -->
                     <div class="pdf-loader" id="pdfLoader">
                         <div class="spinner"></div>
                         <p class="text-muted">Chargement du CV...</p>
                     </div>
-
-                    <!-- Wrapper pour maintenir le ratio -->
                     <div class="pdf-wrapper">
-                        <object id="pdfObject" 
-                                data="assets/pdf/CV_Francois_Lachance1.pdf" 
-                                type="application/pdf" 
+                        <object id="pdfObject"
+                                data="assets/pdf/CV_Francois_Lachance1.pdf"
+                                type="application/pdf"
                                 class="pdf-viewer"
-                                aria-label="CV de François Lachance"
                                 style="display: none;">
-                            
-                            <!-- Fallback si le PDF ne charge pas -->
                             <div class="pdf-fallback">
-                                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3" aria-hidden="true"></i>
-                                <h2 class="fw-bold h4 mb-3">Impossible d'afficher le CV</h2>
-                                <p class="text-muted mb-4">Votre navigateur ne supporte pas l'affichage des PDF intégrés.</p>
-                                <a href="assets/pdf/CV_Francois_Lachance1.pdf" class="btn btn-download" target="_blank" rel="noopener noreferrer">
-                                    <i class="fas fa-external-link-alt me-2" aria-hidden="true"></i>Ouvrir le PDF
+                                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                                <h2 class="h4 fw-bold mb-3">Aperçu non disponible</h2>
+                                <p class="text-muted mb-4">Votre navigateur ne peut pas afficher le PDF intégré.</p>
+                                <a href="assets/pdf/CV_Francois_Lachance1.pdf" class="btn-download" target="_blank" rel="noopener">
+                                    <i class="fas fa-external-link-alt"></i> Ouvrir le PDF
                                 </a>
                             </div>
                         </object>
@@ -216,60 +302,81 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="container">
-            <small>&copy; 2025 François Lachance Awounang-Ngounou. Tous droits réservés.</small>
+    <!-- FOOTER (identique portfolio) -->
+    <footer>
+        <div class="container text-center text-white">
+            <p class="mb-1 fw-600" style="font-family:'Poppins',sans-serif; font-weight:700;">&copy; 2025 François Lachance Awounang-Ngounou</p>
+            <p class="small" style="color:rgba(255,255,255,0.45);">Ingénieur GESI & Computer Vision | Toulouse, France</p>
+            <nav class="social-links" aria-label="Réseaux sociaux">
+                <a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+                <a href="https://github.com/lachance123-francois" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="mailto:lachanceaeounang@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope fa-lg"></i>
+                </a>
+            </nav>
         </div>
     </footer>
 
-    <!-- Script optimisé -->
+    <!-- Script de chargement PDF + navbar scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Navbar scroll effect
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    document.getElementById('mainNavbar').classList.toggle('scrolled', window.scrollY > 50);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
         // Gestion du chargement du PDF
         (function() {
             const pdfObject = document.getElementById('pdfObject');
             const loader = document.getElementById('pdfLoader');
             const pdfPath = 'assets/pdf/CV_Francois_Lachance1.pdf';
 
-            // Vérifier si le PDF existe
+            function showFallback() {
+                if (loader) loader.style.display = 'none';
+                if (pdfObject) {
+                    pdfObject.style.display = 'none';
+                    const fallbackDiv = pdfObject.querySelector('.pdf-fallback');
+                    if (fallbackDiv) {
+                        pdfObject.insertAdjacentHTML('afterend', fallbackDiv.outerHTML);
+                    }
+                }
+            }
+
+            // Vérification existence du PDF
             fetch(pdfPath, { method: 'HEAD' })
                 .then(response => {
                     if (response.ok) {
-                        // PDF trouvé - afficher l'object
                         pdfObject.style.display = 'block';
                         loader.style.display = 'none';
-                        
-                        // Cacher le loader après chargement complet
                         pdfObject.addEventListener('load', () => {
                             loader.style.display = 'none';
                         });
                     } else {
-                        // PDF non trouvé - afficher le fallback
                         showFallback();
                     }
                 })
                 .catch(() => {
-                    // Erreur réseau - afficher le fallback
                     showFallback();
                 });
 
-            function showFallback() {
-                loader.style.display = 'none';
-                pdfObject.style.display = 'none';
-                pdfObject.insertAdjacentHTML('afterend', pdfObject.querySelector('.pdf-fallback').outerHTML);
-            }
-
-            // Timeout de sécurité (5 secondes)
+            // Timeout sécurité (5s)
             setTimeout(() => {
-                if (loader.style.display !== 'none') {
-                    loader.innerHTML = '<p class="text-muted">Le chargement prend plus de temps que prévu...</p>';
+                if (loader && loader.style.display !== 'none') {
+                    loader.innerHTML = '<p class="text-muted">Chargement lent... Le PDF s\'affichera sous peu.</p>';
                 }
             }, 5000);
         })();
     </script>
-
-    <!-- Bootstrap JS (déféré pour ne pas bloquer le rendu) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
-
 </body>
 </html>
