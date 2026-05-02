@@ -75,6 +75,31 @@
             transition: opacity 0.3s;
         }
         .project-grid-card:hover .overlay-link { opacity: 1; }
+
+        /* ── Lecteur vidéo carte ── */
+        .card-video-wrapper {
+            height: 160px;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+        .card-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .card-video-wrapper .overlay-link {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .project-grid-card:hover .card-video-wrapper .overlay-link { opacity: 1; }
         .tech-tag {
             display: inline-block;
             background: #e9ecef;
@@ -210,11 +235,18 @@
 
             <div class="row g-4 justify-content-center">
 
-                <!-- Jeu de balle FFT -->
+                <!-- ── Jeu de balle FFT — VIDÉO ── -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up">
                     <div class="project-grid-card">
-                        <div class="card-img-top-placeholder" style="background: linear-gradient(135deg, #f7971e, #ffd200);">
-                            <i class="fas fa-wave-square"></i>
+                        <div class="card-video-wrapper">
+                            <video
+                                src="https://raw.githubusercontent.com/lachance123-franccois/jeu-de-balle/main/demo.mp4"
+                                autoplay
+                                muted
+                                loop
+                                playsinline
+                                onerror="this.parentElement.innerHTML='<div style=\'height:160px;background:linear-gradient(135deg,#f7971e,#ffd200);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;\'><i class=\'fas fa-wave-square\'></i></div>'"
+                            ></video>
                             <div class="overlay-link">
                                 <a href="https://github.com/lachance123-franccois/jeu-de-balle" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a>
                             </div>
