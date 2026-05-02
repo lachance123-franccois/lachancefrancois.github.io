@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Architecture technique du système de veille académique Academic Tracker - Scraping intelligent, notifications automatisées et dashboard React">
+    <meta name="author" content="François Lachance">
+    <title>Academic Tracker - Architecture Technique</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 50%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(0, 255, 157, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 184, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.04) 0%, transparent 50%);
+            animation: bgPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-radius: 100px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #00ff9d;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff9d 0%, #00b8ff 50%, #ff00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a0a0c0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .version-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.25rem 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 1rem;
+        }
+
+        /* Section headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00ff9d;
+        }
+
+        .section-subtitle {
+            color: #888;
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+
+        /* Workflow */
+        .workflow {
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 255, 157, 0.15);
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 180px;
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #2d2d44;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.15);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00ff9d, #00b8ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0a0a0f;
+            margin: 0 auto 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .step-desc {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .step-arrow {
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff9d;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .step-arrow { display: none; }
+            .flow-steps { flex-direction: column; }
+        }
+
+        /* Architecture Grid */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .layer {
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 157, 0.15);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .layer:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 255, 157, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .layer-header {
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.1), rgba(0, 184, 255, 0.05));
+            border-bottom: 1px solid rgba(0, 255, 157, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .layer-header i {
+            font-size: 1.5rem;
+            color: #00ff9d;
+        }
+
+        .layer-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .layer-header span {
+            margin-left: auto;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff9d;
+            opacity: 0.7;
+        }
+
+        .components {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .component {
+            background: rgba(30, 30, 56, 0.8);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid #00ff9d;
+        }
+
+        .component:hover {
+            background: rgba(40, 40, 70, 0.9);
+            transform: translateX(5px);
+        }
+
+        .component-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-icon {
+            font-size: 1.2rem;
+        }
+
+        .component-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .component-desc {
+            font-size: 0.8rem;
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            padding-left: 1.9rem;
+        }
+
+        .component-tech {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border-radius: 8px;
+            padding: 0.25rem 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #00ff9d;
+            margin-left: 1.9rem;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+            background: rgba(0, 255, 157, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00ff9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 157, 0.15);
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 100px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(0, 255, 157, 0.2);
+            transform: translateY(-2px);
+            border-color: #00ff9d;
+        }
+
+        /* Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: rgba(22, 22, 42, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 157, 0.15);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff9d;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #00ff9d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-subtitle {
+                display: none;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00ff9d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-badge">
+                <i class="fas fa-cube"></i>
+                <span>SYSTEM ARCHITECTURE</span>
+            </div>
+            <h1>Academic Tracker</h1>
+            <p class="subtitle">Système de veille académique automatisé pour Toulouse</p>
+            <div class="version-tag">v2.0.0 | Production Ready</div>
+        </div>
+
+        <!-- Workflow -->
+        <div class="workflow">
+            <div class="section-header">
+                <i class="fas fa-chart-line section-icon"></i>
+                <h2 class="section-title">Workflow Quotidien</h2>
+                <span class="section-subtitle">Automatisation complète via GitHub Actions</span>
+            </div>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Trigger GitHub Actions</div>
+                    <div class="step-desc">Déclenchement quotidien à 7h UTC<br>(8h Paris)</div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Scraping Multi-Sources</div>
+                    <div class="step-desc">CROUS · ABG · theses.fr · ADUM<br>Labos IRIT/LAAS/TéSA</div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Filtrage Intelligent</div>
+                    <div class="step-desc">30+ mots-clés · Toulouse uniquement<br>Score de pertinence min. 70%</div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Base de Données</div>
+                    <div class="step-desc">SQLite · Déduplication<br>Hachage SHA-256 · Historique 90j</div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Notification Email</div>
+                    <div class="step-desc">Template HTML premium<br>Uniquement les nouvelles offres</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Grid -->
+        <div class="section-header">
+            <i class="fas fa-cubes section-icon"></i>
+            <h2 class="section-title">Architecture Système</h2>
+            <span class="section-subtitle">5 couches interconnectées</span>
+        </div>
+
+        <div class="architecture-grid">
+            <!-- Layer 1: Scrapers -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-spider"></i>
+                    <h3>🔍 Scrapers</h3>
+                    <span>Collecte de données</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🏠</span>
+                            <span class="component-name">CROUS Housing Scraper</span>
+                        </div>
+                        <div class="component-desc">Logements étudiants · Prix ≤600€ · Zone Toulouse · Rotation user-agents</div>
+                        <div class="component-tech"><i class="fab fa-python"></i> requests · BeautifulSoup</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🎓</span>
+                            <span class="component-name">PhD Thesis Scraper</span>
+                        </div>
+                        <div class="component-desc">Thèses en IA · Signal · Image · Télécoms · Sources: ABG, theses.fr, ADUM</div>
+                        <div class="component-tech"><i class="fab fa-python"></i> requests · BeautifulSoup · JSON</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">💼</span>
+                            <span class="component-name">Internship Scraper</span>
+                        </div>
+                        <div class="component-desc">Stages M2/Ingénieur · Filtrage par mots-clés · Entreprises toulousaines</div>
+                        <div class="component-tech"><i class="fab fa-python"></i> requests · regex · caching</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Data -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-database"></i>
+                    <h3>💾 Gestion des Données</h3>
+                    <span>Stockage & déduplication</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🗄️</span>
+                            <span class="component-name">Database Manager</span>
+                        </div>
+                        <div class="component-desc">SQLite · 3 tables · Indexation · Cleanup automatique (90 jours)</div>
+                        <div class="component-tech"><i class="fas fa-database"></i> SQLite3 · logging</div>
+                    </div>
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🔄</span>
+                            <span class="component-name">Main Orchestrator</span>
+                        </div>
+                        <div class="component-desc">Coordination des scrapers · Gestion erreurs · Logs détaillés</div>
+                        <div class="component-tech"><i class="fab fa-python"></i> argparse · json · datetime</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Notifications -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-envelope"></i>
+                    <h3>📧 Notifications</h3>
+                    <span>Alertes quotidiennes</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">✉️</span>
+                            <span class="component-name">Email Notifier</span>
+                        </div>
+                        <div class="component-desc">Template HTML premium · Design futuriste · Statistiques visuelles · Liens directs</div>
+                        <div class="component-tech"><i class="fas fa-envelope"></i> SMTP · MIME · HTML/CSS</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 4: Frontend -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>🎨 Interface Utilisateur</h3>
+                    <span>Dashboard React</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">📊</span>
+                            <span class="component-name">Research Command Center</span>
+                        </div>
+                        <div class="component-desc">Statistiques temps réel · Navigation par onglets · Design ultra-stylé</div>
+                        <div class="component-tech"><i class="fab fa-react"></i> React · CSS3 · Chart.js</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 5: Automation -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-rocket"></i>
+                    <h3>⚙️ Automatisation</h3>
+                    <span>CI/CD</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🤖</span>
+                            <span class="component-name">GitHub Actions</span>
+                        </div>
+                        <div class="component-desc">Exécution quotidienne · Commit auto · Nettoyage hebdomadaire</div>
+                        <div class="component-tech"><i class="fab fa-github"></i> YAML workflow · cron</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 6: Stealth -->
+            <div class="layer">
+                <div class="layer-header">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>🕵️ Anti-Détection</h3>
+                    <span>Stealth Mode</span>
+                </div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-header">
+                            <span class="component-icon">🎭</span>
+                            <span class="component-name">Stealth Utils</span>
+                        </div>
+                        <div class="component-desc">Rotation user-agents · Délais aléatoires · Cache persistant · Rate limiting éthique</div>
+                        <div class="component-tech"><i class="fab fa-python"></i> random · time · hashlib</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="section-header">
+            <i class="fas fa-star section-icon"></i>
+            <h2 class="section-title">Fonctionnalités Clés</h2>
+            <span class="section-subtitle">Ce qui rend le système unique</span>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Filtrage Intelligent</div>
+                <div class="feature-desc">Focus automatique sur image, vidéo, signal, télécommunications et domaines connexes avec 30+ mots-clés</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚫</div>
+                <div class="feature-title">Déduplication</div>
+                <div class="feature-desc">Détection et suppression automatique des offres en double via hachage SHA-256 du contenu</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Statistiques</div>
+                <div class="feature-desc">Tracking complet avec historique, nombre d'offres, durée des scraping et taux de réussite</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <div class="feature-title">Notifications Ciblées</div>
+                <div class="feature-desc">Email uniquement pour les nouvelles offres, pas de spam avec les anciennes déjà notifiées</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧹</div>
+                <div class="feature-title">Auto-Nettoyage</div>
+                <div class="feature-desc">Suppression automatique des offres de plus de 90 jours pour garder la base propre</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Performance</div>
+                <div class="feature-desc">Cache intelligent, rate limiting et gestion d'erreurs pour un scraping rapide et fiable</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕵️</div>
+                <div class="feature-title">Mode Stealth</div>
+                <div class="feature-desc">Rotation d'user-agents + délais aléatoires pour éviter les blocages</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <div class="feature-title">PWA Ready</div>
+                <div class="feature-desc">Installable sur mobile, fonctionnement hors-ligne, notifications push</div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="tech-stack">
+            <div class="section-header" style="justify-content: center; border-bottom: none; margin-bottom: 0;">
+                <i class="fas fa-code"></i>
+                <h2 class="section-title">Stack Technique</h2>
+            </div>
+            <div class="tech-badges">
+                <span class="tech-badge"><i class="fab fa-python"></i> Python 3.11+</span>
+                <span class="tech-badge"><i class="fas fa-database"></i> SQLite</span>
+                <span class="tech-badge"><i class="fab fa-react"></i> React</span>
+                <span class="tech-badge"><i class="fab fa-html5"></i> HTML5</span>
+                <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+                <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="tech-badge"><i class="fab fa-github"></i> GitHub Actions</span>
+                <span class="tech-badge"><i class="fas fa-envelope"></i> SMTP</span>
+                <span class="tech-badge"><i class="fas fa-shield-alt"></i> SHA-256</span>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="section-header">
+            <i class="fas fa-chart-simple section-icon"></i>
+            <h2 class="section-title">Métriques Système</h2>
+            <span class="section-subtitle">Performance en production</span>
+        </div>
+
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value">~30s</div>
+                <div class="metric-label">Temps moyen d'exécution</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">15+</div>
+                <div class="metric-label">Sources scrapées</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">Uptime (GitHub Actions)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">90j</div>
+                <div class="metric-label">Rétention données</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2025 François Lachance - Academic Tracker</p>
+            <div class="footer-links">
+                <a href="contratdevie.html"><i class="fas fa-tachometer-alt"></i> Accéder au Tracker</a>
+                <a href="https://github.com/lachance123-francois/academic-tracker" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <a href="ARCHITECTURE.html"><i class="fas fa-cube"></i> Documentation</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
