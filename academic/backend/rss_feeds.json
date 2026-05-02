@@ -1,0 +1,23 @@
+{
+  "phd": [
+    {
+      "name": "ABG - Thèses Informatique",
+      "url": "https://www.abg.asso.fr/fr/actualites/feed/theses"
+    },
+    {
+      "name": "EURAXESS - France",
+      "url": "https://euraxess.ec.europa.eu/jobs/feed/173"
+    }
+  ],
+  "internship": [
+    {
+      "name": "ABG - Stages",
+      "url": "https://www.abg.asso.fr/fr/actualites/feed/stages"
+    },
+    {
+      "name": "Welcome To The Jungle",
+      "url": "https://www.welcometothejungle.com/fr/jobs.rss?query=stage"
+    }
+  ],
+  "housing": []
+}
