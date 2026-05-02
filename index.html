@@ -6,7 +6,7 @@
     <meta name="description" content="Portfolio de François Lachance - Ingénieur IA & Traitement du Signal, expert en Machine Learning, vision par ordinateur et analyse spatiale à Toulouse">
     <meta name="keywords" content="IA, Machine Learning, Traitement Signal, Deep Learning, Ingénieur, Toulouse">
     <meta name="author" content="François Lachance">
-    <meta property="og:title" content="François Lachance - Ingénieur IA & Signal">
+    <meta property="og:title" content="François Lachance - Ingénieur Systemes Automatise et Traitement D'images">
     <meta property="og:description" content="Expert en Machine Learning et Traitement du Signal appliqué au spatial">
     <meta property="og:type" content="website">
     <title>François Lachance - Ingénieur IA & Signal | Portfolio</title>
@@ -16,6 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!--
+        CORRECTION #6 — Preload du worker PDF.js pour accélérer le premier rendu
+    -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js" as="script">
 
     <style>
         :root {
@@ -31,6 +36,35 @@
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
             --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* ============================================================
+           CORRECTION #13 — Dark mode via prefers-color-scheme
+           ============================================================ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #e2e8f0;
+                --text-secondary: #94a3b8;
+                --white: #0f172a;
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+                --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+                --sky-hover: #1e3a5f;
+            }
+            body { background: #0f172a; color: var(--text-primary); }
+            .hero-section { background: linear-gradient(180deg, #112240 0%, #0f172a 100%) !important; }
+            .hero-section h1 { color: var(--light-sky) !important; }
+            #expertise { background: linear-gradient(180deg, #0f172a 0%, #0a192f 100%) !important; }
+            .expertise-card { background: #112240 !important; border-color: rgba(184,212,233,0.1) !important; }
+            .stats-section { background: #0a192f !important; }
+            .stat-item:hover { background: #112240 !important; }
+            .docs-panel { background: #112240 !important; }
+            #docs-login-screen p { color: var(--text-secondary) !important; }
+            .code-digit { background: #0a192f !important; color: var(--text-primary) !important; border-color: #334155 !important; }
+            .code-digit:focus { background: #112240 !important; border-color: var(--light-sky) !important; }
+            .code-digit.filled { background: #1e3a5f !important; }
+            .doc-item { background: #0a192f !important; border-color: #334155 !important; color: var(--text-primary) !important; }
+            .doc-item:hover { background: #1e3a5f !important; border-color: var(--light-sky) !important; }
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -166,9 +200,21 @@
 
         /* STATS */
         .stats-section { background: var(--white); padding: 4rem 0; }
-        .stat-item { text-align: center; padding: 1.5rem; transition: var(--transition-base); border-radius: 12px; }
+        .stat-item {
+            text-align: center; padding: 1.5rem; transition: var(--transition-base);
+            border-radius: 12px; cursor: default;
+        }
         .stat-item:hover { background: var(--light-sky); transform: scale(1.05); }
-        .stat-item h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--navy-deep); margin-bottom: 0.5rem; }
+
+        /*
+            CORRECTION #12 — Styles pour l'animation count-up des statistiques
+        */
+        .stat-item h2 {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+            color: var(--navy-deep); margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .stat-item.counting h2 { transform: scale(1.08); }
         .stat-item p { color: var(--text-secondary); font-weight: 500; margin: 0; }
 
         /* FOOTER */
@@ -199,8 +245,6 @@
         /* ============================
            DOCUMENTS PERSONNELS MODAL
            ============================ */
-
-        /* Overlay sombre */
         .docs-overlay {
             display: none;
             position: fixed;
@@ -213,7 +257,6 @@
         }
         .docs-overlay.active { display: flex; }
 
-        /* Panneau principal */
         .docs-panel {
             background: var(--white);
             border-radius: 20px;
@@ -259,7 +302,6 @@
         }
         .docs-close-btn:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
 
-        /* Écran de connexion */
         #docs-login-screen { padding: 2.5rem 2rem; }
         #docs-login-screen p {
             color: var(--text-secondary);
@@ -293,6 +335,9 @@
         }
         .code-digit.filled { border-color: var(--navy-deep); background: var(--sky-hover); }
 
+        /*
+            CORRECTION #10 — Styles pour l'état loading du bouton unlock
+        */
         .btn-unlock {
             width: 100%;
             background: var(--navy-deep);
@@ -305,8 +350,21 @@
             cursor: pointer;
             transition: var(--transition-base);
             display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-unlock:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-unlock:hover:not(:disabled) { background: var(--navy-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-unlock:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .btn-unlock .btn-spinner {
+            display: none;
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        .btn-unlock.loading .btn-spinner { display: inline-block; }
+        .btn-unlock.loading .btn-text { display: none; }
 
         .error-msg {
             display: none;
@@ -323,7 +381,6 @@
             75% { transform: translateX(8px); }
         }
 
-        /* Écran documents */
         #docs-content-screen { display: none; padding: 2rem; }
         #docs-content-screen.active { display: block; }
 
@@ -415,16 +472,19 @@
         }
         .viewer-close:hover { background: rgba(239,68,68,0.3); transform: rotate(90deg); }
 
-        /* Zone de la slide */
+        /*
+            CORRECTION #2 — Virgule manquante + overflow correct dans .viewer-stage
+        */
         .viewer-stage {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem
-            overflow : hidden;
+            padding: 1rem;        /* ← virgule restaurée */
+            overflow: hidden;     /* ← espace avant hidden supprimé */
             position: relative;
         }
+
         .slide-frame {
             position: relative;
             width: 100%;
@@ -439,7 +499,7 @@
             width: 100%; height: 100%; border: none; display: block;
         }
 
-        /* Boutons de navigation */
+        /* Boutons de navigation prev/next */
         .viewer-nav-btn {
             position: absolute;
             top: 50%;
@@ -456,12 +516,10 @@
             z-index: 10;
         }
         .viewer-nav-btn:hover { background: rgba(184,212,233,0.2); border-color: var(--light-sky); transform: translateY(-50%) scale(1.1); }
-        .viewer-nav-btn:disabled { opacity: 0.25; cursor: default; }
-        .viewer-nav-btn:disabled:hover { background: rgba(255,255,255,0.08); transform: translateY(-50%) scale(1); }
+        .viewer-nav-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
         #btn-prev { left: 1rem; }
         #btn-next { right: 1rem; }
 
-        /* Barre du bas */
         .viewer-bottombar {
             background: #0d1b2a;
             border-top: 1px solid rgba(184,212,233,0.1);
@@ -549,7 +607,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html" aria-current="page">Accueil</a>
+                        <a class="nav-link active" href="index.html" aria-current="page" data-section="hero">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="machine-learning.html">IA & ML</a>
@@ -566,7 +624,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
-                    <!-- ✅ NOUVEAU : Documents Personnels -->
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="docsNavLink" aria-label="Accéder aux documents personnels">
                             <i class="fas fa-lock me-1" style="font-size:0.8rem; opacity:0.7;"></i>
@@ -580,7 +637,7 @@
 
     <!-- Hero Section -->
     <main id="main-content">
-        <section class="hero-section" aria-labelledby="hero-title">
+        <section class="hero-section" id="section-hero" aria-labelledby="hero-title">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7 text-center text-lg-start hero-content">
@@ -605,10 +662,16 @@
                     </div>
                     <div class="col-lg-5 text-center mt-5 mt-lg-0">
                         <div class="profile-photo-wrapper animate-zoomIn">
-                            <img src="assets/aaa.png"
-                                 alt="Photo de profil de François Lachance, ingénieur en Systeme automatises et traitement du signal"
+                            <!--
+                                CORRECTION #11 — Nom de fichier renommé pour le SEO
+                                (renommer aussi le fichier sur disque : aaa.png → francois-lachance.jpg)
+                            -->
+                            <img src="assets/francois-lachance.png"
+                                 alt="François Lachance, ingénieur en systèmes automatisés et traitement du signal, Toulouse"
                                  class="profile-photo"
-                                 loading="eager">
+                                 loading="eager"
+                                 width="320"
+                                 height="320">
                         </div>
                     </div>
                 </div>
@@ -616,7 +679,7 @@
         </section>
 
         <!-- Section Expertise -->
-        <section id="expertise" class="py-5" aria-labelledby="expertise-title">
+        <section id="expertise" aria-labelledby="expertise-title">
             <div class="container">
                 <div class="section-title text-center">
                     <h2 id="expertise-title">Mes Domaines d'interventions</h2>
@@ -656,16 +719,32 @@
             <div class="container">
                 <div class="row">
                     <div class="col-6 col-md-3">
-                        <div class="stat-item"><h2>10+</h2><p>Projets Réalisés</p></div>
+                        <!--
+                            CORRECTION #12 — Count-up animé via data-attributes
+                            data-target : valeur finale ; data-suffix : suffixe affiché
+                        -->
+                        <div class="stat-item" data-target="10" data-suffix="+">
+                            <h2 class="stat-value">0+</h2>
+                            <p>Projets Réalisés</p>
+                        </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item"><h2>2025</h2><p>Année de Lancement</p></div>
+                        <div class="stat-item" data-target="2025" data-suffix="">
+                            <h2 class="stat-value">0</h2>
+                            <p>Année de Lancement</p>
+                        </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item"><h2>100%</h2><p>Passion & Engagement</p></div>
+                        <div class="stat-item" data-target="100" data-suffix="%">
+                            <h2 class="stat-value">0%</h2>
+                            <p>Passion & Engagement</p>
+                        </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="stat-item"><h2><i class="fas fa-map-marker-alt"></i></h2><p>Toulouse, France</p></div>
+                        <div class="stat-item">
+                            <h2><i class="fas fa-map-marker-alt"></i></h2>
+                            <p>Toulouse, France</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -693,7 +772,7 @@
 
 
     <!-- ============================================================
-         MODAL : DOCUMENTS PERSONNELS (Écran de connexion)
+         MODAL : DOCUMENTS PERSONNELS
          ============================================================ -->
     <div class="docs-overlay" id="docsOverlay" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title">
         <div class="docs-panel">
@@ -714,14 +793,16 @@
                     Entrez votre code d'accès à 4 chiffres
                 </p>
                 <div class="code-input-wrapper" role="group" aria-label="Code d'accès">
-                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 1" id="d1">
-                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 2" id="d2">
-                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 3" id="d3">
-                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 4" id="d4">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 1" id="d1" autocomplete="off">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 2" id="d2" autocomplete="off">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 3" id="d3" autocomplete="off">
+                    <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 4" id="d4" autocomplete="off">
                 </div>
                 <button class="btn-unlock" id="btnUnlock">
-                    <i class="fas fa-unlock-alt"></i>
-                    Déverrouiller
+                    <div class="btn-spinner" aria-hidden="true"></div>
+                    <span class="btn-text">
+                        <i class="fas fa-unlock-alt me-2"></i>Déverrouiller
+                    </span>
                 </button>
                 <p class="error-msg" id="errorMsg" role="alert">
                     <i class="fas fa-exclamation-circle me-1"></i>
@@ -732,7 +813,7 @@
             <!-- Écran contenu (après connexion réussie) -->
             <div id="docs-content-screen">
                 <p class="docs-section-label">
-                    <i class="fas fa-presentation-screen me-1"></i>
+                    <i class="fas fa-chalkboard-teacher me-1"></i>
                     Présentations
                 </p>
                 <div class="doc-item" id="openPresentation" role="button" tabindex="0"
@@ -760,30 +841,40 @@
     <!-- ============================================================
          VIEWER DE PRÉSENTATION PLEIN ÉCRAN
          ============================================================ -->
-    <div class="viewer-overlay" id="viewerOverlay" role="dialog" aria-modal="true" aria-label="Viewer de présentation">
+    <div class="viewer-overlay" id="viewerOverlay" role="dialog" aria-modal="true" aria-label="Viewer de présentation" tabindex="-1">
 
         <!-- Barre supérieure -->
         <div class="viewer-topbar">
             <div class="viewer-title">
-                <i class="fas fa-presentation-screen"></i>
+                <i class="fas fa-chalkboard-teacher"></i>
                 How Does Facial Recognition Work?
             </div>
-            <span class="viewer-counter" id="slideCounter">Slide 1 / 13</span>
-                <button class="viewer-close" id="viewerCloseBtn" aria-label="Quitter la présentation">
-                    <i class="fas fa-times"></i>
-                </button>
+            <span class="viewer-counter" id="slideCounter" aria-live="polite">Slide 1 / 13</span>
+            <button class="viewer-close" id="viewerCloseBtn" aria-label="Quitter la présentation">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
 
         <!-- Zone principale -->
         <div class="viewer-stage">
+            <!--
+                CORRECTION #3 — Boutons prev/next créés dans le DOM
+            -->
+            <button class="viewer-nav-btn" id="btn-prev" aria-label="Slide précédente" disabled>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
             <div class="slide-frame" id="slideFrame">
                 <div class="viewer-loading" id="viewerLoading">
                     <div class="spinner"></div>
                     <p>Chargement de la présentation…</p>
                 </div>
-                <!-- Les slides sont rendues ici -->
                 <canvas id="pdfCanvas" style="width:100%;height:100%;display:none;"></canvas>
             </div>
+
+            <button class="viewer-nav-btn" id="btn-next" aria-label="Slide suivante">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
 
         <!-- Barre de points -->
@@ -792,29 +883,130 @@
 
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
-    <!-- PDF.js pour rendre les slides du PPTX (converti en PDF côté serveur, ou via Google Slides embed) -->
+    <!--
+        CORRECTION #4 — Bootstrap chargé SANS defer pour éviter la race condition
+        avec le script inline qui s'initialise immédiatement
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <script>
-        // ─── Navbar scroll ────────────────────────────────────────
-        window.addEventListener('scroll', function () {
-            document.getElementById('mainNavbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
+        // ─── Configurer PDF.js dès le chargement ──────────────────────────────────
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        // ─── Smooth scroll ────────────────────────────────────────
+        // ─── Navbar scroll (CORRECTION #7 — throttle via requestAnimationFrame) ───
+        let ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    document.getElementById('mainNavbar')
+                        .classList.toggle('scrolled', window.scrollY > 50);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // ─── Smooth scroll (CORRECTION #5 — vérifie que la cible existe) ─────────
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                if (href === '#') return; // laisser passer les modals
-                e.preventDefault();
+                if (href === '#') return;
                 const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
 
-        // ─── Documents Personnels – Logique ───────────────────────
-        const CORRECT_CODE = '1234';
+        // ─── CORRECTION #14 — Navbar active sync au scroll ────────────────────────
+        (function () {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link[href^="#"], .navbar-nav .nav-link[href="index.html"]');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const id = entry.target.getAttribute('id');
+                        const active = document.querySelector(`.navbar-nav .nav-link[href="#${id}"]`)
+                                    || document.querySelector('.navbar-nav .nav-link[href="index.html"]');
+                        if (active) {
+                            active.classList.add('active');
+                            active.setAttribute('aria-current', 'page');
+                        }
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            sections.forEach(s => observer.observe(s));
+        })();
+
+        // ─── CORRECTION #12 — Count-up animé pour les statistiques ───────────────
+        (function () {
+            const statItems = document.querySelectorAll('.stat-item[data-target]');
+            if (!statItems.length) return;
+
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const animateCounter = (el) => {
+                const target  = parseInt(el.dataset.target, 10);
+                const suffix  = el.dataset.suffix || '';
+                const display = el.querySelector('.stat-value');
+                if (!display) return;
+
+                if (prefersReduced) {
+                    display.textContent = target + suffix;
+                    return;
+                }
+
+                const duration = 1800;
+                const start    = performance.now();
+                el.classList.add('counting');
+
+                const step = (now) => {
+                    const elapsed  = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // easeOutQuart
+                    const eased    = 1 - Math.pow(1 - progress, 4);
+                    display.textContent = Math.floor(eased * target) + suffix;
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        display.textContent = target + suffix;
+                        el.classList.remove('counting');
+                    }
+                };
+                requestAnimationFrame(step);
+            };
+
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        io.unobserve(entry.target); // ne se rejoue qu'une fois
+                    }
+                });
+            }, { threshold: 0.6 });
+
+            statItems.forEach(item => io.observe(item));
+        })();
+
+        // ─── CORRECTION #1 — Code hashé (SHA-256) ─────────────────────────────────
+        // Hash SHA-256 du code "1234" — généré via : await hashCode('1234')
+        // Pour changer le code, remplacer cette valeur par le hash de votre nouveau code.
+        const CORRECT_HASH = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4';
+
+        async function hashCode(code) {
+            const encoder = new TextEncoder();
+            const data    = encoder.encode(code);
+            const buffer  = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(buffer))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
 
         const docsOverlay   = document.getElementById('docsOverlay');
         const docsCloseBtn  = document.getElementById('docsCloseBtn');
@@ -823,10 +1015,8 @@
         const errorMsg      = document.getElementById('errorMsg');
         const loginScreen   = document.getElementById('docs-login-screen');
         const contentScreen = document.getElementById('docs-content-screen');
-        const digits        = [document.getElementById('d1'), document.getElementById('d2'),
-                               document.getElementById('d3'), document.getElementById('d4')];
+        const digits        = ['d1','d2','d3','d4'].map(id => document.getElementById(id));
 
-        // Ouvrir le modal
         docsNavLink.addEventListener('click', (e) => {
             e.preventDefault();
             openDocsModal();
@@ -846,13 +1036,15 @@
 
         docsCloseBtn.addEventListener('click', closeDocsModal);
         docsOverlay.addEventListener('click', (e) => { if (e.target === docsOverlay) closeDocsModal(); });
+        docsOverlay.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDocsModal(); });
 
         // Navigation entre champs
         digits.forEach((d, i) => {
             d.addEventListener('input', () => {
+                // N'accepte que les chiffres
+                d.value = d.value.replace(/\D/g, '').slice(-1);
                 d.classList.toggle('filled', d.value !== '');
                 if (d.value && i < 3) digits[i + 1].focus();
-                // Auto-unlock quand les 4 chiffres sont remplis
                 if (digits.every(x => x.value !== '')) tryUnlock();
             });
             d.addEventListener('keydown', (e) => {
@@ -863,20 +1055,40 @@
 
         btnUnlock.addEventListener('click', tryUnlock);
 
-        function tryUnlock() {
+        // CORRECTION #10 — Anti double-clic + spinner loading
+        let unlockPending = false;
+
+        async function tryUnlock() {
+            if (unlockPending) return;
             const code = digits.map(d => d.value).join('');
-            if (code === CORRECT_CODE) {
-                loginScreen.style.display = 'none';
-                contentScreen.classList.add('active');
-            } else {
-                errorMsg.classList.add('show');
-                digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
-                // Reset animation pour re-déclencher le shake
-                errorMsg.style.animation = 'none';
-                errorMsg.offsetHeight; // reflow
-                errorMsg.style.animation = '';
-                setTimeout(() => digits[0].focus(), 100);
+            if (code.length < 4) return;
+
+            unlockPending = true;
+            btnUnlock.classList.add('loading');
+            btnUnlock.disabled = true;
+
+            try {
+                const hash = await hashCode(code);
+
+                if (hash === CORRECT_HASH) {
+                    loginScreen.style.display  = 'none';
+                    contentScreen.classList.add('active');
+                } else {
+                    showError();
+                }
+            } finally {
+                unlockPending = false;
+                btnUnlock.classList.remove('loading');
+                btnUnlock.disabled = false;
             }
+        }
+
+        function showError() {
+            errorMsg.classList.remove('show');
+            void errorMsg.offsetHeight; // reflow pour relancer l'animation
+            errorMsg.classList.add('show');
+            digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
+            setTimeout(() => digits[0].focus(), 50);
         }
 
         function resetLogin() {
@@ -886,14 +1098,9 @@
             digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
         }
 
-        // ─── Viewer PDF ───────────────────────────────────────────
-        const PPTX_PATH     = 'assets/pdf/facial_recognition_improved.pptx';
-        // On utilise Google Slides viewer : il accepte une URL publique
-        // Pour une utilisation locale, on convertit le PPTX en PDF via PDF.js
-        // Le fichier doit être: assets/facial_recognition_improved.pdf
-        // (tu peux le générer une fois avec LibreOffice ou en exportant depuis PowerPoint)
-        const PDF_PATH      = 'assets/pdf/facial_recognition_improved.pdf';
-        const TOTAL_SLIDES  = 13;
+        // ─── Viewer PDF ────────────────────────────────────────────────────────────
+        const PDF_PATH     = 'assets/pdf/facial_recognition_improved.pdf';
+        const TOTAL_SLIDES = 13;
 
         const viewerOverlay = document.getElementById('viewerOverlay');
         const viewerClose   = document.getElementById('viewerCloseBtn');
@@ -903,24 +1110,26 @@
         const loadingEl     = document.getElementById('viewerLoading');
         const openPres      = document.getElementById('openPresentation');
 
+        // CORRECTION #3 — Boutons récupérés depuis le DOM (maintenant présents)
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
         let pdfDoc      = null;
         let currentPage = 1;
         let totalPages  = TOTAL_SLIDES;
         let rendering   = false;
 
-        // Configurer PDF.js
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
         // Ouvrir le viewer
         openPres.addEventListener('click', openViewer);
-        openPres.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openViewer(); });
+        openPres.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openViewer(); }
+        });
 
         async function openViewer() {
             closeDocsModal();
             viewerOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            setTimeout(() => viewerOverlay.focus(), 100);
+            viewerOverlay.focus();
 
             if (!pdfDoc) {
                 await loadPDF();
@@ -928,26 +1137,44 @@
                 renderSlide(currentPage);
             }
         }
+
         async function loadPDF() {
             try {
                 loadingEl.style.display = 'flex';
                 pdfCanvas.style.display = 'none';
 
-                pdfDoc = await pdfjsLib.getDocument(PDF_PATH).promise;
+                pdfDoc     = await pdfjsLib.getDocument(PDF_PATH).promise;
                 totalPages = pdfDoc.numPages;
 
                 buildDots();
                 currentPage = 1;
                 await renderSlide(currentPage);
             } catch (err) {
-                loadingEl.innerHTML = `
-                        <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:#f59e0b;"></i>
-                        <p style="color:#64748b;text-align:center;max-width:300px;">
-                            Erreur : <strong>${err.message}</strong><br><br>
-                            <small>Vérifiez que le fichier existe à :<br>
-                            <code>assets/pdf/facial_recognition_improved.pdf</code></small>
-                        </p>`;
-                    console.error('PDF load error:', err);
+                // CORRECTION #8 — XSS : message d'erreur via textContent (pas innerHTML)
+                loadingEl.innerHTML = '';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-exclamation-triangle';
+                icon.style.cssText = 'font-size:2rem;color:#f59e0b;';
+
+                const msg = document.createElement('p');
+                msg.style.cssText = 'color:#64748b;text-align:center;max-width:300px;';
+
+                const errLine = document.createElement('strong');
+                errLine.textContent = err.message; // ← textContent, jamais innerHTML
+
+                const hint = document.createElement('small');
+                hint.textContent = 'Vérifiez que le fichier existe à : assets/pdf/facial_recognition_improved.pdf';
+
+                msg.appendChild(document.createTextNode('Erreur : '));
+                msg.appendChild(errLine);
+                msg.appendChild(document.createElement('br'));
+                msg.appendChild(document.createElement('br'));
+                msg.appendChild(hint);
+
+                loadingEl.appendChild(icon);
+                loadingEl.appendChild(msg);
+
+                console.error('PDF load error:', err);
             }
         }
 
@@ -958,9 +1185,9 @@
             loadingEl.style.display = 'flex';
             pdfCanvas.style.display = 'none';
 
-            const page    = await pdfDoc.getPage(pageNum);
-            const stage   = document.getElementById('slideFrame');
-            const scale   = stage.clientWidth / page.getViewport({ scale: 1 }).width;
+            const page     = await pdfDoc.getPage(pageNum);
+            const stage    = document.getElementById('slideFrame');
+            const scale    = stage.clientWidth / page.getViewport({ scale: 1 }).width;
             const viewport = page.getViewport({ scale });
 
             pdfCanvas.width  = viewport.width;
@@ -974,16 +1201,21 @@
             loadingEl.style.display = 'none';
             pdfCanvas.style.display = 'block';
 
-            // Update UI
             updateUI();
             rendering = false;
         }
 
         function updateUI() {
             slideCounter.textContent = `Slide ${currentPage} / ${totalPages}`;
+
+            // CORRECTION #3 — Mise à jour des boutons prev/next
+            btnPrev.disabled = currentPage === 1;
+            btnNext.disabled = currentPage === totalPages;
+
             document.querySelectorAll('.slide-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i + 1 === currentPage);
-                dot.setAttribute('aria-selected', i + 1 === currentPage);
+                const isActive = i + 1 === currentPage;
+                dot.classList.toggle('active', isActive);
+                dot.setAttribute('aria-selected', String(isActive));
             });
         }
 
@@ -994,7 +1226,9 @@
                 dot.className = 'slide-dot' + (i === 1 ? ' active' : '');
                 dot.setAttribute('role', 'tab');
                 dot.setAttribute('aria-label', `Slide ${i}`);
-                dot.setAttribute('aria-selected', i === 1);
+                dot.setAttribute('aria-selected', i === 1 ? 'true' : 'false');
+                // CORRECTION #9 — tabindex explicite pour navigation clavier
+                dot.setAttribute('tabindex', '0');
                 dot.addEventListener('click', () => goTo(i));
                 slideDots.appendChild(dot);
             }
@@ -1006,26 +1240,26 @@
             await renderSlide(currentPage);
         }
 
+        // CORRECTION #3 — Event listeners sur les boutons prev/next
+        btnPrev.addEventListener('click', () => goTo(currentPage - 1));
+        btnNext.addEventListener('click', () => goTo(currentPage + 1));
 
         viewerClose.addEventListener('click', closeViewer);
+
         viewerOverlay.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') goTo(currentPage + 1);
             if (e.key === 'ArrowLeft')  goTo(currentPage - 1);
             if (e.key === 'Escape')     closeViewer();
         });
-        document.getElementById('slideFrame').addEventListener('click', () => goTo(currentPage + 1));
+
+        // Clic sur la slide = slide suivante
+        pdfCanvas.addEventListener('click', () => goTo(currentPage + 1));
+        pdfCanvas.style.cursor = 'pointer';
+
         function closeViewer() {
             viewerOverlay.classList.remove('active');
             document.body.style.overflow = '';
         }
-
-        // Rendre le viewer focusable pour les raccourcis clavier
-       // Rendre le viewer focusable pour les raccourcis clavier
-        viewerOverlay.setAttribute('tabindex', '-1'); // ← -1 au lieu de 0 (pas navigable au Tab mais focusable via JS)
-        viewerOverlay.addEventListener('click', (e) => {
-            if (e.target === viewerOverlay) return;
-            viewerOverlay.focus();
-        });
     </script>
 </body>
 </html>
