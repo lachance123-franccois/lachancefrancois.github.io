@@ -2,25 +2,45 @@
 <html lang="fr">
 <head>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H1TCN6K06Z"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-H1TCN6K06Z');
-    </script>
-
 
 
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets Ingénierie | François Lachance</title>
+    <title>Traitement du signal et de l'image — François Lachance Awounang-Ngounou</title>
+<meta name="description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
+<link rel="canonical" href="https://lachance123-franccois.github.io/matlab.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://lachance123-franccois.github.io/matlab.html">
+<meta property="og:title" content="Traitement du signal et de l'image — François Lachance Awounang-Ngounou">
+<meta property="og:description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
+<meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1a26">
+<link rel="stylesheet" href="css/theme.css">
+<script>
+/* Met en pause toutes les animations canvas quand l'onglet est en arrière-plan. */
+(function () {
+  var raf = window.requestAnimationFrame.bind(window), queued = [];
+  window.requestAnimationFrame = function (cb) {
+    if (document.hidden) { queued.push(cb); return 0; }
+    return raf(cb);
+  };
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) queued.splice(0).forEach(function (cb) { raf(cb); });
+  });
+})();
+</script>
     <style>
         :root { --sky-blue:#87CEEB; --off-white:#F5F5F5; --navy-dark:#1A3A5A; }
         body { background-color:var(--off-white); font-family:'Poppins',sans-serif; }
@@ -46,21 +66,37 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color:var(--navy-dark);">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html"><i class="fas fa-microchip"></i> F. Lachance A.N</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="machine-learning.html">IA & ML</a></li>
-                <li class="nav-item"><a class="nav-link active" href="matlab.html">Projets</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Webs</a></li>
-                <li class="nav-item"><a class="nav-link" href="cv-op.html">Mon CV</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
-            </ul>
-        </div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<div class="availability">
+  <div class="wrap availability__inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de ⟦mois/année⟧, puis CDI.</span>
+    <span>Toulouse et mobilité France entière.</span>
+    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+  </div>
+</div>
+
+<nav class="site-nav" id="siteNav" aria-label="Navigation principale">
+  <div class="wrap site-nav__inner">
+    <a class="site-nav__brand" href="index.html">
+      <span class="dot" aria-hidden="true"></span>François Lachance
+    </a>
+    <button class="site-nav__toggle" type="button" id="navToggle"
+            aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">☰</button>
+    <div class="site-nav__menu" id="navMenu">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+        <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
+        <li><a class="site-nav__link" href="matlab.html" aria-current="page">Signal &amp; image</a></li>
+        <li><a class="site-nav__link" href="veille.html">Veille automatisée</a></li>
+        <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
+        <li><a class="site-nav__cta" href="contact.html">Me contacter</a></li>
+      </ul>
     </div>
+  </div>
 </nav>
+<div id="contenu">
 
 <section class="py-5" style="background:linear-gradient(rgba(26,58,90,0.9),rgba(26,58,90,0.9)),url('assets/tech-bg.jpg');background-size:cover;">
     <div class="container text-center py-5">
@@ -175,39 +211,74 @@
     <div class="container">
         <div class="row g-4 text-center">
             <div class="col-md-4" data-aos="fade-up">
-                <a href="ALOGRITHM.html" class="skill-card-link">
+                <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-brain fa-3x text-primary mb-3"></i>
                         <h4 class="text-color fw-bold">Algorithmie</h4>
                         <p class="small text-muted">Conception d'architectures mathématiques complexes sous MATLAB & Python.</p>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <a href="traitement.html" class="skill-card-link">
+                <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-satellite fa-3x text-primary mb-3"></i>
                         <h4 class="text-color fw-bold">Analyse</h4>
                         <p class="small text-muted">Traitement massif de données issues de capteurs (Radar, Lidar, Optique).</p>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <a href="robotique.html" class="skill-card-link">
+                <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
                         <h4 class="text-color fw-bold">Robotique</h4>
                         <p class="small text-muted">Implémentation de boucles de contrôle et de systèmes asservis.</p>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer class="py-4" style="background-color:var(--navy-dark);color:white;">
-    <div class="container text-center"><p>&copy; 2025 <strong>François Lachance Awounang-Ngounou</strong></p></div>
+</div><!-- /#contenu -->
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__cols">
+      <div>
+        <h4>François Lachance Awounang-Ngounou</h4>
+        <p style="margin:0;">Ingénieur traitement du signal, image et machine learning.<br>Toulouse, France.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
+          <li><a href="matlab.html">Signal &amp; image</a></li>
+          <li><a href="veille.html">Veille automatisée</a></li>
+          <li><a href="cv-op.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ailleurs</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-foot__base">
+      <span>© 2026 François Lachance Awounang-Ngounou</span>
+      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+    </div>
+  </div>
 </footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
+<script src="js/main.js" defer></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

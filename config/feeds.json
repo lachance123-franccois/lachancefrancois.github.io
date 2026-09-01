@@ -1,0 +1,10 @@
+{
+  "phd": [
+    { "name": "ABG — offres de thèse",       "url": "https://www.abg.asso.fr/fr/candidatOffres/rss" },
+    { "name": "EURAXESS France",             "url": "https://euraxess.ec.europa.eu/jobs/search/feed" }
+  ],
+  "internship": [
+    { "name": "ABG — stages",                "url": "https://www.abg.asso.fr/fr/candidatOffres/rss?type=stage" }
+  ],
+  "housing": []
+}
