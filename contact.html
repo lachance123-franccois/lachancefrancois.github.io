@@ -1,280 +1,232 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H1TCN6K06Z"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-H1TCN6K06Z');
-    </script>
+<title>Contact — François Lachance Awounang-Ngounou</title>
+<meta name="description" content="Contacter François Lachance, ingénieur signal, image et machine learning à Toulouse. Réponse sous 24 à 48 heures.">
+<link rel="canonical" href="https://lachance123-franccois.github.io/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — François Lachance Awounang-Ngounou">
+<meta property="og:description" content="Ingénieur signal, image et machine learning. Disponible pour un stage de fin d'études puis un CDI.">
 
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1a26">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | François Lachance </title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
-    <link rel="stylesheet" href="css/main.css"> <style>
-        :root {
-            --navy-deep: #0a192f;
-            --accent-blue: #0077b5;
-            --accent-green: #00d084;
-            --light-bg: #f4f7f6;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
 
-        body { font-family: 'Poppins', sans-serif; background-color: var(--light-bg); }
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--sp-12); align-items: start; }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: var(--sp-8); } }
 
-        /* Hero Contact */
-        /* Hero Contact - Nouveau Design */
-        .hero-contact {
-            /* Dégradé doux du blanc vers un bleu ciel très léger */
-            background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 100%);
-            padding: 100px 0 80px;
-            color: var(--navy-deep); /* Texte en bleu marine pour rester lisible */
-            border-bottom: 1px solid rgba(0, 119, 181, 0.1);
-        }
+  .form-card {
+    background: var(--paper-pure); border: 1px solid var(--rule);
+    border-radius: var(--radius-lg); padding: var(--sp-8); box-shadow: var(--shadow-sm);
+  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
 
-        /* On supprime la marge négative pour que le blanc soit uniforme */
-        section.py-5.mt-n5 {
-            margin-top: 0 !important;
-            background-color: #f8f9fa; /* Gris très clair pour détacher le formulaire */
-        }
+  .coord { list-style: none; margin: 0 0 var(--sp-8); padding: 0; }
+  .coord li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4);
+    align-items: baseline; padding: var(--sp-4) 0; border-bottom: 1px solid var(--rule);
+  }
+  .coord dt, .coord .k {
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--text-muted); white-space: nowrap;
+  }
+  .coord .v { font-weight: 500; }
+  .coord .v a { text-decoration: none; }
+  .coord .v a:hover { text-decoration: underline; }
 
-        /* Ajustement de la Navbar si elle est sombre */
-        .navbar-dark.bg-dark {
-            background-color: #0a192f !important; /* On garde un contraste fort pour la navigation */
-        }
-
-        /* Modernisation de la carte de formulaire */
-        .contact-form-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-       
-
-        .form-control {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            margin-bottom: 5px;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 0.25rem rgba(0, 208, 132, 0.1);
-        }
-
-        /* Info Blocks */
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
-
-        .contact-info-item:hover { transform: translateX(10px); }
-
-        .contact-info-item i {
-            font-size: 1.5rem;
-            color: var(--accent-green);
-            width: 50px;
-        }
-
-        .contact-info-item h5 { margin-bottom: 2px; font-weight: 700; color: var(--navy-deep); }
-        .contact-info-item a { text-decoration: none; color: #6c757d; }
-
-        /* Expertise Card for Testimonials */
-        .testimonial-card {
-            background: white;
-            border-left: 5px solid var(--accent-green);
-            padding: 25px;
-            border-radius: 10px;
-            height: 100%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-                /* Force la section de contact à être au-dessus du décor du header */
-        section.py-5.mt-n5 {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Amélioration du style des liens pour qu'ils soient plus cliquables */
-        .contact-info-item a {
-            display: block; /* Rend toute la zone cliquable */
-            width: 100%;
-        }
-    </style>
+  .note {
+    background: var(--paper-pure); border: 1px solid var(--rule);
+    border-left: 3px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0;
+    padding: var(--sp-4) var(--sp-6);
+  }
+  .note p:last-child { margin-bottom: 0; }
+</style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="fas fa-code me-2 text-info"></i>Francois Lachance 
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="machine-learning.html">Machine Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="matlab.html">Signal & Image</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cv-op.html">Mon CV</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-bold text-info" href="contact.html">Contact</a></li>
-                </ul>
-            </div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<div class="availability">
+  <div class="wrap availability__inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de ⟦mois/année⟧, puis CDI.</span>
+    <span>Toulouse et mobilité France entière.</span>
+    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+  </div>
+</div>
+
+<nav class="site-nav" id="siteNav" aria-label="Navigation principale">
+  <div class="wrap site-nav__inner">
+    <a class="site-nav__brand" href="index.html">
+      <span class="dot" aria-hidden="true"></span>François Lachance
+    </a>
+    <button class="site-nav__toggle" type="button" id="navToggle"
+            aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">☰</button>
+    <div class="site-nav__menu" id="navMenu">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+        <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
+        <li><a class="site-nav__link" href="matlab.html">Signal &amp; image</a></li>
+        <li><a class="site-nav__link" href="veille.html">Veille automatisée</a></li>
+        <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
+        <li><a class="site-nav__cta" href="contact.html" aria-current="page">Me contacter</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="contenu" class="section">
+  <div class="wrap">
+
+    <p class="eyebrow">Contact</p>
+    <h1 style="font-size: var(--step-3); max-width: 20ch;">Parlons de votre sujet de stage.</h1>
+    <p class="lede" style="margin-bottom: var(--sp-12);">
+      Fiche de poste, question technique, ou simple prise de contact : j'écris une réponse
+      utile sous 24 à 48&nbsp;heures.
+    </p>
+
+    <div class="contact-grid">
+
+      <!-- FORMULAIRE ------------------------------------------------------
+           Remplacer VOTRE_ID par l'identifiant Formspree réel, sinon le
+           formulaire affiche un message et renvoie vers l'adresse email. -->
+      <form class="form-card" id="contactForm"
+            action="https://formspree.io/f/VOTRE_ID" method="POST">
+
+        <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Envoyer un message</h2>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">Nom et prénom</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email professionnel</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
         </div>
-    </nav>
 
-    <header class="hero-contact">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Discutons de votre projet</h1>
-            <p class="lead animate__animated animate__fadeInUp" style="max-width: 700px; margin: auto;">
-                Ouvert aux opportunités de collaboration en <strong>IA</strong>, <strong>Machine Learning</strong> et <strong>Systèmes Intelligents</strong>.
-            </p>
+        <div class="field">
+          <label for="f-org">Entreprise <span class="hint">(facultatif)</span></label>
+          <input id="f-org" name="organisation" type="text" autocomplete="organization">
         </div>
-    </header>
 
-    <section class="py-5 mt-n5">
-        <div class="container">
-            <div class="row g-5">
-                
-                <div class="col-lg-7">
-                    <div class="contact-form-card animate__animated animate__fadeInLeft">
-                        <h3 class="fw-bold mb-4">Envoyez-moi un message</h3>
-                        <form action="https://formspree.io/f/VOTRE_ID" method="POST"> <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-bold">Noms </label>
-                                    <input type="text" name="name" class="form-control" placeholder="francois lachance" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-bold">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="francois@exemple.com" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Sujet</label>
-                                <input type="text" name="subject" class="form-control" placeholder="Ex: Projet Machine Learning" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label fw-bold">Votre Message</label>
-                                <textarea name="message" class="form-control" rows="5" placeholder="Décrivez votre besoin..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">
-                                <i class="fas fa-paper-plane me-2"></i>Envoyer
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-lg-5">
-                    <div class="ps-lg-4">
-                        <h3 class="fw-bold mb-4 text-navy-deep">Mes coordonnées</h3>
-                        
-                        <div class="contact-info-item animate__animated animate__fadeInRight">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h5>Localisation</h5>
-                                <p class="text-muted mb-0">Toulouse, France</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.1s;">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <h5>WhatsApp</h5>
-                                <a href="https://wa.me/33618600123" target="_blank">+33 6 18 60 01 23</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h5>Email Professionnel</h5>
-                                <a href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item animate__animated animate__fadeInRight" style="animation-delay: 0.3s;">
-                            <i class="fab fa-linkedin"></i>
-                            <div>
-                                <h5>LinkedIn</h5>
-                                <a href="https://www.linkedin.com/in/francois-l-a35723204?/" target="_blank">François Lachance</a>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-info border-0 shadow-sm mt-4">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Temps de réponse estimé : <strong>24h à 48h</strong>.
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="field">
+          <label for="f-subject">Objet</label>
+          <select id="f-subject" name="subject" required>
+            <option value="">Choisir…</option>
+            <option>Proposition de stage</option>
+            <option>Proposition d'alternance ou de CDI</option>
+            <option>Question technique sur un projet</option>
+            <option>Autre</option>
+          </select>
         </div>
-    </section>
 
-    <!---<section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5">Témoignages <small class="text-muted d-block fs-6 fw-normal mt-2">(Exemples d'illustration)</small></h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="fst-italic text-muted">"Un ingénieur rigoureux avec une solide base mathématique. Très recommandé pour les projets ML."</p>
-                        <h6 class="fw-bold mb-0">Marc fogue</h6>
-                        <small class="text-primary">Tech Lead</small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="fst-italic text-muted">"Communication fluide et travail de haute qualité sur l'analyse de données complexes."</p>
-                        <h6 class="fw-bold mb-0">Sophie Kamdem</h6>
-                        <small class="text-primary">Data Scientist</small>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="text-warning mb-3 small"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="fst-italic text-muted">"Excellente compréhension des enjeux métiers liés à l'intelligence artificielle."</p>
-                        <h6 class="fw-bold mb-0"> pavidot donfack </h6>
-                        <small class="text-primary">Chef de Projet</small>
-                    </div>
-                </div>
-            </div>
+        <div class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" rows="6" required
+                    placeholder="Le sujet, l'équipe, les dates. Le reste peut attendre l'entretien."></textarea>
         </div>
-    </section> --->
 
-    <footer class="bg-dark text-white py-5 mt-5">
-        <div class="container">
-            <div class="row align-items-center text-center text-md-start">
-                <div class="col-md-8">
-                    <p class="mb-0">© 2025 <strong>François Lachance Awounang-Ngounou</strong></p>
-                    <small class="text-muted">Ingénieur Polytechnicien | Spécialiste Signal, Image & Apprentissage Automatique</small>
-                </div>
-                <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                    <a href="#" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
-                    <a href="#" class="text-white mx-2"><i class="fab fa-github fa-lg"></i></a>
-                </div>
-            </div>
+        <!-- Piège à robots : invisible, jamais rempli par un humain -->
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="act act--primary" type="submit">Envoyer le message</button>
+
+        <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+
+        <p style="font-size: .82rem; color: var(--text-muted); margin: var(--sp-4) 0 0;">
+          Les informations envoyées servent uniquement à répondre à ce message.
+          Elles ne sont ni revendues ni utilisées à d'autres fins.
+        </p>
+      </form>
+
+      <!-- COORDONNÉES ----------------------------------------------------- -->
+      <div>
+        <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Coordonnées</h2>
+
+        <ul class="coord">
+          <li>
+            <span class="k">Email</span>
+            <span class="v"><a href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a></span>
+          </li>
+          <li>
+            <span class="k">LinkedIn</span>
+            <span class="v"><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">François Lachance Awounang-Ngounou</a></span>
+          </li>
+          <li>
+            <span class="k">GitHub</span>
+            <span class="v"><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">lachance123-franccois</a></span>
+          </li>
+          <li>
+            <span class="k">Lieu</span>
+            <span class="v">Toulouse, France — mobile en France</span>
+          </li>
+          <li>
+            <span class="k">Réponse</span>
+            <span class="v">sous 24 à 48 heures</span>
+          </li>
+        </ul>
+
+        <div class="note">
+          <p><strong>Pour aller plus vite</strong></p>
+          <p style="font-size: .93rem; color: var(--text-muted);">
+            Si vous avez déjà une fiche de poste, joignez-la ou collez-en le contenu.
+            Je réponds avec les projets les plus proches du sujet et ce que je sais déjà faire dessus.
+          </p>
         </div>
-    </footer>
+      </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__cols">
+      <div>
+        <h4>François Lachance Awounang-Ngounou</h4>
+        <p style="margin:0;">Ingénieur traitement du signal, image et machine learning.<br>Toulouse, France.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
+          <li><a href="matlab.html">Signal &amp; image</a></li>
+          <li><a href="veille.html">Veille automatisée</a></li>
+          <li><a href="cv-op.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ailleurs</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-foot__base">
+      <span>© 2026 François Lachance Awounang-Ngounou</span>
+      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>

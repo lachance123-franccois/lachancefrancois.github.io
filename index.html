@@ -1,1359 +1,394 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H1TCN6K06Z"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-H1TCN6K06Z');
-    </script>
+<title>François Lachance Awounang-Ngounou — Ingénieur signal, image &amp; machine learning</title>
+<meta name="description" content="Ingénieur traitement du signal, vision par ordinateur et machine learning basé à Toulouse. EEG, analyse vibratoire, télécoms numériques, YOLOv8. Recherche un stage de fin d'études puis un CDI.">
+<meta name="author" content="François Lachance Awounang-Ngounou">
+<link rel="canonical" href="https://lachance123-franccois.github.io/">
 
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://lachance123-franccois.github.io/">
+<meta property="og:title" content="François Lachance Awounang-Ngounou — Ingénieur signal, image & machine learning">
+<meta property="og:description" content="Des signaux bruités aux décisions fiables : EEG, vibrations, télécoms, vision. Disponible pour un stage de fin d'études puis un CDI.">
+<meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de François Lachance - Ingénieur IA & Traitement du Signal, expert en Machine Learning, vision par ordinateur et analyse spatiale à Toulouse">
-    <meta name="keywords" content="IA, Machine Learning, Traitement Signal, Deep Learning, Ingénieur, Toulouse">
-    <meta name="author" content="François Lachance">
-    <meta property="og:title" content="François Lachance - Ingénieur IA & Signal">
-    <meta property="og:description" content="Expert en Machine Learning et Traitement du Signal appliqué au spatial">
-    <meta property="og:type" content="website">
-    <title>François Lachance - Ingénieur ML & Signal | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js" as="script">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1a26">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<!-- Données structurées : aide Google à afficher le bon encart sur ton nom -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "François Lachance Awounang-Ngounou",
+  "jobTitle": "Ingénieur traitement du signal, image et machine learning",
+  "url": "https://lachance123-franccois.github.io/",
+  "email": "mailto:lachanceawounang@icloud.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Toulouse", "addressCountry": "FR" },
+  "knowsAbout": ["Traitement du signal", "Vision par ordinateur", "Machine learning", "Python", "MATLAB", "Traitement d'images"],
+  "sameAs": [
+    "https://github.com/lachance123-franccois",
+    "https://www.linkedin.com/in/francois-l-a35723204"
+  ]
+}
+</script>
 
 <style>
-    :root {
-        --navy:        #0b1d35;
-        --navy-mid:    #142b4e;
-        --navy-soft:   #1c3a63;
-        --accent:      #4fa8d5;
-        --accent-warm: #e8a44a;
-        --text-main:   #1a2535;
-        --text-muted:  #5e7898;
-        --surface:     #ffffff;
-        --surface-2:   #f4f7fb;
-        --border:      rgba(11,29,53,0.08);
-        --shadow-sm:   0 2px 8px rgba(11,29,53,0.07);
-        --shadow-md:   0 6px 20px rgba(11,29,53,0.12);
-        --shadow-lg:   0 16px 40px rgba(11,29,53,0.16);
-        --ease:        cubic-bezier(0.4, 0, 0.2, 1);
-        --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
+  /* --- Hero : le seul endroit où l'on dépense de l'audace --- */
+  .hero { background: var(--ink-900); color: var(--text-invert); padding-block: var(--sp-16) var(--sp-12); }
+  .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-12); align-items: center; }
+  .hero h1 { color: #fff; font-size: var(--step-4); margin-bottom: var(--sp-4); }
+  .hero__role { font-family: var(--font-mono); font-size: var(--step--1); color: var(--signal); margin: 0 0 var(--sp-4); }
+  .hero p { color: rgba(255,255,255,.8); font-size: var(--step-1); max-width: 46ch; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --text-main:   #dde8f5;
-            --text-muted:  #8bacc8;
-            --surface:     #0d1a2d;
-            --surface-2:   #0b1d35;
-            --border:      rgba(79,168,213,0.1);
-            --shadow-sm:   0 2px 8px rgba(0,0,0,0.4);
-            --shadow-md:   0 6px 20px rgba(0,0,0,0.5);
-            --shadow-lg:   0 16px 40px rgba(0,0,0,0.6);
-        }
-        body { background: #0a1628; color: var(--text-main); }
-        .expertise-card, .project-card { background: var(--navy-mid) !important; border-color: var(--border) !important; }
-        .stats-section, #about-section { background: var(--navy) !important; }
-        .tech-badge { background: rgba(79,168,213,0.12) !important; color: var(--accent) !important; border-color: rgba(79,168,213,0.2) !important; }
-        .code-digit { background: var(--navy) !important; color: var(--text-main) !important; border-color: #2a3f5f !important; }
-        .code-digit:focus { background: var(--navy-mid) !important; border-color: var(--accent) !important; }
-        .code-digit.filled { background: var(--navy-soft) !important; }
-        .doc-item { background: var(--navy) !important; border-color: #2a3f5f !important; color: var(--text-main) !important; }
-        .doc-item:hover { background: var(--navy-mid) !important; border-color: var(--accent) !important; }
-        .docs-panel { background: var(--navy-mid) !important; }
-        #docs-login-screen p { color: var(--text-muted) !important; }
-    }
+  /* Panneau instrument : la trace qui se dessine au chargement */
+  .scope {
+    border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius-lg);
+    background: #071620; overflow: hidden; box-shadow: var(--shadow-lg);
+  }
+  .scope__head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .6rem .9rem; border-bottom: 1px solid rgba(255,255,255,.1);
+    font-family: var(--font-mono); font-size: .74rem; color: rgba(255,255,255,.55);
+  }
+  .scope__head b { color: var(--signal); font-weight: 500; }
+  .scope canvas { width: 100%; height: 300px; display: block; }
+  .scope__foot {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-family: var(--font-mono); font-size: .74rem;
+  }
+  .scope__foot div { padding: .6rem .9rem; color: rgba(255,255,255,.5); }
+  .scope__foot div + div { border-left: 1px solid rgba(255,255,255,.1); }
+  .scope__foot span { display: block; color: #fff; font-size: .95rem; margin-top: 2px; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  @media (max-width: 940px) {
+    .hero__grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+    .scope canvas { height: 220px; }
+  }
 
-    body {
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: var(--text-main);
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
+  /* Chiffres clés — pas d'animation de compteur, juste des faits lisibles */
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-6); }
+  .facts div { border-top: 2px solid var(--signal); padding-top: var(--sp-3); }
+  .facts b { display: block; font-family: var(--font-mono); font-size: var(--step-2); font-weight: 500; }
+  .facts span { font-size: .9rem; color: var(--text-muted); }
 
-    /* ── NAVBAR ── */
-    .navbar {
-        background: var(--navy) !important;
-        box-shadow: var(--shadow-md);
-        transition: padding 0.3s var(--ease);
-        padding: 1rem 0;
-    }
-    .navbar.scrolled { padding: 0.5rem 0; }
-    .navbar-brand {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.4rem; font-weight: 800;
-        letter-spacing: -0.5px;
-        transition: 0.3s var(--ease);
-    }
-    .navbar-brand:hover { transform: translateY(-2px); }
-    .brand-icon { color: var(--accent); }
-    .nav-link {
-        position: relative; padding: 0.5rem 1rem !important;
-        font-weight: 500; font-size: 0.9rem;
-        transition: 0.3s var(--ease);
-    }
-    .nav-link::after {
-        content: ''; position: absolute; bottom: 0; left: 50%;
-        width: 0; height: 2px; background: var(--accent);
-        transition: 0.3s var(--ease); transform: translateX(-50%);
-    }
-    .nav-link:hover::after, .nav-link.active::after { width: 80%; }
+  .split { display: grid; grid-template-columns: 340px 1fr; gap: var(--sp-12); align-items: start; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
-    /* ── HERO ── */
-    .hero-section {
-        position: relative;
-        background: linear-gradient(145deg, #e8f2fa 0%, #f4f7fb 60%, #edf5f9 100%);
-        min-height: 100vh; display: flex; align-items: center; overflow: hidden;
-    }
-    .hero-section::before {
-        content: "";
-        position: absolute; inset: 0;
-        background-image:
-            radial-gradient(circle at 15% 40%, rgba(79,168,213,0.12) 0%, transparent 50%),
-            radial-gradient(circle at 85% 20%, rgba(11,29,53,0.06) 0%, transparent 45%),
-            radial-gradient(circle at 70% 80%, rgba(232,164,74,0.08) 0%, transparent 40%);
-        pointer-events: none;
-    }
-    .hero-section::after {
-        content: "";
-        position: absolute; top: 0; left: 0; width: 100%; height: 6px;
-        background: linear-gradient(90deg, var(--navy), var(--accent), var(--accent-warm));
-    }
-    .hero-content { position: relative; z-index: 10; }
-    .hero-eyebrow {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: rgba(79,168,213,0.12); border: 1px solid rgba(79,168,213,0.25);
-        border-radius: 100px; padding: 0.35rem 1rem;
-        font-size: 0.8rem; font-weight: 600; color: var(--accent);
-        letter-spacing: 0.5px; text-transform: uppercase;
-        margin-bottom: 1.5rem;
-    }
-    .hero-section h1 {
-        font-family: 'Poppins', sans-serif;
-        font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800;
-        line-height: 1.1; margin-bottom: 1.5rem; color: var(--navy);
-        letter-spacing: -1px;
-    }
-    .hero-section h1 .accent-text {
-        background: linear-gradient(135deg, var(--navy) 30%, var(--accent));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-section .lead {
-        font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted);
-        max-width: 560px; line-height: 1.85;
-    }
-    .hero-section .lead strong { color: var(--text-main); font-weight: 600; }
-
-    .profile-photo-wrapper {
-        position: relative; display: inline-block;
-    }
-    .profile-photo {
-        width: 100%; max-width: 300px; aspect-ratio: 1; object-fit: cover;
-        border-radius: 32px;
-        border: 6px solid var(--surface);
-        box-shadow: var(--shadow-lg), 0 0 0 2px rgba(79,168,213,0.2);
-        display: block; margin: 0 auto;
-        transition: all 0.5s var(--ease-spring);
-    }
-    .profile-photo:hover { transform: scale(1.04) rotate(2deg); }
-    .profile-badge {
-        position: absolute; bottom: 12px; right: -12px;
-        background: var(--navy); color: var(--accent);
-        border-radius: 12px; padding: 0.5rem 0.9rem;
-        font-size: 0.75rem; font-weight: 700;
-        box-shadow: var(--shadow-md);
-        display: flex; align-items: center; gap: 0.4rem;
-        border: 2px solid rgba(79,168,213,0.2);
-    }
-    .profile-badge span { color: var(--surface); }
-
-    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-    .btn-primary {
-        background: var(--navy); border: none; padding: 0.875rem 2rem;
-        font-weight: 600; font-size: 0.9rem; border-radius: 12px;
-        transition: all 0.3s var(--ease);
-        position: relative; overflow: hidden;
-    }
-    .btn-primary::before {
-        content: ''; position: absolute; inset: 0;
-        background: linear-gradient(135deg, var(--navy-soft), var(--navy));
-        opacity: 0; transition: opacity 0.3s;
-    }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-    .btn-outline-accent {
-        border: 2px solid var(--navy); color: var(--navy);
-        padding: 0.875rem 2rem; font-weight: 600; font-size: 0.9rem;
-        border-radius: 12px; transition: all 0.3s var(--ease);
-        background: transparent;
-        text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-outline-accent:hover {
-        background: var(--navy); color: var(--surface);
-        transform: translateY(-3px); box-shadow: var(--shadow-md);
-    }
-
-    /* ── SECTION HEADERS ── */
-    .section-header { position: relative; margin-bottom: 3.5rem; }
-    .section-header .overline {
-        display: inline-block; font-size: 0.75rem; font-weight: 700;
-        letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
-        margin-bottom: 0.75rem;
-    }
-    .section-header h2 {
-        font-family: 'Poppins', sans-serif;
-        font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800;
-        color: var(--navy); letter-spacing: -0.5px; margin-bottom: 0.75rem;
-    }
-    .section-header p { color: var(--text-muted); max-width: 520px; }
-    .section-header.center { text-align: center; }
-    .section-header.center p { margin: 0 auto; }
-    .title-bar {
-        width: 48px; height: 4px;
-        background: linear-gradient(90deg, var(--accent), var(--accent-warm));
-        border-radius: 2px; margin-top: 1rem;
-    }
-    .section-header.center .title-bar { margin: 1rem auto 0; }
-
-    /* ── À PROPOS ── */
-    #about-section {
-        padding: 5rem 0;
-        background: var(--navy);
-        position: relative; overflow: hidden;
-    }
-    #about-section::before {
-        content: '';
-        position: absolute; top: -60px; right: -60px;
-        width: 300px; height: 300px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(79,168,213,0.08) 0%, transparent 70%);
-    }
-    .about-text {
-        font-size: 1.1rem; line-height: 1.9; color: rgba(221,232,245,0.85);
-    }
-    .about-text strong { color: var(--accent); font-weight: 600; }
-    .about-highlight {
-        background: rgba(79,168,213,0.08);
-        border-left: 3px solid var(--accent);
-        border-radius: 0 8px 8px 0;
-        padding: 1rem 1.5rem;
-        color: rgba(221,232,245,0.9);
-        font-style: italic; font-size: 1rem;
-        margin-top: 1.5rem;
-    }
-    .about-values {
-        display: flex; flex-direction: column; gap: 1rem;
-        margin-top: 1rem;
-    }
-    .about-value-item {
-        display: flex; align-items: flex-start; gap: 1rem;
-        background: rgba(79,168,213,0.06);
-        border: 1px solid rgba(79,168,213,0.12);
-        border-radius: 12px; padding: 1rem 1.2rem;
-    }
-    .about-value-item i {
-        color: var(--accent); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0;
-    }
-    .about-value-item p { margin: 0; color: rgba(221,232,245,0.8); font-size: 0.9rem; }
-    .about-value-item strong { color: #dde8f5; display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
-
-    /* ── EXPERTISE ── */
-    #expertise { padding: 5rem 0; background: var(--surface-2); }
-    .expertise-card {
-        background: var(--surface); border-radius: 20px; padding: 2.5rem 2rem;
-        transition: all 0.4s var(--ease-spring); border: 1px solid var(--border);
-        height: 100%; position: relative; overflow: hidden;
-    }
-    .expertise-card::after {
-        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-        background: linear-gradient(90deg, var(--accent), var(--accent-warm));
-        transform: scaleX(0); transform-origin: left; transition: 0.4s var(--ease);
-    }
-    .expertise-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .expertise-card:hover::after { transform: scaleX(1); }
-    .card-icon-wrap {
-        width: 60px; height: 60px; border-radius: 16px;
-        background: linear-gradient(135deg, var(--navy), var(--navy-soft));
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 1.5rem; transition: 0.4s var(--ease-spring);
-    }
-    .expertise-card:hover .card-icon-wrap { transform: scale(1.1) rotate(5deg); }
-    .card-icon-wrap i { color: var(--accent); font-size: 1.4rem; }
-    .expertise-card h3 {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--navy);
-    }
-    .expertise-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
-    .card-link {
-        color: var(--navy); font-weight: 600; font-size: 0.85rem; text-decoration: none;
-        display: inline-flex; align-items: center; gap: 0.4rem;
-        transition: 0.3s var(--ease);
-    }
-    .card-link:hover { color: var(--accent); gap: 0.8rem; }
-
-    /* ── PROJETS ── */
-    #projects { padding: 5rem 0; background: var(--surface); }
-    .project-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 20px; overflow: hidden;
-        transition: all 0.4s var(--ease-spring);
-        height: 100%;
-        box-shadow: var(--shadow-sm);
-    }
-    .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .project-thumb {
-        height: 180px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 3.5rem; position: relative; overflow: hidden;
-    }
-    .project-thumb::before {
-        content: ''; position: absolute; inset: 0;
-        opacity: 0.9;
-    }
-    .project-thumb .thumb-icon { position: relative; z-index: 1; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
-    .thumb-ml    { background: linear-gradient(135deg, #0f2440 0%, #1a3a6b 100%); }
-    .thumb-sig   { background: linear-gradient(135deg, #0a2a1f 0%, #0d4a35 100%); }
-    .thumb-auto  { background: linear-gradient(135deg, #2a1a0a 0%, #5a3010 100%); }
-    .thumb-ia    { background: linear-gradient(135deg, #1a0a2a 0%, #3d1060 100%); }
-
-    .project-body { padding: 1.5rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
-    .project-tag {
-        font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px;
-        text-transform: uppercase; padding: 0.25rem 0.6rem;
-        border-radius: 100px; border: 1px solid;
-    }
-    .tag-blue  { color: #3b9bd5; border-color: rgba(59,155,213,0.3); background: rgba(59,155,213,0.08); }
-    .tag-green { color: #2d9e72; border-color: rgba(45,158,114,0.3); background: rgba(45,158,114,0.08); }
-    .tag-orange{ color: #d4872a; border-color: rgba(212,135,42,0.3);  background: rgba(212,135,42,0.08);  }
-    .tag-purple{ color: #9b6dd5; border-color: rgba(155,109,213,0.3); background: rgba(155,109,213,0.08); }
-    .project-body h4 {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem;
-    }
-    .project-body p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
-    .project-meta {
-        display: flex; align-items: center; justify-content: space-between;
-        padding-top: 1rem; border-top: 1px solid var(--border);
-    }
-    .project-meta span { font-size: 0.75rem; color: var(--text-muted); }
-    .project-meta a {
-        font-size: 0.8rem; font-weight: 600; color: var(--navy); text-decoration: none;
-        display: inline-flex; align-items: center; gap: 0.3rem; transition: 0.3s var(--ease);
-    }
-    .project-meta a:hover { color: var(--accent); }
-
-    /* ── TECH STACK ── */
-    #techstack { padding: 4rem 0; background: var(--surface-2); }
-    .tech-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-    .tech-badge {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: var(--surface); border: 1px solid var(--border);
-        border-radius: 100px; padding: 0.5rem 1.1rem;
-        font-size: 0.82rem; font-weight: 600; color: var(--text-main);
-        transition: all 0.3s var(--ease); box-shadow: var(--shadow-sm);
-    }
-    .tech-badge i { font-size: 1rem; }
-    .tech-badge:hover {
-        background: var(--navy); color: var(--surface);
-        transform: translateY(-3px); box-shadow: var(--shadow-md);
-        border-color: var(--navy);
-    }
-    .tech-badge:hover i { color: var(--accent); }
-
-    /* ── STATS ── */
-    .stats-section { background: var(--surface); padding: 4rem 0; }
-    .stat-item {
-        text-align: center; padding: 2rem 1.5rem;
-        transition: all 0.3s var(--ease);
-        border-radius: 16px; cursor: default;
-        border: 1px solid transparent;
-    }
-    .stat-item:hover { background: var(--surface-2); border-color: var(--border); transform: scale(1.04); }
-    .stat-item h2 {
-        font-family: 'Poppins', sans-serif;
-        font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800;
-        color: var(--navy); margin-bottom: 0.5rem;
-        transition: transform 0.3s ease;
-    }
-    .stat-item.counting h2 { transform: scale(1.08); }
-    .stat-item p { color: var(--text-muted); font-weight: 500; margin: 0; font-size: 0.9rem; }
-
-    /* ── FOOTER ── */
-    footer {
-        background: var(--navy);
-        border-top: 4px solid transparent;
-        border-image: linear-gradient(90deg, var(--navy-soft), var(--accent), var(--accent-warm)) 1;
-        padding: 3rem 0;
-    }
-    .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; }
-    .social-links a {
-        width: 42px; height: 42px; display: inline-flex; align-items: center;
-        justify-content: center; background: rgba(255,255,255,0.08);
-        border-radius: 12px; transition: all 0.3s var(--ease);
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    .social-links a:hover {
-        background: var(--accent); color: var(--navy) !important;
-        transform: translateY(-4px); border-color: var(--accent);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeInUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeInLeft { from { opacity:0; transform:translateX(-28px); } to { opacity:1; transform:translateX(0); } }
-    @keyframes zoomIn     { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
-    .animate-fadeInLeft  { animation: fadeInLeft 0.7s ease-out; }
-    .animate-fadeInUp    { animation: fadeInUp 0.7s ease-out; }
-    .animate-zoomIn      { animation: zoomIn 0.9s var(--ease-spring); }
-    .delay-200 { animation-delay:0.2s; animation-fill-mode:backwards; }
-    .delay-400 { animation-delay:0.4s; animation-fill-mode:backwards; }
-
-    /* ── MODAL DOCUMENTS ── */
-    .docs-overlay {
-        display: none; position: fixed; inset: 0;
-        background: rgba(11,29,53,0.85); backdrop-filter: blur(6px);
-        z-index: 2000; align-items: center; justify-content: center;
-    }
-    .docs-overlay.active { display: flex; }
-    .docs-panel {
-        background: var(--surface); border-radius: 24px; width: 90%; max-width: 520px;
-        box-shadow: 0 40px 100px rgba(0,0,0,0.4); overflow: hidden;
-        animation: slideUp 0.4s var(--ease-spring);
-    }
-    @keyframes slideUp {
-        from { opacity:0; transform:translateY(40px) scale(0.95); }
-        to   { opacity:1; transform:translateY(0) scale(1); }
-    }
-    .docs-panel-header {
-        background: var(--navy); padding: 1.6rem 2rem;
-        display: flex; align-items: center; justify-content: space-between;
-    }
-    .docs-panel-header h4 {
-        color: var(--surface); font-family: 'Poppins', sans-serif; font-weight: 700;
-        font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 0.75rem;
-    }
-    .docs-panel-header h4 i { color: var(--accent); }
-    .docs-close-btn {
-        background: rgba(255,255,255,0.1); border: none; color: var(--surface);
-        width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
-        transition: all 0.3s var(--ease);
-        display: flex; align-items: center; justify-content: center;
-    }
-    .docs-close-btn:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
-    #docs-login-screen { padding: 2.5rem 2rem; }
-    #docs-login-screen > p {
-        color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem; text-align: center;
-    }
-    .code-input-wrapper {
-        display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem;
-    }
-    .code-digit {
-        width: 54px; height: 62px; border: 2px solid #dde5ef; border-radius: 12px;
-        font-size: 1.7rem; font-weight: 700; text-align: center; color: var(--navy);
-        outline: none; transition: all 0.25s var(--ease); background: var(--surface-2);
-    }
-    .code-digit:focus { border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(79,168,213,0.15); }
-    .code-digit.filled { border-color: var(--navy); background: rgba(79,168,213,0.06); }
-    .btn-unlock {
-        width: 100%; background: var(--navy); color: var(--surface);
-        border: none; padding: 0.9rem; border-radius: 12px; font-size: 0.95rem;
-        font-weight: 600; cursor: pointer; transition: all 0.3s var(--ease);
-        display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-    }
-    .btn-unlock:hover:not(:disabled) { background: var(--navy-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .btn-unlock:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-    .btn-unlock .btn-spinner {
-        display: none; width: 16px; height: 16px;
-        border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
-        border-radius: 50%; animation: spin 0.7s linear infinite;
-    }
-    .btn-unlock.loading .btn-spinner { display: inline-block; }
-    .btn-unlock.loading .btn-text  { display: none; }
-    .error-msg {
-        display: none; color: #e05252; font-size: 0.83rem;
-        text-align: center; margin-top: 0.75rem; animation: shake 0.4s ease;
-    }
-    .error-msg.show { display: block; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
-    #docs-content-screen { display: none; padding: 2rem; }
-    #docs-content-screen.active { display: block; }
-    .docs-section-label {
-        font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-        color: var(--text-muted); margin-bottom: 1rem; padding-bottom: 0.5rem;
-        border-bottom: 1px solid var(--border);
-    }
-    .doc-item {
-        display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem;
-        border-radius: 12px; border: 1px solid var(--border); text-decoration: none;
-        color: var(--text-main); transition: all 0.3s var(--ease); cursor: pointer;
-        background: var(--surface-2);
-    }
-    .doc-item:hover { background: rgba(79,168,213,0.06); border-color: var(--accent); transform: translateX(4px); color: var(--navy); }
-    .doc-icon {
-        width: 44px; height: 44px; background: var(--navy); border-radius: 10px;
-        display: flex; align-items: center; justify-content: center;
-        color: var(--accent); font-size: 1.2rem; flex-shrink: 0;
-    }
-    .doc-info { flex: 1; min-width: 0; }
-    .doc-name { font-weight: 600; font-size: 0.92rem; color: var(--navy); }
-    .doc-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
-    .doc-arrow { color: var(--text-muted); font-size: 0.85rem; transition: 0.3s var(--ease); }
-    .doc-item:hover .doc-arrow { color: var(--navy); transform: translateX(4px); }
-
-    /* ── VIEWER PDF ── */
-    .viewer-overlay {
-        display: none; position: fixed; inset: 0; background: #070e1a;
-        z-index: 3000; flex-direction: column;
-    }
-    .viewer-overlay.active { display: flex; }
-    .viewer-topbar {
-        background: #0b1525; border-bottom: 1px solid rgba(79,168,213,0.12);
-        padding: 0.75rem 1.5rem; display: flex; align-items: center;
-        justify-content: space-between; flex-shrink: 0;
-    }
-    .viewer-title { color: var(--accent); font-size: 0.88rem; font-weight: 600; display: flex; align-items: center; gap: 0.6rem; }
-    .viewer-counter { color: rgba(255,255,255,0.45); font-size: 0.82rem; }
-    .viewer-close {
-        background: rgba(255,255,255,0.07); border: none; color: #fff;
-        width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
-        transition: all 0.3s var(--ease); display: flex; align-items: center; justify-content: center;
-    }
-    .viewer-close:hover { background: rgba(224,82,82,0.3); transform: rotate(90deg); }
-    .viewer-stage {
-        flex: 1; display: flex; align-items: center; justify-content: center;
-        padding: 1rem; overflow: hidden; position: relative;
-    }
-    .slide-frame {
-        position: relative; width: 100%; max-width: 960px;
-        aspect-ratio: 16/9; background: #fff; border-radius: 8px; overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .slide-frame iframe { width: 100%; height: 100%; border: none; display: block; }
-    .viewer-nav-btn {
-        position: absolute; top: 50%; transform: translateY(-50%);
-        background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
-        color: #fff; width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
-        font-size: 1rem; transition: all 0.3s var(--ease);
-        display: flex; align-items: center; justify-content: center; z-index: 10;
-    }
-    .viewer-nav-btn:hover { background: rgba(79,168,213,0.18); border-color: var(--accent); transform: translateY(-50%) scale(1.1); }
-    .viewer-nav-btn:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
-    #btn-prev { left: 1rem; }
-    #btn-next { right: 1rem; }
-    .viewer-bottombar {
-        background: #0b1525; border-top: 1px solid rgba(79,168,213,0.08);
-        padding: 0.75rem 1.5rem; display: flex; align-items: center;
-        justify-content: center; gap: 0.5rem; flex-wrap: wrap; flex-shrink: 0;
-    }
-    .slide-dot {
-        width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.18);
-        cursor: pointer; transition: all 0.3s var(--ease); border: none;
-    }
-    .slide-dot.active { background: var(--accent); transform: scale(1.4); }
-    .slide-dot:hover { background: rgba(79,168,213,0.6); }
-    .viewer-loading {
-        position: absolute; inset: 0; display: flex; flex-direction: column;
-        align-items: center; justify-content: center; background: #f4f7fb; gap: 1rem;
-    }
-    .viewer-loading p { color: var(--text-muted); font-size: 0.88rem; }
-    .spinner { width: 38px; height: 38px; border: 3px solid #dde5ef; border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 991px) {
-        .navbar-nav { padding: 1rem 0; }
-        .hero-section { padding: 3rem 0; }
-        .cta-buttons { justify-content: center; }
-        .profile-photo { max-width: 240px; }
-    }
-    @media (max-width: 768px) {
-        .cta-buttons { flex-direction: column; align-items: stretch; }
-        .btn-primary, .btn-outline-accent { width: 100%; justify-content: center; }
-        .expertise-card, .project-card { margin-bottom: 1rem; }
-        .viewer-stage { padding: 1rem 3.5rem; }
-        .viewer-nav-btn { width: 36px; height: 36px; font-size: 0.85rem; }
-        #btn-prev { left: 0.3rem; }
-        #btn-next { right: 0.3rem; }
-        .code-digit { width: 46px; height: 54px; font-size: 1.4rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-    .skip-link { position: absolute; top: -40px; left: 0; background: var(--navy); color: var(--surface); padding: 8px; z-index: 1000; text-decoration: none; }
-    .skip-link:focus { top: 0; }
-    @media print { nav, footer, .cta-buttons { display: none; } }
+  .cta-band { background: var(--ink-800); color: #fff; padding-block: var(--sp-16); }
+  .cta-band h2 { color: #fff; }
+  .cta-band p { color: rgba(255,255,255,.75); }
 </style>
 </head>
-
 <body>
-    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNavbar" role="navigation" aria-label="Navigation principale">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html" aria-label="Retour à l'accueil">
-            <span class="brand-icon me-2" aria-hidden="true"><i class="fas fa-code"></i></span>
-            François Lachance
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="index.html" aria-current="page" data-section="hero">Accueil</a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="machine-learning.html">IA & ML</a></li>
-                <li class="nav-item"><a class="nav-link" href="matlab.html">Traitement Signal & Image</a></li>
-                <li class="nav-item"><a class="nav-link" href="web.html">Automatisme</a></li>
-                <li class="nav-item"><a class="nav-link" href="academic/contratdevie.html">📊 Contrat de vie</a></li>  <!-- NOUVEAU -->
-                <li class="nav-item"><a class="nav-link" href="cv-op.html">Mon CV</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="docsNavLink" aria-label="Accéder aux documents personnels">
-                        <i class="fas fa-lock me-1" style="font-size:0.75rem;opacity:0.7;"></i>
-                        Documents
-                    </a>
-                </li>
-            </ul>
-        </div>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<!-- Bandeau disponibilité : l'information n°1 pour un recruteur -->
+<div class="availability">
+  <div class="wrap availability__inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de ⟦mois/année⟧, puis CDI.</span>
+    <span>Toulouse et mobilité France entière.</span>
+    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+  </div>
+</div>
+
+<nav class="site-nav" id="siteNav" aria-label="Navigation principale">
+  <div class="wrap site-nav__inner">
+    <a class="site-nav__brand" href="index.html">
+      <span class="dot" aria-hidden="true"></span>François Lachance
+    </a>
+    <button class="site-nav__toggle" type="button" id="navToggle"
+            aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">☰</button>
+    <div class="site-nav__menu" id="navMenu">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html" aria-current="page">Accueil</a></li>
+        <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
+        <li><a class="site-nav__link" href="matlab.html">Signal &amp; image</a></li>
+        <li><a class="site-nav__link" href="veille.html">Veille automatisée</a></li>
+        <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
+        <li><a class="site-nav__cta" href="contact.html">Me contacter</a></li>
+      </ul>
     </div>
+  </div>
 </nav>
 
-<main id="main-content">
+<main id="contenu">
 
-    <!-- ── HERO ── -->
-    <section class="hero-section" id="section-hero" aria-labelledby="hero-title">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 text-center text-lg-start hero-content">
-                    <div class="hero-eyebrow animate-fadeInLeft">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        Toulouse, France
-                    </div>
-                    <h1 id="hero-title" class="animate-fadeInLeft">
-                        Bienvenue, je suis<br>
-                        <span class="accent-text">François Lachance</span>
-                    </h1>
-                    <p class="lead animate-fadeInUp delay-200">
-                        Ingénieur passionné d'<strong>Intelligence Artificielle</strong> et de <strong>Machine Learning</strong>,
-                        expert en <strong>Traitement du Signal et de l'Image</strong> appliqué au spatial,
-                        et automaticien rigoureux.
-                    </p>
-                    <div class="cta-buttons animate-fadeInUp delay-400">
-                        <a href="cv-op.html" class="btn btn-primary btn-lg shadow" aria-label="Télécharger mon CV">
-                            <i class="fas fa-file-download me-2" aria-hidden="true"></i>
-                            Télécharger CV
-                        </a>
-                        <a href="#projects" class="btn-outline-accent btn-lg">
-                            Voir mes projets
-                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-5 text-center mt-5 mt-lg-0">
-                    <div class="profile-photo-wrapper animate-zoomIn">
-                        <img src="assets/aaa.png"
-                             alt="François Lachance, ingénieur IA et traitement du signal, Toulouse"
-                             class="profile-photo"
-                             loading="eager"
-                             width="300"
-                             height="300">
-                        <div class="profile-badge">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Master EEA-SIA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="hero__role">Ingénieur — traitement du signal, image &amp; machine learning</p>
+        <h1>Je transforme des signaux bruités en décisions fiables.</h1>
+        <p>
+          EEG, vibrations de roulements, symboles QAM, flux vidéo : mêmes mathématiques,
+          mêmes exigences de rigueur. Je conçois la chaîne complète, de l'acquisition
+          jusqu'au modèle qui décide.
+        </p>
+        <div class="hero__actions">
+          <a class="act act--signal" href="machine-learning.html">Voir les projets</a>
+          <a class="act act--onDark" href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV</a>
         </div>
-    </section>
+      </div>
 
-    <!-- ── À PROPOS ── -->
-    <section id="about-section" aria-labelledby="about-title">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <div class="section-header">
-                        <span class="overline">À propos</span>
-                        <h2 id="about-title">Ingénieur à la croisée du signal, de l'image et de l'IA</h2>
-                        <div class="title-bar"></div>
-                    </div>
-                    <p class="about-text">
-                        Actuellement en <strong>Master EEA-SIA2 / IdS-IM</strong> à Toulouse, je combine électronique,
-                        traitement du signal et intelligence artificielle pour concevoir des systèmes capables
-                        de percevoir, analyser et décider. Mon approche mêle une rigueur héritée des automatismes industriels
-                        et une curiosité pour les modèles prédictifs, afin de construire des chaînes de traitement robustes,
-                        du capteur à la décision.
-                    </p>
-                    <p class="about-text mt-3">
-                        J’accorde une attention particulière à l’esthétique cachée des signaux — ce fragile équilibre entre
-                        information et bruit, où l’ingénieur doit souvent forger des certitudes à partir d’indices incomplets.
-                        C’est dans cet entre-deux, entre la théorie et la panne, que naît la véritable intelligence système.
-                    </p>
-                    <blockquote class="about-highlight">
-                        “Celui qui sait pourquoi il tombe ne craint plus la chute.”
-                    </blockquote>
-                </div>
-                <div class="col-lg-6">
-                    <div class="about-values">
-                        <div class="about-value-item">
-                            <i class="fas fa-brain"></i>
-                            <div>
-                                <strong>Vision appliquée & IA</strong>
-                                <p>Conception de pipelines de reconnaissance d’images, détection d’objets et classification de données complexes avec TensorFlow, PyTorch et OpenCV. Expérience en fine-tuning de modèles pré-entraînés pour l’embarqué.</p>
-                            </div>
-                        </div>
-                        <div class="about-value-item">
-                            <i class="fas fa-wave-square"></i>
-                            <div>
-                                <strong>Signal & Estimation avancée</strong>
-                                <p>Traitement spectral haute résolution, filtrage adaptatif (LMS, RLS), démodulation cohérente, estimation paramétrique par moindres carrés récursifs et méthodes de Monte-Carlo pour l’incertitude.</p>
-                            </div>
-                        </div>
-                        <div class="about-value-item">
-                            <i class="fas fa-cogs"></i>
-                            <div>
-                                <strong>Automatisme & Temps réel</strong>
-                                <p>Programmation de systèmes industriels sous TIA Portal (API SIEMENS), modélisation Simulink pour le contrôle prédictif, supervision et maintenance de chaînes de production, avec une sensibilité particulière aux dérives temporelles des capteurs.</p>
-                            </div>
-                        </div>
-                        <div class="about-value-item">
-                            <i class="fas fa-chalkboard-user"></i>
-                            <div>
-                                <strong>Pédagogie & Transmission</strong>
-                                <p>Encadrement de travaux pratiques en traitement du signal et automatique. Conviction que l’école ne prépare qu’à moitié : la vraie compétence s’acquiert dans l’effort obstiné, face à un banc d’essai silencieux ou une doc mal écrite.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <figure class="scope" role="img"
+              aria-label="Oscilloscope animé : un signal EEG bruité est filtré, puis une crise est détectée.">
+        <figcaption class="scope__head">
+          <span>EEG — canal Fp1 · 256 Hz</span>
+          <b id="scopeState">acquisition</b>
+        </figcaption>
+        <canvas id="heroScope" height="300"></canvas>
+        <div class="scope__foot">
+          <div>SNR entrée<span id="scopeSnr">—</span></div>
+          <div>Latence<span id="scopeLat">—</span></div>
+          <div>Décision<span id="scopeDec">—</span></div>
         </div>
-    </section>
+      </figure>
+    </div>
+  </header>
 
-    <!-- ── PROJETS ── -->
-    <section id="projects" aria-labelledby="projects-title">
-        <div class="container">
-            <div class="section-header center">
-                <span class="overline">Travaux & Réalisations</span>
-                <h2 id="projects-title">Projets récents</h2>
-                <p>Une sélection de projets techniques menés en formation et en autonomie.</p>
-                <div class="title-bar"></div>
-            </div>
-            <div class="row g-4">
+  <hr class="rule">
 
-                <div class="col-sm-6 col-xl-3">
-                    <div class="project-card">
-                        <div class="project-thumb thumb-ml">
-                            <span class="thumb-icon">🧬</span>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag tag-blue">Deep Learning</span>
-                                <span class="project-tag tag-purple">CNN</span>
-                            </div>
-                            <h4>Classification de lésions cutanées</h4>
-                            <p>Classification multi-classes (9 catégories) sur le dataset ISIC 2019. Gestion du déséquilibre de classes et augmentation de données avancée.</p>
-                            <div class="project-meta">
-                                <span><i class="fab fa-python me-1"></i>PyTorch · scikit-learn</span>
-                                <a href="machine-learning.html">Voir <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <!-- ================= CE QUE JE CHERCHE ================= -->
+  <section class="section section--tight">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Ce que je cherche</p>
+        <h2>Un stage qui débouche sur un poste.</h2>
+      </div>
+      <div>
+        <p>
+          Je termine un master EEA parcours signal, image et automatique. Je cherche un
+          stage de fin d'études de six mois — puis un CDI — sur des sujets où le signal
+          rencontre l'apprentissage&nbsp;: perception embarquée, maintenance prédictive,
+          imagerie médicale, télécoms, contrôle qualité industriel.
+        </p>
+        <p>
+          Ce qui m'intéresse dans une équipe&nbsp;: des données réelles et imparfaites,
+          des contraintes temps réel, et des gens qui relisent le code des autres.
+        </p>
 
-                <div class="col-sm-6 col-xl-3">
-                    <div class="project-card">
-                        <div class="project-thumb thumb-ia">
-                            <span class="thumb-icon">👁️</span>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag tag-purple">Computer Vision</span>
-                                <span class="project-tag tag-blue">ML</span>
-                            </div>
-                            <h4>Reconnaissance faciale</h4>
-                            <p>Pipeline complet de détection et reconnaissance de visages : extraction de features, matching et identification en temps réel avec OpenCV.</p>
-                            <div class="project-meta">
-                                <span><i class="fab fa-python me-1"></i>OpenCV · Python</span>
-                                <a href="machine-learning.html">Voir <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="project-card">
-                        <div class="project-thumb thumb-sig">
-                            <span class="thumb-icon">📡</span>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag tag-green">Signal</span>
-                                <span class="project-tag tag-blue">Estimation</span>
-                            </div>
-                            <h4>Estimation paramétrique (MC)</h4>
-                            <p>Estimateur des moindres carrés pour modèles non-linéaires, estimation de réponse impulsionnelle via convolution bruitée. Dérivation de β̂ = (RᵀR)⁻¹Rᵀy.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-calculator me-1"></i>MATLAB · Python</span>
-                                <a href="matlab.html">Voir <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xl-3">
-                    <div class="project-card">
-                        <div class="project-thumb thumb-auto">
-                            <span class="thumb-icon">⚙️</span>
-                        </div>
-                        <div class="project-body">
-                            <div class="project-tags">
-                                <span class="project-tag tag-orange">Automatisme</span>
-                                <span class="project-tag tag-green">Temps-réel</span>
-                            </div>
-                            <h4>Automatisme TIA Portal</h4>
-                            <p>Programmation et supervision de systèmes industriels complexes. Gestion d'automates Siemens, chaînes de sécurité et maintenance préventive.</p>
-                            <div class="project-meta">
-                                <span><i class="fas fa-microchip me-1"></i>TIA Portal · Simulink</span>
-                                <a href="web.html">Voir <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="facts" style="margin-top: var(--sp-8);">
+          <div><b>⟦11⟧</b><span>projets publiés sur GitHub, code lisible et documenté</span></div>
+          <div><b>Python · MATLAB</b><span>langages de travail quotidiens</span></div>
+          <div><b>Toulouse</b><span>disponible sur place, mobile en France</span></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ── EXPERTISE ── -->
-    <section id="expertise" aria-labelledby="expertise-title">
-        <div class="container">
-            <div class="section-header center">
-                <span class="overline">Savoir-faire</span>
-                <h2 id="expertise-title">Domaines d'intervention</h2>
-                <div class="title-bar"></div>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <article class="expertise-card">
-                        <div class="card-icon-wrap"><i class="fas fa-brain"></i></div>
-                        <h3>Machine Learning & IA</h3>
-                        <p>Deep Learning, classification et vision par ordinateur avec TensorFlow, PyTorch et scikit-learn.</p>
-                        <a href="machine-learning.html" class="card-link" aria-label="Voir mes projets en Intelligence Artificielle">Projets IA</a>
-                    </article>
-                </div>
-                <div class="col-md-4">
-                    <article class="expertise-card">
-                        <div class="card-icon-wrap"><i class="fas fa-satellite"></i></div>
-                        <h3>Traitement Signal & Image</h3>
-                        <p>Analyse spatiale, filtrage avancé et segmentation sous MATLAB, OpenCV et Python.</p>
-                        <a href="matlab.html" class="card-link" aria-label="Voir mes analyses en traitement du signal">Voir les analyses</a>
-                    </article>
-                </div>
-                <div class="col-md-4">
-                    <article class="expertise-card">
-                        <div class="card-icon-wrap"><i class="fas fa-microchip"></i></div>
-                        <h3>Automatisme Industriel</h3>
-                        <p>TIA Portal, Simulink et maintenance des systèmes industriels complexes.</p>
-                        <a href="web.html" class="card-link" aria-label="Voir les détails techniques en automatisme">Détails techniques</a>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
+  <hr class="rule">
 
-    <!-- ── TECH STACK ─ --->
-    <section id="techstack" aria-labelledby="techstack-title">
-        <div class="container">
-            <div class="section-header center">
-                <span class="overline">Outils & Technologies</span>
-                <h2 id="techstack-title">Tech Stack</h2>
-                <div class="title-bar"></div>
-            </div>
-            <div class="tech-grid">
-                <span class="tech-badge"><i class="fab fa-python" style="color:#4b8bbe;"></i> Python</span>
-                <span class="tech-badge"><i class="fas fa-fire" style="color:#ee4c2c;"></i> PyTorch</span>
-                <span class="tech-badge"><i class="fas fa-brain" style="color:#ff6f00;"></i> TensorFlow</span>
-                <span class="tech-badge"><i class="fas fa-chart-line" style="color:#2d9e72;"></i> scikit-learn</span>
-                <span class="tech-badge"><i class="fas fa-eye" style="color:#5a9bd5;"></i> OpenCV</span>
-                <span class="tech-badge"><i class="fas fa-calculator" style="color:#e16737;"></i> MATLAB</span>
-                <span class="tech-badge"><i class="fas fa-microchip" style="color:#009999;"></i> TIA Portal</span>
-                <span class="tech-badge"><i class="fas fa-sliders-h" style="color:#0076a8;"></i> Simulink</span>
-                <span class="tech-badge"><i class="fab fa-git-alt" style="color:#f05032;"></i> Git</span>
-                <span class="tech-badge"><i class="fab fa-linux" style="color:#fcc624;"></i> Linux</span>
-                <span class="tech-badge"><i class="fas fa-wave-square" style="color:#4fa8d5;"></i> Traitement Signal</span>
-                <span class="tech-badge"><i class="fas fa-project-diagram" style="color:#9b6dd5;"></i> LaTeX</span>
-            </div>
-        </div>
-    </section>
+  <!-- ================= PROJETS PHARES ================= -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Trois chaînes de traitement complètes</p>
+      <h2>Projets phares</h2>
+      <p class="lede" style="margin-bottom: var(--sp-12);">
+        Chaque projet part d'un signal réel, passe par une méthode explicite et se termine
+        par un chiffre. Le code est public.
+      </p>
 
-    <!-- ── STATS ── -->
-    <section class="stats-section" aria-label="Statistiques du portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <div class="stat-item" data-target="10" data-suffix="+">
-                        <h2 class="stat-value">0+</h2>
-                        <p>Projets Réalisés</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item" data-target="3" data-suffix="">
-                        <h2 class="stat-value">0</h2>
-                        <p>Domaines d'expertise</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item" data-target="100" data-suffix="%">
-                        <h2 class="stat-value">0%</h2>
-                        <p>Passion & Engagement</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item">
-                        <h2><i class="fas fa-map-marker-alt" style="color:var(--accent);"></i></h2>
-                        <p>Toulouse, France</p>
-                    </div>
-                </div>
+      <div class="entries">
+
+        <article class="entry reveal">
+          <div class="entry__view"><canvas id="viz-eeg" aria-hidden="true"></canvas></div>
+          <div class="entry__body">
+            <p class="entry__domain">Signal biomédical</p>
+            <h3>Détection de crises d'épilepsie sur EEG</h3>
+            <p>
+              Décomposition en ondelettes discrètes du signal EEG, extraction d'indicateurs
+              par sous-bande (énergie, entropie), puis classification des fenêtres suspectes.
+              Chaîne complète, de la lecture des enregistrements bruts à l'alerte.
+            </p>
+            <p class="entry__result">
+              Sensibilité <strong>⟦xx&nbsp;%⟧</strong> pour <strong>⟦x⟧</strong> fausses alarmes
+              par heure sur ⟦jeu de données, ex.&nbsp;: CHB-MIT⟧.
+            </p>
+            <div class="entry__foot">
+              <ul class="tags"><li>Python</li><li>PyWavelets</li><li>DWT</li><li>scikit-learn</li></ul>
+              <a class="entry__link" href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie"
+                 target="_blank" rel="noopener">Lire le code</a>
             </div>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="entry__view"><canvas id="viz-vib" aria-hidden="true"></canvas></div>
+          <div class="entry__body">
+            <p class="entry__domain">Maintenance prédictive</p>
+            <h3>Classification de défauts de roulement</h3>
+            <p>
+              Analyse vibratoire d'un roulement à billes&nbsp;: enveloppe du signal,
+              recherche des fréquences caractéristiques de défaut (BPFI, BPFO, BSF),
+              puis classification du type de défaut et de sa sévérité.
+            </p>
+            <p class="entry__result">
+              Exactitude <strong>⟦xx&nbsp;%⟧</strong> sur ⟦x⟧ classes de défaut,
+              validation croisée ⟦k⟧ blocs.
+            </p>
+            <div class="entry__foot">
+              <ul class="tags"><li>Python</li><li>scikit-learn</li><li>FFT</li><li>Analyse vibratoire</li></ul>
+              <a class="entry__link" href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-"
+                 target="_blank" rel="noopener">Lire le code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="entry__view"><canvas id="viz-vision" aria-hidden="true"></canvas></div>
+          <div class="entry__body">
+            <p class="entry__domain">Vision par ordinateur</p>
+            <h3>VisionGuard — détection d'objets en temps réel</h3>
+            <p>
+              Surveillance vidéo par YOLOv8&nbsp;: capture, inférence, suivi des objets
+              entre images et interface d'exploitation avec affichage du débit et de la
+              latence bout en bout.
+            </p>
+            <p class="entry__result">
+              <strong>⟦xx⟧ images/s</strong> sur ⟦matériel, ex.&nbsp;: CPU i5 / GPU GTX 1650⟧,
+              latence bout en bout <strong>⟦xx⟧ ms</strong>.
+            </p>
+            <div class="entry__foot">
+              <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
+              <a class="entry__link" href="https://github.com/lachance123-franccois/VisionGuard"
+                 target="_blank" rel="noopener">Lire le code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <p style="margin-top: var(--sp-8);">
+        <a class="act act--ghost" href="machine-learning.html">Tous les projets IA &amp; machine learning</a>
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ================= COMPÉTENCES ================= -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Compétences</p>
+      <h2>Ce que je sais faire, concrètement</h2>
+      <div class="grid-3" style="margin-top: var(--sp-8);">
+
+        <div class="skill">
+          <h4>Traitement du signal</h4>
+          <p>Filtrage, analyse spectrale, ondelettes, démodulation numérique, débruitage,
+             extraction d'indicateurs sur signaux 1D biomédicaux et vibratoires.</p>
+          <p class="skill__tools">NumPy · SciPy · PyWavelets · MATLAB</p>
         </div>
-    </section>
+
+        <div class="skill">
+          <h4>Vision &amp; traitement d'images</h4>
+          <p>Segmentation, analyse spectrale d'images aériennes, détection et suivi
+             d'objets, chaînes de traitement temps réel sur flux vidéo.</p>
+          <p class="skill__tools">OpenCV · YOLOv8 · scikit-image</p>
+        </div>
+
+        <div class="skill">
+          <h4>Machine learning</h4>
+          <p>Classification supervisée, séries temporelles, réseaux convolutifs et
+             récurrents, évaluation honnête (validation croisée, fuite de données).</p>
+          <p class="skill__tools">scikit-learn · PyTorch · TensorFlow · pandas</p>
+        </div>
+
+        <div class="skill">
+          <h4>Développement</h4>
+          <p>Code Python structuré et testé, notebooks reproductibles, Git,
+             environnements isolés, documentation utilisable par quelqu'un d'autre.</p>
+          <p class="skill__tools">Git · pytest · Docker ⟦si vrai⟧ · Linux</p>
+        </div>
+
+        <div class="skill">
+          <h4>Mathématiques appliquées</h4>
+          <p>Probabilités et statistiques, algèbre linéaire, optimisation, théorie de
+             l'estimation — la base qui permet de déboguer un modèle plutôt que de l'essayer au hasard.</p>
+          <p class="skill__tools">Estimation · Optimisation · Statistiques</p>
+        </div>
+
+        <div class="skill">
+          <h4>Langues</h4>
+          <p>Français&nbsp;: langue de travail. Anglais&nbsp;: ⟦niveau, ex. B2 — lecture
+             d'articles scientifiques et documentation technique⟧.</p>
+          <p class="skill__tools">FR · EN</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APPEL À L'ACTION ================= -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Un sujet de stage à pourvoir&nbsp;?</h2>
+      <p style="max-width: 52ch;">
+        Envoyez-moi la fiche de poste. Je réponds sous 24&nbsp;h avec une lecture
+        du sujet et les projets qui s'en rapprochent le plus.
+      </p>
+      <div class="hero__actions">
+        <a class="act act--signal" href="contact.html">Écrire un message</a>
+        <a class="act act--onDark" href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<footer role="contentinfo">
-    <div class="container text-center text-white">
-        <p class="mb-1 fw-600" style="font-family:'Poppins',sans-serif; font-weight:700;">&copy; 2025 François Lachance Awounang-Ngounou</p>
-        <p class="small" style="color:rgba(255,255,255,0.45);">Ingénieur GESI & Computer Vision | Toulouse, France</p>
-        <nav class="social-links" aria-label="Réseaux sociaux">
-            <a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="color:#fff;">
-                <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-            </a>
-            <a href="https://github.com/lachance123-francois" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="color:#fff;">
-                <i class="fab fa-github fa-lg" aria-hidden="true"></i>
-            </a>
-            <a href="mailto:lachanceaeounang@gmail.com" aria-label="Email" style="color:#fff;">
-                <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
-            </a>
-        </nav>
-
-        <!-- COMPTEUR DE VISITES — ajouté ici--->
-        <p class="mt-3 small" style="color:rgba(255,255,255,0.5);">
-            <i class="fas fa-eye me-1"></i> Visiteurs :
-            <img src="https://visitor-badge.laobi.icu/badge?page_id=lachance123-franccois.github.io"
-                 alt="Compteur de visiteurs"
-                 style="vertical-align: middle; margin-left: 4px;" />
-        </p>
-
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__cols">
+      <div>
+        <h4>François Lachance Awounang-Ngounou</h4>
+        <p style="margin:0;">Ingénieur traitement du signal, image et machine learning.<br>Toulouse, France.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
+          <li><a href="matlab.html">Signal &amp; image</a></li>
+          <li><a href="veille.html">Veille automatisée</a></li>
+          <li><a href="cv-op.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ailleurs</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="site-foot__base">
+      <span>© 2026 François Lachance Awounang-Ngounou</span>
+      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+    </div>
+  </div>
 </footer>
 
-<!-- ── MODAL DOCUMENTS ── -->
-<div class="docs-overlay" id="docsOverlay" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title">
-    <div class="docs-panel">
-        <div class="docs-panel-header">
-            <h4 id="docs-dialog-title">
-                <i class="fas fa-folder-lock"></i>
-                Documents Personnels
-            </h4>
-            <button class="docs-close-btn" id="docsCloseBtn" aria-label="Fermer">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div id="docs-login-screen">
-            <p style="margin-top:0.5rem;">
-                <i class="fas fa-shield-alt me-1" style="color:var(--accent);"></i>
-                Entrez votre code d'accès à 4 chiffres
-            </p>
-            <div class="code-input-wrapper" role="group" aria-label="Code d'accès">
-                <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 1" id="d1" autocomplete="off">
-                <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 2" id="d2" autocomplete="off">
-                <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 3" id="d3" autocomplete="off">
-                <input class="code-digit" type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" aria-label="Chiffre 4" id="d4" autocomplete="off">
-            </div>
-            <button class="btn-unlock" id="btnUnlock">
-                <div class="btn-spinner" aria-hidden="true"></div>
-                <span class="btn-text">
-                    <i class="fas fa-unlock-alt me-2"></i>Déverrouiller
-                </span>
-            </button>
-            <p class="error-msg" id="errorMsg" role="alert">
-                <i class="fas fa-exclamation-circle me-1"></i>
-                Code incorrect. Réessayez.
-            </p>
-        </div>
-        <div id="docs-content-screen">
-            <p class="docs-section-label">
-                <i class="fas fa-chalkboard-teacher me-1"></i>
-                Présentations
-            </p>
-            <div class="doc-item" id="openPresentation" role="button" tabindex="0"
-                 aria-label="Ouvrir la présentation Reconnaissance Faciale">
-                <div class="doc-icon">
-                    <i class="fas fa-file-powerpoint"></i>
-                </div>
-                <div class="doc-info">
-                    <div class="doc-name">How Does Facial Recognition Work?</div>
-                    <div class="doc-meta">
-                        <i class="fas fa-layer-group me-1" style="font-size:0.7rem;"></i>
-                        13 slides &nbsp;·&nbsp;
-                        <i class="fas fa-calendar me-1" style="font-size:0.7rem;"></i>
-                        2025/2026 &nbsp;·&nbsp;
-                        Signal, Image & ML
-                    </div>
-                </div>
-                <i class="fas fa-chevron-right doc-arrow"></i>
-            </div>
-        </div>
-    </div>
-</div>
+<button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 
-
-<!-- ── VIEWER PDF ── -->
-<div class="viewer-overlay" id="viewerOverlay" role="dialog" aria-modal="true" aria-label="Viewer de présentation" tabindex="-1">
-    <div class="viewer-topbar">
-        <div class="viewer-title">
-            <i class="fas fa-chalkboard-teacher"></i>
-            How Does Facial Recognition Work?
-        </div>
-        <span class="viewer-counter" id="slideCounter" aria-live="polite">Slide 1 / 13</span>
-        <button class="viewer-close" id="viewerCloseBtn" aria-label="Quitter la présentation">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div class="viewer-stage">
-        <button class="viewer-nav-btn" id="btn-prev" aria-label="Slide précédente" disabled>
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="slide-frame" id="slideFrame">
-            <div class="viewer-loading" id="viewerLoading">
-                <div class="spinner"></div>
-                <p>Chargement de la présentation…</p>
-            </div>
-            <canvas id="pdfCanvas" style="width:100%;height:100%;display:none;"></canvas>
-        </div>
-        <button class="viewer-nav-btn" id="btn-next" aria-label="Slide suivante">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    <div class="viewer-bottombar" id="slideDots" role="tablist" aria-label="Navigation par slide"></div>
-</div>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-<script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    // Navbar scroll
-    let ticking = false;
-    window.addEventListener('scroll', function () {
-        if (!ticking) {
-            window.requestAnimationFrame(function () {
-                document.getElementById('mainNavbar')
-                    .classList.toggle('scrolled', window.scrollY > 50);
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-
-    // Navbar active sync
-    (function () {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    const id = entry.target.getAttribute('id');
-                    const active = document.querySelector(`.navbar-nav .nav-link[href="#${id}"]`)
-                                || document.querySelector('.navbar-nav .nav-link[href="index.html"]');
-                    if (active) { active.classList.add('active'); active.setAttribute('aria-current', 'page'); }
-                }
-            });
-        }, { threshold: 0.4 });
-        sections.forEach(s => observer.observe(s));
-    })();
-
-    // Count-up animé
-    (function () {
-        const statItems = document.querySelectorAll('.stat-item[data-target]');
-        if (!statItems.length) return;
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const animateCounter = (el) => {
-            const target  = parseInt(el.dataset.target, 10);
-            const suffix  = el.dataset.suffix || '';
-            const display = el.querySelector('.stat-value');
-            if (!display) return;
-            if (prefersReduced) { display.textContent = target + suffix; return; }
-            const duration = 1800;
-            const start    = performance.now();
-            el.classList.add('counting');
-            const step = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const eased    = 1 - Math.pow(1 - progress, 4);
-                display.textContent = Math.floor(eased * target) + suffix;
-                if (progress < 1) { requestAnimationFrame(step); }
-                else { display.textContent = target + suffix; el.classList.remove('counting'); }
-            };
-            requestAnimationFrame(step);
-        };
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { animateCounter(entry.target); io.unobserve(entry.target); }
-            });
-        }, { threshold: 0.6 });
-        statItems.forEach(item => io.observe(item));
-    })();
-
-    // ── SHA-256 — hash de "1234"
-    // Pour changer le code : await hashCode('votre_code') et remplacer la valeur
-    const CORRECT_HASH = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4';
-
-    async function hashCode(code) {
-        const encoder = new TextEncoder();
-        const buffer  = await crypto.subtle.digest('SHA-256', encoder.encode(code));
-        return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    const docsOverlay   = document.getElementById('docsOverlay');
-    const docsCloseBtn  = document.getElementById('docsCloseBtn');
-    const docsNavLink   = document.getElementById('docsNavLink');
-    const btnUnlock     = document.getElementById('btnUnlock');
-    const errorMsg      = document.getElementById('errorMsg');
-    const loginScreen   = document.getElementById('docs-login-screen');
-    const contentScreen = document.getElementById('docs-content-screen');
-    const digits        = ['d1','d2','d3','d4'].map(id => document.getElementById(id));
-
-    docsNavLink.addEventListener('click', (e) => { e.preventDefault(); openDocsModal(); });
-
-    function openDocsModal() {
-        docsOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        resetLogin();
-        setTimeout(() => digits[0].focus(), 100);
-    }
-    function closeDocsModal() {
-        docsOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    docsCloseBtn.addEventListener('click', closeDocsModal);
-    docsOverlay.addEventListener('click', (e) => { if (e.target === docsOverlay) closeDocsModal(); });
-    docsOverlay.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDocsModal(); });
-
-    digits.forEach((d, i) => {
-        d.addEventListener('input', () => {
-            d.value = d.value.replace(/\D/g, '').slice(-1);
-            d.classList.toggle('filled', d.value !== '');
-            if (d.value && i < 3) digits[i + 1].focus();
-            if (digits.every(x => x.value !== '')) tryUnlock();
-        });
-        d.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !d.value && i > 0) digits[i - 1].focus();
-            if (e.key === 'Enter') tryUnlock();
-        });
-    });
-
-    btnUnlock.addEventListener('click', tryUnlock);
-
-    let unlockPending = false;
-    async function tryUnlock() {
-        if (unlockPending) return;
-        const code = digits.map(d => d.value).join('');
-        if (code.length < 4) return;
-        unlockPending = true;
-        btnUnlock.classList.add('loading');
-        btnUnlock.disabled = true;
-        try {
-            const hash = await hashCode(code);
-            if (hash === CORRECT_HASH) {
-                loginScreen.style.display = 'none';
-                contentScreen.classList.add('active');
-            } else {
-                showError();
-            }
-        } finally {
-            unlockPending = false;
-            btnUnlock.classList.remove('loading');
-            btnUnlock.disabled = false;
-        }
-    }
-
-    function showError() {
-        errorMsg.classList.remove('show');
-        void errorMsg.offsetHeight;
-        errorMsg.classList.add('show');
-        digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
-        setTimeout(() => digits[0].focus(), 50);
-    }
-    function resetLogin() {
-        loginScreen.style.display = 'block';
-        contentScreen.classList.remove('active');
-        errorMsg.classList.remove('show');
-        digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
-    }
-
-    // ── Viewer PDF ──
-    const PDF_PATH     = 'assets/pdf/facial_recognition_improved.pdf';
-    const TOTAL_SLIDES = 13;
-
-    const viewerOverlay = document.getElementById('viewerOverlay');
-    const viewerClose   = document.getElementById('viewerCloseBtn');
-    const slideCounter  = document.getElementById('slideCounter');
-    const slideDots     = document.getElementById('slideDots');
-    const pdfCanvas     = document.getElementById('pdfCanvas');
-    const loadingEl     = document.getElementById('viewerLoading');
-    const openPres      = document.getElementById('openPresentation');
-    const btnPrev       = document.getElementById('btn-prev');
-    const btnNext       = document.getElementById('btn-next');
-
-    let pdfDoc      = null;
-    let currentPage = 1;
-    let totalPages  = TOTAL_SLIDES;
-    let rendering   = false;
-
-    openPres.addEventListener('click', openViewer);
-    openPres.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openViewer(); }
-    });
-
-    async function openViewer() {
-        closeDocsModal();
-        viewerOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        viewerOverlay.focus();
-        if (!pdfDoc) { await loadPDF(); } else { renderSlide(currentPage); }
-    }
-
-    async function loadPDF() {
-        try {
-            loadingEl.style.display = 'flex';
-            pdfCanvas.style.display = 'none';
-            pdfDoc     = await pdfjsLib.getDocument(PDF_PATH).promise;
-            totalPages = pdfDoc.numPages;
-            buildDots();
-            currentPage = 1;
-            await renderSlide(currentPage);
-        } catch (err) {
-            loadingEl.innerHTML = '';
-            const icon = document.createElement('i');
-            icon.className = 'fas fa-exclamation-triangle';
-            icon.style.cssText = 'font-size:2rem;color:#e8a44a;';
-            const msg = document.createElement('p');
-            msg.style.cssText = 'color:var(--text-muted);text-align:center;max-width:300px;';
-            const errLine = document.createElement('strong');
-            errLine.textContent = err.message;
-            const hint = document.createElement('small');
-            hint.textContent = 'Vérifiez que le fichier existe à : assets/pdf/facial_recognition_improved.pdf';
-            msg.appendChild(document.createTextNode('Erreur : '));
-            msg.appendChild(errLine);
-            msg.appendChild(document.createElement('br'));
-            msg.appendChild(document.createElement('br'));
-            msg.appendChild(hint);
-            loadingEl.appendChild(icon);
-            loadingEl.appendChild(msg);
-            console.error('PDF load error:', err);
-        }
-    }
-
-    async function renderSlide(pageNum) {
-        if (rendering || !pdfDoc) return;
-        rendering = true;
-        loadingEl.style.display = 'flex';
-        pdfCanvas.style.display = 'none';
-        const page     = await pdfDoc.getPage(pageNum);
-        const stage    = document.getElementById('slideFrame');
-        const scale    = stage.clientWidth / page.getViewport({ scale: 1 }).width;
-        const viewport = page.getViewport({ scale });
-        pdfCanvas.width  = viewport.width;
-        pdfCanvas.height = viewport.height;
-        await page.render({ canvasContext: pdfCanvas.getContext('2d'), viewport }).promise;
-        loadingEl.style.display = 'none';
-        pdfCanvas.style.display = 'block';
-        updateUI();
-        rendering = false;
-    }
-
-    function updateUI() {
-        slideCounter.textContent = `Slide ${currentPage} / ${totalPages}`;
-        btnPrev.disabled = currentPage === 1;
-        btnNext.disabled = currentPage === totalPages;
-        document.querySelectorAll('.slide-dot').forEach((dot, i) => {
-            const active = i + 1 === currentPage;
-            dot.classList.toggle('active', active);
-            dot.setAttribute('aria-selected', String(active));
-        });
-    }
-
-    function buildDots() {
-        slideDots.innerHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
-            const dot = document.createElement('button');
-            dot.className = 'slide-dot' + (i === 1 ? ' active' : '');
-            dot.setAttribute('role', 'tab');
-            dot.setAttribute('aria-label', `Slide ${i}`);
-            dot.setAttribute('aria-selected', i === 1 ? 'true' : 'false');
-            dot.setAttribute('tabindex', '0');
-            dot.addEventListener('click', () => goTo(i));
-            slideDots.appendChild(dot);
-        }
-    }
-
-    async function goTo(n) {
-        if (n < 1 || n > totalPages || n === currentPage || rendering) return;
-        currentPage = n;
-        await renderSlide(currentPage);
-    }
-
-    btnPrev.addEventListener('click', () => goTo(currentPage - 1));
-    btnNext.addEventListener('click', () => goTo(currentPage + 1));
-    viewerClose.addEventListener('click', closeViewer);
-    viewerOverlay.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') goTo(currentPage + 1);
-        if (e.key === 'ArrowLeft')  goTo(currentPage - 1);
-        if (e.key === 'Escape')     closeViewer();
-    });
-    pdfCanvas.addEventListener('click', () => goTo(currentPage + 1));
-    pdfCanvas.style.cursor = 'pointer';
-
-    function closeViewer() {
-        viewerOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-</script>
-
-
+<script src="js/main.js" defer></script>
 </body>
 </html>
