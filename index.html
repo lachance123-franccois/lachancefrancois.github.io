@@ -26,6 +26,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<script>document.documentElement.classList.add('js');</script>
+
 
 <!-- Données structurées : aide Google à afficher le bon encart sur ton nom -->
 <script type="application/ld+json">
@@ -81,9 +83,13 @@
   }
 
   /* Chiffres clés — pas d'animation de compteur, juste des faits lisibles */
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-6); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--sp-6); }
   .facts div { border-top: 2px solid var(--signal); padding-top: var(--sp-3); }
-  .facts b { display: block; font-family: var(--font-mono); font-size: var(--step-2); font-weight: 500; }
+  .facts b { display: block; margin-bottom: 2px; }
+  /* Chasse fixe et grande taille : uniquement pour une valeur mesurée. */
+  .facts b.metric { font-family: var(--font-mono); font-size: var(--step-2); font-weight: 500; }
+  /* Le reste est du texte, et doit en avoir l'air. */
+  .facts b.word { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
   .facts span { font-size: .9rem; color: var(--text-muted); }
 
   .split { display: grid; grid-template-columns: 340px 1fr; gap: var(--sp-12); align-items: start; }
@@ -185,9 +191,9 @@
         </p>
 
         <div class="facts" style="margin-top: var(--sp-8);">
-          <div><b>⟦11⟧</b><span>projets publiés sur GitHub, code lisible et documenté</span></div>
-          <div><b>Python · MATLAB</b><span>langages de travail quotidiens</span></div>
-          <div><b>Toulouse</b><span>disponible sur place, mobile en France</span></div>
+          <div><b class="word">Code public</b><span>chaque projet est lisible sur GitHub</span></div>
+          <div><b class="word">Python et MATLAB</b><span>langages de travail quotidiens</span></div>
+          <div><b class="word">Toulouse</b><span>disponible sur place, mobile en France</span></div>
         </div>
       </div>
     </div>
@@ -201,8 +207,8 @@
       <p class="eyebrow">Trois chaînes de traitement complètes</p>
       <h2>Projets phares</h2>
       <p class="lede" style="margin-bottom: var(--sp-12);">
-        Chaque projet part d'un signal réel, passe par une méthode explicite et se termine
-        par un chiffre. Le code est public.
+        Chaque projet part d'un signal réel et suit une méthode explicite, de
+        l'acquisition jusqu'à la décision. Le code est public.
       </p>
 
       <div class="entries">
@@ -216,10 +222,6 @@
               Décomposition en ondelettes discrètes du signal EEG, extraction d'indicateurs
               par sous-bande (énergie, entropie), puis classification des fenêtres suspectes.
               Chaîne complète, de la lecture des enregistrements bruts à l'alerte.
-            </p>
-            <p class="entry__result">
-              Sensibilité <strong>⟦xx&nbsp;%⟧</strong> pour <strong>⟦x⟧</strong> fausses alarmes
-              par heure sur ⟦jeu de données, ex.&nbsp;: CHB-MIT⟧.
             </p>
             <div class="entry__foot">
               <ul class="tags"><li>Python</li><li>PyWavelets</li><li>DWT</li><li>scikit-learn</li></ul>
@@ -239,10 +241,6 @@
               recherche des fréquences caractéristiques de défaut (BPFI, BPFO, BSF),
               puis classification du type de défaut et de sa sévérité.
             </p>
-            <p class="entry__result">
-              Exactitude <strong>⟦xx&nbsp;%⟧</strong> sur ⟦x⟧ classes de défaut,
-              validation croisée ⟦k⟧ blocs.
-            </p>
             <div class="entry__foot">
               <ul class="tags"><li>Python</li><li>scikit-learn</li><li>FFT</li><li>Analyse vibratoire</li></ul>
               <a class="entry__link" href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-"
@@ -260,10 +258,6 @@
               Surveillance vidéo par YOLOv8&nbsp;: capture, inférence, suivi des objets
               entre images et interface d'exploitation avec affichage du débit et de la
               latence bout en bout.
-            </p>
-            <p class="entry__result">
-              <strong>⟦xx⟧ images/s</strong> sur ⟦matériel, ex.&nbsp;: CPU i5 / GPU GTX 1650⟧,
-              latence bout en bout <strong>⟦xx⟧ ms</strong>.
             </p>
             <div class="entry__foot">
               <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
@@ -315,7 +309,7 @@
           <h4>Développement</h4>
           <p>Code Python structuré et testé, notebooks reproductibles, Git,
              environnements isolés, documentation utilisable par quelqu'un d'autre.</p>
-          <p class="skill__tools">Git · pytest · Docker ⟦si vrai⟧ · Linux</p>
+          <p class="skill__tools">Git · pytest · Linux</p>
         </div>
 
         <div class="skill">
@@ -327,8 +321,8 @@
 
         <div class="skill">
           <h4>Langues</h4>
-          <p>Français&nbsp;: langue de travail. Anglais&nbsp;: ⟦niveau, ex. B2 — lecture
-             d'articles scientifiques et documentation technique⟧.</p>
+          <p>Français&nbsp;: langue de travail. Anglais&nbsp;: lecture d'articles
+             scientifiques et de documentation technique au quotidien.</p>
           <p class="skill__tools">FR · EN</p>
         </div>
 
