@@ -72,23 +72,38 @@
     });
   }
 
-  /* ---------- Apparition au défilement (remplace AOS) -------------------- */
+  /* ---------- Apparition au défilement (remplace AOS) --------------------
+     Remplace la bibliothèque AOS, qui posait un problème sérieux : sa
+     feuille de style met `[data-aos] { opacity: 0 }` en attendant que
+     `AOS.init()` soit appelé. Si l'appel manque — ou échoue parce que le CDN
+     ne répond pas — la section reste invisible sans le moindre message
+     d'erreur. Ici, l'état par défaut est visible : en cas de panne du
+     JavaScript, le contenu s'affiche quand même.                          */
+  var revealObserver = null;
+
   function initReveal() {
-    var items = $$('.reveal');
+    var items = $$('.reveal:not(.is-in)');
     if (!items.length) return;
+
     if (reduceMotion || !('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('is-in'); });
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('is-in');
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    items.forEach(function (el) { io.observe(el); });
+
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          revealObserver.unobserve(e.target);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    }
+    items.forEach(function (el) { revealObserver.observe(el); });
   }
+
+  // Appelé par les pages qui insèrent du contenu après le démarrage.
+  window.FLReveal = initReveal;
 
   /* ---------- Socle canvas ----------------------------------------------
      Un seul moteur pour toutes les visualisations :
