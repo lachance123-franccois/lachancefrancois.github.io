@@ -11,14 +11,19 @@
 
   var GH = 'https://github.com/lachance123-franccois/';
 
-  /* Une ligne « résultat » par projet : c'est ce qu'un ingénieur lit en premier.
-     Les ⟦…⟧ sont à remplacer par les vrais chiffres avant mise en ligne. */
+  /* Chaque projet peut porter une clé `result` : une phrase courte avec un
+     chiffre mesuré, affichée dans un encadré. Elle est volontairement absente
+     tant que le chiffre n'a pas été relevé — une fiche sans résultat est
+     neutre, une fiche avec un résultat indéfendable en entretien ne l'est pas.
+
+     Pour en ajouter une :
+         result: 'Exactitude 91 % sur les 1 200 images de test du jeu X.'
+     La métrique, la valeur, et sur quoi elle a été mesurée. */
   var PROJECTS = [
     {
       title: 'Prévision de séries temporelles par LSTM',
       domain: 'Séries temporelles',
       desc: 'Modélisation de flux économiques par réseau récurrent : fenêtrage, normalisation, entraînement et comparaison à une référence naïve.',
-      result: 'RMSE ⟦valeur⟧ contre ⟦valeur⟧ pour la référence naïve, sur ⟦n⟧ mois de test.',
       techs: ['TensorFlow', 'Python', 'LSTM'],
       link: GH + 'pipeline_serie-temporelle',
       icon: 'fa-chart-line', tone: 'signal'
@@ -27,7 +32,6 @@
       title: 'Classification de radiographies pulmonaires',
       domain: 'Imagerie médicale',
       desc: 'Classification d\'images médicales par réseau convolutif ResNet, avec augmentation de données et suivi du surapprentissage.',
-      result: 'Exactitude ⟦xx %⟧ et rappel ⟦xx %⟧ sur le jeu de test ⟦nom du jeu de données⟧.',
       techs: ['PyTorch', 'ResNet', 'OpenCV'],
       link: GH + 'classification_trash',
       icon: 'fa-lungs', tone: 'detect'
@@ -36,7 +40,6 @@
       title: 'Analyse de sentiment par BERT',
       domain: 'Traitement du langage',
       desc: 'Affinage d\'un modèle BERT pour la classification multi-classe de textes, avec analyse des erreurs par classe.',
-      result: 'F1 macro ⟦valeur⟧ sur ⟦n⟧ classes.',
       techs: ['Hugging Face', 'BERT', 'Python'],
       link: GH + 'analyse_bert',
       icon: 'fa-language', tone: 'ink'
@@ -45,7 +48,6 @@
       title: 'Classification de graines par image',
       domain: 'Vision par ordinateur',
       desc: 'Reconnaissance de variétés de graines à partir de photographies : segmentation, descripteurs de forme et de texture, puis classification.',
-      result: 'Exactitude ⟦xx %⟧ sur ⟦n⟧ variétés.',
       techs: ['scikit-learn', 'OpenCV', 'pandas'],
       link: GH + 'riceclassification2.0',
       icon: 'fa-seedling', tone: 'signal'
@@ -54,7 +56,6 @@
       title: 'Régression linéaire — de la théorie au code',
       domain: 'Fondamentaux',
       desc: 'Implémentation de la régression linéaire depuis les équations : moindres carrés, descente de gradient, régularisation, diagnostics de résidus.',
-      result: 'Résultats identiques à scikit-learn à ⟦tolérance⟧ près, code commenté pas à pas.',
       techs: ['NumPy', 'Python', 'Statistiques'],
       link: GH + 'regression-lineaire',
       icon: 'fa-chart-simple', tone: 'ink'
@@ -63,7 +64,6 @@
       title: 'Prévision météorologique',
       domain: 'Séries temporelles',
       desc: 'Prédiction de variables climatiques par modèles ARIMA et Prophet, avec validation glissante dans le temps.',
-      result: 'MAE ⟦valeur⟧ à ⟦n⟧ jours d\'horizon.',
       techs: ['Prophet', 'statsmodels', 'pandas'],
       link: GH + 'pipeline_serie-temporelle',
       icon: 'fa-cloud-sun', tone: 'detect'
@@ -110,7 +110,7 @@
               '<p class="entry__domain mb-1">' + escapeHtml(p.domain) + '</p>' +
               '<h3 class="h5 mt-1">' + escapeHtml(p.title) + '</h3>' +
               '<p class="text-muted small">' + escapeHtml(p.desc) + '</p>' +
-              '<p class="entry__result small">' + escapeHtml(p.result) + '</p>' +
+              (p.result ? '<p class="entry__result small">' + escapeHtml(p.result) + '</p>' : '') +
               '<div class="mt-auto">' +
                 '<div class="mb-3">' + tags + '</div>' +
                 '<a class="entry__link" href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener">Lire le code</a>' +

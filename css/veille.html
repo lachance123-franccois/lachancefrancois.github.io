@@ -23,6 +23,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<script>document.documentElement.classList.add('js');</script>
+
 
 <style>
   /* --- Schéma de la chaîne de traitement --- */
@@ -105,6 +107,34 @@
     font-family: var(--font-mono); font-size: .85em; background: var(--paper);
     border: 1px solid var(--rule); border-radius: 5px; padding: 1px 6px;
   }
+
+  /* --- Les quatre couches : la numérotation encode un ordre réel --- */
+  .layers { list-style: none; counter-reset: layer; margin: 0; padding: 0; }
+  .layers li {
+    counter-increment: layer;
+    border-left: 2px solid var(--rule);
+    padding: 0 0 var(--sp-6) var(--sp-8);
+    position: relative;
+  }
+  .layers li:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .layers li::before {
+    content: counter(layer);
+    position: absolute; left: -13px; top: 0;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--signal);
+    color: var(--signal-dim); font-family: var(--font-mono); font-size: .74rem;
+    display: grid; place-items: center;
+  }
+  .layers h3 { font-size: 1.05rem; margin: 0 0 var(--sp-2); }
+  .layers p { font-size: .93rem; color: var(--text-muted); margin-bottom: var(--sp-2); }
+  .layers__stack { font-family: var(--font-mono); font-size: .78rem; color: var(--signal-dim); }
+
+  .specs { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .specs th, .specs td { text-align: left; padding: var(--sp-3) 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .specs th {
+    font: 400 .82rem var(--font-mono); color: var(--text-muted);
+    width: 40%; padding-right: var(--sp-4);
+  }
 </style>
 </head>
 <body>
@@ -154,10 +184,9 @@
       </p>
 
       <div class="facts" style="margin: var(--sp-12) 0;">
-        <div><b>⟦n⟧</b><span>sources interrogées chaque matin</span></div>
-        <div><b>⟦n⟧</b><span>offres collectées à ce jour</span></div>
-        <div><b>31</b><span>tests, sans accès réseau</span></div>
-        <div><b>0</b><span>intervention manuelle depuis la mise en service</span></div>
+        <div><b class="metric">31</b><span>tests, sans accès réseau</span></div>
+        <div><b class="word">Quotidien</b><span>exécution planifiée par GitHub Actions</span></div>
+        <div><b class="word">Zéro secret</b><span>aucun identifiant dans le dépôt</span></div>
       </div>
     </div>
   </section>
@@ -211,6 +240,72 @@ API CROUS ─────────┘                                        
         <p style="margin-top: var(--sp-6);">
           <a class="act act--ghost" href="https://github.com/lachance123-franccois/lachance123-franccois.github.io"
              target="_blank" rel="noopener">Lire le code</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Détail</p>
+        <h2 style="font-size: var(--step-2);">Les quatre couches</h2>
+      </div>
+      <div>
+        <ol class="layers">
+          <li>
+            <h3>Collecte</h3>
+            <p>Flux RSS et API publique du CROUS, lus par un client HTTP unique
+               qui consulte <code>robots.txt</code>, espace les requêtes et met
+               les réponses en cache. Une source qui tombe ne fait pas tomber
+               les autres&nbsp;: chaque échec est journalisé et la collecte
+               continue.</p>
+            <p class="layers__stack">requests · feedparser · urllib.robotparser</p>
+          </li>
+          <li>
+            <h3>Tri</h3>
+            <p>Filtrage sur un vocabulaire du domaine — image, signal, télécoms,
+               apprentissage — puis dédoublonnage par empreinte SHA-256 sur des
+               champs normalisés. Les logements échappent au filtre thématique,
+               pour des raisons évidentes.</p>
+            <p class="layers__stack">hashlib · unicodedata</p>
+          </li>
+          <li>
+            <h3>Mémoire</h3>
+            <p>Une table SQLite indexée sur la catégorie, l'état de notification
+               et la date. Elle sait ce qui a déjà été signalé, ce qui permet de
+               n'envoyer qu'un email par jour contenant uniquement du nouveau.
+               Purge automatique au-delà de 90&nbsp;jours.</p>
+            <p class="layers__stack">sqlite3</p>
+          </li>
+          <li>
+            <h3>Sortie</h3>
+            <p>Un digest email en texte et en HTML — le texte compte, un message
+               uniquement HTML finit souvent en indésirable — et un fichier JSON
+               que cette page lit. Les identifiants SMTP viennent de
+               l'environnement, jamais d'un fichier.</p>
+            <p class="layers__stack">smtplib · email.message · GitHub&nbsp;Actions</p>
+          </li>
+        </ol>
+
+        <h3 style="font-size: var(--step-1); margin-top: var(--sp-8);">Ce qui tourne en production</h3>
+        <table class="specs">
+          <tbody>
+            <tr><th scope="row">Déclenchement</th><td>GitHub Actions, tous les jours à 7 h 13 UTC</td></tr>
+            <tr><th scope="row">Sources</th><td>flux RSS publics et API CROUS, état vérifiable par <code>tracker check</code></td></tr>
+            <tr><th scope="row">Rétention</th><td>90 jours, purge automatique</td></tr>
+            <tr><th scope="row">Tests</th><td>31, sans accès réseau, exécutés avant chaque collecte</td></tr>
+            <tr><th scope="row">Secrets</th><td>5 variables d'environnement, aucune dans le dépôt</td></tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top: var(--sp-8);">
+          En complément, un petit outil manuel&nbsp;:
+          <a href="recherche-linkedin.html">le générateur de recherches LinkedIn</a>.
+          Il construit les requêtes, je les ouvre moi-même — ce que la collecte
+          automatique ne peut pas faire sur un site qui l'interdit.
         </p>
       </div>
     </div>
