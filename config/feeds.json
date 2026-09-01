@@ -1,10 +1,19 @@
 {
-  "phd": [
-    { "name": "ABG — offres de thèse",       "url": "https://www.abg.asso.fr/fr/candidatOffres/rss" },
-    { "name": "EURAXESS France",             "url": "https://euraxess.ec.europa.eu/jobs/search/feed" }
+  "_lisez_moi": [
+    "Les flux ci-dessous sont VIDES volontairement.",
+    "Les adresses fournies au départ renvoyaient 404 : elles avaient été devinées,",
+    "pas relevées. Deviner une URL de flux ne marche jamais longtemps.",
+    "",
+    "Pour remplir ce fichier :",
+    "  python -m tracker.cli discover https://www.abg.asso.fr/fr/candidatOffres",
+    "La commande lit la page et affiche les flux qu'elle déclare elle-même.",
+    "Recopier ensuite chaque flux sous la bonne catégorie, puis vérifier :",
+    "  python -m tracker.cli check",
+    "",
+    "Si un site n'expose aucun flux, ne pas le contourner : passer au suivant.",
+    "Cette clé commençant par _ est ignorée par le programme."
   ],
-  "internship": [
-    { "name": "ABG — stages",                "url": "https://www.abg.asso.fr/fr/candidatOffres/rss?type=stage" }
-  ],
+  "phd": [],
+  "internship": [],
   "housing": []
 }

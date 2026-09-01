@@ -1,0 +1,16 @@
+{
+  "database": "data/offers.db",
+  "feeds": "config/feeds.json",
+  "export": "data/offers.json",
+  "cache_dir": ".cache",
+  "min_delay_seconds": 2,
+  "housing": {
+    "enabled": true,
+    "city": "Toulouse",
+    "max_price": 600
+  },
+  "notify": {
+    "enabled": false,
+    "recipient": "ton.adresse@exemple.fr"
+  }
+}
