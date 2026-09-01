@@ -83,6 +83,10 @@
   .board__toolbar input:focus {
     outline: none; border-color: var(--signal); box-shadow: 0 0 0 3px var(--signal-glow);
   }
+  .board__toolbar input:disabled {
+    background: var(--paper); color: var(--text-muted);
+    border-style: dashed; cursor: not-allowed;
+  }
   .board__toolbar .count { font-family: var(--font-mono); font-size: .8rem; color: var(--text-muted); }
 
   .board__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }

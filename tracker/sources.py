@@ -1,27 +1,3 @@
-"""
-Sources de données.
-
-Ne restent que des sources qu'on a le droit d'interroger : flux RSS publiés
-pour être consommés par des machines, et l'API publique du CROUS (service
-public, données de logement étudiant).
-
-Ont été retirées, et pourquoi :
-
-- LeBonCoin, SeLoger, PAP : conditions d'utilisation interdisant l'extraction
-  automatisée. Le code livré ne fonctionnait de toute façon pas (clé API
-  `YOUR_API_KEY` en dur, URL PAP mal orthographiée « annonnes »).
-- Welcome to the Jungle, HelloWork : mêmes conditions, et pages rendues par
-  JavaScript que BeautifulSoup ne voit pas. Ces fonctions renvoyaient
-  systématiquement zéro offre.
-- GitHub Jobs : service fermé par GitHub en 2021, l'URL renvoie une erreur.
-- API Indeed Publisher : fermée aux nouveaux inscrits.
-- theses.fr : le site recense les thèses *soutenues*, pas les postes à
-  pourvoir. L'endpoint utilisé (`/api/annonces/search.json`) n'existe pas, et
-  l'appel plantait de toute façon sur un `hashlib.md5()` sans `.encode()`.
-
-Résultat mesurable : la base livrée contenait une seule offre. Mieux vaut
-trois sources qui répondent que huit qui échouent en silence.
-"""
 
 from __future__ import annotations
 
@@ -46,9 +22,6 @@ def _strip_html(text: str) -> str:
     return _TAG_RE.sub(" ", text or "")
 
 
-# ---------------------------------------------------------------------------
-# Flux RSS
-# ---------------------------------------------------------------------------
 def load_feeds(path: str = "config/feeds.json") -> dict:
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -107,63 +80,99 @@ def fetch_feed(session: PoliteSession, url: str, name: str,
 def collect_feeds(session: PoliteSession, feeds: dict) -> List[Offer]:
     out: List[Offer] = []
     for kind, entries in feeds.items():
+        if kind.startswith("_") or not isinstance(entries, list):
+            continue                      # clés de documentation
         for feed in entries:
             out.extend(fetch_feed(session, feed["url"], feed["name"], kind))
     return out
 
 
-# ---------------------------------------------------------------------------
-# CROUS — API publique du service public du logement étudiant
-# ---------------------------------------------------------------------------
-CROUS_SEARCH = "https://trouverunlogement.lescrous.fr/api/fr/search/38"
+
+CROUS_TOOL_ID = 44
+CROUS_SEARCH = "https://trouverunlogement.lescrous.fr/api/fr/search/{tool_id}"
+
+CROUS_BOUNDS = {"Toulouse": "1.3120,43.6700_1.5230,43.5340"}
 
 
 def fetch_crous(session: PoliteSession, city: str = "Toulouse",
-                max_price: Optional[float] = None) -> List[Offer]:
+                max_price: Optional[float] = None,
+                tool_id: int = CROUS_TOOL_ID,
+                bounds: Optional[str] = None) -> List[Offer]:
     """Interroge le moteur de recherche du CROUS.
 
-    Le format de réponse de ce service a déjà changé plusieurs fois. Le
-    parseur est donc défensif : toute forme inattendue produit un journal
-    explicite plutôt qu'une exception, et `check_sources()` permet de vérifier
-    l'état réel du service en une commande.
+    Ce service refuse GET et répond 405 « Method Not Allowed » : la requête
+    doit être un POST avec un corps JSON. La première version du code faisait
+    un GET, ce qui explique qu'aucun logement n'ait jamais été collecté.
+
+    Le format de réponse a déjà changé plusieurs fois. Le parseur est donc
+    défensif : toute forme inattendue produit un journal explicite indiquant
+    les clés reçues, plutôt qu'une exception ou un silence.
     """
-    payload = session.get_json(CROUS_SEARCH, params={"q": city})
-    if payload is None:
-        logger.warning("CROUS : pas de réponse exploitable")
+    url = CROUS_SEARCH.format(tool_id=tool_id)
+    payload = {
+        "idTool": tool_id,
+        "need_aggregation": False,
+        "page": 1,
+        "pageSize": 50,
+        "sector": None,
+        "occupationMode": None,
+        "bounds": bounds or CROUS_BOUNDS.get(city, CROUS_BOUNDS["Toulouse"]),
+    }
+
+    data = session.post_json(url, payload)
+    if data is None:
+        logger.warning(
+            "CROUS : pas de réponse exploitable. Vérifier l'identifiant d'outil "
+            "(%s) sur trouverunlogement.lescrous.fr — il figure dans l'URL "
+            "/tools/<id>/search.", tool_id)
         return []
 
     items = (
-        payload.get("results", {}).get("items")
-        or payload.get("data", {}).get("residences")
-        or payload.get("items")
+        (data.get("results") or {}).get("items")
+        or (data.get("data") or {}).get("residences")
+        or data.get("items")
         or []
     )
-    if not isinstance(items, list):
-        logger.warning("CROUS : format de réponse inattendu (%s)", type(items).__name__)
+    if not isinstance(items, list) or not items:
+        logger.warning("CROUS : aucune annonce dans la réponse (clés reçues : %s)",
+                       ", ".join(sorted(data.keys())) or "aucune")
         return []
 
     offers: List[Offer] = []
     for item in items:
         if not isinstance(item, dict):
             continue
-        price = item.get("occupationModes", [{}])[0].get("rent", {}).get("min") \
-            if isinstance(item.get("occupationModes"), list) else item.get("price")
+
+        price = None
+        modes = item.get("occupationModes")
+        if isinstance(modes, list) and modes:
+            rent = (modes[0] or {}).get("rent")
+            if isinstance(rent, dict):
+                price = rent.get("min")
+        if price is None:
+            price = item.get("price")
         try:
-            price = float(price) / 100 if isinstance(price, int) and price > 10000 else float(price)
+            price = float(price)
+            # Certains champs sont exprimés en centimes.
+            if price > 5000:
+                price /= 100
         except (TypeError, ValueError):
             price = None
 
         if max_price is not None and price is not None and price > max_price:
             continue
 
-        residence_id = item.get("id") or item.get("residence", {}).get("id")
+        residence = item.get("residence") if isinstance(item.get("residence"), dict) else {}
+        item_id = item.get("id") or residence.get("id")
+
         try:
             offers.append(Offer(
                 kind="housing",
-                title=item.get("label") or item.get("name") or "Logement CROUS",
-                url=f"https://trouverunlogement.lescrous.fr/tools/38/accommodations/{residence_id}",
+                title=item.get("label") or residence.get("label") or "Logement CROUS",
+                url=("https://trouverunlogement.lescrous.fr/tools/"
+                     f"{tool_id}/accommodations/{item_id}"),
                 source="CROUS",
-                organisation=item.get("residence", {}).get("label", "") if isinstance(item.get("residence"), dict) else "",
+                organisation=residence.get("label", ""),
                 location=city,
                 description=_strip_html(item.get("description", "")),
                 price=price,
@@ -175,24 +184,22 @@ def fetch_crous(session: PoliteSession, city: str = "Toulouse",
     return offers
 
 
-# ---------------------------------------------------------------------------
-# Collecte complète
-# ---------------------------------------------------------------------------
 def collect_all(session: PoliteSession, feeds: dict,
                 housing_city: str = "Toulouse",
                 housing_max_price: Optional[float] = 600,
-                with_housing: bool = True) -> List[Offer]:
+                with_housing: bool = True,
+                crous_tool_id: int = CROUS_TOOL_ID,
+                crous_bounds: Optional[str] = None) -> List[Offer]:
     offers = collect_feeds(session, feeds)
     if with_housing:
-        offers.extend(fetch_crous(session, housing_city, housing_max_price))
+        offers.extend(fetch_crous(session, housing_city, housing_max_price,
+                                  tool_id=crous_tool_id, bounds=crous_bounds))
 
     relevant = [o for o in offers if is_relevant(o)]
     dropped = len(offers) - len(relevant)
     if dropped:
         logger.info("%d offre(s) hors domaine écartée(s)", dropped)
 
-    # Dédoublonnage dans le lot courant (deux flux peuvent republier la même
-    # annonce) ; la base se charge du dédoublonnage entre exécutions.
     unique, seen = [], set()
     for offer in relevant:
         if offer.id not in seen:
@@ -202,11 +209,10 @@ def collect_all(session: PoliteSession, feeds: dict,
 
 
 def check_sources(session: PoliteSession, feeds: dict) -> List[dict]:
-    """Diagnostic : indique pour chaque source si elle répond et combien
-    d'entrées elle renvoie. À lancer avant de soupçonner un bug dans le reste
-    du code — une source morte ressemble à une panne applicative."""
     report = []
     for kind, entries in feeds.items():
+        if kind.startswith("_") or not isinstance(entries, list):
+            continue
         for feed in entries:
             start = time.time()
             body = session.get_text(feed["url"], use_cache=False)
@@ -224,9 +230,9 @@ def check_sources(session: PoliteSession, feeds: dict) -> List[dict]:
             })
 
     start = time.time()
-    payload = session.get_json(CROUS_SEARCH, params={"q": "Toulouse"}, use_cache=False)
+    housing = fetch_crous(session)
     report.append({"source": "CROUS", "kind": "housing",
-                   "status": "ok" if payload else "injoignable",
-                   "entries": len(fetch_crous(session)) if payload else 0,
+                   "status": "ok" if housing else "vide ou injoignable",
+                   "entries": len(housing),
                    "seconds": round(time.time() - start, 2)})
     return report

@@ -81,8 +81,12 @@
   function emptyState(reason) {
     var messages = {
       nofile: ['Aucune donnée disponible',
-        'Le fichier <code>data/offers.json</code> est absent. Lancer ' +
-        '<code>python -m tracker.cli collect</code> pour le produire.'],
+        'Deux causes possibles. Soit le fichier <code>data/offers.json</code> ' +
+        "n'existe pas encore — le produire avec <code>python -m tracker.cli collect</code>. " +
+        'Soit la page est ouverte directement depuis le disque ' +
+        '(<code>file://</code>), où le navigateur interdit la lecture de ' +
+        'fichiers locaux : lancer <code>python -m http.server 8000</code> ' +
+        'dans le dossier du site, puis ouvrir <code>http://localhost:8000</code>.'],
       nooffers: ['Aucune offre dans cette catégorie',
         'Vérifier l\'état des sources avec <code>python -m tracker.cli check</code> : ' +
         'une source qui ne répond plus ressemble à une panne du programme.'],
@@ -93,10 +97,20 @@
     return '<li class="board__empty"><strong>' + m[0] + '</strong>' + m[1] + '</li>';
   }
 
+  function setSearchEnabled(enabled, reason) {
+    if (!el.search) return;
+    el.search.disabled = !enabled;
+    el.search.placeholder = enabled
+      ? 'Filtrer par mot-clé, organisme ou lieu…'
+      : reason;
+    if (!enabled) el.search.value = '';
+  }
+
   function render() {
     if (!state.data) {
       el.list.innerHTML = emptyState('nofile');
       el.count.textContent = '';
+      setSearchEnabled(false, 'Rien à filtrer : aucune donnée chargée');
       return;
     }
 
@@ -104,8 +118,11 @@
     if (!offers.length) {
       el.list.innerHTML = emptyState('nooffers');
       el.count.textContent = '0 offre';
+      setSearchEnabled(false, 'Rien à filtrer : aucune offre dans cette catégorie');
       return;
     }
+
+    setSearchEnabled(true);
 
     var filtered = offers.filter(function (o) { return matches(o, state.query); });
     el.count.textContent = filtered.length + ' / ' + offers.length +

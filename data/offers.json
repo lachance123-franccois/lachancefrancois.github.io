@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-09-01T05:18:44+00:00",
+  "stats": {
+    "total": 0,
+    "pending": 0,
+    "by_kind": {},
+    "last_runs": [
+      {
+        "id": 3,
+        "started_at": "2026-09-01T05:18:44+00:00",
+        "kind": "all",
+        "found": 0,
+        "inserted": 0,
+        "duration_s": 0.3052825927734375,
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": 2,
+        "started_at": "2026-09-01T05:18:15+00:00",
+        "kind": "all",
+        "found": 0,
+        "inserted": 0,
+        "duration_s": 0.28620052337646484,
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": 1,
+        "started_at": "2026-09-01T05:04:01+00:00",
+        "kind": "all",
+        "found": 0,
+        "inserted": 0,
+        "duration_s": 4.284253835678101,
+        "status": "ok",
+        "error": null
+      }
+    ]
+  },
+  "offers": {
+    "internship": [],
+    "phd": [],
+    "housing": []
+  }
+}

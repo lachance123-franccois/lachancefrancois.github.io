@@ -1,26 +1,3 @@
-"""
-Client HTTP poli.
-
-Remplace `stealth_utils.py`. L'ancien module faisait tourner une liste
-d'user-agents de navigateurs, falsifiait les en-têtes Sec-Fetch pour imiter une
-navigation humaine et ignorait robots.txt. Trois raisons de changer :
-
-1. Techniquement, ça ne marche pas : les sites visés (LeBonCoin, SeLoger,
-   Welcome to the Jungle) sont derrière des protections qui détectent bien
-   autre chose qu'un user-agent, et la base livrée contenait une seule offre.
-2. Juridiquement, c'est indéfendable : ces sites l'interdisent dans leurs
-   conditions d'utilisation, et la jurisprudence française sur l'aspiration de
-   bases d'annonces existe.
-3. Professionnellement, c'est le pire signal possible : un dépôt public appelé
-   « stealth » qui contourne des protections ferme des portes chez un
-   employeur, il n'en ouvre aucune.
-
-Ce module fait l'inverse et c'est ce qui est défendable en entretien :
-user-agent identifié avec une adresse de contact, robots.txt consulté et
-respecté, une requête à la fois avec un délai, cache disque pour ne pas
-redemander deux fois la même chose.
-"""
-
 from __future__ import annotations
 
 import hashlib
@@ -30,7 +7,7 @@ import os
 import time
 from pathlib import Path
 from typing import Optional
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 from urllib.robotparser import RobotFileParser
 
 import requests
@@ -203,6 +180,77 @@ class PoliteSession:
         body = response.text
         self._write_cache(path, body, url)
         return body
+
+    def post_json(self, url: str, payload: dict, use_cache: bool = True):
+        """POST avec corps JSON.
+
+        Nécessaire pour les services qui refusent GET : un code 405
+        « Method Not Allowed » signifie que l'adresse existe mais que le verbe
+        est mauvais — c'est le cas du moteur de recherche du CROUS.
+        Le cache est indexé sur l'URL *et* le corps, sinon deux recherches
+        différentes se recouvriraient.
+        """
+        if self.respect_robots and not self.robots.allows(url):
+            logger.warning("robots.txt interdit %s — source ignorée", url)
+            return None
+
+        path = self._cache_path(url, payload)
+        if use_cache:
+            cached = self._read_cache(path)
+            if cached is not None:
+                try:
+                    return json.loads(cached)
+                except json.JSONDecodeError:
+                    pass
+
+        self._wait(max(self.min_delay, self.robots.crawl_delay(url, self.min_delay)))
+
+        try:
+            response = self.session.post(
+                url, json=payload, timeout=self.timeout,
+                headers={"Content-Type": "application/json", "Accept": "application/json"},
+            )
+        except requests.RequestException as exc:
+            logger.warning("échec réseau %s : %s", url, exc)
+            return None
+
+        if not response.ok:
+            logger.warning("HTTP %s sur %s (POST)", response.status_code, url)
+            return None
+
+        self._write_cache(path, response.text, url)
+        try:
+            return response.json()
+        except ValueError:
+            logger.warning("réponse non JSON depuis %s", url)
+            return None
+
+    def discover_feeds(self, url: str):
+        """Liste les flux RSS/Atom qu'une page déclare elle-même.
+
+        Un site qui publie un flux le signale dans son en-tête HTML :
+            <link rel="alternate" type="application/rss+xml" href="...">
+        Chercher cette déclaration est plus fiable que deviner une adresse —
+        c'est ainsi que les URL de config/feeds.json doivent être trouvées.
+        """
+        body = self.get_text(url, use_cache=False)
+        if body is None:
+            return []
+
+        found = []
+        pattern = re.compile(
+            r'<link[^>]+rel=["\']alternate["\'][^>]*>', re.IGNORECASE)
+        for tag in pattern.findall(body):
+            if "rss" not in tag.lower() and "atom" not in tag.lower():
+                continue
+            href = re.search(r'href=["\']([^"\']+)["\']', tag)
+            title = re.search(r'title=["\']([^"\']*)["\']', tag)
+            if href:
+                found.append({
+                    "url": urljoin(url, href.group(1)),
+                    "title": title.group(1) if title else "(sans titre)",
+                })
+        return found
 
     def get_json(self, url: str, params: Optional[dict] = None,
                  use_cache: bool = True):

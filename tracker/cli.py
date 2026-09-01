@@ -1,28 +1,3 @@
-#!/usr/bin/env python3
-"""
-Point d'entrée unique.
-
-Remplace `main.py`, `collector.py` et `test.py`, qui faisaient trois fois le
-même travail avec trois modèles de données différents et n'étaient jamais
-d'accord entre eux (`collector.py` écrivait un JSON que personne ne lisait,
-`main.py` écrivait en base, `test.py` importait une classe `CROUSScraper` qui
-n'existe pas).
-
-Autre changement notable : la pause aléatoire de 30 à 180 secondes placée en
-tête de `run_safe_scraping()` a disparu. Elle rendait tout test impossible et
-n'apportait rien — l'espacement des requêtes se gère par requête, pas par une
-sieste au démarrage. Pour éviter de lancer la collecte à heure fixe, c'est le
-`cron` de GitHub Actions qui décale, pas le programme.
-
-Usage :
-    python -m tracker.cli collect            collecte + export
-    python -m tracker.cli collect --notify   collecte + export + email
-    python -m tracker.cli check              teste chaque source, sans rien écrire
-    python -m tracker.cli stats              état de la base
-    python -m tracker.cli export             régénère le JSON du site
-    python -m tracker.cli cleanup --days 90  purge les vieilles offres
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -32,6 +7,13 @@ import os
 import sys
 import time
 from pathlib import Path
+
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
 
 from .db import Store
 from .export import export_json
@@ -48,7 +30,8 @@ DEFAULT_CONFIG = {
     "export": "data/offers.json",
     "cache_dir": ".cache",
     "min_delay_seconds": 2,
-    "housing": {"enabled": True, "city": "Toulouse", "max_price": 600},
+    "housing": {"enabled": True, "city": "Toulouse", "max_price": 600,
+                "crous_tool_id": 44, "bounds": None},
     "notify": {"enabled": False, "recipient": ""},
 }
 
@@ -73,13 +56,14 @@ def make_session(config: dict) -> PoliteSession:
     )
 
 
-# ---------------------------------------------------------------------------
 def cmd_collect(args, config: dict) -> int:
     session = make_session(config)
     feeds = load_feeds(config["feeds"])
-    if not feeds:
-        logger.error("aucun flux configuré — voir %s", config["feeds"])
-        return 1
+    if not any(v for k, v in feeds.items() if not k.startswith("_")):
+        logger.warning(
+            "aucun flux configuré dans %s — seul le CROUS sera interrogé. "
+            "Utiliser `discover` pour en trouver, puis `check` pour vérifier.",
+            config["feeds"])
 
     housing = config["housing"]
     started = time.time()
@@ -90,6 +74,8 @@ def cmd_collect(args, config: dict) -> int:
             housing_city=housing["city"],
             housing_max_price=housing["max_price"],
             with_housing=housing["enabled"] and not args.no_housing,
+            crous_tool_id=housing.get("crous_tool_id", 44),
+            crous_bounds=housing.get("bounds"),
         )
     except Exception as exc:                       # noqa: BLE001
         logger.error("collecte interrompue : %s", exc, exc_info=True)
@@ -144,6 +130,35 @@ def cmd_check(args, config: dict) -> int:
     return 0
 
 
+def cmd_discover(args, config: dict) -> int:
+    """Interroge une page et liste les flux qu'elle déclare elle-même.
+
+    C'est la bonne façon de remplir config/feeds.json : deviner une adresse
+    de flux mène à des 404, alors qu'un site qui en publie un le signale
+    dans son en-tête HTML.
+    """
+    session = make_session(config)
+    feeds = session.discover_feeds(args.url)
+
+    if not feeds:
+        print(f"\nAucun flux déclaré sur {args.url}")
+        print("\nÀ essayer :")
+        print("  - la page d'accueil du site plutôt qu'une page de résultats")
+        print("  - la page « actualités » ou « offres », qui porte souvent le flux")
+        print("  - chercher « <nom du site> RSS » dans un moteur de recherche")
+        print("\nSi le site n'expose aucun flux, ne pas le contourner :")
+        print("  une source qui ne veut pas être lue automatiquement ne doit pas l'être.")
+        return 1
+
+    print(f"\n{len(feeds)} flux déclaré(s) sur {args.url}\n")
+    for feed in feeds:
+        print(f"  {feed['title']}")
+        print(f"    {feed['url']}\n")
+    print("À recopier dans config/feeds.json, sous la bonne catégorie :")
+    print('  { "name": "…", "url": "…" }')
+    return 0
+
+
 def cmd_stats(args, config: dict) -> int:
     with Store(config["database"]) as store:
         stats = store.stats()
@@ -174,7 +189,7 @@ def cmd_cleanup(args, config: dict) -> int:
     return 0
 
 
-# ---------------------------------------------------------------------------
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tracker",
@@ -191,6 +206,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("check", help="teste chaque source sans rien écrire")
     p.set_defaults(func=cmd_check)
+
+    p = sub.add_parser("discover", help="liste les flux RSS déclarés par une page")
+    p.add_argument("url", help="adresse de la page à inspecter")
+    p.set_defaults(func=cmd_discover)
 
     p = sub.add_parser("stats", help="affiche l'état de la base")
     p.set_defaults(func=cmd_stats)
