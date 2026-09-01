@@ -20,7 +20,8 @@
       desc: 'Modélisation de flux économiques par réseau récurrent : fenêtrage, normalisation, entraînement et comparaison à une référence naïve.',
       result: 'RMSE ⟦valeur⟧ contre ⟦valeur⟧ pour la référence naïve, sur ⟦n⟧ mois de test.',
       techs: ['TensorFlow', 'Python', 'LSTM'],
-      link: GH + 'pipeline_serie-temporelle'
+      link: GH + 'pipeline_serie-temporelle',
+      icon: 'fa-chart-line', tone: 'signal'
     },
     {
       title: 'Classification de radiographies pulmonaires',
@@ -28,7 +29,8 @@
       desc: 'Classification d\'images médicales par réseau convolutif ResNet, avec augmentation de données et suivi du surapprentissage.',
       result: 'Exactitude ⟦xx %⟧ et rappel ⟦xx %⟧ sur le jeu de test ⟦nom du jeu de données⟧.',
       techs: ['PyTorch', 'ResNet', 'OpenCV'],
-      link: GH + 'classification_trash'
+      link: GH + 'classification_trash',
+      icon: 'fa-lungs', tone: 'detect'
     },
     {
       title: 'Analyse de sentiment par BERT',
@@ -36,7 +38,8 @@
       desc: 'Affinage d\'un modèle BERT pour la classification multi-classe de textes, avec analyse des erreurs par classe.',
       result: 'F1 macro ⟦valeur⟧ sur ⟦n⟧ classes.',
       techs: ['Hugging Face', 'BERT', 'Python'],
-      link: GH + 'analyse_bert'
+      link: GH + 'analyse_bert',
+      icon: 'fa-language', tone: 'ink'
     },
     {
       title: 'Classification de graines par image',
@@ -44,7 +47,8 @@
       desc: 'Reconnaissance de variétés de graines à partir de photographies : segmentation, descripteurs de forme et de texture, puis classification.',
       result: 'Exactitude ⟦xx %⟧ sur ⟦n⟧ variétés.',
       techs: ['scikit-learn', 'OpenCV', 'pandas'],
-      link: GH + 'riceclassification2.0'
+      link: GH + 'riceclassification2.0',
+      icon: 'fa-seedling', tone: 'signal'
     },
     {
       title: 'Régression linéaire — de la théorie au code',
@@ -52,7 +56,8 @@
       desc: 'Implémentation de la régression linéaire depuis les équations : moindres carrés, descente de gradient, régularisation, diagnostics de résidus.',
       result: 'Résultats identiques à scikit-learn à ⟦tolérance⟧ près, code commenté pas à pas.',
       techs: ['NumPy', 'Python', 'Statistiques'],
-      link: GH + 'regression-lineaire'
+      link: GH + 'regression-lineaire',
+      icon: 'fa-chart-simple', tone: 'ink'
     },
     {
       title: 'Prévision météorologique',
@@ -60,9 +65,20 @@
       desc: 'Prédiction de variables climatiques par modèles ARIMA et Prophet, avec validation glissante dans le temps.',
       result: 'MAE ⟦valeur⟧ à ⟦n⟧ jours d\'horizon.',
       techs: ['Prophet', 'statsmodels', 'pandas'],
-      link: GH + 'pipeline_serie-temporelle'
+      link: GH + 'pipeline_serie-temporelle',
+      icon: 'fa-cloud-sun', tone: 'detect'
     }
   ];
+
+  // Trois tons tirés du design system. L'ancienne version tirait six
+  // dégradés sans rapport les uns avec les autres (rose, orange, violet…),
+  // ce qui donnait une page arlequin. Trois suffisent à distinguer les
+  // familles de projets.
+  var TONES = {
+    signal: 'linear-gradient(135deg, #1f9aa8 0%, #16303f 100%)',
+    detect: 'linear-gradient(135deg, #c4703a 0%, #16303f 100%)',
+    ink:    'linear-gradient(135deg, #16303f 0%, #0b1a26 100%)'
+  };
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -80,8 +96,16 @@
       }).join('');
 
       return '' +
-        '<div class="col-md-6 col-lg-4">' +
+        '<div class="col-md-6 col-lg-4 reveal">' +
           '<div class="project-card h-100 d-flex flex-column">' +
+            '<div class="project-image-placeholder" style="background: ' +
+                (TONES[p.tone] || TONES.ink) + ';" aria-hidden="true">' +
+              '<i class="fas ' + escapeHtml(p.icon || 'fa-diagram-project') + ' fa-3x"></i>' +
+              '<div class="project-overlay">' +
+                '<a class="btn btn-light rounded-pill px-4" href="' + escapeHtml(p.link) +
+                '" target="_blank" rel="noopener" tabindex="-1">Voir le code</a>' +
+              '</div>' +
+            '</div>' +
             '<div class="p-4 d-flex flex-column h-100">' +
               '<p class="entry__domain mb-1">' + escapeHtml(p.domain) + '</p>' +
               '<h3 class="h5 mt-1">' + escapeHtml(p.title) + '</h3>' +
@@ -96,7 +120,8 @@
         '</div>';
     }).join('');
 
-    if (window.AOS && typeof window.AOS.refresh === 'function') window.AOS.refresh();
+    // Les cartes viennent d'être insérées : main.js doit les observer.
+    if (typeof window.FLReveal === 'function') window.FLReveal();
   }
 
   /* ---------- Vignettes animées des projets signal ----------------------- */

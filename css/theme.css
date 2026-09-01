@@ -28,9 +28,13 @@
   --text-invert: #eef3f4;
 
   /* --- Type ------------------------------------------------------------ */
-  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
-  --font-body:    "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  /* Polices nommées avant tout générique : sur Linux, une chaîne qui
+     retombe trop vite sur `sans-serif` peut atteindre une police emoji
+     pour des caractères comme le tiret cadratin, rendu alors en carré
+     bleu. Les repliements explicites évitent ce cas. */
+  --font-display: "Space Grotesk", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
 
   --step--1: clamp(0.82rem, 0.80rem + 0.1vw, 0.88rem);
   --step-0:  clamp(1rem, 0.96rem + 0.2vw, 1.06rem);
@@ -412,8 +416,14 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 /* ==========================================================================
    Apparition au défilement (remplace AOS — 0 dépendance, 0 CLS)
    ========================================================================== */
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
+/* L'état masqué n'est appliqué que si le JavaScript a pu poser la classe
+   `js` sur <html>. Sans JavaScript — ou si un script échoue — le contenu
+   reste visible au lieu de disparaître silencieusement. */
+html.js .reveal {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+html.js .reveal.is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
