@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<script>document.documentElement.classList.add('js');</script>
+
 
 <style>
   .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--sp-12); align-items: start; }
@@ -77,7 +79,6 @@
         <li><a class="site-nav__link" href="index.html">Accueil</a></li>
         <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
         <li><a class="site-nav__link" href="matlab.html">Signal &amp; image</a></li>
-        <li><a class="site-nav__link" href="veille.html">Veille automatisée</a></li>
         <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
         <li><a class="site-nav__cta" href="contact.html" aria-current="page">Me contacter</a></li>
       </ul>
@@ -98,10 +99,24 @@
     <div class="contact-grid">
 
       <!-- FORMULAIRE ------------------------------------------------------
-           Remplacer VOTRE_ID par l'identifiant Formspree réel, sinon le
-           formulaire affiche un message et renvoie vers l'adresse email. -->
+           Un site statique ne peut pas envoyer d'email par lui-même : il faut
+           un service de relais. Celui-ci est FormSubmit, qui ne demande aucune
+           inscription — l'adresse de destination suffit.
+
+           À LA PREMIÈRE SOUMISSION, FormSubmit envoie un message de
+           confirmation à lachanceawounang@icloud.com. Tant que le lien qu'il
+           contient n'est pas cliqué, aucun message n'arrive. C'est normal, et
+           c'est à faire une seule fois.
+
+           Pour passer à Formspree à la place : remplacer l'URL d'action par
+           https://formspree.io/f/VOTRE_IDENTIFIANT (compte gratuit requis). -->
       <form class="form-card" id="contactForm"
-            action="https://formspree.io/f/VOTRE_ID" method="POST">
+            action="https://formsubmit.co/ajax/lachanceawounang@icloud.com" method="POST">
+
+        <!-- Réglages lus par FormSubmit, jamais affichés -->
+        <input type="hidden" name="_subject" value="Message depuis le portfolio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
 
         <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Envoyer un message</h2>
 
@@ -204,7 +219,6 @@
           <li><a href="index.html">Accueil</a></li>
           <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
           <li><a href="matlab.html">Signal &amp; image</a></li>
-          <li><a href="veille.html">Veille automatisée</a></li>
           <li><a href="cv-op.html">CV</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
