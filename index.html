@@ -92,6 +92,9 @@
   .facts b.word { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
   .facts span { font-size: .9rem; color: var(--text-muted); }
 
+  .entry__view--image { display: grid; place-items: center; padding: 10px; }
+  .entry__view--image img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; }
+
   .split { display: grid; grid-template-columns: 340px 1fr; gap: var(--sp-12); align-items: start; }
   @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
@@ -203,7 +206,7 @@
   <!-- ================= PROJETS PHARES ================= -->
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Quatre chaînes de traitement complètes</p>
+      <p class="eyebrow">Cinq chaînes de traitement complètes</p>
       <h2>Projets phares</h2>
       <p class="lede" style="margin-bottom: var(--sp-12);">
         Chaque projet part d'un signal réel et suit une méthode explicite, de
@@ -211,6 +214,33 @@
       </p>
 
       <div class="entries">
+
+        <article class="entry reveal">
+          <div class="entry__view entry__view--image">
+            <img src="assets/projets/fig2_robustesse.png" loading="lazy"
+                 alt="Barres d'exactitude : le modèle biaisé domine en i.i.d. puis tombe au niveau du hasard quand le biais est inversé.">
+          </div>
+          <div class="entry__body">
+            <p class="entry__domain">Robustesse causale — imagerie médicale</p>
+            <h3>Le modèle le plus performant est le seul inutilisable</h3>
+            <p>
+              Démonstration, mesure et correction de l'apprentissage par raccourci
+              sur un classifieur de radiographies. Confondant injecté sous contrôle,
+              tests d'intervention <code>do(biais)</code>, Grad-CAM, et deux stratégies
+              de correction comparées.
+            </p>
+            <p class="entry__result">
+              <strong>0.965</strong> d'exactitude publiée, <strong>0.495</strong> —
+              le hasard — dès que l'artefact change de classe.
+              <strong>51,7&nbsp;%</strong> des diagnostics basculent si l'on ajoute ou
+              efface un glyphe couvrant 2&nbsp;% de l'image.
+            </p>
+            <div class="entry__foot">
+              <ul class="tags"><li>PyTorch</li><li>Grad-CAM</li><li>Causalité</li><li>GRL</li></ul>
+              <a class="entry__link" href="machine-learning.html">Voir le projet</a>
+            </div>
+          </div>
+        </article>
 
         <article class="entry reveal">
           <div class="entry__view"><canvas id="viz-uq" aria-hidden="true"></canvas></div>
