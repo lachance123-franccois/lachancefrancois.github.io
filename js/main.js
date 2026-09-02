@@ -1,9 +1,4 @@
-/* ==========================================================================
-   main.js — un seul point d'entrée, aucune dépendance externe.
-   Corrige : double initialisation, plantage quand un élément est absent,
-   effet machine à écrire qui détruisait le H1, compteurs qui bouclaient,
-   parallaxe non throttlée, AOS appelé avant chargement.
-   ========================================================================== */
+
 (function () {
   'use strict';
 
@@ -72,13 +67,6 @@
     });
   }
 
-  /* ---------- Apparition au défilement (remplace AOS) --------------------
-     Remplace la bibliothèque AOS, qui posait un problème sérieux : sa
-     feuille de style met `[data-aos] { opacity: 0 }` en attendant que
-     `AOS.init()` soit appelé. Si l'appel manque — ou échoue parce que le CDN
-     ne répond pas — la section reste invisible sans le moindre message
-     d'erreur. Ici, l'état par défaut est visible : en cas de panne du
-     JavaScript, le contenu s'affiche quand même.                          */
   var revealObserver = null;
 
   function initReveal() {
@@ -105,13 +93,6 @@
   // Appelé par les pages qui insèrent du contenu après le démarrage.
   window.FLReveal = initReveal;
 
-  /* ---------- Socle canvas ----------------------------------------------
-     Un seul moteur pour toutes les visualisations :
-     - redimensionne uniquement quand la taille change (au lieu de chaque image)
-     - gère les écrans haute densité
-     - met l'animation en pause hors écran et en onglet inactif (batterie)
-     - se désactive si l'utilisateur demande moins d'animations
-     ---------------------------------------------------------------------- */
   function createScene(canvas, drawFrame, opts) {
     if (!canvas || !canvas.getContext) return null;
     opts = opts || {};
@@ -180,9 +161,6 @@
   // Exposé pour les pages qui ont leurs propres visualisations.
   window.FLScene = createScene;
 
-  /* ---------- Oscilloscope du hero --------------------------------------
-     Séquence : acquisition bruitée → filtrage → détection.
-     Un seul moment orchestré, il boucle lentement.                        */
   function initHeroScope() {
     var canvas = $('#heroScope');
     if (!canvas) return;
@@ -331,6 +309,69 @@
       }, { stillFrame: 60 });
     }
 
+    var sc = $('#viz-shortcut');
+    if (sc) {
+      createScene(sc, function (ctx, w, h, f) {
+        var cycle = f % 300;
+        // 0-90 : sans glyphe · 90-150 : apparition · 150-240 : avec · 240-300 : retrait
+        var glyph = cycle < 90 ? 0
+                  : cycle < 150 ? (cycle - 90) / 60
+                  : cycle < 240 ? 1
+                  : 1 - (cycle - 240) / 60;
+        glyph = Math.max(0, Math.min(1, glyph));
+        var biased = glyph > 0.5;
+
+        ctx.fillStyle = '#0b1a26';
+        ctx.fillRect(0, 0, w, h);
+
+        var cx = w / 2, cy = h * 0.54, r = Math.min(w, h) * 0.34;
+
+        // Thorax
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(0.86, 1);
+        ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(190,205,212,0.32)'; ctx.fill();
+        ctx.restore();
+
+        // Champs pulmonaires — identiques d'un bout à l'autre de la boucle
+        [-1, 1].forEach(function (side) {
+          ctx.save();
+          ctx.translate(cx + side * r * 0.38, cy - r * 0.06);
+          ctx.scale(0.42, 0.78);
+          ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.fillStyle = '#0d2230'; ctx.fill();
+          ctx.restore();
+        });
+
+        // Rachis
+        ctx.fillStyle = 'rgba(210,222,228,0.4)';
+        ctx.fillRect(cx - 1.5, cy - r * 0.85, 3, r * 1.7);
+
+        // Filigrane en coin : 2 % de l'image, aucun contenu médical
+        if (glyph > 0.01) {
+          var gx = 10, gy = 10, gs = Math.min(w, h) * 0.14;
+          ctx.strokeStyle = 'rgba(255,255,255,' + (0.85 * glyph) + ')';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(gx, gy); ctx.lineTo(gx, gy + gs); ctx.lineTo(gx + gs * 0.7, gy + gs);
+          ctx.stroke();
+        }
+
+        // Verdict du modèle : il suit le glyphe, pas les poumons
+        var verdict = biased ? 'malade' : 'sain';
+        var col = biased ? '#c4703a' : '#2fb6c4';
+        ctx.fillStyle = col;
+        ctx.font = '500 12px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText('diagnostic : ' + verdict, w - 12, 22);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.font = '400 10px "IBM Plex Mono", monospace';
+        ctx.fillText('poumons inchangés', 12, h - 12);
+      }, { stillFrame: 200 });
+    }
+
     // Incertitude : les barres de fiabilité remontent vers la diagonale
     var uqv = $('#viz-uq');
     if (uqv) {
@@ -392,9 +433,6 @@
     }
   }
 
-  /* ---------- Formulaire de contact -------------------------------------
-     Envoi asynchrone : la personne reste sur la page et voit une confirmation.
-     En cas d'échec, on donne une porte de sortie (l'adresse email).        */
   function initForm() {
     var form = $('#contactForm');
     if (!form) return;

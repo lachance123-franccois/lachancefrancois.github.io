@@ -92,9 +92,6 @@
   .facts b.word { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
   .facts span { font-size: .9rem; color: var(--text-muted); }
 
-  .entry__view--image { display: grid; place-items: center; padding: 10px; }
-  .entry__view--image img { width: 100%; height: auto; object-fit: contain; border-radius: 6px; }
-
   .split { display: grid; grid-template-columns: 340px 1fr; gap: var(--sp-12); align-items: start; }
   @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
@@ -216,9 +213,9 @@
       <div class="entries">
 
         <article class="entry reveal">
-          <div class="entry__view entry__view--image">
-            <img src="assets/fig2_robustesse.png" loading="lazy"
-                 alt="Barres d'exactitude : le modèle biaisé domine en i.i.d. puis tombe au niveau du hasard quand le biais est inversé.">
+          <div class="entry__view">
+            <canvas id="viz-shortcut" role="img"
+                    aria-label="Animation : un glyphe apparaît dans le coin d'une radiographie, le diagnostic du modèle bascule de sain à malade alors que les poumons n'ont pas changé."></canvas>
           </div>
           <div class="entry__body">
             <p class="entry__domain">Robustesse causale — imagerie médicale</p>
