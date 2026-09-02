@@ -20,7 +20,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -28,6 +27,8 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b1a26">
 <link rel="stylesheet" href="css/theme.css">
+<script>document.documentElement.classList.add('js');</script>
+
 <script>
 /* Met en pause toutes les animations canvas quand l'onglet est en arrière-plan. */
 (function () {
@@ -89,7 +90,6 @@
         <li><a class="site-nav__link" href="index.html">Accueil</a></li>
         <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
         <li><a class="site-nav__link" href="matlab.html" aria-current="page">Signal &amp; image</a></li>
-        <li><a class="site-nav__link" href="veille.html">Veille automatisée</a></li>
         <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
         <li><a class="site-nav__cta" href="contact.html">Me contacter</a></li>
       </ul>
@@ -156,7 +156,7 @@
         <div class="row g-4 justify-content-center">
 
             <!-- CARTE 1 : Balles FFT — vidéo réelle, canvas en fallback -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media" id="wrap-balles">
                         <video id="vid-balles" src="https://raw.githubusercontent.com/lachance123-franccois/jeu-de-balle/main/demo.mp4" autoplay muted loop playsinline></video>
@@ -172,7 +172,7 @@
             </div>
 
             <!-- CARTE 2 : Image Aérienne — scan spectral animé -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media">
                         <canvas id="cv-satellite" width="360" height="160"></canvas>
@@ -188,7 +188,7 @@
             </div>
 
             <!-- CARTE 3 : ECG bruité + filtré Kalman -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media" style="background:#0a1628;">
                         <canvas id="cv-ecg" width="360" height="160"></canvas>
@@ -210,7 +210,7 @@
 <section class="py-5 bg-white">
     <div class="container">
         <div class="row g-4 text-center">
-            <div class="col-md-4" data-aos="fade-up">
+            <div class="col-md-4 reveal">
                 <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-brain fa-3x text-primary mb-3"></i>
@@ -219,7 +219,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-4 reveal">
                 <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-satellite fa-3x text-primary mb-3"></i>
@@ -228,7 +228,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-4 reveal">
                 <div class="skill-card-link">
                     <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
                         <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
@@ -256,7 +256,6 @@
           <li><a href="index.html">Accueil</a></li>
           <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
           <li><a href="matlab.html">Signal &amp; image</a></li>
-          <li><a href="veille.html">Veille automatisée</a></li>
           <li><a href="cv-op.html">CV</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -281,10 +280,7 @@
 <script src="js/main.js" defer></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-AOS.init({ duration:800, once:true });
-
 /* ─── CARTE 1 : fallback balles canvas si vidéo absente ─── */
 const vidB = document.getElementById('vid-balles');
 function launchBallCanvas() {
