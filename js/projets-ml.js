@@ -129,6 +129,87 @@
     var scene = window.FLScene;
     if (typeof scene !== 'function') return;
 
+    // Diagramme de fiabilité : les barres d'exactitude, d'abord sous la
+    // diagonale parce que le modèle annonce plus de certitude qu'il n'en
+    // mérite, remontent vers elle après recalibration. C'est exactement ce
+    // que mesure l'ECE.
+    var uq = document.getElementById('canvas-uq');
+    if (uq) {
+      var label = document.getElementById('uqState');
+      var BINS = 10;
+      // Écart initial par tranche de confiance : plus le modèle est sûr,
+      // plus il se surestime.
+      var GAP = [0.02, 0.03, 0.05, 0.08, 0.11, 0.15, 0.19, 0.23, 0.26, 0.28];
+      var MASS = [0.01, 0.01, 0.02, 0.03, 0.04, 0.06, 0.09, 0.14, 0.26, 0.34];
+      var last = '';
+
+      scene(uq, function (ctx, w, h, f) {
+        var cycle = f % 420;
+        // 0 → 1 : proportion de l'écart déjà corrigé
+        var fix = cycle < 140 ? 0
+                : cycle < 240 ? (cycle - 140) / 100
+                : cycle < 340 ? 1
+                : 1 - (cycle - 340) / 80;
+        fix = Math.max(0, Math.min(1, fix));
+
+        var state = fix < 0.15 ? 'modèle brut'
+                  : fix > 0.85 ? 'après recalibration' : 'recalibration…';
+        if (label && state !== last) { label.textContent = state; last = state; }
+
+        ctx.fillStyle = '#071620';
+        ctx.fillRect(0, 0, w, h);
+
+        var pad = 34, x0 = pad, y0 = h - 26, x1 = w - 14, y1 = 14;
+        var pw = x1 - x0, ph = y0 - y1;
+
+        // Grille
+        ctx.strokeStyle = 'rgba(47,182,196,0.10)';
+        ctx.lineWidth = 1;
+        for (var g = 0; g <= 5; g++) {
+          var gx = x0 + (pw * g) / 5, gy = y0 - (ph * g) / 5;
+          ctx.beginPath(); ctx.moveTo(gx, y1); ctx.lineTo(gx, y0); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(x0, gy); ctx.lineTo(x1, gy); ctx.stroke();
+        }
+
+        // Barres : exactitude réelle par tranche de confiance
+        var bw = pw / BINS;
+        for (var i = 0; i < BINS; i++) {
+          var conf = (i + 0.5) / BINS;
+          var acc = Math.max(0, conf - GAP[i] * (1 - fix));
+          var bx = x0 + i * bw;
+
+          // Écart restant, en ambre
+          if (acc < conf - 0.002) {
+            ctx.fillStyle = 'rgba(196,112,58,0.35)';
+            ctx.fillRect(bx + 2, y0 - conf * ph, bw - 4, (conf - acc) * ph);
+          }
+          // Exactitude mesurée
+          ctx.fillStyle = 'rgba(47,182,196,' + (0.35 + 0.45 * MASS[i] / 0.34) + ')';
+          ctx.fillRect(bx + 2, y0 - acc * ph, bw - 4, acc * ph);
+        }
+
+        // Diagonale : calibration parfaite
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+        ctx.setLineDash([4, 4]);
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Axes
+        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(x0, y1); ctx.lineTo(x0, y0); ctx.lineTo(x1, y0);
+        ctx.stroke();
+
+        // ECE courant, calculé sur les mêmes chiffres que les barres
+        var ece = 0;
+        for (var j = 0; j < BINS; j++) ece += MASS[j] * GAP[j] * (1 - fix);
+        ctx.fillStyle = fix > 0.85 ? '#2fb6c4' : '#c4703a';
+        ctx.font = '500 12px "IBM Plex Mono", monospace';
+        ctx.fillText('ECE ' + ece.toFixed(3), x0 + 10, y1 + 18);
+      }, { stillFrame: 300 });
+    }
+
     // EEG — signal calme puis crise
     var eeg = document.getElementById('canvas-eeg');
     if (eeg) {

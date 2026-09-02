@@ -331,6 +331,39 @@
       }, { stillFrame: 60 });
     }
 
+    // Incertitude : les barres de fiabilité remontent vers la diagonale
+    var uqv = $('#viz-uq');
+    if (uqv) {
+      var GAPV = [0.03, 0.06, 0.10, 0.15, 0.20, 0.25, 0.28];
+      createScene(uqv, function (ctx, w, h, f) {
+        var cycle = f % 360;
+        var fix = cycle < 120 ? 0 : cycle < 210 ? (cycle - 120) / 90
+                : cycle < 300 ? 1 : 1 - (cycle - 300) / 60;
+        fix = Math.max(0, Math.min(1, fix));
+
+        ctx.fillStyle = '#0b1a26'; ctx.fillRect(0, 0, w, h);
+        var pad = 14, x0 = pad, y0 = h - pad, x1 = w - pad, y1 = pad;
+        var pw = x1 - x0, ph = y0 - y1, n = GAPV.length, bw = pw / n;
+
+        for (var i = 0; i < n; i++) {
+          var conf = (i + 0.5) / n;
+          var acc = Math.max(0, conf - GAPV[i] * (1 - fix));
+          var bx = x0 + i * bw;
+          if (acc < conf - 0.002) {
+            ctx.fillStyle = 'rgba(196,112,58,0.4)';
+            ctx.fillRect(bx + 1, y0 - conf * ph, bw - 2, (conf - acc) * ph);
+          }
+          ctx.fillStyle = 'rgba(47,182,196,0.7)';
+          ctx.fillRect(bx + 1, y0 - acc * ph, bw - 2, acc * ph);
+        }
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+        ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+        ctx.setLineDash([]);
+      }, { stillFrame: 250 });
+    }
+
     // EEG (vignette) : même logique que le hero, en plus sobre
     var eeg = $('#viz-eeg');
     if (eeg) {
@@ -375,12 +408,14 @@
     }
 
     form.addEventListener('submit', function (e) {
-      // Le formulaire reste fonctionnel sans JavaScript : on n'intercepte
-      // que si l'action est bien configurée.
+      // Détecte une adresse d'envoi restée à l'état de gabarit, quel que
+      // soit le service utilisé, plutôt qu'un identifiant écrit en dur.
       var action = form.getAttribute('action') || '';
-      if (action.indexOf('VOTRE_ID') !== -1 || !action) {
+      var notConfigured = !action || /VOTRE_|YOUR_|xxxx|exemple\.|example\./i.test(action);
+      if (notConfigured) {
         e.preventDefault();
-        say('Le formulaire n\'est pas encore relié à un service d\'envoi. Écrivez directement à lachanceawounang@icloud.com.', false);
+        say("Le formulaire n'est pas encore relié à un service d'envoi. "
+            + 'Écrivez directement à lachanceawounang@icloud.com.', false);
         return;
       }
 
@@ -401,7 +436,9 @@
           say('Message reçu. Je réponds sous 24 à 48 heures.', true);
         })
         .catch(function () {
-          say('L\'envoi a échoué. Écrivez à lachanceawounang@icloud.com, la réponse sera la même.', false);
+          say("L'envoi a échoué. Si c'est le premier message envoyé depuis ce "
+              + 'formulaire, le service attend peut-être une confirmation par email. '
+              + 'Sinon, écrivez à lachanceawounang@icloud.com : la réponse sera la même.', false);
         })
         .then(function () {
           if (submit) { submit.disabled = false; submit.textContent = original; }
