@@ -60,6 +60,75 @@
     }
 
 
+
+    /* ---- Étude de cas : raccourci causal ------------------------------ */
+    .case { background: var(--paper-pure); }
+    .case__eyebrow {
+        font-family: var(--font-mono); font-size: .8rem;
+        color: var(--signal-dim); margin-bottom: .6rem;
+    }
+    .case__title {
+        font-family: var(--font-display); font-weight: 700;
+        font-size: clamp(1.7rem, 1.2rem + 2vw, 2.7rem);
+        line-height: 1.12; letter-spacing: -.02em;
+        color: var(--ink-900); margin-bottom: 1.2rem; max-width: 18ch;
+    }
+    .case__lede { font-size: 1.02rem; color: var(--text-muted); max-width: 60ch; }
+    .case__lede strong { color: var(--ink-900); }
+    .case__h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: .7rem; }
+    .case .text-muted { font-size: .95rem; }
+    .case code {
+        font-family: var(--font-mono); font-size: .85em; background: var(--paper);
+        border: 1px solid var(--rule); border-radius: 5px; padding: 1px 6px;
+    }
+
+    /* Le résultat, isolé : trois chiffres qui racontent toute l'histoire */
+    .case__headline {
+        background: var(--ink-900); color: rgba(255,255,255,.75);
+        border-radius: 16px; padding: 1.6rem 1.8rem;
+    }
+    .case__headline-label {
+        font-family: var(--font-mono); font-size: .76rem;
+        color: var(--signal); margin-bottom: 1.2rem;
+    }
+    .case__headline dl { margin: 0; }
+    .case__headline dl > div { padding: .85rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .case__headline dt { font-size: .84rem; font-weight: 400; color: rgba(255,255,255,.6); }
+    .case__headline dd {
+        margin: .2rem 0 0; font-family: var(--font-mono);
+        font-size: 1.9rem; font-weight: 500; line-height: 1;
+    }
+    .case__headline dd.up { color: #2fb6c4; }
+    .case__headline dd.down { color: #c4703a; }
+    .case__headline-note {
+        margin: 1.2rem 0 0; font-size: .86rem; color: rgba(255,255,255,.55);
+    }
+
+    .case__figure { margin: 2.5rem 0 0; }
+    .case__figure img {
+        width: 100%; height: auto; display: block;
+        border: 1px solid var(--rule); border-radius: 12px; background: #fff;
+    }
+    .case__figure figcaption {
+        margin-top: .9rem; font-size: .88rem; line-height: 1.65; color: var(--text-muted);
+    }
+    .case__figure figcaption strong { color: var(--ink-900); }
+
+    .case__card {
+        height: 100%; padding: 1.3rem 1.4rem;
+        border: 1px solid var(--rule); border-left: 3px solid var(--signal);
+        border-radius: 0 12px 12px 0; background: var(--paper);
+    }
+    .case__card--warn { border-left-color: var(--detect); }
+    .case__card h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: .5rem; }
+    .case__card p { font-size: .9rem; color: var(--text-muted); margin: 0; }
+
+    .case__closing {
+        margin-top: 2.5rem; padding: 1.1rem 1.4rem;
+        background: var(--paper); border-radius: 12px;
+        font-size: .93rem; color: var(--text-muted); max-width: none;
+    }
+
     /* ---- Projet principal ------------------------------------------- */
     .featured { background: var(--ink-900); color: rgba(255,255,255,.82); }
     .featured__eyebrow {
@@ -118,6 +187,10 @@
     .scope-panel__foot div { padding: .55rem .9rem; color: rgba(255,255,255,.45); }
     .scope-panel__foot div + div { border-left: 1px solid rgba(255,255,255,.1); }
     .scope-panel__foot span { display: block; color: #fff; font-size: .85rem; margin-top: 2px; }
+    .scope-panel__caption {
+        margin: .9rem 0 0; font-size: .85rem; line-height: 1.65;
+        color: rgba(255,255,255,.6);
+    }
 
     .project-card {
         background: white; border-radius: 15px; overflow: hidden;
@@ -233,6 +306,185 @@
     </div>
 </header>
 
+<!-- SECTION 0a : SHORTCUT-AUDIT  -->
+<section class="py-5 case">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <p class="case__eyebrow">Projet — robustesse causale &amp; apprentissage par raccourci</p>
+                <h2 class="case__title">Le modèle le plus performant est le seul inutilisable.</h2>
+                <p class="case__lede">
+                    Un classifieur supervisé n'optimise qu'une chose&nbsp;: séparer les
+                    classes sur les données qu'on lui donne. Rien ne l'oblige à ce que
+                    la régularité qu'il trouve ait un sens clinique. Si les patients
+                    malades viennent surtout d'un autre hôpital que les sujets sains,
+                    l'appareil d'acquisition devient un prédicteur parfait — et le
+                    modèle s'en sert.
+                </p>
+                <p class="case__lede">
+                    J'ai reproduit le phénomène dans un cadre où <strong>la cause visuelle
+                    du diagnostic est connue par construction</strong>&nbsp;: des
+                    radiographies thoraciques générées, où seule la présence d'opacités
+                    pulmonaires définit la classe malade. Toute performance obtenue sans
+                    regarder les opacités est donc un raccourci démontré, pas soupçonné.
+                </p>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="case__headline">
+                    <p class="case__headline-label">Le modèle biaisé, en trois chiffres</p>
+                    <dl>
+                        <div>
+                            <dt>exactitude publiée (i.i.d.)</dt>
+                            <dd class="metric up">0.965</dd>
+                        </div>
+                        <div>
+                            <dt>exactitude quand l'artefact change de classe</dt>
+                            <dd class="metric down">0.495</dd>
+                        </div>
+                        <div>
+                            <dt>diagnostics qui basculent si l'on ajoute ou efface un glyphe couvrant 2&nbsp;% de l'image</dt>
+                            <dd class="metric down">51,7&nbsp;%</dd>
+                        </div>
+                    </dl>
+                    <p class="case__headline-note">
+                        Il bat le modèle de contrôle de trois points sur la seule colonne
+                        qu'un rapport aurait publiée. Puis il tombe au niveau du hasard.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <figure class="case__figure">
+            <img src="outputs/fig1_dataset.png" loading="lazy"
+                 alt="Trois lignes d'images : radiographies propres, les mêmes avec un filigrane en coin, et la différence entre les deux qui ne montre que le glyphe.">
+            <figcaption>
+                <strong>Le protocole.</strong> Les images propres et l'artefact ne sont
+                jamais fusionnés sur le disque. Les radiographies sont générées une fois,
+                le filigrane est appliqué au moment où le chargeur sert l'image, selon un
+                vecteur de drapeaux fourni séparément. Comparer la sortie du modèle avec
+                et sans artefact sur la <em>même</em> radiographie revient donc à réaliser
+                une intervention <code>do(biais&nbsp;=&nbsp;b)</code> au sens de Pearl&nbsp;:
+                on force la valeur du confondant, tout le reste est tenu constant. Ce qui
+                est mesuré est un effet causal, pas une association.
+            </figcaption>
+        </figure>
+
+        <div class="row g-4 mt-4">
+            <div class="col-lg-7">
+                <figure class="case__figure mb-0">
+                    <img src="outputs/fig2_robustesse.png" loading="lazy"
+                         alt="Diagramme en barres : quatre modèles évalués sur quatre configurations du confondant. Le modèle biaisé, en orange, est le meilleur en i.i.d. et s'effondre à 0,49 quand le biais est inversé.">
+                    <figcaption>
+                        Quatre bras entraînés sur exactement le même contenu médical.
+                        Seule la distribution du confondant change.
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-lg-5">
+                <h3 class="case__h3">Quatre suites contrefactuelles</h3>
+                <p class="text-muted">
+                    L'exactitude sur un jeu de test tiré de la même distribution ne dit
+                    rien des raisons d'une prédiction. Chaque modèle est donc évalué sur
+                    quatre configurations construites à partir des <em>mêmes</em> images
+                    propres&nbsp;: biais corrélé comme à l'entraînement, artefact retiré
+                    partout, artefact présent partout, artefact déplacé sur la classe
+                    opposée.
+                </p>
+                <h3 class="case__h3 mt-4">Qui paie l'addition</h3>
+                <p class="text-muted mb-0">
+                    Sur la suite i.i.d., le modèle biaisé atteint 0,983 sur les 406
+                    patients malades porteurs de l'artefact — et <strong>0,294 sur les
+                    17 qui ne l'ont pas</strong>. Ces derniers sont massivement classés
+                    sains. Le modèle échoue précisément sur les patients atypiques, ceux
+                    pour qui une aide au diagnostic aurait le plus de valeur. La moyenne
+                    les efface complètement.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <div class="col-lg-5">
+                <h3 class="case__h3">Localiser le raccourci</h3>
+                <p class="text-muted">
+                    La densité d'attention Grad-CAM dans la zone du filigrane atteint
+                    <span class="metric">×1,87</span> pour le modèle biaisé, contre
+                    <span class="metric">×0,31</span> pour le contrôle et
+                    <span class="metric">×0,11</span> pour le bras décorrélé. Les modèles
+                    robustes concentrent leur attention sur les champs pulmonaires&nbsp;;
+                    le modèle biaisé y retombe à ×1,15.
+                </p>
+                <h3 class="case__h3 mt-4">Et la limite de la méthode</h3>
+                <p class="text-muted mb-0">
+                    Avec un confondant <em>global</em> — un simple changement de gamma,
+                    qui simule un autre appareil — le raccourci est d'ampleur comparable
+                    (0,959 en i.i.d., 0,339 en inversé) mais <strong>aucune carte de
+                    saillance ne peut le révéler</strong>&nbsp;: il n'y a pas de région
+                    suspecte à montrer. Seuls les tests contrefactuels détectent les deux
+                    régimes. C'est ce qui borne la portée de l'explicabilité par saillance.
+                </p>
+            </div>
+            <div class="col-lg-7">
+                <figure class="case__figure mb-0">
+                    <img src="outputs/fig3_gradcam.png" loading="lazy"
+                         alt="Grille Grad-CAM : une ligne par modèle. Le modèle biaisé concentre sa chaleur sur le coin supérieur gauche où se trouve le filigrane, les autres sur les champs pulmonaires.">
+                    <figcaption>
+                        Où chaque modèle regarde, sur des images toutes biaisées.
+                        Ligne 2&nbsp;: le coin du filigrane.
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-4 reveal">
+                <div class="case__card">
+                    <h3>Décorrélation</h3>
+                    <p>Le confondant cesse d'être informatif. Taux de bascule ramené à
+                       <span class="metric">0,005</span> sans perte mesurable
+                       d'exactitude — mais suppose qu'on puisse changer la composition
+                       du jeu de données.</p>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="case__card">
+                    <h3>Inversion de gradient</h3>
+                    <p>Une tête adversariale devine le biais, l'encodeur est poussé à
+                       rendre cette tâche impossible. Fonctionne sur les données
+                       inchangées&nbsp;: bascule à <span class="metric">0,051</span>, au
+                       prix d'une dizaine de points d'exactitude.</p>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="case__card case__card--warn">
+                    <h3>Ce qui n'a pas marché</h3>
+                    <p>L'entraînement adversarial n'a pas convergé&nbsp;:
+                       <code>adv_acc</code> descend à 0,598 puis remonte à 0,809 au lieu
+                       de tendre vers 0,50. Le gradient inversé n'est le gradient d'aucune
+                       perte réelle&nbsp;; l'équilibre n'est pas atteint. Les leviers
+                       disponibles n'ont pas été réglés — l'écart avec la décorrélation ne
+                       mesure donc pas une supériorité intrinsèque de celle-ci.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="case__closing">
+            Une vérification indépendante par régression logistique, en dix secondes et
+            sans PyTorch, donne 0,960 en i.i.d. et 0,209 en inversé. Le réseau convolutif
+            et le modèle linéaire s'effondrent de la même façon&nbsp;: le raccourci vient
+            des données, pas d'un choix d'architecture.
+        </p>
+
+        <div class="featured__actions">
+            <a class="act act--primary"
+               href="https://github.com/lachance123-franccois/shortcut-audit"
+               target="_blank" rel="noopener">Lire le code</a>
+        </div>
+    </div>
+</section>
+
+<hr class="section-separator">
+
 <!-- SECTION 0 : PROJET PRINCIPAL -->
 <section class="py-5 featured">
     <div class="container">
@@ -269,10 +521,19 @@
                     </figcaption>
                     <canvas id="canvas-uq" height="260"></canvas>
                     <div class="scope-panel__foot">
-                        <div>Axe X<span>confiance annoncée</span></div>
-                        <div>Axe Y<span>exactitude réelle</span></div>
+                        <div>Barres bleues<span>exactitude mesurée</span></div>
+                        <div>Barres ambre<span>confiance en trop</span></div>
                     </div>
                 </figure>
+                <p class="scope-panel__caption">
+                    Chaque barre regroupe les prédictions d'un même niveau de
+                    confiance. Si le modèle était honnête, elles toucheraient la
+                    diagonale&nbsp;: sur les cas annoncés à 80&nbsp;%, il aurait
+                    raison 80&nbsp;% du temps. Elles sont en dessous, et l'écart
+                    se creuse à droite — plus le modèle est sûr de lui, plus il
+                    se surestime. L'animation montre la recalibration qui referme
+                    cet écart&nbsp;; l'ECE, en haut à gauche, en est la mesure.
+                </p>
             </div>
         </div>
 
@@ -410,7 +671,7 @@
                 </div>
             </div>
 
-            <!-- Classification Défauts de Roulement — animation vibrations -->
+            <!-- Classification Défauts de Roulement  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -433,7 +694,7 @@
                 </div>
             </div>
 
-            <!-- Démodulation QAM-16 — animation constellation -->
+            <!-- Démodulation QAM-16  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -456,7 +717,7 @@
                 </div>
             </div>
 
-            <!-- VisionGuard — animation bounding boxes -->
+            <!-- VisionGuard -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -479,7 +740,7 @@
                 </div>
             </div>
 
-            <!-- Camera Vision Mini — vidéo réelle (inchangé) -->
+            <!-- Camera Vision Mini — vidéo réelle  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="project-video-wrapper">
@@ -565,7 +826,7 @@
       <div>
         <h4>Ailleurs</h4>
         <ul>
-          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/francois-lachance12" target="_blank" rel="noopener">LinkedIn</a></li>
           <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
         </ul>
