@@ -104,6 +104,12 @@
         margin: 1.2rem 0 0; font-size: .86rem; color: rgba(255,255,255,.55);
     }
 
+
+    .case__panel { margin-top: 2.5rem; }
+    .case__panel-caption {
+        margin-top: .9rem; font-size: .9rem; line-height: 1.65; color: var(--text-muted);
+    }
+    .scope-panel__foot--3 { grid-template-columns: repeat(3, 1fr); }
     .case__figure { margin: 2.5rem 0 0; }
     .case__figure img {
         width: 100%; height: auto; display: block;
@@ -354,6 +360,27 @@
                 </div>
             </div>
         </div>
+
+                <figure class="scope-panel case__panel" role="img"
+                aria-label="Animation du test d'intervention : un glyphe apparaît dans le coin de la radiographie, l'attention Grad-CAM quitte les poumons pour le coin, et la probabilité de maladie prédite passe de faible à élevée sans qu'aucun pixel du parenchyme n'ait changé.">
+            <figcaption class="scope-panel__head">
+                <span>Test d'intervention — do(biais)</span>
+                <b id="scState">biais = 0</b>
+            </figcaption>
+            <canvas id="canvas-shortcut" height="280"></canvas>
+            <div class="scope-panel__foot scope-panel__foot--3">
+                <div>Parenchyme<span>inchangé</span></div>
+                <div>P(malade)<span id="scProb">—</span></div>
+                <div>Attention coin<span id="scFocus">—</span></div>
+            </div>
+        </figure>
+        <p class="case__panel-caption">
+            Reconstitution du mécanisme mesuré. Seul le glyphe change&nbsp;: il couvre
+            2&nbsp;% de l'image et ne contient aucune information médicale. La chaleur
+            Grad-CAM quitte les champs pulmonaires, la probabilité prédite bascule, le
+            diagnostic avec elle. Sur 800&nbsp;patients de test, cela arrive à
+            <span class="metric">51,7&nbsp;%</span> d'entre eux.
+        </p>
 
         <figure class="case__figure">
             <img src="assets/fig1_dataset.png" loading="lazy"

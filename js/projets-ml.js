@@ -129,6 +129,122 @@
     var scene = window.FLScene;
     if (typeof scene !== 'function') return;
 
+    // Test d'intervention do(biais) : radiographie à gauche, jauge de
+    // probabilité à droite. Le glyphe apparaît, l'attention Grad-CAM quitte
+    // les poumons pour le coin, la probabilité bascule — et pas un pixel du
+    // parenchyme n'a changé. C'est le mécanisme que le projet mesure.
+    var scc = document.getElementById('canvas-shortcut');
+    if (scc) {
+      var elState = document.getElementById('scState');
+      var elProb  = document.getElementById('scProb');
+      var elFocus = document.getElementById('scFocus');
+      var lastState = '';
+
+      scene(scc, function (ctx, w, h, f) {
+        var cycle = f % 400;
+        var g = cycle < 110 ? 0
+              : cycle < 190 ? (cycle - 110) / 80
+              : cycle < 310 ? 1
+              : 1 - (cycle - 310) / 80;
+        g = Math.max(0, Math.min(1, g));
+
+        // Valeurs mesurées dans le projet : ATE = +0.466
+        var prob = 0.19 + 0.466 * g;
+        var focus = 0.31 + (1.87 - 0.31) * g;
+        var state = g > 0.5 ? 'biais = 1' : 'biais = 0';
+        if (state !== lastState) { lastState = state; if (elState) elState.textContent = state; }
+        if (elProb)  elProb.textContent  = prob.toFixed(2);
+        if (elFocus) elFocus.textContent = '×' + focus.toFixed(2);
+
+        ctx.fillStyle = '#071620';
+        ctx.fillRect(0, 0, w, h);
+
+        var imgW = Math.min(w * 0.52, h * 1.05);
+        var ox = 18, oy = (h - imgW * 0.92) / 2, side = imgW * 0.92;
+        var cx = ox + side / 2, cy = oy + side * 0.54, r = side * 0.34;
+
+        // Thorax
+        ctx.save(); ctx.translate(cx, cy); ctx.scale(0.86, 1);
+        ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(190,205,212,0.3)'; ctx.fill();
+        ctx.restore();
+
+        // Champs pulmonaires : rigoureusement identiques tout au long
+        [-1, 1].forEach(function (sd) {
+          ctx.save();
+          ctx.translate(cx + sd * r * 0.38, cy - r * 0.06);
+          ctx.scale(0.42, 0.78);
+          ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.fillStyle = '#0d2230'; ctx.fill();
+          ctx.restore();
+        });
+        ctx.fillStyle = 'rgba(210,222,228,0.38)';
+        ctx.fillRect(cx - 1.5, cy - r * 0.85, 3, r * 1.7);
+
+        // Chaleur Grad-CAM : sur les poumons quand g=0, sur le coin quand g=1
+        function heat(hx, hy, rad, intensity) {
+          if (intensity < 0.02) return;
+          var grd = ctx.createRadialGradient(hx, hy, 0, hx, hy, rad);
+          grd.addColorStop(0, 'rgba(196,112,58,' + (0.5 * intensity) + ')');
+          grd.addColorStop(0.5, 'rgba(196,112,58,' + (0.2 * intensity) + ')');
+          grd.addColorStop(1, 'rgba(196,112,58,0)');
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(hx, hy, rad, 0, Math.PI * 2); ctx.fill();
+        }
+        heat(cx - r * 0.38, cy - r * 0.06, r * 0.55, 1 - g);
+        heat(cx + r * 0.38, cy - r * 0.06, r * 0.55, 1 - g);
+        heat(ox + side * 0.11, oy + side * 0.11, r * 0.5, g);
+
+        // Le glyphe
+        if (g > 0.01) {
+          var gx = ox + side * 0.05, gy = oy + side * 0.05, gs = side * 0.13;
+          ctx.strokeStyle = 'rgba(255,255,255,' + (0.9 * g) + ')';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(gx, gy); ctx.lineTo(gx, gy + gs); ctx.lineTo(gx + gs * 0.7, gy + gs);
+          ctx.stroke();
+        }
+
+        // Cadre de l'image
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(ox, oy, side, side * 0.92);
+
+        // Jauge de probabilité à droite
+        var bx = ox + side + 34, bw = Math.max(w - bx - 26, 40);
+        var by = oy + side * 0.30, bh = 18;
+
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.font = '400 10.5px "IBM Plex Mono", monospace';
+        ctx.fillText('P(malade)', bx, by - 10);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.08)';
+        ctx.fillRect(bx, by, bw, bh);
+        ctx.fillStyle = prob > 0.5 ? '#c4703a' : '#2fb6c4';
+        ctx.fillRect(bx, by, bw * prob, bh);
+
+        // Seuil de décision
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+        ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(bx + bw * 0.5, by - 5); ctx.lineTo(bx + bw * 0.5, by + bh + 5);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.font = '400 9px "IBM Plex Mono", monospace';
+        ctx.fillText('seuil 0.50', bx + bw * 0.5 - 24, by + bh + 18);
+
+        // Verdict
+        ctx.fillStyle = prob > 0.5 ? '#c4703a' : '#2fb6c4';
+        ctx.font = '500 15px "IBM Plex Mono", monospace';
+        ctx.fillText(prob > 0.5 ? 'malade' : 'sain', bx, by + bh + 46);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.font = '400 10px "IBM Plex Mono", monospace';
+        ctx.fillText('parenchyme identique', bx, by + bh + 68);
+      }, { stillFrame: 250 });
+    }
+
     // Diagramme de fiabilité : les barres d'exactitude, d'abord sous la
     // diagonale parce que le modèle annonce plus de certitude qu'il n'en
     // mérite, remontent vers elle après recalibration. C'est exactement ce
@@ -159,7 +275,7 @@
         ctx.fillStyle = '#071620';
         ctx.fillRect(0, 0, w, h);
 
-        var pad = 34, x0 = pad, y0 = h - 26, x1 = w - 14, y1 = 14;
+        var pad = 40, x0 = pad, y0 = h - 34, x1 = w - 16, y1 = 14;
         var pw = x1 - x0, ph = y0 - y1;
 
         // Grille
@@ -200,6 +316,48 @@
         ctx.beginPath();
         ctx.moveTo(x0, y1); ctx.lineTo(x0, y0); ctx.lineTo(x1, y0);
         ctx.stroke();
+
+        // Graduations : sans elles, le lecteur ne sait pas que les deux axes
+        // vont de 0 à 1 et la diagonale ne veut plus rien dire.
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.font = '400 9px "IBM Plex Mono", monospace';
+        ['0', '0.5', '1'].forEach(function (t, i) {
+          ctx.textAlign = 'center';
+          ctx.fillText(t, x0 + (pw * i) / 2, y0 + 12);
+          ctx.textAlign = 'right';
+          ctx.fillText(t, x0 - 5, y0 - (ph * i) / 2 + 3);
+        });
+        ctx.textAlign = 'left';
+
+        // Nom des axes
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.font = '400 9.5px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('confiance annoncée', x0 + pw / 2, y0 + 23);
+        ctx.save();
+        ctx.translate(11, y1 + ph / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillText('exactitude réelle', 0, 0);
+        ctx.restore();
+        ctx.textAlign = 'left';
+
+        // Étiquette de la diagonale
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.font = '400 9px "IBM Plex Mono", monospace';
+        ctx.save();
+        ctx.translate(x1 - 92, y1 + 26);
+        ctx.rotate(-Math.atan2(ph, pw));
+        ctx.fillText('calibration parfaite', 0, 0);
+        ctx.restore();
+
+        // Légende de l'écart, tant qu'il est visible
+        if (fix < 0.9) {
+          ctx.fillStyle = 'rgba(196,112,58,' + (0.35 * (1 - fix) + 0.25) + ')';
+          ctx.fillRect(x0 + 10, y1 + 28, 9, 9);
+          ctx.fillStyle = 'rgba(255,255,255,' + (0.5 * (1 - fix) + 0.2) + ')';
+          ctx.font = '400 9.5px "IBM Plex Mono", monospace';
+          ctx.fillText('excès de confiance', x0 + 24, y1 + 36);
+        }
 
         // ECE courant, calculé sur les mêmes chiffres que les barres
         var ece = 0;
