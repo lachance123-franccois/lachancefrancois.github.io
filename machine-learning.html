@@ -5,13 +5,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets IA et machine learning — François Lachance Awounang-Ngounou</title>
+    <title>Projets IA et machine learning · François Lachance Awounang-Ngounou</title>
 <meta name="description" content="Onze projets de machine learning, traitement du signal et vision par ordinateur : EEG, analyse vibratoire, démodulation QAM-16, YOLOv8. Code public sur GitHub.">
 <link rel="canonical" href="https://lachance123-franccois.github.io/machine-learning.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://lachance123-franccois.github.io/machine-learning.html">
-<meta property="og:title" content="Projets IA et machine learning — François Lachance Awounang-Ngounou">
+<meta property="og:title" content="Projets IA et machine learning · François Lachance Awounang-Ngounou">
 <meta property="og:description" content="Onze projets de machine learning, traitement du signal et vision par ordinateur : EEG, analyse vibratoire, démodulation QAM-16, YOLOv8. Code public sur GitHub.">
 <meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -49,19 +49,14 @@
         --accent-green: #00d084;
         --navy-deep: #0a192f;
     }
-    
     body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
-    
     .hero-ml {
         background: linear-gradient(135deg, var(--navy-deep) 0%, #172a45 100%);
         padding: 100px 0 60px;
         color: white;
         position: relative;
     }
-
-
-
-    /* ---- Étude de cas : raccourci causal ------------------------------ */
+    
     .case { background: var(--paper-pure); }
     .case__eyebrow {
         font-family: var(--font-mono); font-size: .8rem;
@@ -81,8 +76,7 @@
         font-family: var(--font-mono); font-size: .85em; background: var(--paper);
         border: 1px solid var(--rule); border-radius: 5px; padding: 1px 6px;
     }
-
-    /* Le résultat, isolé : trois chiffres qui racontent toute l'histoire */
+    
     .case__headline {
         background: var(--ink-900); color: rgba(255,255,255,.75);
         border-radius: 16px; padding: 1.6rem 1.8rem;
@@ -103,8 +97,6 @@
     .case__headline-note {
         margin: 1.2rem 0 0; font-size: .86rem; color: rgba(255,255,255,.55);
     }
-
-
     .case__panel { margin-top: 2.5rem; }
     .case__panel-caption {
         margin-top: .9rem; font-size: .9rem; line-height: 1.65; color: var(--text-muted);
@@ -119,7 +111,6 @@
         margin-top: .9rem; font-size: .88rem; line-height: 1.65; color: var(--text-muted);
     }
     .case__figure figcaption strong { color: var(--ink-900); }
-
     .case__card {
         height: 100%; padding: 1.3rem 1.4rem;
         border: 1px solid var(--rule); border-left: 3px solid var(--signal);
@@ -128,14 +119,12 @@
     .case__card--warn { border-left-color: var(--detect); }
     .case__card h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: .5rem; }
     .case__card p { font-size: .9rem; color: var(--text-muted); margin: 0; }
-
     .case__closing {
         margin-top: 2.5rem; padding: 1.1rem 1.4rem;
         background: var(--paper); border-radius: 12px;
         font-size: .93rem; color: var(--text-muted); max-width: none;
     }
-
-    /* ---- Projet principal ------------------------------------------- */
+    
     .featured { background: var(--ink-900); color: rgba(255,255,255,.82); }
     .featured__eyebrow {
         font-family: var(--font-mono); font-size: .8rem;
@@ -148,14 +137,14 @@
     }
     .featured__lede { color: rgba(255,255,255,.78); font-size: 1.02rem; max-width: 52ch; }
     .featured__lede strong { color: #fff; }
-    .featured__actions { margin-top: 1.6rem; }
+    .featured__actions { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+    .featured__pdf-note { margin-top: .9rem; font-size: .85rem; color: rgba(255,255,255,.55); }
     .featured__h3 { font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-bottom: .9rem; }
     .featured .text-muted { color: rgba(255,255,255,.7) !important; font-size: .95rem; }
     .featured code {
         font-family: var(--font-mono); font-size: .85em; color: var(--signal);
         background: rgba(255,255,255,.06); border-radius: 5px; padding: 1px 6px;
     }
-
     .featured__card {
         height: 100%; padding: 1.4rem 1.5rem;
         background: rgba(255,255,255,.04);
@@ -172,7 +161,6 @@
         font-family: var(--font-mono); font-size: .76rem;
         color: var(--signal) !important; margin-top: .8rem !important;
     }
-
     /* Panneau instrument, comme sur la page d'accueil */
     .scope-panel {
         margin: 0; border: 1px solid rgba(255,255,255,.14); border-radius: 16px;
@@ -197,7 +185,6 @@
         margin: .9rem 0 0; font-size: .85rem; line-height: 1.65;
         color: rgba(255,255,255,.6);
     }
-
     .project-card {
         background: white; border-radius: 15px; overflow: hidden;
         transition: all 0.3s ease; height: 100%;
@@ -205,8 +192,7 @@
         position: relative;
     }
     .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-
-    /* Canvas wrapper — même dimensions que project-image-placeholder */
+    
     .canvas-thumb {
         height: 200px;
         position: relative;
@@ -216,13 +202,11 @@
         width: 100%; height: 100%;
         display: block;
     }
-
     .project-image-placeholder {
         height: 200px;
         display: flex; align-items: center; justify-content: center;
         color: white; position: relative;
     }
-
     .project-video-wrapper {
         height: 200px; position: relative;
         background: #000; overflow: hidden;
@@ -230,7 +214,6 @@
     .project-video-wrapper video {
         width: 100%; height: 100%; object-fit: cover; display: block;
     }
-
     .project-overlay {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(10, 25, 47, 0.8);
@@ -238,25 +221,20 @@
         opacity: 0; transition: opacity 0.3s ease;
     }
     .project-card:hover .project-overlay { opacity: 1; }
-
     .tech-badge {
         background: #e9ecef; color: var(--navy-deep);
         padding: 4px 12px; border-radius: 20px;
         font-size: 0.8rem; font-weight: 600;
         margin-right: 5px; margin-bottom: 5px; display: inline-block;
     }
-
     .section-title-line {
         width: 60px; height: 4px;
         background: var(--accent-green);
         margin: 10px auto 30px;
     }
-
-
     .form-control:focus { border-color: var(--accent-green); box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25); }
     .btn-primary { background: var(--navy-deep); border: none; }
     .btn-primary:hover { background: var(--accent-green); }
-
     .section-separator {
         border: none; height: 3px;
         background: linear-gradient(to right, transparent, var(--accent-green), transparent);
@@ -271,7 +249,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de Mars 2027, puis CDI.</span>
+    <span><strong>Disponible</strong> : stage de fin d'études de 6&nbsp;mois à partir de ⟦mois/année⟧, puis CDI.</span>
     <span>Toulouse et mobilité France entière.</span>
     <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
   </div>
@@ -312,19 +290,18 @@
     </div>
 </header>
 
-<!-- SECTION 0a : SHORTCUT-AUDIT  -->
 <section class="py-5 case">
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-7">
-                <p class="case__eyebrow">Projet — robustesse causale &amp; apprentissage par raccourci</p>
+                <p class="case__eyebrow">Projet · robustesse causale et apprentissage par raccourci</p>
                 <h2 class="case__title">Le modèle le plus performant est le seul inutilisable.</h2>
                 <p class="case__lede">
                     Un classifieur supervisé n'optimise qu'une chose&nbsp;: séparer les
                     classes sur les données qu'on lui donne. Rien ne l'oblige à ce que
                     la régularité qu'il trouve ait un sens clinique. Si les patients
                     malades viennent surtout d'un autre hôpital que les sujets sains,
-                    l'appareil d'acquisition devient un prédicteur parfait — et le
+                    l'appareil d'acquisition devient un prédicteur parfait, et le
                     modèle s'en sert.
                 </p>
                 <p class="case__lede">
@@ -364,14 +341,14 @@
                 <figure class="scope-panel case__panel" role="img"
                 aria-label="Animation du test d'intervention : un glyphe apparaît dans le coin de la radiographie, l'attention Grad-CAM quitte les poumons pour le coin, et la probabilité de maladie prédite passe de faible à élevée sans qu'aucun pixel du parenchyme n'ait changé.">
             <figcaption class="scope-panel__head">
-                <span>Test d'intervention — do(biais)</span>
+                <span>Test d'intervention · do(biais)</span>
                 <b id="scState">biais = 0</b>
             </figcaption>
             <canvas id="canvas-shortcut" height="280"></canvas>
             <div class="scope-panel__foot scope-panel__foot--3">
                 <div>Parenchyme<span>inchangé</span></div>
-                <div>P(malade)<span id="scProb">—</span></div>
-                <div>Attention coin<span id="scFocus">—</span></div>
+                <div>P(malade)<span id="scProb">…</span></div>
+                <div>Attention coin<span id="scFocus">…</span></div>
             </div>
         </figure>
         <p class="case__panel-caption">
@@ -421,7 +398,7 @@
                 <h3 class="case__h3 mt-4">Qui paie l'addition</h3>
                 <p class="text-muted mb-0">
                     Sur la suite i.i.d., le modèle biaisé atteint 0,983 sur les 406
-                    patients malades porteurs de l'artefact — et <strong>0,294 sur les
+                    patients malades porteurs de l'artefact, et <strong>0,294 sur les
                     17 qui ne l'ont pas</strong>. Ces derniers sont massivement classés
                     sains. Le modèle échoue précisément sur les patients atypiques, ceux
                     pour qui une aide au diagnostic aurait le plus de valeur. La moyenne
@@ -443,8 +420,8 @@
                 </p>
                 <h3 class="case__h3 mt-4">Et la limite de la méthode</h3>
                 <p class="text-muted mb-0">
-                    Avec un confondant <em>global</em> — un simple changement de gamma,
-                    qui simule un autre appareil — le raccourci est d'ampleur comparable
+                    Avec un confondant <em>global</em>, un simple changement de gamma
+                    qui simule un autre appareil, le raccourci est d'ampleur comparable
                     (0,959 en i.i.d., 0,339 en inversé) mais <strong>aucune carte de
                     saillance ne peut le révéler</strong>&nbsp;: il n'y a pas de région
                     suspecte à montrer. Seuls les tests contrefactuels détectent les deux
@@ -469,7 +446,7 @@
                     <h3>Décorrélation</h3>
                     <p>Le confondant cesse d'être informatif. Taux de bascule ramené à
                        <span class="metric">0,005</span> sans perte mesurable
-                       d'exactitude — mais suppose qu'on puisse changer la composition
+                       d'exactitude, mais suppose qu'on puisse changer la composition
                        du jeu de données.</p>
                 </div>
             </div>
@@ -489,7 +466,7 @@
                        <code>adv_acc</code> descend à 0,598 puis remonte à 0,809 au lieu
                        de tendre vers 0,50. Le gradient inversé n'est le gradient d'aucune
                        perte réelle&nbsp;; l'équilibre n'est pas atteint. Les leviers
-                       disponibles n'ont pas été réglés — l'écart avec la décorrélation ne
+                       disponibles n'ont pas été réglés, l'écart avec la décorrélation ne
                        mesure donc pas une supériorité intrinsèque de celle-ci.</p>
                 </div>
             </div>
@@ -512,12 +489,11 @@
 
 <hr class="section-separator">
 
-<!-- SECTION 0 : PROJET PRINCIPAL -->
 <section class="py-5 featured">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
-                <p class="featured__eyebrow">Projet principal — quantification d'incertitude</p>
+                <p class="featured__eyebrow">Projet principal · quantification d'incertitude</p>
                 <h2 class="featured__title">Apprendre à un modèle médical à dire «&nbsp;je ne sais pas&nbsp;»</h2>
                 <p class="featured__lede">
                     Un réseau de classification a beau se tromper, il rend toujours une
@@ -533,10 +509,17 @@
                     prix&nbsp;».
                 </p>
                 <div class="featured__actions">
-                    <a class="act act--signal"
-                       href="https://github.com/lachance123-franccois/uncertainty-aware-medical-imaging"
+                    <a class="act act--signal" href="assets/pdf/AWOUNANG_incertitude_imagerie_medicale.pdf"
+                       target="_blank" rel="noopener">Lire le rapport</a>
+                    <a class="act act--onDark" href="https://github.com/lachance123-franccois/uncertainty-aware-medical-imaging"
                        target="_blank" rel="noopener">Lire le code</a>
+                    <a class="act act--onDark" href="assets/pdf/AWOUNANG_incertitude_imagerie_medicale.pdf" download>Télécharger le PDF</a>
                 </div>
+                <p class="featured__pdf-note">
+                    Rapport complet : formulation du problème, protocole,
+                    résultats et discussion. Il s'ouvre dans un onglet, sans
+                    téléchargement obligatoire.
+                </p>
             </div>
 
             <div class="col-lg-6">
@@ -557,7 +540,7 @@
                     confiance. Si le modèle était honnête, elles toucheraient la
                     diagonale&nbsp;: sur les cas annoncés à 80&nbsp;%, il aurait
                     raison 80&nbsp;% du temps. Elles sont en dessous, et l'écart
-                    se creuse à droite — plus le modèle est sûr de lui, plus il
+                    se creuse à droite : plus le modèle est sûr de lui, plus il
                     se surestime. L'animation montre la recalibration qui referme
                     cet écart&nbsp;; l'ECE, en haut à gauche, en est la mesure.
                 </p>
@@ -578,7 +561,7 @@
                 <div class="featured__card">
                     <h3>Trois incertitudes</h3>
                     <p>Total, aléatoire (le bruit de l'image) et épistémique
-                       (l'ignorance du modèle), séparées par information mutuelle —
+                       (l'ignorance du modèle), séparées par information mutuelle,
                        plus la vacuité pour l'évidentiel.</p>
                     <p class="featured__stack">Entropie · Dirichlet</p>
                 </div>
@@ -627,14 +610,14 @@
                 <p class="text-muted">
                     Un réseau de classification ne produit qu'une seule distribution
                     pour toute l'image&nbsp;: il n'y a pas de carte spatiale gratuite.
-                    Elle est reconstruite par occlusion — on masque une zone, on relance
+                    Elle est reconstruite par occlusion : on masque une zone, on relance
                     la chaîne complète, et on mesure la variation de
                     <em>l'incertitude</em>, pas du score de classe.
                 </p>
                 <p class="text-muted">
                     Une zone qui rend le modèle incertain quand on la cache portait la
                     preuve de la décision. Une zone qui le rend plus confiant contenait
-                    un signal contradictoire — un artefact, un marqueur, une structure
+                    un signal contradictoire : un artefact, un marqueur, une structure
                     superposée.
                 </p>
                 <p class="text-muted mb-0">
@@ -650,7 +633,6 @@
 
 <hr class="section-separator">
 
-<!-- SECTION 1 : Projets ML classiques -->
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
@@ -664,7 +646,6 @@
 
 <hr class="section-separator">
 
-<!-- SECTION 2 : Signal & Vision Python -->
 <section class="py-5" style="background-color: #f0f4f8;">
     <div class="container">
         <div class="text-center mb-5">
@@ -675,7 +656,6 @@
 
         <div class="row g-4">
 
-            <!-- Détection Crises Épileptiques — animation EEG -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -698,7 +678,6 @@
                 </div>
             </div>
 
-            <!-- Classification Défauts de Roulement  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -721,7 +700,6 @@
                 </div>
             </div>
 
-            <!-- Démodulation QAM-16  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -744,7 +722,6 @@
                 </div>
             </div>
 
-            <!-- VisionGuard -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="canvas-thumb">
@@ -767,7 +744,6 @@
                 </div>
             </div>
 
-            <!-- Camera Vision Mini — vidéo réelle  -->
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-card">
                     <div class="project-video-wrapper">
@@ -798,7 +774,6 @@
     </div>
 </section>
 
-<!-- Stack Technique -->
 <section class="py-5 bg-white">
     <div class="container">
         <h3 class="text-center fw-bold mb-5">Stack Technique</h3>
@@ -831,8 +806,7 @@
     </div>
 </section>
 
-</div><!-- /#contenu -->
-
+</div>
 <footer class="site-foot">
   <div class="wrap">
     <div class="site-foot__cols">
@@ -861,7 +835,7 @@
     </div>
     <div class="site-foot__base">
       <span>© 2026 François Lachance Awounang-Ngounou</span>
-      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+      <span>Site construit à la main en HTML, CSS et JavaScript.</span>
     </div>
   </div>
 </footer>
