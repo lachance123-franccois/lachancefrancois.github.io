@@ -2,27 +2,20 @@
 <html lang="fr">
 <head>
 
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traitement du signal et de l'image — François Lachance Awounang-Ngounou</title>
-<meta name="description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
-<link rel="canonical" href="https://lachance123-franccois.github.io/matlab.html">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:url" content="https://lachance123-franccois.github.io/matlab.html">
-<meta property="og:title" content="Traitement du signal et de l'image — François Lachance Awounang-Ngounou">
-<meta property="og:description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
-<meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
-<meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="CV de François Lachance Awounang-Ngounou, ingénieur IA et traitement du signal, master EEA parcours SIA2.">
+    <meta name="keywords" content="CV, François Lachance, Ingénieur, IA, Traitement Signal, Toulouse">
+    <meta name="author" content="François Lachance">
+    <meta property="og:title" content="CV de François Lachance Awounang-Ngounou">
+    <meta property="og:description" content="Curriculum Vitae de François Lachance, ingénieur spécialisé en IA et traitement du signal">
+    <meta property="og:type" content="website">
+    <title>CV | François Lachance Awounang-Ngounou</title>
+
+    <link rel="preconnect" href="https:    <link rel="preconnect" href="https:    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https:<link rel="preconnect" href="https:<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b1a26">
@@ -30,7 +23,6 @@
 <script>document.documentElement.classList.add('js');</script>
 
 <script>
-/* Met en pause toutes les animations canvas quand l'onglet est en arrière-plan. */
 (function () {
   var raf = window.requestAnimationFrame.bind(window), queued = [];
   window.requestAnimationFrame = function (cb) {
@@ -42,37 +34,181 @@
   });
 })();
 </script>
+
     <style>
-        :root { --sky-blue:#87CEEB; --off-white:#F5F5F5; --navy-dark:#1A3A5A; }
-        body { background-color:var(--off-white); font-family:'Poppins',sans-serif; }
-        .text-blanc { color:#D6CFC4; }
-        .text-color { color:#00d084; }
-        .carousel-item { height:500px; border-radius:20px; overflow:hidden; }
-        .carousel-caption { background:rgba(26,58,90,0.85); border-radius:15px; padding:30px; bottom:10%; backdrop-filter:blur(10px); }
-        .project-slide-img { width:100%; height:100%; object-fit:cover; filter:brightness(0.7); }
-        .carousel-indicators [data-bs-target] { background-color:var(--sky-blue); }
-        .project-grid-card { background:white; border-radius:15px; overflow:hidden; transition:all 0.3s ease; border:none; box-shadow:0 5px 15px rgba(0,0,0,0.07); height:100%; }
-        .project-grid-card:hover { transform:translateY(-8px); box-shadow:0 15px 35px rgba(0,0,0,0.12); }
-        .card-media { height:160px; position:relative; overflow:hidden; }
-        .card-media canvas, .card-media video { width:100%; height:100%; display:block; object-fit:cover; }
-        .overlay-link { position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s; }
-        .project-grid-card:hover .overlay-link { opacity:1; }
-        .tech-tag { display:inline-block; background:#e9ecef; color:#1A3A5A; padding:2px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; margin:2px; }
-        .skill-card-link { text-decoration:none; color:inherit; display:block; transition:transform 0.3s ease; }
-        .skill-card-link:hover { transform:translateY(-10px); }
-        .interactive-card { border:2px solid transparent; background-color:#fff; transition:all 0.3s ease-in-out; cursor:pointer; }
-        .skill-card-link:hover .interactive-card { border-color:var(--sky-blue); box-shadow:0 15px 30px rgba(135,206,235,0.3)!important; }
-        .interactive-card i { transition:transform 0.4s ease; }
-        .skill-card-link:hover i { transform:scale(1.2) rotate(5deg); color:var(--sky-blue)!important; }
+        :root {
+            --navy:        #0b1d35;
+            --navy-mid:    #142b4e;
+            --navy-soft:   #1c3a63;
+            --accent:      #4fa8d5;
+            --accent-warm: #e8a44a;
+            --text-main:   #1a2535;
+            --text-muted:  #5e7898;
+            --surface:     #ffffff;
+            --surface-2:   #f4f7fb;
+            --border:      rgba(11,29,53,0.08);
+            --shadow-sm:   0 2px 8px rgba(11,29,53,0.07);
+            --shadow-md:   0 6px 20px rgba(11,29,53,0.12);
+            --shadow-lg:   0 16px 40px rgba(11,29,53,0.16);
+            --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--surface-2);
+        }
+        .navbar {
+            background: var(--navy) !important;
+            box-shadow: var(--shadow-md);
+            transition: padding 0.3s var(--ease);
+            padding: 1rem 0;
+        }
+        .navbar.scrolled { padding: 0.5rem 0; }
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem; font-weight: 800;
+            letter-spacing: -0.5px;
+            transition: 0.3s var(--ease);
+        }
+        .navbar-brand:hover { transform: translateY(-2px); }
+        .brand-icon { color: var(--accent); }
+        .nav-link {
+            position: relative; padding: 0.5rem 1rem !important;
+            font-weight: 500; font-size: 0.9rem;
+            transition: 0.3s var(--ease);
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 2px; background: var(--accent);
+            transition: 0.3s var(--ease); transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
+        .cv-header {
+            background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .cv-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+        .cv-header .lead {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .cv-container {
+            background: var(--surface);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--border);
+        }
+        .pdf-wrapper {
+            width: 100%;
+            aspect-ratio: 8.5 / 11;            max-height: 900px;
+            position: relative;
+            background: var(--surface-2);
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+        .pdf-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+        .spinner {
+            border: 4px solid rgba(79,168,213,0.2);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .pdf-fallback {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--surface);
+            border-radius: 16px;
+        }
+        .btn-download {
+            background-color: var(--navy);
+            color: white;
+            border-radius: 30px;
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s var(--ease);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-download:hover {
+            background-color: var(--navy-soft);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+        footer {
+            background: var(--navy);
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(90deg, var(--navy-soft), var(--accent), var(--accent-warm)) 1;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; }
+        .social-links a {
+            width: 42px; height: 42px; display: inline-flex; align-items: center;
+            justify-content: center; background: rgba(255,255,255,0.08);
+            border-radius: 12px; transition: all 0.3s var(--ease);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .social-links a:hover {
+            background: var(--accent); color: var(--navy) !important;
+            transform: translateY(-4px); border-color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .cv-header { padding: 2rem 0; }
+            .pdf-wrapper { aspect-ratio: 1 / 1.4; max-height: 600px; }
+            .btn-download { padding: 0.6rem 1.5rem; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de Mars 2027, puis CDI.</span>
+    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
     <span>Toulouse et mobilité France entière.</span>
     <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
   </div>
@@ -89,8 +225,8 @@
       <ul class="site-nav__list">
         <li><a class="site-nav__link" href="index.html">Accueil</a></li>
         <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
-        <li><a class="site-nav__link" href="matlab.html" aria-current="page">Signal &amp; image</a></li>
-        <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
+        <li><a class="site-nav__link" href="matlab.html">Signal &amp; image</a></li>
+        <li><a class="site-nav__link" href="cv-op.html" aria-current="page">CV</a></li>
         <li><a class="site-nav__cta" href="contact.html">Me contacter</a></li>
       </ul>
     </div>
@@ -98,151 +234,46 @@
 </nav>
 <div id="contenu">
 
-<section class="py-5" style="background:linear-gradient(rgba(26,58,90,0.9),rgba(26,58,90,0.9)),url('assets/tech-bg.jpg');background-size:cover;">
-    <div class="container text-center py-5">
-        <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInDown">Projets MATLAB — Signal & Image</h1>
-        <p class="lead text-blanc animate__animated animate__fadeInUp">Traitement du signal, analyse spectrale et imagerie aérienne sous MATLAB.</p>
-    </div>
-</section>
-
-<section class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-5 fw-bold"><i class="fas fa-rocket text-primary me-2"></i>Réalisations Phares</h2>
-        <div id="projectCarousel" class="carousel slide shadow-lg" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200" class="project-slide-img" alt="">
-                    <div class="carousel-caption d-none d-md-block text-start">
-                        <span class="badge bg-info mb-2">Traitement d'Image</span>
-                        <h3>Analyse Spectrale d'Image Aérienne</h3>
-                        <p>Application MATLAB d'analyse spectrale sur images aériennes multispectrales.</p>
-                        <a href="https://github.com/lachance123-franccois/app-analyse-spectral-d-image-aerienne" target="_blank" class="btn btn-primary">Voir sur GitHub</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200" class="project-slide-img" alt="">
-                    <div class="carousel-caption d-none d-md-block text-start">
-                        <span class="badge bg-primary mb-2">DSP / FFT</span>
-                        <h3>Simulation Physique & Analyse FFT</h3>
-                        <p>Simulation de balles couplée à une analyse spectrale complète : FFT, DSP, STFT.</p>
-                        <a href="https://github.com/lachance123-franccois/jeu-de-balle" target="_blank" class="btn btn-primary">Voir sur GitHub</a>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1200" class="project-slide-img" alt="">
-                    <div class="carousel-caption d-none d-md-block text-start">
-                        <span class="badge bg-success mb-2">Signal & DSP</span>
-                        <h3>Filtrage Adaptatif Signaux ECG</h3>
-                        <p>Élimination des bruits 50Hz et artefacts musculaires via filtres de Kalman.</p>
-                        <a href="#" class="btn btn-primary">Détails</a>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+    <header class="cv-header">
+        <div class="container">
+            <h1>Curriculum Vitae</h1>
+            <p class="lead">Ingénieur en Intelligence Artificielle & Traitement du Signal</p>
+            <a href="assets/pdf/CV_Francois_Lachance.pdf" download="CV_Francois_Lachance.pdf" class="btn-download mt-3">
+                <i class="fas fa-file-download"></i> Télécharger le PDF
+            </a>
         </div>
-    </div>
-</section>
+    </header>
 
-<section class="py-5" style="background-color:#f0f4f8;">
-    <div class="container">
-        <h2 class="text-center fw-bold mb-2"><i class="fas fa-folder-open text-primary me-2"></i>Projets MATLAB</h2>
-        <p class="text-center text-muted mb-5">Traitement du signal, analyse spectrale et imagerie sous MATLAB</p>
-        <div class="row g-4 justify-content-center">
-
-            <!-- CARTE 1 : Balles FFT — vidéo réelle, canvas en fallback -->
-            <div class="col-md-6 col-lg-4 reveal">
-                <div class="project-grid-card">
-                    <div class="card-media" id="wrap-balles">
-                        <video id="vid-balles" src="https://raw.githubusercontent.com/lachance123-franccois/jeu-de-balle/main/demo.mp4" autoplay muted loop playsinline></video>
-                        <div class="overlay-link"><a href="https://github.com/lachance123-franccois/jeu-de-balle" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a></div>
+    <main class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="cv-container">
+                    <div class="pdf-loader" id="pdfLoader">
+                        <div class="spinner"></div>
+                        <p class="text-muted">Chargement du CV...</p>
                     </div>
-                    <div class="p-4">
-                        <small class="text-warning fw-bold text-uppercase">DSP / FFT</small>
-                        <h5 class="mt-2">Balles Rebondissantes & FFT</h5>
-                        <p class="text-muted small">Simulation physique couplée à une analyse spectrale complète : spectre d'amplitude, DSP, STFT, comparaison de fenêtrages. Projet Master SIA.</p>
-                        <div class="mt-3"><span class="tech-tag">MATLAB</span><span class="tech-tag">FFT</span><span class="tech-tag">STFT</span><span class="tech-tag">Fenêtrage</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARTE 2 : Image Aérienne — scan spectral animé -->
-            <div class="col-md-6 col-lg-4 reveal">
-                <div class="project-grid-card">
-                    <div class="card-media">
-                        <canvas id="cv-satellite" width="360" height="160"></canvas>
-                        <div class="overlay-link"><a href="https://github.com/lachance123-franccois/app-analyse-spectral-d-image-aerienne" target="_blank" class="btn btn-light rounded-pill px-4">Voir le code</a></div>
-                    </div>
-                    <div class="p-4">
-                        <small class="text-info fw-bold text-uppercase">Traitement d'Image</small>
-                        <h5 class="mt-2">Analyse Spectrale d'Image Aérienne</h5>
-                        <p class="text-muted small">Application MATLAB d'analyse spectrale sur images aériennes multispectrales pour la détection et classification de zones géographiques.</p>
-                        <div class="mt-3"><span class="tech-tag">MATLAB</span><span class="tech-tag">Télédétection</span><span class="tech-tag">Multispectral</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARTE 3 : ECG bruité + filtré Kalman -->
-            <div class="col-md-6 col-lg-4 reveal">
-                <div class="project-grid-card">
-                    <div class="card-media" style="background:#0a1628;">
-                        <canvas id="cv-ecg" width="360" height="160"></canvas>
-                        <div class="overlay-link"><a href="#" class="btn btn-light rounded-pill px-4">Détails</a></div>
-                    </div>
-                    <div class="p-4">
-                        <small class="text-success fw-bold text-uppercase">Signal & DSP</small>
-                        <h5 class="mt-2">Filtrage Adaptatif Signaux ECG</h5>
-                        <p class="text-muted small">Élimination des bruits 50Hz et artefacts musculaires sur signaux cardiaques réels via filtres de Kalman et traitement adaptatif.</p>
-                        <div class="mt-3"><span class="tech-tag">MATLAB</span><span class="tech-tag">Kalman</span><span class="tech-tag">ECG</span><span class="tech-tag">Filtrage</span></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="row g-4 text-center">
-            <div class="col-md-4 reveal">
-                <div class="skill-card-link">
-                    <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
-                        <i class="fas fa-brain fa-3x text-primary mb-3"></i>
-                        <h4 class="text-color fw-bold">Algorithmie</h4>
-                        <p class="small text-muted">Conception d'architectures mathématiques complexes sous MATLAB & Python.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 reveal">
-                <div class="skill-card-link">
-                    <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
-                        <i class="fas fa-satellite fa-3x text-primary mb-3"></i>
-                        <h4 class="text-color fw-bold">Analyse</h4>
-                        <p class="small text-muted">Traitement massif de données issues de capteurs (Radar, Lidar, Optique).</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 reveal">
-                <div class="skill-card-link">
-                    <div class="p-4 border rounded-3 h-100 shadow-sm interactive-card">
-                        <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
-                        <h4 class="text-color fw-bold">Robotique</h4>
-                        <p class="small text-muted">Implémentation de boucles de contrôle et de systèmes asservis.</p>
+                    <div class="pdf-wrapper">
+                        <object id="pdfObject"
+                                data="assets/pdf/CV_Francois_Lachance.pdf"
+                                type="application/pdf"
+                                class="pdf-viewer"
+                                style="display: none;">
+                            <div class="pdf-fallback">
+                                <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                                <h2 class="h4 fw-bold mb-3">Aperçu non disponible</h2>
+                                <p class="text-muted mb-4">Votre navigateur ne peut pas afficher le PDF intégré.</p>
+                                <a href="assets/pdf/CV_Francois_Lachance.pdf" class="btn-download" target="_blank" rel="noopener">
+                                    <i class="fas fa-external-link-alt"></i> Ouvrir le PDF
+                                </a>
+                            </div>
+                        </object>
                     </div>
                 </div>
             </div>
         </div>
+    </main>
+
     </div>
-</section>
-
-</div><!-- /#contenu -->
-
 <footer class="site-foot">
   <div class="wrap">
     <div class="site-foot__cols">
@@ -264,14 +295,13 @@
         <h4>Ailleurs</h4>
         <ul>
           <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
+          <li><a href="https:          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
         </ul>
       </div>
     </div>
     <div class="site-foot__base">
       <span>© 2026 François Lachance Awounang-Ngounou</span>
-      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+      <span>Site construit à la main en HTML, CSS et JavaScript.</span>
     </div>
   </div>
 </footer>
@@ -279,161 +309,43 @@
 <button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 <script src="js/main.js" defer></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script>
-/* ─── CARTE 1 : fallback balles canvas si vidéo absente ─── */
-const vidB = document.getElementById('vid-balles');
-function launchBallCanvas() {
-    const wrap = document.getElementById('wrap-balles');
-    const ov = wrap.querySelector('.overlay-link').outerHTML;
-    wrap.innerHTML = '<canvas id="cv-balles" width="360" height="160"></canvas>' + ov;
-    animBalles(document.getElementById('cv-balles'));
-}
-vidB.addEventListener('error', launchBallCanvas);
-setTimeout(() => { if (vidB.readyState === 0) launchBallCanvas(); }, 3500);
-
-function animBalles(cv) {
-    const ctx = cv.getContext('2d');
-    const W = cv.width, H = cv.height;
-    const cols = ['#f7971e','#ffd200','#ff6b6b','#4ecdc4','#c3a6ff'];
-    const balls = cols.map((c, i) => ({
-        x: 30 + i*66, y: 30 + Math.random()*50,
-        vx: (Math.random()-0.5)*2.4, vy: Math.random()*1.5+0.5,
-        r: 11 + i*1.5, e: 0.78 + i*0.04, col: c
-    }));
-    let tick = 0;
-    (function loop() {
-        ctx.fillStyle = '#1a1a2e'; ctx.fillRect(0,0,W,H);
-        ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
-        for(let x=0;x<W;x+=36){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-        for(let y=0;y<H;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-        ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1.5;
-        ctx.beginPath();ctx.moveTo(0,H-8);ctx.lineTo(W,H-8);ctx.stroke();
-
-        balls.forEach(b => {
-            b.vy += 0.22; b.x += b.vx; b.y += b.vy;
-            if(b.y+b.r >= H-8){b.y=H-8-b.r; b.vy=-Math.abs(b.vy)*b.e;}
-            if(b.x-b.r<0){b.x=b.r; b.vx=Math.abs(b.vx);}
-            if(b.x+b.r>W){b.x=W-b.r; b.vx=-Math.abs(b.vx);}
-            ctx.beginPath();ctx.ellipse(b.x,H-5,b.r*0.7,2.5,0,0,Math.PI*2);
-            ctx.fillStyle='rgba(0,0,0,0.25)';ctx.fill();
-            ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
-            ctx.fillStyle=b.col;ctx.fill();
-            ctx.beginPath();ctx.arc(b.x-b.r*0.28,b.y-b.r*0.28,b.r*0.22,0,Math.PI*2);
-            ctx.fillStyle='rgba(255,255,255,0.35)';ctx.fill();
-        });
-
-        /* mini spectre FFT */
-        const nB=20,bW=5,bGap=2,sx=W-nB*(bW+bGap)-4;
-        for(let i=0;i<nB;i++){
-            const amp=6+18*Math.abs(Math.sin(tick*0.05+i*0.55+i*i*0.015));
-            ctx.fillStyle=`hsl(${170+i*4},75%,58%)`;
-            ctx.fillRect(sx+i*(bW+bGap),H-8-amp,bW,amp);
-        }
-        ctx.fillStyle='rgba(255,255,255,0.45)';ctx.font='9px monospace';ctx.fillText('FFT',W-26,H-11);
-        tick++;
-        requestAnimationFrame(loop);
-    })();
-}
-
-/* ─── CARTE 2 : scan spectral image satellite ─── */
-(function() {
-    const cv = document.getElementById('cv-satellite');
-    const ctx = cv.getContext('2d');
-    const W=cv.width, H=cv.height;
-    function n(x,y,s){return Math.sin(x*s+1.3)*Math.cos(y*s*0.7+0.9);}
-    function terrain(x,y){return 0.5*n(x,y,0.05)+0.3*n(x,y,0.13)+0.2*n(x,y,0.26);}
-    const pals = [
-        v=>`rgb(${Math.round(v*60)},${Math.round(90+v*130)},${Math.round(v*30)})`,   /* NIR végétation */
-        v=>`rgb(${Math.round(140+v*90)},${Math.round(60+v*70)},${Math.round(v*30)})`, /* SWIR sol */
-        v=>`rgb(${Math.round(v*30)},${Math.round(v*60)},${Math.round(100+v*140)})`    /* BLUE eau */
-    ];
-    let palIdx=0, scanY=0, phase=0;
-    const imgData = ctx.createImageData(W,H);
-    function drawTerrain(p) {
-        const fn=pals[p%pals.length];
-        for(let y=0;y<H;y++) for(let x=0;x<W;x++){
-            const v=(terrain(x,y)+1)/2;
-            const m=fn(v).match(/\d+/g);
-            const i=(y*W+x)*4;
-            imgData.data[i]=+m[0]; imgData.data[i+1]=+m[1];
-            imgData.data[i+2]=+m[2]; imgData.data[i+3]=255;
-        }
-        ctx.putImageData(imgData,0,0);
-    }
-    drawTerrain(0);
-    const bands=['NIR','RED','GREEN'];
-    (function loop(){
-        phase++;
-        if(phase%200===0){palIdx++;drawTerrain(palIdx);}
-        ctx.strokeStyle='rgba(255,255,60,0.9)';ctx.lineWidth=1.5;
-        ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.stroke();
-        const g=ctx.createLinearGradient(0,scanY-8,0,scanY+8);
-        g.addColorStop(0,'rgba(255,255,0,0)');g.addColorStop(0.5,'rgba(255,255,0,0.18)');g.addColorStop(1,'rgba(255,255,0,0)');
-        ctx.fillStyle=g;ctx.fillRect(0,scanY-8,W,16);
-        scanY=(scanY+2)%H;
-        ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(4,4,58,20);
-        ctx.fillStyle='#fff';ctx.font='bold 11px monospace';
-        ctx.fillText('B:'+bands[palIdx%3],8,18);
-        requestAnimationFrame(loop);
-    })();
-})();
-
-/* ─── CARTE 3 : ECG bruité + filtré Kalman ─── */
-(function() {
-    const cv = document.getElementById('cv-ecg');
-    const ctx = cv.getContext('2d');
-    const W=cv.width, H=cv.height, MID=H*0.5;
-    const BUF=W;
-    let raw=new Float32Array(BUF), filt=new Float32Array(BUF), tick=0;
-    const alpha=0.16;
-    function pulse(p) {
-        p=((p%80)/80);
-        if(p<0.08) return 8*p/0.08-4;
-        if(p<0.12) return 4-8*(p-0.08)/0.04;
-        if(p<0.30) return 0;
-        if(p<0.33) return -12*(p-0.30)/0.03;
-        if(p<0.36) return -4+72*(p-0.33)/0.03;
-        if(p<0.39) return 68-85*(p-0.36)/0.03;
-        if(p<0.42) return -17+17*(p-0.39)/0.03;
-        if(p<0.55) return 0;
-        if(p<0.65) return 9*Math.sin(Math.PI*(p-0.55)/0.10);
-        return 0;
-    }
-    (function loop(){
-        const sig=pulse(tick)/80*34;
-        const noise=(Math.random()-0.5)*9+3.5*Math.sin(tick*0.314);
-        const newRaw=sig+noise;
-        const prevF=filt[BUF-1];
-        const newFilt=prevF+alpha*(sig-prevF);
-        for(let i=0;i<BUF-1;i++){raw[i]=raw[i+1];filt[i]=filt[i+1];}
-        raw[BUF-1]=newRaw; filt[BUF-1]=newFilt;
-        tick++;
-
-        ctx.fillStyle='#0a1628';ctx.fillRect(0,0,W,H);
-        ctx.strokeStyle='rgba(0,200,100,0.08)';ctx.lineWidth=0.5;
-        for(let x=0;x<W;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-        for(let y=0;y<H;y+=18){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-
-        ctx.beginPath();ctx.strokeStyle='rgba(255,70,70,0.45)';ctx.lineWidth=1;
-        for(let i=0;i<BUF;i++){i===0?ctx.moveTo(i,MID-raw[i]):ctx.lineTo(i,MID-raw[i]);}
-        ctx.stroke();
-
-        ctx.beginPath();ctx.strokeStyle='#00ff88';ctx.lineWidth=2;
-        for(let i=0;i<BUF;i++){i===0?ctx.moveTo(i,MID-filt[i]):ctx.lineTo(i,MID-filt[i]);}
-        ctx.stroke();
-
-        /* point courant clignotant */
-        if(tick%30<20){
-            ctx.beginPath();ctx.arc(BUF-1,MID-filt[BUF-1],3.5,0,Math.PI*2);
-            ctx.fillStyle='#00ff88';ctx.fill();
-        }
-        ctx.font='10px monospace';
-        ctx.fillStyle='rgba(255,70,70,0.75)';ctx.fillText('BRUT',6,14);
-        ctx.fillStyle='#00ff88';ctx.fillText('FILTRÉ',6,26);
-        requestAnimationFrame(loop);
-    })();
-})();
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function() {
+            const pdfObject = document.getElementById('pdfObject');
+            const loader = document.getElementById('pdfLoader');
+            const pdfPath = 'assets/pdf/CV_Francois_Lachance.pdf';
+            function showFallback() {
+                if (loader) loader.style.display = 'none';
+                if (pdfObject) {
+                    pdfObject.style.display = 'none';
+                    const fallbackDiv = pdfObject.querySelector('.pdf-fallback');
+                    if (fallbackDiv) {
+                        pdfObject.insertAdjacentHTML('afterend', fallbackDiv.outerHTML);
+                    }
+                }
+            }
+            fetch(pdfPath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        pdfObject.style.display = 'block';
+                        loader.style.display = 'none';
+                        pdfObject.addEventListener('load', () => {
+                            loader.style.display = 'none';
+                        });
+                    } else {
+                        showFallback();
+                    }
+                })
+                .catch(() => {
+                    showFallback();
+                });
+            setTimeout(() => {
+                if (loader && loader.style.display !== 'none') {
+                    loader.innerHTML = '<p class="text-muted">Chargement lent... Le PDF s\'affichera sous peu.</p>';
+                }
+            }, 5000);
+        })();
+    </script>
 </body>
 </html>

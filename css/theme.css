@@ -1,12 +1,5 @@
-/* ==========================================================================
-   THEME — Source unique de vérité du portfolio
-   Remplace : colors.css, hero.css, navbar.css, cards.css, animations.css,
-              footer.css, styles1.css (qui définissaient 6 :root en conflit)
-   ========================================================================== */
-
 :root {
-  /* --- Encre & papier ------------------------------------------------- */
-  --ink-900: #0b1a26;   /* fond des zones "instrument" */
+  --ink-900: #0b1a26;   
   --ink-800: #10202e;
   --ink-700: #16303f;
   --ink-500: #35566b;
@@ -14,24 +7,18 @@
 
   --paper:     #f6f7f5;
   --paper-pure:#ffffff;
-  --rule:      #dfe4e6;   /* filets, graduations */
+  --rule:      #dfe4e6;   
 
-  /* --- Couleurs fonctionnelles (elles signifient quelque chose) -------- */
-  --signal:      #1f9aa8;  /* trace, liens, actions : "mesure en cours" */
+  --signal:      #1f9aa8;
   --signal-dim:  #177984;
   --signal-glow: rgba(31, 154, 168, 0.18);
-  --detect:      #c4703a;  /* détection / alerte / mise en avant */
+  --detect:      #c4703a;
   --ok:          #2e8b6b;
 
   --text:        #10202e;
   --text-muted:  #4e6b7d;
   --text-invert: #eef3f4;
 
-  /* --- Type ------------------------------------------------------------ */
-  /* Polices nommées avant tout générique : sur Linux, une chaîne qui
-     retombe trop vite sur `sans-serif` peut atteindre une police emoji
-     pour des caractères comme le tiret cadratin, rendu alors en carré
-     bleu. Les repliements explicites évitent ce cas. */
   --font-display: "Space Grotesk", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-body:    "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
@@ -43,7 +30,6 @@
   --step-3:  clamp(2rem, 1.6rem + 1.8vw, 3rem);
   --step-4:  clamp(2.5rem, 1.9rem + 3vw, 4.2rem);
 
-  /* --- Espace, rythme, élévation --------------------------------------- */
   --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
   --sp-6: 24px; --sp-8: 32px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
 
@@ -62,8 +48,6 @@
   --measure: 68ch;
 }
 
-/* --- Mode sombre : opt-in par attribut, pas automatique ----------------
-   (le mode auto cassait les pages qui n'ont pas de variantes sombres)   */
 [data-theme="dark"] {
   --paper:      #0b1a26;
   --paper-pure: #10202e;
@@ -76,9 +60,6 @@
   --shadow-lg:  0 18px 44px rgba(0,0,0,.55);
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
@@ -117,7 +98,6 @@ a { color: var(--signal); text-decoration-thickness: 1px; text-underline-offset:
 a:hover { color: var(--signal-dim); }
 img, video, canvas, svg { max-width: 100%; display: block; }
 
-/* Valeurs mesurées : le mono ne sert qu'aux chiffres réels */
 .metric { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; }
 
 :focus-visible {
@@ -142,7 +122,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
   color: var(--signal-dim); letter-spacing: .02em; margin: 0 0 var(--sp-2);
 }
 
-/* Filet gradué : rappelle un axe de mesure, sépare les sections */
 .rule {
   height: 10px; border: 0; margin: 0;
   background:
@@ -151,9 +130,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
   opacity: .9;
 }
 
-/* ==========================================================================
-   Navigation
-   ========================================================================== */
 .site-nav {
   position: sticky; top: 0; z-index: 1000;
   background: rgba(11, 26, 38, .92);
@@ -224,9 +200,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
   .site-nav__cta { margin: var(--sp-3) 0 0; text-align: center; display: block; }
 }
 
-/* ==========================================================================
-   Boutons
-   ========================================================================== */
 .act {
   display: inline-flex; align-items: center; gap: .55rem;
   padding: .72rem 1.35rem; border-radius: 999px;
@@ -250,9 +223,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 .act--onDark { border-color: rgba(255,255,255,.35); color: #fff; }
 .act--onDark:hover { background: rgba(255,255,255,.1); color: #fff; }
 
-/* ==========================================================================
-   Bandeau disponibilité — la première chose qu'un recruteur doit lire
-   ========================================================================== */
 .availability {
   background: var(--ink-900); color: var(--text-invert);
   border-bottom: 1px solid rgba(255,255,255,.08);
@@ -273,9 +243,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 }
 .availability a { color: var(--signal); }
 
-/* ==========================================================================
-   Fiches projet — format "compte rendu d'essai", pas carte SaaS
-   ========================================================================== */
 .entries { display: grid; gap: var(--sp-6); }
 
 .entry {
@@ -300,7 +267,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 .entry h3 { margin-bottom: var(--sp-2); font-size: var(--step-1); }
 .entry p { font-size: .95rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
 
-/* Résultat mesuré : la ligne qui convainc un ingénieur */
 .entry__result {
   border-left: 3px solid var(--detect);
   padding: var(--sp-2) var(--sp-3);
@@ -328,9 +294,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
   .entry__view { min-height: 170px; }
 }
 
-/* ==========================================================================
-   Grille de compétences
-   ========================================================================== */
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--sp-4); }
 
 .skill {
@@ -348,9 +311,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
   color: var(--signal-dim); margin-top: var(--sp-3);
 }
 
-/* ==========================================================================
-   Formulaire
-   ========================================================================== */
 .field { margin-bottom: var(--sp-4); }
 .field label {
   display: block; font-size: .88rem; font-weight: 600;
@@ -376,11 +336,8 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 .form-status.is-visible { display: block; }
 .form-status--ok   { background: rgba(46,139,107,.1);  border-left: 3px solid var(--ok); }
 .form-status--fail { background: rgba(196,112,58,.12); border-left: 3px solid var(--detect); }
-.hp { position: absolute; left: -9999px; }  /* anti-spam */
+.hp { position: absolute; left: -9999px; }  
 
-/* ==========================================================================
-   Pied de page
-   ========================================================================== */
 .site-foot {
   background: var(--ink-900); color: rgba(255,255,255,.72);
   border-top: 3px solid var(--signal);
@@ -402,7 +359,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 }
 @media (max-width: 760px) { .site-foot__cols { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
-/* Retour en haut */
 .to-top {
   position: fixed; right: 20px; bottom: 20px; z-index: 900;
   width: 44px; height: 44px; border-radius: 50%;
@@ -413,12 +369,6 @@ img, video, canvas, svg { max-width: 100%; display: block; }
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 
-/* ==========================================================================
-   Apparition au défilement (remplace AOS — 0 dépendance, 0 CLS)
-   ========================================================================== */
-/* L'état masqué n'est appliqué que si le JavaScript a pu poser la classe
-   `js` sur <html>. Sans JavaScript — ou si un script échoue — le contenu
-   reste visible au lieu de disparaître silencieusement. */
 html.js .reveal {
   opacity: 0; transform: translateY(14px);
   transition: opacity 600ms var(--ease), transform 600ms var(--ease);
@@ -434,7 +384,105 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; }
 }
 
-/* Impression : le CV / la page doivent sortir proprement */
+
+.trace-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+  z-index: 1100; pointer-events: none;
+  background: linear-gradient(90deg,
+    var(--signal) 0%, var(--signal) var(--p, 0%),
+    transparent var(--p, 0%), transparent 100%);
+}
+.trace-progress::after {
+  content: ""; position: absolute; top: -2px; left: var(--p, 0%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--signal); box-shadow: 0 0 8px var(--signal);
+  transform: translateX(-50%); opacity: .9;
+}
+
+.entry, .skill, .case__card, .featured__card { position: relative; }
+.entry::before, .entry::after,
+.skill::before, .skill::after {
+  content: ""; position: absolute; width: 13px; height: 13px;
+  opacity: 0; transition: opacity var(--normal) var(--ease), transform var(--normal) var(--ease);
+  pointer-events: none;
+}
+.entry::before, .skill::before {
+  top: 8px; left: 8px;
+  border-top: 2px solid var(--signal); border-left: 2px solid var(--signal);
+  transform: translate(4px, 4px);
+}
+.entry::after, .skill::after {
+  bottom: 8px; right: 8px;
+  border-bottom: 2px solid var(--signal); border-right: 2px solid var(--signal);
+  transform: translate(-4px, -4px);
+}
+.entry:hover::before, .entry:hover::after,
+.skill:hover::before, .skill:hover::after { opacity: 1; transform: translate(0, 0); }
+
+.hero, .featured, .cta-band, .site-foot, .case__headline { position: relative; }
+.hero::after, .featured::after, .cta-band::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 64px);
+  mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 72%);
+}
+.hero > *, .featured > *, .cta-band > * { position: relative; z-index: 1; }
+
+a:not(.act):not(.site-nav__link):not(.site-nav__brand):not(.site-nav__cta) {
+  background-image: linear-gradient(var(--signal), var(--signal));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  text-decoration: none;
+  transition: background-size 320ms var(--ease), color var(--fast) var(--ease);
+}
+a:not(.act):not(.site-nav__link):not(.site-nav__brand):not(.site-nav__cta):hover {
+  background-size: 100% 1px;
+}
+
+.act { position: relative; overflow: hidden; }
+.act::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%,
+              rgba(255,255,255,.28) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 620ms var(--ease);
+}
+.act:hover::after { transform: translateX(120%); }
+
+::selection { background: var(--signal); color: #04222a; }
+
+.eyebrow { display: inline-flex; align-items: center; gap: .55rem; }
+.eyebrow::before {
+  content: ""; width: 22px; height: 1px; background: var(--signal); flex: none;
+}
+
+.availability .pulse { position: relative; }
+.availability .pulse::after {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+  border: 1px solid rgba(46,139,107,.5);
+  animation: ring 2.4s var(--ease) infinite;
+}
+@keyframes ring {
+  0%   { transform: scale(.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.to-top::before {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+  border: 1px solid var(--signal); opacity: 0;
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+  transform: scale(.85);
+}
+.to-top:hover::before { opacity: .8; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .trace-progress::after, .availability .pulse::after { animation: none; }
+  .act::after { display: none; }
+}
+
 @media print {
   .site-nav, .to-top, .availability, .site-foot { display: none !important; }
   body { background: #fff; }

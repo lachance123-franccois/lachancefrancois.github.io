@@ -1,4 +1,3 @@
-
 (function () {
   'use strict';
 
@@ -6,7 +5,6 @@
   var $  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* ---------- Navigation ------------------------------------------------ */
   function initNav() {
     var nav = $('#siteNav');
     var toggle = $('#navToggle');
@@ -37,7 +35,6 @@
       setOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
-    // Fermer après un clic sur un lien, et à la touche Échap
     $$('a', menu).forEach(function (a) {
       a.addEventListener('click', function () { setOpen(false); });
     });
@@ -49,7 +46,6 @@
     });
   }
 
-  /* ---------- Bouton retour en haut ------------------------------------- */
   function initToTop() {
     var btn = $('#toTop');
     if (!btn) return;
@@ -90,7 +86,6 @@
     items.forEach(function (el) { revealObserver.observe(el); });
   }
 
-  // Appelé par les pages qui insèrent du contenu après le démarrage.
   window.FLReveal = initReveal;
 
   function createScene(canvas, drawFrame, opts) {
@@ -135,7 +130,6 @@
     }
 
     if (reduceMotion) {
-      // Image fixe représentative : le contenu reste lisible, sans mouvement.
       requestAnimationFrame(renderStill);
       window.addEventListener('resize', function () { w = 0; renderStill(); });
       return { start: function () {}, stop: function () {} };
@@ -158,7 +152,6 @@
     return { start: start, stop: stop };
   }
 
-  // Exposé pour les pages qui ont leurs propres visualisations.
   window.FLScene = createScene;
 
   function initHeroScope() {
@@ -170,7 +163,7 @@
 
     var BUF = 340, buf = [], t = 0, lastLabel = '';
     var PHASES = [
-      { name: 'acquisition', until: 240, snr: '4.2 dB',  lat: '—',     dec: 'en attente' },
+      { name: 'acquisition', until: 240, snr: '4.2 dB',  lat: '…',     dec: 'en attente' },
       { name: 'filtrage',    until: 480, snr: '11.6 dB', lat: '8 ms',  dec: 'en attente' },
       { name: 'détection',   until: 700, snr: '11.6 dB', lat: '23 ms', dec: 'crise' }
     ];
@@ -207,7 +200,6 @@
       ctx.fillStyle = '#071620';
       ctx.fillRect(0, 0, w, h);
 
-      // Réticule
       ctx.strokeStyle = 'rgba(31,154,168,0.10)';
       ctx.lineWidth = 1;
       for (var x = 0; x <= w; x += 44) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
@@ -242,9 +234,7 @@
     }, { stillFrame: 300 });
   }
 
-  /* ---------- Vignettes des fiches projet -------------------------------- */
   function initProjectViz() {
-    // Vibration : signal sain puis impulsions périodiques de défaut
     var vib = $('#viz-vib');
     if (vib) {
       var vbuf = [], VB = 260, vt = 0;
@@ -270,7 +260,6 @@
       }, { stillFrame: 150 });
     }
 
-    // Vision : cadres de détection qui se déplacent (sans getImageData, coûteux)
     var vis = $('#viz-vision');
     if (vis) {
       var objs = [
@@ -313,7 +302,6 @@
     if (sc) {
       createScene(sc, function (ctx, w, h, f) {
         var cycle = f % 300;
-        // 0-90 : sans glyphe · 90-150 : apparition · 150-240 : avec · 240-300 : retrait
         var glyph = cycle < 90 ? 0
                   : cycle < 150 ? (cycle - 90) / 60
                   : cycle < 240 ? 1
@@ -326,7 +314,6 @@
 
         var cx = w / 2, cy = h * 0.54, r = Math.min(w, h) * 0.34;
 
-        // Thorax
         ctx.save();
         ctx.translate(cx, cy);
         ctx.scale(0.86, 1);
@@ -334,7 +321,6 @@
         ctx.fillStyle = 'rgba(190,205,212,0.32)'; ctx.fill();
         ctx.restore();
 
-        // Champs pulmonaires — identiques d'un bout à l'autre de la boucle
         [-1, 1].forEach(function (side) {
           ctx.save();
           ctx.translate(cx + side * r * 0.38, cy - r * 0.06);
@@ -344,11 +330,9 @@
           ctx.restore();
         });
 
-        // Rachis
         ctx.fillStyle = 'rgba(210,222,228,0.4)';
         ctx.fillRect(cx - 1.5, cy - r * 0.85, 3, r * 1.7);
 
-        // Filigrane en coin : 2 % de l'image, aucun contenu médical
         if (glyph > 0.01) {
           var gx = 10, gy = 10, gs = Math.min(w, h) * 0.14;
           ctx.strokeStyle = 'rgba(255,255,255,' + (0.85 * glyph) + ')';
@@ -358,7 +342,6 @@
           ctx.stroke();
         }
 
-        // Verdict du modèle : il suit le glyphe, pas les poumons
         var verdict = biased ? 'malade' : 'sain';
         var col = biased ? '#c4703a' : '#2fb6c4';
         ctx.fillStyle = col;
@@ -372,7 +355,6 @@
       }, { stillFrame: 200 });
     }
 
-    // Incertitude : les barres de fiabilité remontent vers la diagonale
     var uqv = $('#viz-uq');
     if (uqv) {
       var GAPV = [0.03, 0.06, 0.10, 0.15, 0.20, 0.25, 0.28];
@@ -405,7 +387,6 @@
       }, { stillFrame: 250 });
     }
 
-    // EEG (vignette) : même logique que le hero, en plus sobre
     var eeg = $('#viz-eeg');
     if (eeg) {
       var ebuf = [], EB = 240, et = 0;
@@ -428,7 +409,7 @@
         ctx.strokeStyle = c; ctx.lineWidth = 1.5; ctx.stroke();
         ctx.fillStyle = c;
         ctx.font = '500 11px "IBM Plex Mono", monospace';
-        ctx.fillText(crise ? 'crise détectée' : 'EEG — Fp1', 12, 20);
+        ctx.fillText(crise ? 'crise détectée' : 'EEG · Fp1', 12, 20);
       }, { stillFrame: 220 });
     }
   }
@@ -446,8 +427,6 @@
     }
 
     form.addEventListener('submit', function (e) {
-      // Détecte une adresse d'envoi restée à l'état de gabarit, quel que
-      // soit le service utilisé, plutôt qu'un identifiant écrit en dur.
       var action = form.getAttribute('action') || '';
       var notConfigured = !action || /VOTRE_|YOUR_|xxxx|exemple\.|example\./i.test(action);
       if (notConfigured) {
@@ -458,7 +437,7 @@
       }
 
       e.preventDefault();
-      if (form.querySelector('.hp') && form.querySelector('.hp').value) return; // piège à robots
+      if (form.querySelector('.hp') && form.querySelector('.hp').value) return;
 
       var original = submit ? submit.textContent : '';
       if (submit) { submit.disabled = true; submit.textContent = 'Envoi en cours…'; }
@@ -484,9 +463,32 @@
     });
   }
 
-  /* ---------- Démarrage -------------------------------------------------- */
+  function initProgress() {
+    var bar = document.createElement('div');
+    bar.className = 'trace-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    var ticking = false;
+    function update() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      bar.style.setProperty('--p', (ratio * 100).toFixed(2) + '%');
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
   function boot() {
     initNav();
+    initProgress();
     initToTop();
     initReveal();
     initHeroScope();
