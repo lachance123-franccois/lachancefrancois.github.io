@@ -31,7 +31,6 @@
 <script>document.documentElement.classList.add('js');</script>
 
 <script>
-/* Met en pause toutes les animations canvas quand l'onglet est en arrière-plan. */
 (function () {
   var raf = window.requestAnimationFrame.bind(window), queued = [];
   window.requestAnimationFrame = function (cb) {
@@ -56,7 +55,6 @@
         color: white;
         position: relative;
     }
-    
     .case { background: var(--paper-pure); }
     .case__eyebrow {
         font-family: var(--font-mono); font-size: .8rem;
@@ -76,7 +74,6 @@
         font-family: var(--font-mono); font-size: .85em; background: var(--paper);
         border: 1px solid var(--rule); border-radius: 5px; padding: 1px 6px;
     }
-    
     .case__headline {
         background: var(--ink-900); color: rgba(255,255,255,.75);
         border-radius: 16px; padding: 1.6rem 1.8rem;
@@ -124,7 +121,6 @@
         background: var(--paper); border-radius: 12px;
         font-size: .93rem; color: var(--text-muted); max-width: none;
     }
-    
     .featured { background: var(--ink-900); color: rgba(255,255,255,.82); }
     .featured__eyebrow {
         font-family: var(--font-mono); font-size: .8rem;
@@ -161,7 +157,6 @@
         font-family: var(--font-mono); font-size: .76rem;
         color: var(--signal) !important; margin-top: .8rem !important;
     }
-    /* Panneau instrument, comme sur la page d'accueil */
     .scope-panel {
         margin: 0; border: 1px solid rgba(255,255,255,.14); border-radius: 16px;
         background: #071620; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,.4);
@@ -192,7 +187,6 @@
         position: relative;
     }
     .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-    
     .canvas-thumb {
         height: 200px;
         position: relative;
@@ -249,7 +243,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> : stage de fin d'études de 6&nbsp;mois à partir de ⟦mois/année⟧, puis CDI.</span>
+    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
     <span>Toulouse et mobilité France entière.</span>
     <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
   </div>

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contact — François Lachance Awounang-Ngounou</title>
+<title>Contact | François Lachance Awounang-Ngounou</title>
 <meta name="description" content="Contacter François Lachance, ingénieur signal, image et machine learning à Toulouse. Réponse sous 24 à 48 heures.">
 <link rel="canonical" href="https://lachance123-franccois.github.io/contact.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact — François Lachance Awounang-Ngounou">
+<meta property="og:title" content="Contact | François Lachance Awounang-Ngounou">
 <meta property="og:description" content="Ingénieur signal, image et machine learning. Disponible pour un stage de fin d'études puis un CDI.">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -21,18 +21,15 @@
 <link rel="stylesheet" href="css/theme.css">
 <script>document.documentElement.classList.add('js');</script>
 
-
 <style>
   .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--sp-12); align-items: start; }
   @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: var(--sp-8); } }
-
   .form-card {
     background: var(--paper-pure); border: 1px solid var(--rule);
     border-radius: var(--radius-lg); padding: var(--sp-8); box-shadow: var(--shadow-sm);
   }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
   @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
-
   .coord { list-style: none; margin: 0 0 var(--sp-8); padding: 0; }
   .coord li {
     display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4);
@@ -45,7 +42,6 @@
   .coord .v { font-weight: 500; }
   .coord .v a { text-decoration: none; }
   .coord .v a:hover { text-decoration: underline; }
-
   .note {
     background: var(--paper-pure); border: 1px solid var(--rule);
     border-left: 3px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0;
@@ -61,7 +57,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de Mars 2027, puis CDI.</span>
+    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
     <span>Toulouse et mobilité France entière.</span>
     <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
   </div>
@@ -98,22 +94,11 @@
 
     <div class="contact-grid">
 
-      <!-- FORMULAIRE ------------------------------------------------------
-           Un site statique ne peut pas envoyer d'email par lui-même : il faut
-           un service de relais. Celui-ci est FormSubmit, qui ne demande aucune
-           inscription — l'adresse de destination suffit.
-
-           À LA PREMIÈRE SOUMISSION, FormSubmit envoie un message de
-           confirmation à lachanceawounang@icloud.com. Tant que le lien qu'il
-           contient n'est pas cliqué, aucun message n'arrive. C'est normal, et
-           c'est à faire une seule fois.
-
-           Pour passer à Formspree à la place : remplacer l'URL d'action par
-           https://formspree.io/f/VOTRE_IDENTIFIANT (compte gratuit requis). -->
+      
       <form class="form-card" id="contactForm"
             action="https://formsubmit.co/ajax/lachanceawounang@icloud.com" method="POST">
 
-        <!-- Réglages lus par FormSubmit, jamais affichés -->
+        
         <input type="hidden" name="_subject" value="Message depuis le portfolio">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
@@ -153,7 +138,7 @@
                     placeholder="Le sujet, l'équipe, les dates. Le reste peut attendre l'entretien."></textarea>
         </div>
 
-        <!-- Piège à robots : invisible, jamais rempli par un humain -->
+        
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <button class="act act--primary" type="submit">Envoyer le message</button>
@@ -166,7 +151,7 @@
         </p>
       </form>
 
-      <!-- COORDONNÉES ----------------------------------------------------- -->
+      
       <div>
         <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Coordonnées</h2>
 
@@ -185,7 +170,7 @@
           </li>
           <li>
             <span class="k">Lieu</span>
-            <span class="v">Toulouse, France — mobile en France</span>
+            <span class="v">Toulouse, France. Mobilité France entière.</span>
           </li>
           <li>
             <span class="k">Réponse</span>
@@ -234,7 +219,237 @@
     </div>
     <div class="site-foot__base">
       <span>© 2026 François Lachance Awounang-Ngounou</span>
-      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+      <span>Site construit à la main : HTML, CSS, JavaScript.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
+
+<script src="js/main.js" defer></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact | François Lachance Awounang-Ngounou</title>
+<meta name="description" content="Contacter François Lachance, ingénieur signal, image et machine learning à Toulouse. Réponse sous 24 à 48 heures.">
+<link rel="canonical" href="https://lachance123-franccois.github.io/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact | François Lachance Awounang-Ngounou">
+<meta property="og:description" content="Ingénieur signal, image et machine learning. Disponible pour un stage de fin d'études puis un CDI.">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1a26">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--sp-12); align-items: start; }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: var(--sp-8); } }
+  .form-card {
+    background: var(--paper-pure); border: 1px solid var(--rule);
+    border-radius: var(--radius-lg); padding: var(--sp-8); box-shadow: var(--shadow-sm);
+  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+  .coord { list-style: none; margin: 0 0 var(--sp-8); padding: 0; }
+  .coord li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--sp-4);
+    align-items: baseline; padding: var(--sp-4) 0; border-bottom: 1px solid var(--rule);
+  }
+  .coord dt, .coord .k {
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--text-muted); white-space: nowrap;
+  }
+  .coord .v { font-weight: 500; }
+  .coord .v a { text-decoration: none; }
+  .coord .v a:hover { text-decoration: underline; }
+  .note {
+    background: var(--paper-pure); border: 1px solid var(--rule);
+    border-left: 3px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0;
+    padding: var(--sp-4) var(--sp-6);
+  }
+  .note p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<div class="availability">
+  <div class="wrap availability__inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
+    <span>Toulouse et mobilité France entière.</span>
+    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+  </div>
+</div>
+
+<nav class="site-nav" id="siteNav" aria-label="Navigation principale">
+  <div class="wrap site-nav__inner">
+    <a class="site-nav__brand" href="index.html">
+      <span class="dot" aria-hidden="true"></span>François Lachance
+    </a>
+    <button class="site-nav__toggle" type="button" id="navToggle"
+            aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">☰</button>
+    <div class="site-nav__menu" id="navMenu">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+        <li><a class="site-nav__link" href="machine-learning.html">IA &amp; machine learning</a></li>
+        <li><a class="site-nav__link" href="matlab.html">Signal &amp; image</a></li>
+        <li><a class="site-nav__link" href="cv-op.html">CV</a></li>
+        <li><a class="site-nav__cta" href="contact.html" aria-current="page">Me contacter</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="contenu" class="section">
+  <div class="wrap">
+
+    <p class="eyebrow">Contact</p>
+    <h1 style="font-size: var(--step-3); max-width: 20ch;">Parlons de votre sujet de stage.</h1>
+    <p class="lede" style="margin-bottom: var(--sp-12);">
+      Fiche de poste, question technique, ou simple prise de contact : j'écris une réponse
+      utile sous 24 à 48&nbsp;heures.
+    </p>
+
+    <div class="contact-grid">
+
+      
+      <form class="form-card" id="contactForm"
+            action="https://formsubmit.co/ajax/lachanceawounang@icloud.com" method="POST">
+
+        
+        <input type="hidden" name="_subject" value="Message depuis le portfolio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
+        <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Envoyer un message</h2>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">Nom et prénom</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email professionnel</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-org">Entreprise <span class="hint">(facultatif)</span></label>
+          <input id="f-org" name="organisation" type="text" autocomplete="organization">
+        </div>
+
+        <div class="field">
+          <label for="f-subject">Objet</label>
+          <select id="f-subject" name="subject" required>
+            <option value="">Choisir…</option>
+            <option>Proposition de stage</option>
+            <option>Proposition d'alternance ou de CDI</option>
+            <option>Question technique sur un projet</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" rows="6" required
+                    placeholder="Le sujet, l'équipe, les dates. Le reste peut attendre l'entretien."></textarea>
+        </div>
+
+        
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="act act--primary" type="submit">Envoyer le message</button>
+
+        <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+
+        <p style="font-size: .82rem; color: var(--text-muted); margin: var(--sp-4) 0 0;">
+          Les informations envoyées servent uniquement à répondre à ce message.
+          Elles ne sont ni revendues ni utilisées à d'autres fins.
+        </p>
+      </form>
+
+      
+      <div>
+        <h2 style="font-size: var(--step-1); margin-bottom: var(--sp-6);">Coordonnées</h2>
+
+        <ul class="coord">
+          <li>
+            <span class="k">Email</span>
+            <span class="v"><a href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a></span>
+          </li>
+          <li>
+            <span class="k">LinkedIn</span>
+            <span class="v"><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">François Lachance Awounang-Ngounou</a></span>
+          </li>
+          <li>
+            <span class="k">GitHub</span>
+            <span class="v"><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">lachance123-franccois</a></span>
+          </li>
+          <li>
+            <span class="k">Lieu</span>
+            <span class="v">Toulouse, France. Mobilité France entière.</span>
+          </li>
+          <li>
+            <span class="k">Réponse</span>
+            <span class="v">sous 24 à 48 heures</span>
+          </li>
+        </ul>
+
+        <div class="note">
+          <p><strong>Pour aller plus vite</strong></p>
+          <p style="font-size: .93rem; color: var(--text-muted);">
+            Si vous avez déjà une fiche de poste, joignez-la ou collez-en le contenu.
+            Je réponds avec les projets les plus proches du sujet et ce que je sais déjà faire dessus.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__cols">
+      <div>
+        <h4>François Lachance Awounang-Ngounou</h4>
+        <p style="margin:0;">Ingénieur traitement du signal, image et machine learning.<br>Toulouse, France.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="machine-learning.html">IA &amp; machine learning</a></li>
+          <li><a href="matlab.html">Signal &amp; image</a></li>
+          <li><a href="cv-op.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ailleurs</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-foot__base">
+      <span>© 2026 François Lachance Awounang-Ngounou</span>
+      <span>Site construit à la main : HTML, CSS, JavaScript.</span>
     </div>
   </div>
 </footer>

@@ -2,18 +2,15 @@
 <html lang="fr">
 <head>
 
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traitement du signal et de l'image — François Lachance Awounang-Ngounou</title>
+    <title>Traitement du signal et de l'image | François Lachance Awounang-Ngounou</title>
 <meta name="description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
 <link rel="canonical" href="https://lachance123-franccois.github.io/matlab.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://lachance123-franccois.github.io/matlab.html">
-<meta property="og:title" content="Traitement du signal et de l'image — François Lachance Awounang-Ngounou">
+<meta property="og:title" content="Traitement du signal et de l'image | François Lachance Awounang-Ngounou">
 <meta property="og:description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
 <meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +27,6 @@
 <script>document.documentElement.classList.add('js');</script>
 
 <script>
-/* Met en pause toutes les animations canvas quand l'onglet est en arrière-plan. */
 (function () {
   var raf = window.requestAnimationFrame.bind(window), queued = [];
   window.requestAnimationFrame = function (cb) {
@@ -72,7 +68,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> — stage de fin d'études de 6&nbsp;mois à partir de Mars 2027, puis CDI.</span>
+    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
     <span>Toulouse et mobilité France entière.</span>
     <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
   </div>
@@ -100,7 +96,7 @@
 
 <section class="py-5" style="background:linear-gradient(rgba(26,58,90,0.9),rgba(26,58,90,0.9)),url('assets/tech-bg.jpg');background-size:cover;">
     <div class="container text-center py-5">
-        <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInDown">Projets MATLAB — Signal & Image</h1>
+        <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInDown">Projets MATLAB : signal et image</h1>
         <p class="lead text-blanc animate__animated animate__fadeInUp">Traitement du signal, analyse spectrale et imagerie aérienne sous MATLAB.</p>
     </div>
 </section>
@@ -155,7 +151,7 @@
         <p class="text-center text-muted mb-5">Traitement du signal, analyse spectrale et imagerie sous MATLAB</p>
         <div class="row g-4 justify-content-center">
 
-            <!-- CARTE 1 : Balles FFT — vidéo réelle, canvas en fallback -->
+            
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media" id="wrap-balles">
@@ -171,7 +167,7 @@
                 </div>
             </div>
 
-            <!-- CARTE 2 : Image Aérienne — scan spectral animé -->
+            
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media">
@@ -187,7 +183,7 @@
                 </div>
             </div>
 
-            <!-- CARTE 3 : ECG bruité + filtré Kalman -->
+            
             <div class="col-md-6 col-lg-4 reveal">
                 <div class="project-grid-card">
                     <div class="card-media" style="background:#0a1628;">
@@ -241,7 +237,7 @@
     </div>
 </section>
 
-</div><!-- /#contenu -->
+</div>
 
 <footer class="site-foot">
   <div class="wrap">
@@ -271,7 +267,7 @@
     </div>
     <div class="site-foot__base">
       <span>© 2026 François Lachance Awounang-Ngounou</span>
-      <span>Site construit à la main — HTML, CSS, JavaScript.</span>
+      <span>Site construit à la main : HTML, CSS, JavaScript.</span>
     </div>
   </div>
 </footer>
@@ -281,7 +277,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
-/* ─── CARTE 1 : fallback balles canvas si vidéo absente ─── */
 const vidB = document.getElementById('vid-balles');
 function launchBallCanvas() {
     const wrap = document.getElementById('wrap-balles');
@@ -291,7 +286,6 @@ function launchBallCanvas() {
 }
 vidB.addEventListener('error', launchBallCanvas);
 setTimeout(() => { if (vidB.readyState === 0) launchBallCanvas(); }, 3500);
-
 function animBalles(cv) {
     const ctx = cv.getContext('2d');
     const W = cv.width, H = cv.height;
@@ -309,7 +303,6 @@ function animBalles(cv) {
         for(let y=0;y<H;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
         ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1.5;
         ctx.beginPath();ctx.moveTo(0,H-8);ctx.lineTo(W,H-8);ctx.stroke();
-
         balls.forEach(b => {
             b.vy += 0.22; b.x += b.vx; b.y += b.vy;
             if(b.y+b.r >= H-8){b.y=H-8-b.r; b.vy=-Math.abs(b.vy)*b.e;}
@@ -322,8 +315,7 @@ function animBalles(cv) {
             ctx.beginPath();ctx.arc(b.x-b.r*0.28,b.y-b.r*0.28,b.r*0.22,0,Math.PI*2);
             ctx.fillStyle='rgba(255,255,255,0.35)';ctx.fill();
         });
-
-        /* mini spectre FFT */
+        
         const nB=20,bW=5,bGap=2,sx=W-nB*(bW+bGap)-4;
         for(let i=0;i<nB;i++){
             const amp=6+18*Math.abs(Math.sin(tick*0.05+i*0.55+i*i*0.015));
@@ -335,8 +327,6 @@ function animBalles(cv) {
         requestAnimationFrame(loop);
     })();
 }
-
-/* ─── CARTE 2 : scan spectral image satellite ─── */
 (function() {
     const cv = document.getElementById('cv-satellite');
     const ctx = cv.getContext('2d');
@@ -344,9 +334,9 @@ function animBalles(cv) {
     function n(x,y,s){return Math.sin(x*s+1.3)*Math.cos(y*s*0.7+0.9);}
     function terrain(x,y){return 0.5*n(x,y,0.05)+0.3*n(x,y,0.13)+0.2*n(x,y,0.26);}
     const pals = [
-        v=>`rgb(${Math.round(v*60)},${Math.round(90+v*130)},${Math.round(v*30)})`,   /* NIR végétation */
-        v=>`rgb(${Math.round(140+v*90)},${Math.round(60+v*70)},${Math.round(v*30)})`, /* SWIR sol */
-        v=>`rgb(${Math.round(v*30)},${Math.round(v*60)},${Math.round(100+v*140)})`    /* BLUE eau */
+        v=>`rgb(${Math.round(v*60)},${Math.round(90+v*130)},${Math.round(v*30)})`,   
+        v=>`rgb(${Math.round(140+v*90)},${Math.round(60+v*70)},${Math.round(v*30)})`, 
+        v=>`rgb(${Math.round(v*30)},${Math.round(v*60)},${Math.round(100+v*140)})`    
     ];
     let palIdx=0, scanY=0, phase=0;
     const imgData = ctx.createImageData(W,H);
@@ -378,8 +368,6 @@ function animBalles(cv) {
         requestAnimationFrame(loop);
     })();
 })();
-
-/* ─── CARTE 3 : ECG bruité + filtré Kalman ─── */
 (function() {
     const cv = document.getElementById('cv-ecg');
     const ctx = cv.getContext('2d');
@@ -409,21 +397,17 @@ function animBalles(cv) {
         for(let i=0;i<BUF-1;i++){raw[i]=raw[i+1];filt[i]=filt[i+1];}
         raw[BUF-1]=newRaw; filt[BUF-1]=newFilt;
         tick++;
-
         ctx.fillStyle='#0a1628';ctx.fillRect(0,0,W,H);
         ctx.strokeStyle='rgba(0,200,100,0.08)';ctx.lineWidth=0.5;
         for(let x=0;x<W;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
         for(let y=0;y<H;y+=18){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-
         ctx.beginPath();ctx.strokeStyle='rgba(255,70,70,0.45)';ctx.lineWidth=1;
         for(let i=0;i<BUF;i++){i===0?ctx.moveTo(i,MID-raw[i]):ctx.lineTo(i,MID-raw[i]);}
         ctx.stroke();
-
         ctx.beginPath();ctx.strokeStyle='#00ff88';ctx.lineWidth=2;
         for(let i=0;i<BUF;i++){i===0?ctx.moveTo(i,MID-filt[i]):ctx.lineTo(i,MID-filt[i]);}
         ctx.stroke();
-
-        /* point courant clignotant */
+        
         if(tick%30<20){
             ctx.beginPath();ctx.arc(BUF-1,MID-filt[BUF-1],3.5,0,Math.PI*2);
             ctx.fillStyle='#00ff88';ctx.fill();
