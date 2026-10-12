@@ -187,7 +187,7 @@
 
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Cinq chaînes de traitement complètes</p>
+      <p class="eyebrow">Six chaînes de traitement complètes</p>
       <h2>Projets phares</h2>
       <p class="lede" style="margin-bottom: var(--sp-12);">
         Chaque projet part d'un signal réel et suit une méthode explicite, de
@@ -263,6 +263,37 @@
         </article>
 
         <article class="entry reveal">
+          <div class="entry__view">
+            <canvas id="viz-deconv" role="img"
+                    aria-label="Animation : un signal en marches, flouté et bruité, est progressivement restauré jusqu'à retrouver ses sauts nets."></canvas>
+          </div>
+          <div class="entry__body">
+            <p class="entry__domain">Problèmes inverses · optimisation</p>
+            <h3>Déconvolution : des méthodes variationnelles aux réseaux déroulés</h3>
+            <p>
+              Retrouver un signal à partir d'une mesure floue et bruitée. Comparaison
+              contrôlée de plusieurs familles de méthodes&nbsp;: régularisation
+              quadratique avec choix automatique du paramètre, variation totale
+              résolue par algorithmes proximaux, Plug-and-Play, algorithme déroulé
+              en réseau qui garde le modèle physique, et extension à la
+              déconvolution aveugle.
+            </p>
+            <p class="entry__result">
+              La forme de l'a priori compte plus que l'algorithme. Le réseau déroulé
+              est le meilleur dans ses conditions d'entraînement, mais perd son
+              avantage <strong>dès que le flou change</strong>&nbsp;: une méthode sans
+              apprentissage s'adapte d'elle-même.
+            </p>
+            <div class="entry__foot">
+              <ul class="tags"><li>MATLAB</li><li>Variation totale</li><li>Optimisation proximale</li><li>Unrolling</li></ul>
+              <a class="entry__link" href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled"
+                 target="_blank" rel="noopener">Lire le code</a>
+              <a class="entry__link" href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Lire la note technique</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="entry reveal">
           <div class="entry__view"><canvas id="viz-vib" aria-hidden="true"></canvas></div>
           <div class="entry__body">
             <p class="entry__domain">Maintenance prédictive</p>
@@ -317,7 +348,8 @@
         <div class="skill">
           <h4>Traitement du signal</h4>
           <p>Filtrage, analyse spectrale, ondelettes, démodulation numérique, débruitage,
-             extraction d'indicateurs sur signaux 1D biomédicaux et vibratoires.</p>
+             déconvolution et problèmes inverses, extraction d'indicateurs sur signaux 1D
+             biomédicaux et vibratoires.</p>
           <p class="skill__tools">NumPy · SciPy · PyWavelets · MATLAB</p>
         </div>
 
@@ -346,7 +378,7 @@
           <h4>Mathématiques appliquées</h4>
           <p>Probabilités et statistiques, algèbre linéaire, optimisation, théorie de
              l'estimation, la base qui permet de déboguer un modèle plutôt que de l'essayer au hasard.</p>
-          <p class="skill__tools">Estimation · Optimisation · Statistiques</p>
+          <p class="skill__tools">Estimation · Optimisation convexe · Régularisation · Statistiques</p>
         </div>
 
         <div class="skill">
@@ -412,5 +444,76 @@
 <button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 
 <script src="js/main.js" defer></script>
+<script>
+/* Animation du projet de déconvolution : mesure floue -> restauration progressive */
+(function () {
+  var cv = document.getElementById('viz-deconv');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var N = 160, x = [], y = [];
+  var steps = [[0, .25], [.18, .78], [.40, .45], [.58, .90], [.80, .32], [1.01, .32]];
+  for (var i = 0; i < N; i++) {
+    var t = i / (N - 1), v = steps[0][1];
+    for (var k = 0; k < steps.length - 1; k++) if (t >= steps[k][0]) v = steps[k][1];
+    x.push(v);
+  }
+  var seed = 7; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  var K = 9, s = 3.2, ker = [], z = 0;
+  for (var j = -K; j <= K; j++) { var g = Math.exp(-j * j / (2 * s * s)); ker.push(g); z += g; }
+  for (i = 0; i < N; i++) {
+    var acc = 0;
+    for (j = -K; j <= K; j++) acc += ker[j + K] / z * x[Math.min(N - 1, Math.max(0, i - j))];
+    y.push(acc + (rnd() - .5) * .05);
+  }
+  var root = getComputedStyle(document.documentElement);
+  var accent = (root.getPropertyValue('--signal') || '').trim() || '#3ad6a3';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W = 0, H = 0, running = false, t0 = 0;
+
+  function size() {
+    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    W = r.width || 480; H = r.height || 260;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  function trace(v, col, lw, alpha) {
+    var pad = 18, w = W - 2 * pad, h = H - 2 * pad - 14;
+    ctx.globalAlpha = alpha; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (var i = 0; i < v.length; i++) {
+      var px = pad + w * i / (v.length - 1), py = pad + 14 + h * (1 - v[i]);
+      i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  function frame(p) {
+    var ink = getComputedStyle(cv).color || '#888';
+    ctx.clearRect(0, 0, W, H);
+    var e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, r = [];
+    for (var i = 0; i < N; i++) r.push((1 - e) * y[i] + e * x[i]);
+    trace(y, ink, 1.4, .35);
+    trace(r, accent, 2.4, 1);
+    ctx.font = '11px "IBM Plex Mono", monospace';
+    ctx.fillStyle = ink; ctx.globalAlpha = .6; ctx.fillText('mesure y = h * x + n', 18, 16);
+    ctx.globalAlpha = 1; ctx.fillStyle = accent;
+    var lbl = 'restauration ' + Math.round(e * 100) + ' %';
+    ctx.fillText(lbl, W - 18 - ctx.measureText(lbl).width, 16);
+  }
+  function loop(ts) {
+    if (!running) return;
+    if (!t0) t0 = ts;
+    var c = ((ts - t0) / 1000) % 7, p = c < 1 ? 0 : c < 5 ? (c - 1) / 4 : 1;
+    frame(p); requestAnimationFrame(loop);
+  }
+  size(); frame(reduce ? 1 : 0);
+  window.addEventListener('resize', function () { size(); if (!running) frame(reduce ? 1 : 0); });
+  if (reduce || !('IntersectionObserver' in window)) { frame(1); return; }
+  new IntersectionObserver(function (en) {
+    var vis = en[0].isIntersecting;
+    if (vis && !running) { running = true; t0 = 0; requestAnimationFrame(loop); }
+    if (!vis) running = false;
+  }, { threshold: .25 }).observe(cv);
+})();
+</script>
 </body>
 </html>
