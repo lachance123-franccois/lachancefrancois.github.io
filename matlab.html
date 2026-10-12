@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traitement du signal et de l'image | François Lachance Awounang-Ngounou</title>
-<meta name="description" content="Projets MATLAB et Python de traitement du signal et de l'image : filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
+<meta name="description" content="Projets MATLAB et Python de traitement du signal et de l'image : déconvolution et problèmes inverses, déconvolution et problèmes inverses, filtrage ECG, analyse spectrale d'images aériennes, simulation physique.">
 <link rel="canonical" href="https://lachance123-franccois.github.io/matlab.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
@@ -97,7 +97,7 @@
 <section class="py-5" style="background:linear-gradient(rgba(26,58,90,0.9),rgba(26,58,90,0.9)),url('assets/tech-bg.jpg');background-size:cover;">
     <div class="container text-center py-5">
         <h1 class="display-4 fw-bold text-white animate__animated animate__fadeInDown">Projets MATLAB : signal et image</h1>
-        <p class="lead text-blanc animate__animated animate__fadeInUp">Traitement du signal, analyse spectrale et imagerie aérienne sous MATLAB.</p>
+        <p class="lead text-blanc animate__animated animate__fadeInUp">Traitement du signal, problèmes inverses, analyse spectrale et imagerie aérienne sous MATLAB.</p>
     </div>
 </section>
 
@@ -109,6 +109,7 @@
                 <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="3"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -138,6 +139,15 @@
                         <a href="#" class="btn btn-primary">Détails</a>
                     </div>
                 </div>
+                <div class="carousel-item">
+                    <img src="assets/deconvolution-cover.png" class="project-slide-img" alt="">
+                    <div class="carousel-caption d-none d-md-block text-start">
+                        <span class="badge bg-warning text-dark mb-2">Problèmes inverses</span>
+                        <h3>Déconvolution : des méthodes variationnelles aux réseaux déroulés</h3>
+                        <p>Retrouver un signal à partir d'une mesure floue et bruitée : régularisation, variation totale, algorithmes proximaux et réseau déroulé qui garde le modèle physique.</p>
+                        <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener" class="btn btn-primary">Voir sur GitHub</a>
+                    </div>
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
             <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
@@ -150,6 +160,22 @@
         <h2 class="text-center fw-bold mb-2"><i class="fas fa-folder-open text-primary me-2"></i>Projets MATLAB</h2>
         <p class="text-center text-muted mb-5">Traitement du signal, analyse spectrale et imagerie sous MATLAB</p>
         <div class="row g-4 justify-content-center">
+
+            <div class="col-md-6 col-lg-4 reveal">
+                <div class="project-grid-card">
+                    <div class="card-media" style="background:#0a1628;">
+                        <canvas id="cv-deconv" width="360" height="160" role="img" aria-label="Un signal en marches, flouté et bruité, est progressivement restauré."></canvas>
+                        <div class="overlay-link"><a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener" class="btn btn-light rounded-pill px-4">Voir le code</a></div>
+                    </div>
+                    <div class="p-4">
+                        <small class="text-warning fw-bold text-uppercase">Problèmes inverses</small>
+                        <h5 class="mt-2">Déconvolution : du variationnel aux réseaux déroulés</h5>
+                        <p class="text-muted small">Retrouver un signal flou et bruité. Comparaison de la régularisation quadratique, de la variation totale (algorithmes proximaux), du Plug-and-Play et d'un algorithme déroulé en réseau qui garde le modèle physique, avec une étude de robustesse et une extension à la déconvolution aveugle.</p>
+                        <p class="small mb-0"><a href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Lire la note technique</a></p>
+                        <div class="mt-3"><span class="tech-tag">MATLAB</span><span class="tech-tag">Variation totale</span><span class="tech-tag">Optimisation</span><span class="tech-tag">Unrolling</span></div>
+                    </div>
+                </div>
+            </div>
 
             
             <div class="col-md-6 col-lg-4 reveal">
@@ -416,6 +442,41 @@ function animBalles(cv) {
         ctx.fillStyle='rgba(255,70,70,0.75)';ctx.fillText('BRUT',6,14);
         ctx.fillStyle='#00ff88';ctx.fillText('FILTRÉ',6,26);
         requestAnimationFrame(loop);
+    })();
+})();
+(function() {
+    const cv = document.getElementById('cv-deconv');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const W=cv.width, H=cv.height, N=W;
+    const lv=[[0,.22],[.17,.78],[.38,.42],[.57,.9],[.8,.3]];
+    const x=new Float32Array(N), y=new Float32Array(N);
+    for(let i=0;i<N;i++){const t=i/(N-1);let v=lv[0][1];for(const [a,b] of lv) if(t>=a) v=b; x[i]=v;}
+    const K=14,s=5;let z=0;const k=[];for(let j=-K;j<=K;j++){const g=Math.exp(-j*j/(2*s*s));k.push(g);z+=g;}
+    for(let i=0;i<N;i++){let a=0;for(let j=-K;j<=K;j++)a+=k[j+K]/z*x[Math.min(N-1,Math.max(0,i-j))];y[i]=a+(Math.random()-0.5)*0.05;}
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const top=26, h=H-top-10;
+    function line(v,col,lw){ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=lw;
+        for(let i=0;i<N;i++){const py=top+h*(1-v[i]); i?ctx.lineTo(i,py):ctx.moveTo(i,py);} ctx.stroke();}
+    function draw(p){
+        const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2, r=new Float32Array(N);
+        for(let i=0;i<N;i++) r[i]=(1-e)*y[i]+e*x[i];
+        ctx.fillStyle='#0a1628';ctx.fillRect(0,0,W,H);
+        ctx.strokeStyle='rgba(0,200,100,0.08)';ctx.lineWidth=0.5;
+        for(let gx=0;gx<W;gx+=28){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+        for(let gy=0;gy<H;gy+=18){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+        line(y,'rgba(255,70,70,0.55)',1.2);
+        line(r,'#00ff88',2);
+        ctx.font='10px monospace';
+        ctx.fillStyle='rgba(255,70,70,0.8)';ctx.fillText('MESURE',6,14);
+        ctx.fillStyle='#00ff88';ctx.fillText('RESTAURÉ '+Math.round(e*100)+' %',W-96,14);
+    }
+    if(reduce){draw(1);return;}
+    let t0=null;
+    (function loop(ts){
+        if(t0===null) t0=ts||0;
+        const c=(((ts||0)-t0)/1000)%7, p=c<1?0:c<5?(c-1)/4:1;
+        draw(p); requestAnimationFrame(loop);
     })();
 })();
 </script>
