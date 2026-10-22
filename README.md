@@ -137,17 +137,3 @@ collecte, envoie le digest, purge les offres de plus de 90 jours et committe
 `data/offers.json`. GitHub Pages sert le nouveau fichier dans la minute.
 
 ---
-
-## À compléter avant publication
-
-Chercher `⟦` dans le dépôt : chaque occurrence est une valeur à renseigner.
-
-- [ ] Dates de disponibilité dans le bandeau (présent sur toutes les pages)
-- [ ] Résultats chiffrés des projets (`index.html`, `js/projets-ml.js`)
-- [ ] Déposer `assets/pdf/CV_Francois_Lachance.pdf`
-- [ ] Créer l'identifiant Formspree et remplacer `VOTRE_ID` dans `contact.html`
-- [ ] Générer `assets/og-cover.png` (1200 × 630) et les icônes du manifeste
-- [ ] Vérifier `config/feeds.json` avec `tracker check`
-- [ ] Créer les cinq secrets GitHub Actions
-
-Le détail, et les raisons, sont dans [`AUDIT.md`](AUDIT.md).
