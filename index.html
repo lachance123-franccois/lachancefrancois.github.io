@@ -45,16 +45,25 @@
 }
 </script>
 
+
 <style>
-  .hero { background: var(--ink-900); color: var(--text-invert); padding-block: var(--sp-16) var(--sp-12); }
-  .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-12); align-items: center; }
-  .hero h1 { color: #fff; font-size: var(--step-4); margin-bottom: var(--sp-4); }
+  /* ---------- Hero ---------- */
+  .hero { background: var(--ink-900); color: var(--text-invert); padding-block: var(--sp-24) var(--sp-16); }
+  .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-16); align-items: center; }
+  .hero h1 { color: #fff; font-size: var(--step-4); margin-bottom: var(--sp-6); }
   .hero__role { font-family: var(--font-mono); font-size: var(--step--1); color: var(--signal); margin: 0 0 var(--sp-4); }
-  .hero p { color: rgba(255,255,255,.8); font-size: var(--step-1); max-width: 46ch; }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+  .hero p { color: rgba(255,255,255,.8); font-size: var(--step-1); max-width: 44ch; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-8); }
+  .hero__seek { margin-top: var(--sp-12); padding-top: var(--sp-6); border-top: 1px solid rgba(255,255,255,.12); }
+  .hero__seek-label { font-family: var(--font-mono); font-size: .74rem; color: rgba(255,255,255,.5); margin: 0 0 var(--sp-3); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .chips li {
+    font-size: .82rem; padding: 5px 12px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.85);
+  }
   .scope {
     border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius-lg);
-    background: #071620; overflow: hidden; box-shadow: var(--shadow-lg);
+    background: #071620; overflow: hidden; box-shadow: var(--shadow-lg); margin: 0;
   }
   .scope__head {
     display: flex; justify-content: space-between; align-items: center;
@@ -72,20 +81,97 @@
   .scope__foot div + div { border-left: 1px solid rgba(255,255,255,.1); }
   .scope__foot span { display: block; color: #fff; font-size: .95rem; margin-top: 2px; }
   @media (max-width: 940px) {
-    .hero__grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+    .hero { padding-block: var(--sp-16) var(--sp-12); }
+    .hero__grid { grid-template-columns: 1fr; gap: var(--sp-12); }
     .scope canvas { height: 220px; }
   }
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--sp-6); }
-  .facts div { border-top: 2px solid var(--signal); padding-top: var(--sp-3); }
-  .facts b { display: block; margin-bottom: 2px; }
-  .facts b.metric { font-family: var(--font-mono); font-size: var(--step-2); font-weight: 500; }
-  .facts b.word { font-family: var(--font-display); font-size: var(--step-1); font-weight: 600; }
-  .facts span { font-size: .9rem; color: var(--text-muted); }
-  .split { display: grid; grid-template-columns: 340px 1fr; gap: var(--sp-12); align-items: start; }
-  @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: var(--sp-6); } }
-  .cta-band { background: var(--ink-800); color: #fff; padding-block: var(--sp-16); }
+
+  /* ---------- En-têtes de section ---------- */
+  .section-head { margin-bottom: var(--sp-12); }
+  .section-head h2 { margin-bottom: var(--sp-3); }
+  .section-head .lede { margin: 0; }
+  .section--alt { background: var(--paper-pure); border-block: 1px solid var(--rule); }
+
+  /* ---------- Projets : grille de cartes ---------- */
+  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--paper-pure); border: 1px solid var(--rule);
+    border-radius: var(--radius-lg); overflow: hidden;
+    transition: border-color var(--normal) var(--ease), box-shadow var(--normal) var(--ease), transform var(--normal) var(--ease);
+  }
+  .card:hover { border-color: var(--signal); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .card__view { position: relative; background: var(--ink-900); aspect-ratio: 16 / 9; }
+  .card__view canvas { width: 100%; height: 100%; display: block; }
+  .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); display: flex; flex-direction: column; flex: 1; }
+  .card__domain { font-family: var(--font-mono); font-size: .76rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
+  .card h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: var(--sp-3); }
+  .card p { font-size: .93rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
+  .card__key {
+    font-size: .88rem; color: var(--text); margin-bottom: var(--sp-6);
+    padding-left: var(--sp-3); border-left: 3px solid var(--detect);
+  }
+  .card__key strong { font-family: var(--font-mono); font-weight: 600; }
+  .card__foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--sp-4); }
+  .card__links { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
+  .card__links a { font-weight: 600; font-size: .9rem; }
+
+  /* Carte vedette : deux colonnes sur grand écran */
+  .card--feature { grid-column: span 2; grid-row: span 2; flex-direction: row; }
+  .card--feature .card__view { aspect-ratio: auto; flex: 0 0 50%; min-height: 300px; }
+  .card--feature .card__body { padding: var(--sp-12) var(--sp-8); justify-content: center; }
+  .card--feature .card__foot { margin-top: var(--sp-4); }
+  .card--feature h3 { font-size: var(--step-2); }
+  .card--feature p { font-size: 1rem; }
+
+  @media (max-width: 1040px) {
+    .work { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+    .card--feature { grid-column: auto; grid-row: auto; flex-direction: column; }
+    .card--feature .card__view { aspect-ratio: 16 / 9; min-height: 0; flex: none; }
+    .card--feature .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); justify-content: flex-start; }
+    .card--feature h3 { font-size: 1.15rem; }
+    .card--feature p { font-size: .93rem; }
+  }
+  @media (max-width: 720px) { .work { grid-template-columns: 1fr; } }
+  .work-more { margin: var(--sp-12) auto 0; max-width: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
+
+  /* ---------- Parcours : onglets ---------- */
+  .tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--paper); border: 1px solid var(--rule); margin-bottom: var(--sp-8); }
+  .tabs button {
+    font: 600 .9rem var(--font-body); color: var(--text-muted);
+    background: none; border: 0; padding: .55rem 1.2rem; border-radius: 999px; cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] { background: var(--ink-900); color: #fff; }
+  html:not(.js) .tabs { display: none; }
+  html.js .panel[hidden] { display: none; }
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); max-width: 820px; }
+  .timeline li {
+    display: grid; grid-template-columns: 130px 1fr; gap: var(--sp-6);
+    padding: var(--sp-6); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
+  }
+  .timeline__when { font-family: var(--font-mono); font-size: .85rem; color: var(--signal-dim); padding-top: 2px; }
+  .timeline h3 { font-size: 1.1rem; margin-bottom: var(--sp-1); }
+  .timeline__where { font-size: .92rem; color: var(--text-muted); margin: 0; }
+  .timeline__what { font-size: .92rem; margin: var(--sp-3) 0 0; }
+  .panel + .panel { margin-top: var(--sp-8); }
+  html.js .panel + .panel { margin-top: 0; }
+  .panel__title { font-size: 1rem; margin-bottom: var(--sp-4); }
+  html.js .panel__title { display: none; }
+  @media (max-width: 600px) { .timeline li { grid-template-columns: 1fr; gap: var(--sp-2); } }
+
+  /* ---------- Compétences ---------- */
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+  @media (max-width: 1000px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .skills { grid-template-columns: 1fr; } }
+  .skills .skill { padding: var(--sp-8); }
+  .skills .skill h3 { font-size: 1.05rem; margin-bottom: var(--sp-2); }
+  .skills .skill p { margin-bottom: var(--sp-4); }
+
+  /* ---------- Appel final ---------- */
+  .cta-band { background: var(--ink-800); color: #fff; padding-block: var(--sp-24); text-align: center; }
   .cta-band h2 { color: #fff; }
-  .cta-band p { color: rgba(255,255,255,.75); }
+  .cta-band p { color: rgba(255,255,255,.75); margin-inline: auto; }
+  .cta-band .hero__actions { justify-content: center; }
 </style>
 </head>
 <body>
@@ -122,19 +208,31 @@
 
 <main id="contenu">
 
+  <!-- ===================== HERO ===================== -->
   <header class="hero">
     <div class="wrap hero__grid">
       <div>
         <p class="hero__role">Ingénieur en traitement du signal, image et machine learning</p>
         <h1>Je transforme des signaux bruités en décisions fiables.</h1>
         <p>
-          EEG, vibrations de roulements, symboles QAM, flux vidéo : mêmes mathématiques,
-          mêmes exigences de rigueur. Je conçois la chaîne complète, de l'acquisition
-          jusqu'au modèle qui décide.
+          EEG, vibrations, symboles QAM, flux vidéo&nbsp;: mêmes mathématiques,
+          même rigueur. Je conçois la chaîne complète, de l'acquisition jusqu'au
+          modèle qui décide.
         </p>
         <div class="hero__actions">
-          <a class="act act--signal" href="machine-learning.html">Voir les projets</a>
+          <a class="act act--signal" href="#projets">Voir les projets</a>
           <a class="act act--onDark" href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV</a>
+        </div>
+
+        <div class="hero__seek">
+          <p class="hero__seek-label">Je cherche un stage, puis un CDI, en</p>
+          <ul class="chips">
+            <li>Perception embarquée</li>
+            <li>Maintenance prédictive</li>
+            <li>Imagerie médicale</li>
+            <li>Télécoms</li>
+            <li>Contrôle qualité industriel</li>
+          </ul>
         </div>
       </div>
 
@@ -154,244 +252,241 @@
     </div>
   </header>
 
-  <hr class="rule">
-
-  <section class="section section--tight">
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">Ce que je cherche</p>
-        <h2>Un stage qui débouche sur un poste.</h2>
-      </div>
-      <div>
-        <p>
-          Je termine un master EEA parcours signal, image et automatique. Je cherche un
-          stage de fin d'études de six mois, puis un CDI, sur des sujets où le signal
-          rencontre l'apprentissage&nbsp;: perception embarquée, maintenance prédictive,
-          imagerie médicale, télécoms, contrôle qualité industriel.
-        </p>
-        <p>
-          Ce qui m'intéresse dans une équipe&nbsp;: des données réelles et imparfaites,
-          des contraintes temps réel, et des gens qui relisent le code des autres.
-        </p>
-
-        <div class="facts" style="margin-top: var(--sp-8);">
-          <div><b class="word">Code public</b><span>chaque projet est lisible sur GitHub</span></div>
-          <div><b class="word">Python et MATLAB</b><span>langages de travail quotidiens</span></div>
-          <div><b class="word">Toulouse</b><span>disponible sur place, mobile en France</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <section class="section">
+  <!-- ===================== PROJETS ===================== -->
+  <section class="section" id="projets">
     <div class="wrap">
-      <p class="eyebrow">Six chaînes de traitement complètes</p>
-      <h2>Projets phares</h2>
-      <p class="lede" style="margin-bottom: var(--sp-12);">
-        Chaque projet part d'un signal réel et suit une méthode explicite, de
-        l'acquisition jusqu'à la décision. Le code est public.
-      </p>
+      <div class="section-head">
+        <p class="eyebrow">Projets phares</p>
+        <h2>Six chaînes de traitement complètes</h2>
+        <p class="lede">Chaque projet part d'un signal réel, suit une méthode explicite et publie son code.</p>
+      </div>
 
-      <div class="entries">
+      <div class="work">
 
-        <article class="entry reveal">
-          <div class="entry__view">
+        <article class="card card--feature reveal">
+          <div class="card__view">
             <canvas id="viz-shortcut" role="img"
                     aria-label="Animation : un glyphe apparaît dans le coin d'une radiographie, le diagnostic du modèle bascule de sain à malade alors que les poumons n'ont pas changé."></canvas>
           </div>
-          <div class="entry__body">
-            <p class="entry__domain">Robustesse causale · imagerie médicale</p>
+          <div class="card__body">
+            <p class="card__domain">Robustesse causale · imagerie médicale</p>
             <h3>Le modèle le plus performant est le seul inutilisable</h3>
             <p>
-              Démonstration, mesure et correction de l'apprentissage par raccourci
-              sur un classifieur de radiographies. Confondant injecté sous contrôle,
-              tests d'intervention <code>do(biais)</code>, Grad-CAM, et deux stratégies
-              de correction comparées.
+              Un classifieur de radiographies qui apprend un raccourci&nbsp;: démonstration,
+              mesure par interventions <code>do(biais)</code> et Grad-CAM, puis deux
+              stratégies de correction comparées.
             </p>
-            <p class="entry__result">
-              <strong>0.965</strong> d'exactitude publiée, <strong>0.495</strong>,
-              le hasard, dès que l'artefact change de classe.
-              <strong>51,7&nbsp;%</strong> des diagnostics basculent si l'on ajoute ou
-              efface un glyphe couvrant 2&nbsp;% de l'image.
+            <p class="card__key">
+              <strong>0.965</strong> d'exactitude publiée, <strong>0.495</strong> dès que
+              l'artefact change de classe. <strong>51,7&nbsp;%</strong> des diagnostics
+              basculent pour un glyphe couvrant 2&nbsp;% de l'image.
             </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>PyTorch</li><li>Grad-CAM</li><li>Causalité</li><li>GRL</li></ul>
-              <a class="entry__link" href="machine-learning.html">Voir le projet</a>
+            <div class="card__foot">
+              <ul class="tags"><li>PyTorch</li><li>Grad-CAM</li><li>Causalité</li></ul>
+              <div class="card__links"><a href="machine-learning.html">Voir le projet →</a></div>
             </div>
           </div>
         </article>
 
-        <article class="entry reveal">
-          <div class="entry__view"><canvas id="viz-uq" aria-hidden="true"></canvas></div>
-          <div class="entry__body">
-            <p class="entry__domain">Quantification d'incertitude · IA médicale</p>
-            <h3>umi : quand un modèle doit dire «&nbsp;je ne sais pas&nbsp;»</h3>
+        <article class="card reveal">
+          <div class="card__view"><canvas id="viz-uq" aria-hidden="true"></canvas></div>
+          <div class="card__body">
+            <p class="card__domain">Incertitude · IA médicale</p>
+            <h3>umi&nbsp;: quand un modèle doit dire «&nbsp;je ne sais pas&nbsp;»</h3>
             <p>
-              Bibliothèque comparant quatre façons de produire une incertitude
-              fiable sur des images médicales&nbsp;: softmax recalibré,
-              MC&nbsp;Dropout, ensemble profond et apprentissage évidentiel.
-              Séparation de l'incertitude aléatoire et épistémique, courbes
-              risque-couverture, dégradation contrôlée et cartes spatiales par
-              occlusion. Le rapport chiffré est généré automatiquement.
+              Quatre méthodes d'incertitude comparées sur images médicales, avec
+              rapport chiffré généré automatiquement.
             </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>PyTorch</li><li>Calibration</li><li>Dirichlet</li><li>MedMNIST</li></ul>
-              <a class="entry__link" href="machine-learning.html">Voir le projet</a>
-              <a class="entry__link" href="assets/pdf/AWOUNANG_incertitude_imagerie_medicale.pdf" target="_blank" rel="noopener">Lire le rapport</a>
+            <div class="card__foot">
+              <ul class="tags"><li>PyTorch</li><li>Calibration</li><li>MedMNIST</li></ul>
+              <div class="card__links">
+                <a href="machine-learning.html">Voir le projet →</a>
+                <a href="assets/pdf/AWOUNANG_incertitude_imagerie_medicale.pdf" target="_blank" rel="noopener">Rapport</a>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="entry reveal">
-          <div class="entry__view"><canvas id="viz-eeg" aria-hidden="true"></canvas></div>
-          <div class="entry__body">
-            <p class="entry__domain">Signal biomédical</p>
+        <article class="card reveal">
+          <div class="card__view"><canvas id="viz-eeg" aria-hidden="true"></canvas></div>
+          <div class="card__body">
+            <p class="card__domain">Signal biomédical</p>
             <h3>Détection de crises d'épilepsie sur EEG</h3>
             <p>
-              Décomposition en ondelettes discrètes du signal EEG, extraction d'indicateurs
-              par sous-bande (énergie, entropie), puis classification des fenêtres suspectes.
-              Chaîne complète, de la lecture des enregistrements bruts à l'alerte.
+              Ondelettes discrètes, indicateurs par sous-bande, classification des
+              fenêtres suspectes&nbsp;: de l'enregistrement brut à l'alerte.
             </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>Python</li><li>PyWavelets</li><li>DWT</li><li>scikit-learn</li></ul>
-              <a class="entry__link" href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie"
-                 target="_blank" rel="noopener">Lire le code</a>
+            <div class="card__foot">
+              <ul class="tags"><li>Python</li><li>PyWavelets</li><li>scikit-learn</li></ul>
+              <div class="card__links">
+                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" rel="noopener">Lire le code →</a>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="entry reveal">
-          <div class="entry__view">
+        <article class="card reveal">
+          <div class="card__view">
             <canvas id="viz-deconv" role="img"
                     aria-label="Animation : un signal en marches, flouté et bruité, est progressivement restauré jusqu'à retrouver ses sauts nets."></canvas>
           </div>
-          <div class="entry__body">
-            <p class="entry__domain">Problèmes inverses · optimisation</p>
-            <h3>Déconvolution : des méthodes variationnelles aux réseaux déroulés</h3>
+          <div class="card__body">
+            <p class="card__domain">Problèmes inverses · optimisation</p>
+            <h3>Déconvolution&nbsp;: du variationnel aux réseaux déroulés</h3>
             <p>
-              Retrouver un signal à partir d'une mesure floue et bruitée. Comparaison
-              contrôlée de plusieurs familles de méthodes&nbsp;: régularisation
-              quadratique avec choix automatique du paramètre, variation totale
-              résolue par algorithmes proximaux, Plug-and-Play, algorithme déroulé
-              en réseau qui garde le modèle physique, et extension à la
-              déconvolution aveugle.
+              Variation totale, Plug-and-Play, réseau déroulé et déconvolution aveugle,
+              comparés dans un cadre contrôlé.
             </p>
-            <p class="entry__result">
-              La forme de l'a priori compte plus que l'algorithme. Le réseau déroulé
-              est le meilleur dans ses conditions d'entraînement, mais perd son
-              avantage <strong>dès que le flou change</strong>&nbsp;: une méthode sans
-              apprentissage s'adapte d'elle-même.
-            </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>MATLAB</li><li>Variation totale</li><li>Optimisation proximale</li><li>Unrolling</li></ul>
-              <a class="entry__link" href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled"
-                 target="_blank" rel="noopener">Lire le code</a>
-              <a class="entry__link" href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Lire la note technique</a>
+            <p class="card__key">Le réseau déroulé gagne à l'entraînement, perd son avance <strong>dès que le flou change</strong>.</p>
+            <div class="card__foot">
+              <ul class="tags"><li>MATLAB</li><li>Proximal</li><li>Unrolling</li></ul>
+              <div class="card__links">
+                <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Lire le code →</a>
+                <a href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Note technique</a>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="entry reveal">
-          <div class="entry__view"><canvas id="viz-vib" aria-hidden="true"></canvas></div>
-          <div class="entry__body">
-            <p class="entry__domain">Maintenance prédictive</p>
+        <article class="card reveal">
+          <div class="card__view"><canvas id="viz-vib" aria-hidden="true"></canvas></div>
+          <div class="card__body">
+            <p class="card__domain">Maintenance prédictive</p>
             <h3>Classification de défauts de roulement</h3>
             <p>
-              Analyse vibratoire d'un roulement à billes&nbsp;: enveloppe du signal,
-              recherche des fréquences caractéristiques de défaut (BPFI, BPFO, BSF),
-              puis classification du type de défaut et de sa sévérité.
+              Enveloppe du signal, fréquences de défaut BPFI, BPFO et BSF, puis
+              classification du type de défaut et de sa sévérité.
             </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>Python</li><li>scikit-learn</li><li>FFT</li><li>Analyse vibratoire</li></ul>
-              <a class="entry__link" href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-"
-                 target="_blank" rel="noopener">Lire le code</a>
+            <div class="card__foot">
+              <ul class="tags"><li>Python</li><li>FFT</li><li>scikit-learn</li></ul>
+              <div class="card__links">
+                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" rel="noopener">Lire le code →</a>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="entry reveal">
-          <div class="entry__view"><canvas id="viz-vision" aria-hidden="true"></canvas></div>
-          <div class="entry__body">
-            <p class="entry__domain">Vision par ordinateur</p>
-            <h3>VisionGuard : détection d'objets en temps réel</h3>
+        <article class="card reveal">
+          <div class="card__view"><canvas id="viz-vision" aria-hidden="true"></canvas></div>
+          <div class="card__body">
+            <p class="card__domain">Vision par ordinateur</p>
+            <h3>VisionGuard&nbsp;: détection d'objets en temps réel</h3>
             <p>
-              Surveillance vidéo par YOLOv8&nbsp;: capture, inférence, suivi des objets
-              entre images et interface d'exploitation avec affichage du débit et de la
-              latence bout en bout.
+              YOLOv8, suivi des objets entre images et interface affichant débit
+              et latence de bout en bout.
             </p>
-            <div class="entry__foot">
-              <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
-              <a class="entry__link" href="https://github.com/lachance123-franccois/VisionGuard"
-                 target="_blank" rel="noopener">Lire le code</a>
+            <div class="card__foot">
+              <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li></ul>
+              <div class="card__links">
+                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" rel="noopener">Lire le code →</a>
+              </div>
             </div>
           </div>
         </article>
 
       </div>
 
-      <p style="margin-top: var(--sp-8);">
+      <p class="work-more">
         <a class="act act--ghost" href="machine-learning.html">Tous les projets IA &amp; machine learning</a>
+        <a class="act act--ghost" href="matlab.html">Projets signal &amp; image</a>
       </p>
     </div>
   </section>
 
-  <hr class="rule">
-
-  <section class="section">
+  <!-- ===================== PARCOURS ===================== -->
+  <section class="section section--alt" id="parcours">
     <div class="wrap">
-      <p class="eyebrow">Compétences</p>
-      <h2>Ce que je sais faire, concrètement</h2>
-      <div class="grid-3" style="margin-top: var(--sp-8);">
+      <div class="section-head">
+        <p class="eyebrow">Parcours</p>
+        <h2>Ingénieur diplômé, en master à Toulouse</h2>
+        <p class="lede">Une formation d'ingénieur en systèmes intelligents, un projet industriel de terrain, puis une spécialisation en signal, image et apprentissage.</p>
+      </div>
 
-        <div class="skill">
-          <h4>Traitement du signal</h4>
-          <p>Filtrage, analyse spectrale, ondelettes, démodulation numérique, débruitage,
-             déconvolution et problèmes inverses, extraction d'indicateurs sur signaux 1D
-             biomédicaux et vibratoires.</p>
-          <p class="skill__tools">NumPy · SciPy · PyWavelets · MATLAB</p>
-        </div>
+      <div class="tabs" role="tablist" aria-label="Parcours">
+        <button type="button" role="tab" id="tab-form" aria-controls="panel-form" aria-selected="true">Formation</button>
+        <button type="button" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="false" tabindex="-1">Expérience</button>
+      </div>
 
-        <div class="skill">
-          <h4>Vision &amp; traitement d'images</h4>
-          <p>Segmentation, analyse spectrale d'images aériennes, détection et suivi
-             d'objets, chaînes de traitement temps réel sur flux vidéo.</p>
-          <p class="skill__tools">OpenCV · YOLOv8 · scikit-image</p>
-        </div>
+      <div class="panel" id="panel-form" role="tabpanel" aria-labelledby="tab-form">
+        <h3 class="panel__title">Formation</h3>
+        <ol class="timeline">
+          <li>
+            <span class="timeline__when">2025 – 2027</span>
+            <div>
+              <h3>Master EEA · Signal, image et apprentissage automatique</h3>
+              <p class="timeline__where">Université Toulouse III – Paul Sabatier · Toulouse</p>
+            </div>
+          </li>
+          <li>
+            <span class="timeline__when">2025</span>
+            <div>
+              <h3>Diplôme d'ingénieur en systèmes intelligents</h3>
+              <p class="timeline__where">École Nationale Supérieure Polytechnique (ENSP) · Douala, Cameroun</p>
+            </div>
+          </li>
+        </ol>
+      </div>
 
-        <div class="skill">
-          <h4>Machine learning</h4>
-          <p>Classification supervisée, séries temporelles, réseaux convolutifs et
-             récurrents, évaluation honnête (validation croisée, fuite de données).</p>
-          <p class="skill__tools">scikit-learn · PyTorch · TensorFlow · pandas</p>
-        </div>
-
-        <div class="skill">
-          <h4>Développement</h4>
-          <p>Code Python structuré et testé, notebooks reproductibles, Git,
-             environnements isolés, documentation utilisable par quelqu'un d'autre.</p>
-          <p class="skill__tools">Git · pytest · Linux</p>
-        </div>
-
-        <div class="skill">
-          <h4>Mathématiques appliquées</h4>
-          <p>Probabilités et statistiques, algèbre linéaire, optimisation, théorie de
-             l'estimation, la base qui permet de déboguer un modèle plutôt que de l'essayer au hasard.</p>
-          <p class="skill__tools">Estimation · Optimisation convexe · Régularisation · Statistiques</p>
-        </div>
-
-        <div class="skill">
-          <h4>Langues</h4>
-          <p>Français&nbsp;: langue de travail. Anglais&nbsp;: lecture d'articles
-             scientifiques et de documentation technique au quotidien.</p>
-          <p class="skill__tools">FR · EN</p>
-        </div>
-
+      <div class="panel" id="panel-exp" role="tabpanel" aria-labelledby="tab-exp">
+        <h3 class="panel__title">Expérience</h3>
+        <ol class="timeline">
+          <li>
+            <span class="timeline__when">2025</span>
+            <div>
+              <h3>Projet de fin d'études d'ingénieur</h3>
+              <p class="timeline__where">SOCAPALM · usine de Dibombari, Cameroun</p>
+              <p class="timeline__what">Conception d'un système automatisé de synchronisation d'alternateurs.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
 
+  <!-- ===================== COMPÉTENCES ===================== -->
+  <section class="section" id="competences">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Compétences</p>
+        <h2>Ce que je sais faire, concrètement</h2>
+      </div>
+
+      <div class="skills">
+        <div class="skill">
+          <h3>Traitement du signal</h3>
+          <p>Filtrage, analyse spectrale, ondelettes, déconvolution et problèmes inverses.</p>
+          <ul class="tags"><li>NumPy</li><li>SciPy</li><li>PyWavelets</li><li>MATLAB</li></ul>
+        </div>
+        <div class="skill">
+          <h3>Vision &amp; images</h3>
+          <p>Segmentation, détection et suivi d'objets, traitement temps réel de flux vidéo.</p>
+          <ul class="tags"><li>OpenCV</li><li>YOLOv8</li><li>scikit-image</li></ul>
+        </div>
+        <div class="skill">
+          <h3>Machine learning</h3>
+          <p>Classification, séries temporelles, CNN et RNN, évaluation sans fuite de données.</p>
+          <ul class="tags"><li>PyTorch</li><li>TensorFlow</li><li>scikit-learn</li><li>pandas</li></ul>
+        </div>
+        <div class="skill">
+          <h3>Développement</h3>
+          <p>Code Python structuré et testé, notebooks reproductibles, documentation claire.</p>
+          <ul class="tags"><li>Git</li><li>pytest</li><li>Linux</li></ul>
+        </div>
+        <div class="skill">
+          <h3>Mathématiques appliquées</h3>
+          <p>Probabilités, algèbre linéaire, optimisation et estimation&nbsp;: de quoi déboguer un modèle plutôt que l'essayer au hasard.</p>
+          <ul class="tags"><li>Optimisation convexe</li><li>Régularisation</li><li>Statistiques</li></ul>
+        </div>
+        <div class="skill">
+          <h3>Langues</h3>
+          <p>Français, langue de travail. Anglais, lecture scientifique et technique au quotidien.</p>
+          <ul class="tags"><li>FR</li><li>EN</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
   <section class="cta-band">
     <div class="wrap">
       <h2>Un sujet de stage à pourvoir&nbsp;?</h2>
@@ -435,8 +530,7 @@
       </div>
     </div>
     <div class="site-foot__base">
-      <span>© 2025 François Lachance Awounang-Ngounou</span>
-      <span>Site construit à la main en HTML, CSS et JavaScript.</span>
+      <span>© 2026 François Lachance Awounang-Ngounou</span>
     </div>
   </div>
 </footer>
@@ -444,6 +538,31 @@
 <button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 
 <script src="js/main.js" defer></script>
+<script>
+/* Onglets du parcours (Formation / Expérience), navigables au clavier */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  if (!tabs.length) return;
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(n); n.focus();
+    });
+  });
+  select(tabs[0]);
+})();
+</script>
+
 <script>
 /* Animation du projet de déconvolution : mesure floue -> restauration progressive */
 (function () {
