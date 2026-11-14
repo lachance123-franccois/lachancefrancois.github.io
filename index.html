@@ -93,7 +93,7 @@
   .section--alt { background: var(--paper-pure); border-block: 1px solid var(--rule); }
 
   /* ---------- Projets : grille de cartes ---------- */
-  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+  .work { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
   .card {
     display: flex; flex-direction: column;
     background: var(--paper-pure); border: 1px solid var(--rule);
@@ -103,19 +103,19 @@
   .card:hover { border-color: var(--signal); box-shadow: var(--shadow-md); transform: translateY(-3px); }
   .card__view { position: relative; background: var(--viz-bg); color: var(--text-muted); aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
   .card__view canvas { width: 100%; height: 100%; display: block; }
-  .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); display: flex; flex-direction: column; flex: 1; }
-  .card__domain { font-family: var(--font-mono); font-size: .76rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
-  .card h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: var(--sp-3); }
-  .card p { font-size: .93rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
+  .card__body { padding: var(--sp-4) var(--sp-4) var(--sp-6); display: flex; flex-direction: column; flex: 1; }
+  .card__domain { font-family: var(--font-mono); font-size: .72rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
+  .card h3 { font-size: 1.02rem; line-height: 1.25; margin-bottom: var(--sp-2); }
+  .card p { font-size: .88rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
   .card__foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--sp-4); }
   .card__links { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
-  .card__links a { font-weight: 600; font-size: .9rem; }
+  .card__links a { font-weight: 600; font-size: .86rem; }
 
   @media (max-width: 1040px) {
-    .work { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+    .work { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 720px) { .work { grid-template-columns: 1fr; } }
-  .work-more { margin: var(--sp-12) auto 0; max-width: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
+  @media (max-width: 600px) { .work { grid-template-columns: 1fr; } }
+  .work-more { margin: var(--sp-8) auto 0; max-width: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
 
   /* ---------- Parcours ---------- */
   .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); max-width: 820px; }
@@ -150,7 +150,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> · stage de fin d'études de 6&nbsp;mois dès mars&nbsp;2027, puis CDI · Toulouse, mobilité France</span>
+    <span><strong>Disponible</strong> · stage de fin d'études de 6&nbsp;mois dès mars&nbsp;2027, puis These/CDI · Toulouse, mobilité France</span>
   </div>
 </div>
 
@@ -222,8 +222,8 @@
   <section class="section" id="projets">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Projets phares</p>
-        <h2>Six chaînes de traitement complètes</h2>
+        <p class="eyebrow">Projets</p>
+        <h2>Quatre projets phares</h2>
         <p class="lede">Chaque projet publie son code, sa méthode et ses résultats sur GitHub.</p>
       </div>
 
@@ -234,41 +234,38 @@
           <div class="card__body">
             <p class="card__domain">Robustesse causale · imagerie médicale</p>
             <h3>Apprentissage par raccourci en imagerie médicale</h3>
-            <p>Un classifieur d'images médicales peut afficher une excellente exactitude en s'appuyant sur un artefact d'acquisition plutôt que sur la pathologie. Le projet reproduit ce phénomène dans un cadre contrôlé, le détecte par interventions causales et Grad-CAM, puis compare deux stratégies de correction.</p>
+            <p>Détecter puis corriger un classifieur de radiographies qui s'appuie sur un artefact d'acquisition plutôt que sur la pathologie.</p>
             <div class="card__foot">
-              <ul class="tags"><li>PyTorch</li><li>Grad-CAM</li><li>Causalité</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/shortcut-audit" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+                <a href="https://github.com/lachance123-franccois/shortcut-audit" target="_blank" rel="noopener">Voir sur GitHub →</a>
               </div>
             </div>
           </div>
         </article>
 
         <article class="card reveal">
-          <div class="card__view"><canvas id="viz-uq" aria-hidden="true"></canvas></div>
+          <div class="card__view"><canvas id="viz-anomaly" aria-hidden="true"></canvas></div>
           <div class="card__body">
-            <p class="card__domain">Incertitude · IA médicale</p>
-            <h3>umi&nbsp;: quand un modèle doit dire «&nbsp;je ne sais pas&nbsp;»</h3>
-            <p>Un réseau qui se trompe annonce souvent une confiance proche de 1, et le praticien ne sait pas quels cas relire. umi compare quatre méthodes d'estimation d'incertitude sur un même protocole, pour savoir si l'on peut se fier à la confiance annoncée et à quel coût de calcul.</p>
+            <p class="card__domain">Maintenance prédictive · séries temporelles</p>
+            <h3>Sentinel&nbsp;: détection d'anomalies non supervisée</h3>
+            <p>Repérer une dérive ou une panne naissante dans un signal capteur, sans aucun exemple de panne étiqueté.</p>
             <div class="card__foot">
-              <ul class="tags"><li>PyTorch</li><li>Calibration</li><li>MedMNIST</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/uncertainty-aware-medical-imaging" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+                <a href="https://github.com/lachance123-franccois/sentinel" target="_blank" rel="noopener">Voir sur GitHub →</a>
               </div>
             </div>
           </div>
         </article>
 
         <article class="card reveal">
-          <div class="card__view"><canvas id="viz-eeg" aria-hidden="true"></canvas></div>
+          <div class="card__view"><canvas id="viz-ambi" aria-hidden="true"></canvas></div>
           <div class="card__body">
-            <p class="card__domain">Signal biomédical</p>
-            <h3>Détection de crises d'épilepsie sur EEG</h3>
-            <p>Objectif&nbsp;: repérer automatiquement les crises dans un enregistrement EEG. La chaîne décompose le signal en ondelettes discrètes, calcule des indicateurs par sous-bande et classe les fenêtres suspectes.</p>
+            <p class="card__domain">Audio spatial · séparation de sources</p>
+            <h3>Extraction de locuteur sur signaux ambisoniques</h3>
+            <p>Extraire la voix venant d'une direction donnée dans une scène sonore, avec un autoencodeur à masque comparé à des beamformers classiques.</p>
             <div class="card__foot">
-              <ul class="tags"><li>EEG</li><li>PyWavelets</li><li>scikit-learn</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+                <a href="https://github.com/lachance123-franccois/ambisonic-source-separation" target="_blank" rel="noopener">Voir sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -279,41 +276,10 @@
           <div class="card__body">
             <p class="card__domain">Problèmes inverses · optimisation</p>
             <h3>Déconvolution&nbsp;: du variationnel aux réseaux déroulés</h3>
-            <p>Restaurer un signal flouté et bruité est un problème inverse mal posé. Le projet compare quatre approches dans un cadre contrôlé&nbsp;: variation totale, Plug-and-Play, réseau déroulé et déconvolution aveugle.</p>
+            <p>Restaurer un signal flouté et bruité, des méthodes variationnelles aux réseaux déroulés, jusqu'à la déconvolution aveugle.</p>
             <div class="card__foot">
-              <ul class="tags"><li>MATLAB</li><li>Proximal</li><li>Unrolling</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__view"><canvas id="viz-vib" aria-hidden="true"></canvas></div>
-          <div class="card__body">
-            <p class="card__domain">Maintenance prédictive</p>
-            <h3>Classification de défauts de roulement</h3>
-            <p>Objectif&nbsp;: détecter un défaut de roulement à partir du seul signal vibratoire. Analyse d'enveloppe, fréquences caractéristiques BPFI, BPFO et BSF, puis classification du type de défaut et de sa sévérité.</p>
-            <div class="card__foot">
-              <ul class="tags"><li>Enveloppe</li><li>FFT</li><li>scikit-learn</li></ul>
-              <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <div class="card__view"><canvas id="viz-vision" aria-hidden="true"></canvas></div>
-          <div class="card__body">
-            <p class="card__domain">Vision par ordinateur</p>
-            <h3>VisionGuard&nbsp;: détection d'objets en temps réel</h3>
-            <p>Objectif&nbsp;: détecter et suivre des objets dans un flux vidéo en temps réel. Détection par YOLOv8, suivi entre images et interface de supervision du traitement.</p>
-            <div class="card__foot">
-              <ul class="tags"><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
-              <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+                <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Voir sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -322,8 +288,9 @@
       </div>
 
       <p class="work-more">
-        <a class="act act--ghost" href="machine-learning.html">Tous les projets IA &amp; machine learning</a>
+        <a class="act act--ghost" href="machine-learning.html">Projets IA &amp; machine learning</a>
         <a class="act act--ghost" href="matlab.html">Projets signal &amp; image</a>
+        <a class="act act--ghost" href="https://github.com/lachance123-franccois?tab=repositories" target="_blank" rel="noopener">Tous les dépôts GitHub →</a>
       </p>
     </div>
   </section>
