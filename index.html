@@ -7,24 +7,24 @@
 <title>François Lachance Awounang-Ngounou · Ingénieur signal, image &amp; machine learning</title>
 <meta name="description" content="Ingénieur traitement du signal, vision par ordinateur et machine learning basé à Toulouse. EEG, analyse vibratoire, télécoms numériques, YOLOv8. Recherche un stage de fin d'études puis un CDI.">
 <meta name="author" content="François Lachance Awounang-Ngounou">
-<link rel="canonical" href="https://lachance123-franccois.github.io/">
+<link rel="canonical" href="https://lachance123-franccois.github.io/lachancefrancois.github.io/">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:url" content="https://lachance123-franccois.github.io/">
+<meta property="og:url" content="https://lachance123-franccois.github.io/lachancefrancois.github.io/">
 <meta property="og:title" content="François Lachance Awounang-Ngounou · Ingénieur signal, image & machine learning">
 <meta property="og:description" content="Des signaux bruités aux décisions fiables : EEG, vibrations, télécoms, vision. Disponible pour un stage de fin d'études puis un CDI.">
-<meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
+<meta property="og:image" content="https://lachance123-franccois.github.io/lachancefrancois.github.io/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b1a26">
+<meta name="theme-color" content="#0c2340">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <script>document.documentElement.classList.add('js');</script>
 
@@ -34,7 +34,7 @@
   "@type": "Person",
   "name": "François Lachance Awounang-Ngounou",
   "jobTitle": "Ingénieur traitement du signal, image et machine learning",
-  "url": "https://lachance123-franccois.github.io/",
+  "url": "https://lachance123-franccois.github.io/lachancefrancois.github.io/",
   "email": "mailto:lachanceawounang@icloud.com",
   "address": { "@type": "PostalAddress", "addressLocality": "Toulouse", "addressCountry": "FR" },
   "knowsAbout": ["Traitement du signal", "Vision par ordinateur", "Machine learning", "Python", "MATLAB", "Traitement d'images"],
@@ -63,7 +63,7 @@
   }
   .scope {
     border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius-lg);
-    background: #071620; overflow: hidden; box-shadow: var(--shadow-lg); margin: 0;
+    background: var(--scope-bg); overflow: hidden; box-shadow: var(--shadow-lg); margin: 0;
   }
   .scope__head {
     display: flex; justify-content: space-between; align-items: center;
@@ -87,7 +87,7 @@
   }
 
   /* ---------- En-têtes de section ---------- */
-  .section-head { margin-bottom: var(--sp-12); }
+  .section-head { margin-bottom: var(--sp-8); }
   .section-head h2 { margin-bottom: var(--sp-3); }
   .section-head .lede { margin: 0; }
   .section--alt { background: var(--paper-pure); border-block: 1px solid var(--rule); }
@@ -101,7 +101,7 @@
     transition: border-color var(--normal) var(--ease), box-shadow var(--normal) var(--ease), transform var(--normal) var(--ease);
   }
   .card:hover { border-color: var(--signal); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-  .card__view { position: relative; background: var(--ink-900); aspect-ratio: 16 / 9; }
+  .card__view { position: relative; background: var(--viz-bg); color: var(--text-muted); aspect-ratio: 16 / 9; border-bottom: 1px solid var(--rule); }
   .card__view canvas { width: 100%; height: 100%; display: block; }
   .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); display: flex; flex-direction: column; flex: 1; }
   .card__domain { font-family: var(--font-mono); font-size: .76rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
@@ -118,7 +118,7 @@
 
   /* Carte vedette : deux colonnes sur grand écran */
   .card--feature { grid-column: span 2; grid-row: span 2; flex-direction: row; }
-  .card--feature .card__view { aspect-ratio: auto; flex: 0 0 50%; min-height: 300px; }
+  .card--feature .card__view { aspect-ratio: auto; flex: 0 0 50%; min-height: 300px; border-bottom: 0; border-right: 1px solid var(--rule); }
   .card--feature .card__body { padding: var(--sp-12) var(--sp-8); justify-content: center; }
   .card--feature .card__foot { margin-top: var(--sp-4); }
   .card--feature h3 { font-size: var(--step-2); }
@@ -127,7 +127,7 @@
   @media (max-width: 1040px) {
     .work { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
     .card--feature { grid-column: auto; grid-row: auto; flex-direction: column; }
-    .card--feature .card__view { aspect-ratio: 16 / 9; min-height: 0; flex: none; }
+    .card--feature .card__view { aspect-ratio: 16 / 9; min-height: 0; flex: none; border-right: 0; border-bottom: 1px solid var(--rule); }
     .card--feature .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); justify-content: flex-start; }
     .card--feature h3 { font-size: 1.15rem; }
     .card--feature p { font-size: .93rem; }
@@ -135,43 +135,30 @@
   @media (max-width: 720px) { .work { grid-template-columns: 1fr; } }
   .work-more { margin: var(--sp-12) auto 0; max-width: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
 
-  /* ---------- Parcours : onglets ---------- */
-  .tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--paper); border: 1px solid var(--rule); margin-bottom: var(--sp-8); }
-  .tabs button {
-    font: 600 .9rem var(--font-body); color: var(--text-muted);
-    background: none; border: 0; padding: .55rem 1.2rem; border-radius: 999px; cursor: pointer;
-  }
-  .tabs button[aria-selected="true"] { background: var(--ink-900); color: #fff; }
-  html:not(.js) .tabs { display: none; }
-  html.js .panel[hidden] { display: none; }
-  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-4); max-width: 820px; }
+  /* ---------- Parcours ---------- */
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); max-width: 820px; }
   .timeline li {
     display: grid; grid-template-columns: 130px 1fr; gap: var(--sp-6);
-    padding: var(--sp-6); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
+    padding: var(--sp-4) var(--sp-6); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
   }
   .timeline__when { font-family: var(--font-mono); font-size: .85rem; color: var(--signal-dim); padding-top: 2px; }
   .timeline h3 { font-size: 1.1rem; margin-bottom: var(--sp-1); }
   .timeline__where { font-size: .92rem; color: var(--text-muted); margin: 0; }
-  .timeline__what { font-size: .92rem; margin: var(--sp-3) 0 0; }
-  .panel + .panel { margin-top: var(--sp-8); }
-  html.js .panel + .panel { margin-top: 0; }
-  .panel__title { font-size: 1rem; margin-bottom: var(--sp-4); }
-  html.js .panel__title { display: none; }
+  .timeline__what { font-size: .92rem; margin: var(--sp-2) 0 0; }
   @media (max-width: 600px) { .timeline li { grid-template-columns: 1fr; gap: var(--sp-2); } }
 
   /* ---------- Compétences ---------- */
-  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
+  .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
   @media (max-width: 1000px) { .skills { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .skills { grid-template-columns: 1fr; } }
-  .skills .skill { padding: var(--sp-8); }
-  .skills .skill h3 { font-size: 1.05rem; margin-bottom: var(--sp-2); }
-  .skills .skill p { margin-bottom: var(--sp-4); }
+  .skills .skill { padding: var(--sp-6); }
+  .skills .skill h3 { font-size: 1.05rem; margin-bottom: var(--sp-3); }
 
   /* ---------- Appel final ---------- */
-  .cta-band { background: var(--ink-800); color: #fff; padding-block: var(--sp-24); text-align: center; }
-  .cta-band h2 { color: #fff; }
-  .cta-band p { color: rgba(255,255,255,.75); margin-inline: auto; }
-  .cta-band .hero__actions { justify-content: center; }
+  .cta-band { background: var(--signal-tint); color: var(--text); padding-block: var(--sp-16); text-align: center; }
+  .cta-band::after { display: none; }
+  .cta-band p { color: var(--text-muted); margin-inline: auto; max-width: 52ch; }
+  .cta-band .hero__actions { justify-content: center; margin-top: var(--sp-6); }
 </style>
 </head>
 <body>
@@ -181,9 +168,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
-    <span>Toulouse et mobilité France entière.</span>
-    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+    <span><strong>Disponible</strong> · stage de fin d'études de 6&nbsp;mois dès mars&nbsp;2027, puis CDI · Toulouse, mobilité France</span>
   </div>
 </div>
 
@@ -216,8 +201,7 @@
         <h1>Je transforme des signaux bruités en décisions fiables.</h1>
         <p>
           EEG, vibrations, symboles QAM, flux vidéo&nbsp;: mêmes mathématiques,
-          même rigueur. Je conçois la chaîne complète, de l'acquisition jusqu'au
-          modèle qui décide.
+          même rigueur.
         </p>
         <div class="hero__actions">
           <a class="act act--signal" href="#projets">Voir les projets</a>
@@ -225,7 +209,7 @@
         </div>
 
         <div class="hero__seek">
-          <p class="hero__seek-label">Je cherche un stage, puis un CDI, en</p>
+          <p class="hero__seek-label">Secteurs visés</p>
           <ul class="chips">
             <li>Perception embarquée</li>
             <li>Maintenance prédictive</li>
@@ -317,7 +301,7 @@
               fenêtres suspectes&nbsp;: de l'enregistrement brut à l'alerte.
             </p>
             <div class="card__foot">
-              <ul class="tags"><li>Python</li><li>PyWavelets</li><li>scikit-learn</li></ul>
+              <ul class="tags"><li>EEG</li><li>PyWavelets</li><li>scikit-learn</li></ul>
               <div class="card__links">
                 <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" rel="noopener">Lire le code →</a>
               </div>
@@ -358,7 +342,7 @@
               classification du type de défaut et de sa sévérité.
             </p>
             <div class="card__foot">
-              <ul class="tags"><li>Python</li><li>FFT</li><li>scikit-learn</li></ul>
+              <ul class="tags"><li>Enveloppe</li><li>FFT</li><li>scikit-learn</li></ul>
               <div class="card__links">
                 <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" rel="noopener">Lire le code →</a>
               </div>
@@ -376,7 +360,7 @@
               et latence de bout en bout.
             </p>
             <div class="card__foot">
-              <ul class="tags"><li>Python</li><li>YOLOv8</li><li>OpenCV</li></ul>
+              <ul class="tags"><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
               <div class="card__links">
                 <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" rel="noopener">Lire le code →</a>
               </div>
@@ -399,47 +383,32 @@
       <div class="section-head">
         <p class="eyebrow">Parcours</p>
         <h2>Ingénieur diplômé, en master à Toulouse</h2>
-        <p class="lede">Une formation d'ingénieur en systèmes intelligents, un projet industriel de terrain, puis une spécialisation en signal, image et apprentissage.</p>
       </div>
 
-      <div class="tabs" role="tablist" aria-label="Parcours">
-        <button type="button" role="tab" id="tab-form" aria-controls="panel-form" aria-selected="true">Formation</button>
-        <button type="button" role="tab" id="tab-exp" aria-controls="panel-exp" aria-selected="false" tabindex="-1">Expérience</button>
-      </div>
-
-      <div class="panel" id="panel-form" role="tabpanel" aria-labelledby="tab-form">
-        <h3 class="panel__title">Formation</h3>
-        <ol class="timeline">
-          <li>
-            <span class="timeline__when">2025 – 2027</span>
-            <div>
-              <h3>Master EEA · Signal, image et apprentissage automatique</h3>
-              <p class="timeline__where">Université Toulouse III – Paul Sabatier · Toulouse</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline__when">2025</span>
-            <div>
-              <h3>Diplôme d'ingénieur en systèmes intelligents</h3>
-              <p class="timeline__where">École Nationale Supérieure Polytechnique (ENSP) · Douala, Cameroun</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <div class="panel" id="panel-exp" role="tabpanel" aria-labelledby="tab-exp">
-        <h3 class="panel__title">Expérience</h3>
-        <ol class="timeline">
-          <li>
-            <span class="timeline__when">2025</span>
-            <div>
-              <h3>Projet de fin d'études d'ingénieur</h3>
-              <p class="timeline__where">SOCAPALM · usine de Dibombari, Cameroun</p>
-              <p class="timeline__what">Conception d'un système automatisé de synchronisation d'alternateurs.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
+      <ol class="timeline">
+        <li>
+          <span class="timeline__when">2025 – 2027</span>
+          <div>
+            <h3>Master EEA · Signal, image et apprentissage automatique</h3>
+            <p class="timeline__where">Université Toulouse III – Paul Sabatier · Toulouse</p>
+          </div>
+        </li>
+        <li>
+          <span class="timeline__when">2025</span>
+          <div>
+            <h3>Projet de fin d'études d'ingénieur</h3>
+            <p class="timeline__where">SOCAPALM · usine de Dibombari, Cameroun</p>
+            <p class="timeline__what">Conception d'un système automatisé de synchronisation d'alternateurs.</p>
+          </div>
+        </li>
+        <li>
+          <span class="timeline__when">2025</span>
+          <div>
+            <h3>Diplôme d'ingénieur en systèmes intelligents</h3>
+            <p class="timeline__where">École Nationale Supérieure Polytechnique (ENSP) · Douala, Cameroun</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -454,33 +423,19 @@
       <div class="skills">
         <div class="skill">
           <h3>Traitement du signal</h3>
-          <p>Filtrage, analyse spectrale, ondelettes, déconvolution et problèmes inverses.</p>
           <ul class="tags"><li>NumPy</li><li>SciPy</li><li>PyWavelets</li><li>MATLAB</li></ul>
         </div>
         <div class="skill">
           <h3>Vision &amp; images</h3>
-          <p>Segmentation, détection et suivi d'objets, traitement temps réel de flux vidéo.</p>
           <ul class="tags"><li>OpenCV</li><li>YOLOv8</li><li>scikit-image</li></ul>
         </div>
         <div class="skill">
           <h3>Machine learning</h3>
-          <p>Classification, séries temporelles, CNN et RNN, évaluation sans fuite de données.</p>
           <ul class="tags"><li>PyTorch</li><li>TensorFlow</li><li>scikit-learn</li><li>pandas</li></ul>
         </div>
         <div class="skill">
           <h3>Développement</h3>
-          <p>Code Python structuré et testé, notebooks reproductibles, documentation claire.</p>
           <ul class="tags"><li>Git</li><li>pytest</li><li>Linux</li></ul>
-        </div>
-        <div class="skill">
-          <h3>Mathématiques appliquées</h3>
-          <p>Probabilités, algèbre linéaire, optimisation et estimation&nbsp;: de quoi déboguer un modèle plutôt que l'essayer au hasard.</p>
-          <ul class="tags"><li>Optimisation convexe</li><li>Régularisation</li><li>Statistiques</li></ul>
-        </div>
-        <div class="skill">
-          <h3>Langues</h3>
-          <p>Français, langue de travail. Anglais, lecture scientifique et technique au quotidien.</p>
-          <ul class="tags"><li>FR</li><li>EN</li></ul>
         </div>
       </div>
     </div>
@@ -490,13 +445,13 @@
   <section class="cta-band">
     <div class="wrap">
       <h2>Un sujet de stage à pourvoir&nbsp;?</h2>
-      <p style="max-width: 52ch;">
-        Envoyez-moi la fiche de poste. Je réponds sous 24&nbsp;h avec une lecture
+      <p>
+        Envoyez-moi la fiche de poste. Je réponds sous 24 à 48&nbsp;h avec une lecture
         du sujet et les projets qui s'en rapprochent le plus.
       </p>
       <div class="hero__actions">
         <a class="act act--signal" href="contact.html">Écrire un message</a>
-        <a class="act act--onDark" href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a>
+        <a class="act act--ghost" href="mailto:lachanceawounang@icloud.com">lachanceawounang@icloud.com</a>
       </div>
     </div>
   </section>
@@ -539,31 +494,6 @@
 
 <script src="js/main.js" defer></script>
 <script>
-/* Onglets du parcours (Formation / Expérience), navigables au clavier */
-(function () {
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  if (!tabs.length) return;
-  function select(tab) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', on);
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-      select(n); n.focus();
-    });
-  });
-  select(tabs[0]);
-})();
-</script>
-
-<script>
 /* Animation du projet de déconvolution : mesure floue -> restauration progressive */
 (function () {
   var cv = document.getElementById('viz-deconv');
@@ -585,7 +515,7 @@
     y.push(acc + (rnd() - .5) * .05);
   }
   var root = getComputedStyle(document.documentElement);
-  var accent = (root.getPropertyValue('--signal') || '').trim() || '#3ad6a3';
+  var accent = (root.getPropertyValue('--signal-dim') || '').trim() || '#0e7490';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W = 0, H = 0, running = false, t0 = 0;
 
