@@ -4,99 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Traitement du signal et de l'image | François Lachance Awounang-Ngounou</title>
-<meta name="description" content="Projets MATLAB de traitement du signal et de l'image : déconvolution et problèmes inverses, analyse spectrale FFT/STFT, imagerie aérienne multispectrale, filtrage ECG.">
-<link rel="canonical" href="https://lachance123-franccois.github.io/matlab.html">
+<meta name="description" content="Projets MATLAB de traitement du signal et de l'image : déconvolution, segmentation par contours actifs, transformée de Hough, décodage DTMF. Code et résultats sur GitHub.">
+<link rel="canonical" href="https://lachance123-franccois.github.io/lachancefrancois.github.io/matlab.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:url" content="https://lachance123-franccois.github.io/matlab.html">
+<meta property="og:url" content="https://lachance123-franccois.github.io/lachancefrancois.github.io/matlab.html">
 <meta property="og:title" content="Traitement du signal et de l'image | François Lachance Awounang-Ngounou">
-<meta property="og:description" content="Projets MATLAB de traitement du signal et de l'image : déconvolution, analyse spectrale, imagerie aérienne, filtrage ECG.">
-<meta property="og:image" content="https://lachance123-franccois.github.io/assets/og-cover.png">
+<meta property="og:description" content="Projets MATLAB de traitement du signal et de l'image : déconvolution, segmentation par contours actifs, transformée de Hough, décodage DTMF. Code et résultats sur GitHub.">
+<meta property="og:image" content="https://lachance123-franccois.github.io/lachancefrancois.github.io/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b1a26">
+<meta name="theme-color" content="#0c2340">
 <link rel="stylesheet" href="css/theme.css">
 <script>document.documentElement.classList.add('js');</script>
-
-<script>
-(function () {
-  var raf = window.requestAnimationFrame.bind(window), queued = [];
-  window.requestAnimationFrame = function (cb) {
-    if (document.hidden) { queued.push(cb); return 0; }
-    return raf(cb);
-  };
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) queued.splice(0).forEach(function (cb) { raf(cb); });
-  });
-})();
-</script>
-
-<style>
-  /* ---------- Hero ---------- */
-  .page-hero { background: var(--ink-900); color: var(--text-invert); padding-block: var(--sp-16) var(--sp-12); }
-  .page-hero__role { font-family: var(--font-mono); font-size: var(--step--1); color: var(--signal); margin: 0 0 var(--sp-4); }
-  .page-hero h1 { color: #fff; font-size: var(--step-4); max-width: 18ch; margin-bottom: var(--sp-4); }
-  .page-hero p { color: rgba(255,255,255,.8); font-size: var(--step-1); max-width: 52ch; margin: 0; }
-  @media (max-width: 720px) { .page-hero { padding-block: var(--sp-12) var(--sp-8); } }
-
-  /* ---------- Sections ---------- */
-  .section { padding-block: var(--sp-16); }
-  @media (max-width: 720px) { .section { padding-block: var(--sp-12); } }
-  .section-head { margin-bottom: var(--sp-8); }
-  .section-head h2 { margin-bottom: var(--sp-2); }
-  .section-head .lede { margin: 0; }
-
-  /* ---------- Cartes ---------- */
-  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
-  .card {
-    display: flex; flex-direction: column;
-    background: var(--paper-pure); border: 1px solid var(--rule);
-    border-radius: var(--radius-lg); overflow: hidden;
-    transition: border-color var(--normal) var(--ease), box-shadow var(--normal) var(--ease), transform var(--normal) var(--ease);
-  }
-  .card:hover { border-color: var(--signal); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-  .card__view { position: relative; background: var(--ink-900); aspect-ratio: 9 / 4; overflow: hidden; }
-  .card__view canvas, .card__view video { width: 100%; height: 100%; display: block; object-fit: cover; }
-  .card__body { padding: var(--sp-6); display: flex; flex-direction: column; flex: 1; }
-  .card__domain { font-family: var(--font-mono); font-size: .76rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
-  .card h3 { font-size: 1.12rem; line-height: 1.25; margin-bottom: var(--sp-3); }
-  .card p { font-size: .93rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
-  .card__key { font-size: .88rem; color: var(--text); margin-bottom: var(--sp-4); padding-left: var(--sp-3); border-left: 3px solid var(--detect); }
-  .card__key strong { font-family: var(--font-mono); font-weight: 600; }
-  .card__foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--sp-3); }
-  .card__links { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
-  .card__links a { font-weight: 600; font-size: .9rem; }
-  .card__note { font-family: var(--font-mono); font-size: .76rem; color: var(--text-muted); }
-
-  /* Carte vedette pleine largeur */
-  .card--feature { grid-column: 1 / -1; flex-direction: row; }
-  .card--feature .card__view { flex: 0 0 55%; aspect-ratio: auto; min-height: 300px; display: flex; align-items: center; }
-  .card--feature .card__view canvas { height: auto; aspect-ratio: 640 / 284; object-fit: contain; }
-  .card--feature .card__body { padding: var(--sp-8); justify-content: center; }
-  .card--feature h3 { font-size: var(--step-2); }
-  .card--feature p { font-size: 1rem; }
-  .card--feature .card__foot { margin-top: var(--sp-2); }
-
-  @media (max-width: 1040px) {
-    .work { grid-template-columns: repeat(2, 1fr); }
-    .card--feature { flex-direction: column; }
-    .card--feature .card__view { flex: none; aspect-ratio: 9 / 4; min-height: 0; }
-    .card--feature .card__body { padding: var(--sp-6); }
-    .card--feature h3 { font-size: 1.25rem; }
-  }
-  @media (max-width: 720px) { .work { grid-template-columns: 1fr; } }
-
-  /* ---------- Appel final ---------- */
-  .cta-band { background: var(--ink-800); color: #fff; padding-block: var(--sp-12); text-align: center; }
-  .cta-band h2 { color: #fff; }
-  .cta-band p { color: rgba(255,255,255,.75); margin-inline: auto; }
-  .cta-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; margin-top: var(--sp-6); }
-</style>
 </head>
 <body>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -104,9 +29,7 @@
 <div class="availability">
   <div class="wrap availability__inner">
     <span class="pulse" aria-hidden="true"></span>
-    <span><strong>Disponible</strong> pour un stage de fin d'études de 6&nbsp;mois à partir de mars&nbsp;2027, puis un CDI.</span>
-    <span>Toulouse et mobilité France entière.</span>
-    <a href="assets/pdf/CV_Francois_Lachance.pdf" download>Télécharger le CV (PDF)</a>
+    <span><strong>Disponible</strong> · stage de fin d'études de 6&nbsp;mois dès mars&nbsp;2027, puis These/CDI · Toulouse, mobilité France</span>
   </div>
 </div>
 
@@ -135,105 +58,66 @@
   <div class="wrap">
     <p class="page-hero__role">Projets · signal &amp; image sous MATLAB</p>
     <h1>Les mathématiques du signal, appliquées.</h1>
-    <p>Problèmes inverses, analyse spectrale, imagerie aérienne et filtrage de signaux biomédicaux.</p>
+    <p>Quatre projets en détail. Le code et les résultats sont sur GitHub.</p>
   </div>
 </header>
 
-<section class="section">
+<section class="section section--tight">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Projets MATLAB</p>
-      <h2>Quatre chaînes de traitement</h2>
-      <p class="lede">De la mesure dégradée au signal exploitable, avec une méthode explicite à chaque étape.</p>
+    <p class="eyebrow">Sélection</p>
+    <h2 style="font-size: var(--step-2); margin-bottom: var(--sp-6);">Quatre projets</h2>
+
+    <div class="plist plist--2">
+      <article class="pcard reveal">
+        <p class="pcard__domain">Problèmes inverses · optimisation</p>
+        <h3>Déconvolution&nbsp;: du variationnel aux réseaux déroulés</h3>
+        <p>Restaurer un signal flouté et bruité, des méthodes variationnelles aux réseaux déroulés, jusqu'à la déconvolution aveugle.</p>
+        <a class="pcard__link" href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+      </article>
+
+      <article class="pcard reveal">
+        <p class="pcard__domain">Segmentation d'image</p>
+        <h3>Contours actifs et level sets</h3>
+        <p>Segmenter une image par modèles déformables&nbsp;: snake paramétrique et level set de Chan-Vese, codés à la main.</p>
+        <a class="pcard__link" href="https://github.com/lachance123-franccois/contours-actifs-level-sets" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+      </article>
+
+      <article class="pcard reveal">
+        <p class="pcard__domain">Vision · détection de formes</p>
+        <h3>Comptage de pièces par transformée de Hough</h3>
+        <p>Estimer le montant d'un ensemble de pièces en euros à partir d'une seule photo, sans aucune toolbox.</p>
+        <a class="pcard__link" href="https://github.com/lachance123-franccois/compteur_de_pieces" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+      </article>
+
+      <article class="pcard reveal">
+        <p class="pcard__domain">Télécoms · analyse spectrale</p>
+        <h3>Décodeur DTMF par l'algorithme de Goertzel</h3>
+        <p>Décoder les tonalités d'un clavier téléphonique en ne mesurant l'énergie qu'aux fréquences utiles.</p>
+        <a class="pcard__link" href="https://github.com/lachance123-franccois/dtmf-goertzel" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+      </article>
     </div>
 
-    <div class="work">
-
-      <article class="card card--feature reveal">
-        <div class="card__view">
-          <canvas id="cv-deconv" width="640" height="284" role="img"
-                  aria-label="Un signal en marches, flouté et bruité, est progressivement restauré."></canvas>
-        </div>
-        <div class="card__body">
-          <p class="card__domain">Problèmes inverses · optimisation</p>
-          <h3>Déconvolution&nbsp;: du variationnel aux réseaux déroulés</h3>
-          <p>
-            Retrouver un signal à partir d'une mesure floue et bruitée. Régularisation
-            quadratique, variation totale par algorithmes proximaux, Plug-and-Play et
-            réseau déroulé qui garde le modèle physique, avec une étude de robustesse
-            et une extension à la déconvolution aveugle.
-          </p>
-          <p class="card__key">Le réseau déroulé gagne à l'entraînement, perd son avance <strong>dès que le flou change</strong>.</p>
-          <div class="card__foot">
-            <ul class="tags"><li>MATLAB</li><li>Variation totale</li><li>Proximal</li><li>Unrolling</li></ul>
-            <div class="card__links">
-              <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Lire le code →</a>
-              <a href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Note technique</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card__view" id="wrap-balles">
-          <video id="vid-balles" src="https://raw.githubusercontent.com/lachance123-franccois/jeu-de-balle/main/demo.mp4"
-                 autoplay muted loop playsinline aria-hidden="true"></video>
-        </div>
-        <div class="card__body">
-          <p class="card__domain">Analyse spectrale</p>
-          <h3>Balles rebondissantes et FFT</h3>
-          <p>Simulation physique couplée à une analyse spectrale complète&nbsp;: spectre d'amplitude, DSP, STFT et comparaison de fenêtrages.</p>
-          <div class="card__foot">
-            <ul class="tags"><li>MATLAB</li><li>FFT</li><li>STFT</li></ul>
-            <div class="card__links">
-              <a href="https://github.com/lachance123-franccois/jeu-de-balle" target="_blank" rel="noopener">Lire le code →</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card__view">
-          <canvas id="cv-satellite" width="360" height="160" aria-hidden="true"></canvas>
-        </div>
-        <div class="card__body">
-          <p class="card__domain">Traitement d'image</p>
-          <h3>Analyse spectrale d'images aériennes</h3>
-          <p>Application MATLAB d'analyse d'images multispectrales pour détecter et classer des zones géographiques.</p>
-          <div class="card__foot">
-            <ul class="tags"><li>MATLAB</li><li>Multispectral</li><li>Télédétection</li></ul>
-            <div class="card__links">
-              <a href="https://github.com/lachance123-franccois/app-analyse-spectral-d-image-aerienne" target="_blank" rel="noopener">Lire le code →</a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="card__view">
-          <canvas id="cv-ecg" width="360" height="160" aria-hidden="true"></canvas>
-        </div>
-        <div class="card__body">
-          <p class="card__domain">Signal biomédical</p>
-          <h3>Filtrage adaptatif de signaux ECG</h3>
-          <p>Suppression du bruit secteur à 50&nbsp;Hz et des artefacts musculaires par filtrage de Kalman et traitement adaptatif.</p>
-          <div class="card__foot">
-            <ul class="tags"><li>MATLAB</li><li>Kalman</li><li>ECG</li></ul>
-          </div>
-        </div>
-      </article>
-
+    <div class="more">
+      <h3>Autres projets MATLAB sur GitHub</h3>
+      <ul>
+        <li><a class="act act--ghost act--chip" href="https://github.com/lachance123-franccois/defloutage-de-d-image-bouge-" target="_blank" rel="noopener">Défloutage de bougé</a></li>
+        <li><a class="act act--ghost act--chip" href="https://github.com/lachance123-franccois/inpainting-harmonic-tv" target="_blank" rel="noopener">Inpainting par variation totale</a></li>
+        <li><a class="act act--ghost act--chip" href="https://github.com/lachance123-franccois/accordeur-yin-autocorrelation" target="_blank" rel="noopener">Accordeur par autocorrélation et YIN</a></li>
+        <li><a class="act act--ghost act--chip" href="https://github.com/lachance123-franccois/jeu-de-balle" target="_blank" rel="noopener">Balles rebondissantes et FFT</a></li>
+        <li><a class="act act--ghost act--chip" href="https://github.com/lachance123-franccois/app-analyse-spectral-d-image-aerienne" target="_blank" rel="noopener">Analyse d'images aériennes</a></li>
+        <li><a class="act act--primary act--chip" href="https://github.com/lachance123-franccois?tab=repositories" target="_blank" rel="noopener">Tous les dépôts →</a></li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="cta-band">
   <div class="wrap">
-    <h2>Un problème de signal à résoudre&nbsp;?</h2>
-    <p style="max-width: 52ch;">Envoyez-moi la fiche de poste. Je réponds sous 24&nbsp;h avec les projets qui s'en rapprochent le plus.</p>
+    <h2 style="font-size: var(--step-2);">Un problème de signal à résoudre&nbsp;?</h2>
+    <p>Envoyez-moi la fiche de poste. Je réponds sous 24 à 48&nbsp;h avec les projets qui s'en rapprochent le plus.</p>
     <div class="cta-actions">
       <a class="act act--signal" href="contact.html">Écrire un message</a>
-      <a class="act act--onDark" href="machine-learning.html">Voir les projets IA</a>
+      <a class="act act--ghost" href="machine-learning.html">Voir les projets IA</a>
     </div>
   </div>
 </section>
@@ -260,7 +144,7 @@
       <div>
         <h4>Ailleurs</h4>
         <ul>
-          <li><a href="https://www.linkedin.com/in/francois-l-a35723204" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/francois-lachance12" target="_blank" rel="noopener">LinkedIn</a></li>
           <li><a href="https://github.com/lachance123-franccois" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="mailto:lachanceawounang@icloud.com">Email</a></li>
         </ul>
@@ -275,183 +159,5 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 <script src="js/main.js" defer></script>
-
-<script>
-/* Vidéo des balles : si elle ne charge pas, on dessine une animation à la place */
-(function () {
-  const vid = document.getElementById('vid-balles');
-  let done = false;
-  function fallback() {
-    if (done) return; done = true;
-    const wrap = document.getElementById('wrap-balles');
-    wrap.innerHTML = '<canvas id="cv-balles" width="360" height="160" aria-hidden="true"></canvas>';
-    animBalles(document.getElementById('cv-balles'));
-  }
-  vid.addEventListener('error', fallback);
-  setTimeout(() => { if (vid.readyState === 0) fallback(); }, 3500);
-
-  function animBalles(cv) {
-    const ctx = cv.getContext('2d');
-    const W = cv.width, H = cv.height;
-    const cols = ['#2fb6c4', '#c4703a', '#e7eef0', '#1f9aa8', '#d9a066'];
-    const balls = cols.map((c, i) => ({
-      x: 30 + i * 66, y: 30 + Math.random() * 50,
-      vx: (Math.random() - 0.5) * 2.4, vy: Math.random() * 1.5 + 0.5,
-      r: 11 + i * 1.5, e: 0.78 + i * 0.04, col: c
-    }));
-    let tick = 0;
-    (function loop() {
-      ctx.fillStyle = '#0b1a26'; ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1;
-      for (let x = 0; x < W; x += 36) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-      for (let y = 0; y < H; y += 36) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
-      ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(0, H - 8); ctx.lineTo(W, H - 8); ctx.stroke();
-      balls.forEach(b => {
-        b.vy += 0.22; b.x += b.vx; b.y += b.vy;
-        if (b.y + b.r >= H - 8) { b.y = H - 8 - b.r; b.vy = -Math.abs(b.vy) * b.e; }
-        if (b.x - b.r < 0) { b.x = b.r; b.vx = Math.abs(b.vx); }
-        if (b.x + b.r > W) { b.x = W - b.r; b.vx = -Math.abs(b.vx); }
-        ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = b.col; ctx.fill();
-      });
-      const nB = 20, bW = 5, bGap = 2, sx = W - nB * (bW + bGap) - 4;
-      for (let i = 0; i < nB; i++) {
-        const amp = 6 + 18 * Math.abs(Math.sin(tick * 0.05 + i * 0.55 + i * i * 0.015));
-        ctx.fillStyle = 'rgba(47,182,196,0.85)';
-        ctx.fillRect(sx + i * (bW + bGap), H - 8 - amp, bW, amp);
-      }
-      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '9px monospace'; ctx.fillText('FFT', W - 26, H - 11);
-      tick++;
-      requestAnimationFrame(loop);
-    })();
-  }
-})();
-
-/* Imagerie aérienne : terrain synthétique balayé bande par bande */
-(function () {
-  const cv = document.getElementById('cv-satellite');
-  const ctx = cv.getContext('2d');
-  const W = cv.width, H = cv.height;
-  function n(x, y, s) { return Math.sin(x * s + 1.3) * Math.cos(y * s * 0.7 + 0.9); }
-  function terrain(x, y) { return 0.5 * n(x, y, 0.05) + 0.3 * n(x, y, 0.13) + 0.2 * n(x, y, 0.26); }
-  const pals = [
-    v => [Math.round(v * 60), Math.round(90 + v * 130), Math.round(v * 30)],
-    v => [Math.round(140 + v * 90), Math.round(60 + v * 70), Math.round(v * 30)],
-    v => [Math.round(v * 30), Math.round(v * 60), Math.round(100 + v * 140)]
-  ];
-  let palIdx = 0, scanY = 0, phase = 0;
-  const imgData = ctx.createImageData(W, H);
-  function drawTerrain(p) {
-    const fn = pals[p % pals.length];
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-      const c = fn((terrain(x, y) + 1) / 2), i = (y * W + x) * 4;
-      imgData.data[i] = c[0]; imgData.data[i + 1] = c[1]; imgData.data[i + 2] = c[2]; imgData.data[i + 3] = 255;
-    }
-    ctx.putImageData(imgData, 0, 0);
-  }
-  drawTerrain(0);
-  const bands = ['NIR', 'RED', 'GREEN'];
-  (function loop() {
-    phase++;
-    if (phase % 200 === 0) { palIdx++; drawTerrain(palIdx); }
-    ctx.strokeStyle = 'rgba(255,255,60,0.9)'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(0, scanY); ctx.lineTo(W, scanY); ctx.stroke();
-    scanY = (scanY + 2) % H;
-    ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(4, 4, 58, 20);
-    ctx.fillStyle = '#fff'; ctx.font = 'bold 11px monospace';
-    ctx.fillText('B:' + bands[palIdx % 3], 8, 18);
-    requestAnimationFrame(loop);
-  })();
-})();
-
-/* ECG : signal brut bruité et signal filtré */
-(function () {
-  const cv = document.getElementById('cv-ecg');
-  const ctx = cv.getContext('2d');
-  const W = cv.width, H = cv.height, MID = H * 0.5, BUF = W;
-  const raw = new Float32Array(BUF), filt = new Float32Array(BUF);
-  let tick = 0;
-  const alpha = 0.16;
-  function pulse(p) {
-    p = ((p % 80) / 80);
-    if (p < 0.08) return 8 * p / 0.08 - 4;
-    if (p < 0.12) return 4 - 8 * (p - 0.08) / 0.04;
-    if (p < 0.30) return 0;
-    if (p < 0.33) return -12 * (p - 0.30) / 0.03;
-    if (p < 0.36) return -4 + 72 * (p - 0.33) / 0.03;
-    if (p < 0.39) return 68 - 85 * (p - 0.36) / 0.03;
-    if (p < 0.42) return -17 + 17 * (p - 0.39) / 0.03;
-    if (p < 0.55) return 0;
-    if (p < 0.65) return 9 * Math.sin(Math.PI * (p - 0.55) / 0.10);
-    return 0;
-  }
-  (function loop() {
-    const sig = pulse(tick) / 80 * 34;
-    const noise = (Math.random() - 0.5) * 9 + 3.5 * Math.sin(tick * 0.314);
-    const prevF = filt[BUF - 1];
-    raw.copyWithin(0, 1); filt.copyWithin(0, 1);
-    raw[BUF - 1] = sig + noise; filt[BUF - 1] = prevF + alpha * (sig - prevF);
-    tick++;
-    ctx.fillStyle = '#0b1a26'; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = 'rgba(47,182,196,0.08)'; ctx.lineWidth = 0.5;
-    for (let x = 0; x < W; x += 28) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-    for (let y = 0; y < H; y += 18) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
-    ctx.beginPath(); ctx.strokeStyle = 'rgba(196,112,58,0.55)'; ctx.lineWidth = 1;
-    for (let i = 0; i < BUF; i++) { i === 0 ? ctx.moveTo(i, MID - raw[i]) : ctx.lineTo(i, MID - raw[i]); }
-    ctx.stroke();
-    ctx.beginPath(); ctx.strokeStyle = '#2fb6c4'; ctx.lineWidth = 2;
-    for (let i = 0; i < BUF; i++) { i === 0 ? ctx.moveTo(i, MID - filt[i]) : ctx.lineTo(i, MID - filt[i]); }
-    ctx.stroke();
-    ctx.font = '10px monospace';
-    ctx.fillStyle = 'rgba(196,112,58,0.9)'; ctx.fillText('BRUT', 6, 14);
-    ctx.fillStyle = '#2fb6c4'; ctx.fillText('FILTRÉ', 6, 26);
-    requestAnimationFrame(loop);
-  })();
-})();
-
-/* Déconvolution : mesure floue -> restauration progressive */
-(function () {
-  const cv = document.getElementById('cv-deconv');
-  if (!cv) return;
-  const ctx = cv.getContext('2d');
-  const W = cv.width, H = cv.height, N = W;
-  const lv = [[0, .22], [.17, .78], [.38, .42], [.57, .9], [.8, .3]];
-  const x = new Float32Array(N), y = new Float32Array(N);
-  for (let i = 0; i < N; i++) { const t = i / (N - 1); let v = lv[0][1]; for (const [a, b] of lv) if (t >= a) v = b; x[i] = v; }
-  const K = 24, s = 9; let z = 0; const k = [];
-  for (let j = -K; j <= K; j++) { const g = Math.exp(-j * j / (2 * s * s)); k.push(g); z += g; }
-  for (let i = 0; i < N; i++) { let a = 0; for (let j = -K; j <= K; j++) a += k[j + K] / z * x[Math.min(N - 1, Math.max(0, i - j))]; y[i] = a + (Math.random() - 0.5) * 0.05; }
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const top = 40, h = H - top - 18;
-  function line(v, col, lw) {
-    ctx.beginPath(); ctx.strokeStyle = col; ctx.lineWidth = lw;
-    for (let i = 0; i < N; i++) { const py = top + h * (1 - v[i]); i ? ctx.lineTo(i, py) : ctx.moveTo(i, py); }
-    ctx.stroke();
-  }
-  function draw(p) {
-    const e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, r = new Float32Array(N);
-    for (let i = 0; i < N; i++) r[i] = (1 - e) * y[i] + e * x[i];
-    ctx.fillStyle = '#0b1a26'; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = 'rgba(47,182,196,0.08)'; ctx.lineWidth = 1;
-    for (let gx = 0; gx < W; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
-    for (let gy = 0; gy < H; gy += 28) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
-    line(y, 'rgba(196,112,58,0.6)', 1.6);
-    line(r, '#2fb6c4', 3);
-    ctx.font = '500 14px "IBM Plex Mono", monospace';
-    ctx.fillStyle = 'rgba(196,112,58,0.95)'; ctx.fillText('mesure y = h * x + n', 14, 24);
-    ctx.fillStyle = '#2fb6c4';
-    const lbl = 'restauration ' + Math.round(e * 100) + ' %';
-    ctx.fillText(lbl, W - 14 - ctx.measureText(lbl).width, 24);
-  }
-  if (reduce) { draw(1); return; }
-  let t0 = null;
-  (function loop(ts) {
-    if (t0 === null) t0 = ts || 0;
-    const c = (((ts || 0) - t0) / 1000) % 7, p = c < 1 ? 0 : c < 5 ? (c - 1) / 4 : 1;
-    draw(p); requestAnimationFrame(loop);
-  })();
-})();
-</script>
 </body>
-</html>  
+</html>
