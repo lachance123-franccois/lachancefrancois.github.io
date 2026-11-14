@@ -93,7 +93,7 @@
   .section--alt { background: var(--paper-pure); border-block: 1px solid var(--rule); }
 
   /* ---------- Projets : grille de cartes ---------- */
-  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); }
+  .work { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
   .card {
     display: flex; flex-direction: column;
     background: var(--paper-pure); border: 1px solid var(--rule);
@@ -107,30 +107,12 @@
   .card__domain { font-family: var(--font-mono); font-size: .76rem; color: var(--signal-dim); margin: 0 0 var(--sp-2); }
   .card h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: var(--sp-3); }
   .card p { font-size: .93rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
-  .card__key {
-    font-size: .88rem; color: var(--text); margin-bottom: var(--sp-6);
-    padding-left: var(--sp-3); border-left: 3px solid var(--detect);
-  }
-  .card__key strong { font-family: var(--font-mono); font-weight: 600; }
   .card__foot { margin-top: auto; display: flex; flex-direction: column; gap: var(--sp-4); }
   .card__links { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4); }
   .card__links a { font-weight: 600; font-size: .9rem; }
 
-  /* Carte vedette : deux colonnes sur grand écran */
-  .card--feature { grid-column: span 2; grid-row: span 2; flex-direction: row; }
-  .card--feature .card__view { aspect-ratio: auto; flex: 0 0 50%; min-height: 300px; border-bottom: 0; border-right: 1px solid var(--rule); }
-  .card--feature .card__body { padding: var(--sp-12) var(--sp-8); justify-content: center; }
-  .card--feature .card__foot { margin-top: var(--sp-4); }
-  .card--feature h3 { font-size: var(--step-2); }
-  .card--feature p { font-size: 1rem; }
-
   @media (max-width: 1040px) {
     .work { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
-    .card--feature { grid-column: auto; grid-row: auto; flex-direction: column; }
-    .card--feature .card__view { aspect-ratio: 16 / 9; min-height: 0; flex: none; border-right: 0; border-bottom: 1px solid var(--rule); }
-    .card--feature .card__body { padding: var(--sp-6) var(--sp-6) var(--sp-8); justify-content: flex-start; }
-    .card--feature h3 { font-size: 1.15rem; }
-    .card--feature p { font-size: .93rem; }
   }
   @media (max-width: 720px) { .work { grid-template-columns: 1fr; } }
   .work-more { margin: var(--sp-12) auto 0; max-width: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); }
@@ -242,32 +224,22 @@
       <div class="section-head">
         <p class="eyebrow">Projets phares</p>
         <h2>Six chaînes de traitement complètes</h2>
-        <p class="lede">Chaque projet part d'un signal réel, suit une méthode explicite et publie son code.</p>
+        <p class="lede">Chaque projet publie son code, sa méthode et ses résultats sur GitHub.</p>
       </div>
 
       <div class="work">
 
-        <article class="card card--feature reveal">
-          <div class="card__view">
-            <canvas id="viz-shortcut" role="img"
-                    aria-label="Animation : un glyphe apparaît dans le coin d'une radiographie, le diagnostic du modèle bascule de sain à malade alors que les poumons n'ont pas changé."></canvas>
-          </div>
+        <article class="card reveal">
+          <div class="card__view"><canvas id="viz-shortcut" aria-hidden="true"></canvas></div>
           <div class="card__body">
             <p class="card__domain">Robustesse causale · imagerie médicale</p>
-            <h3>Le modèle le plus performant est le seul inutilisable</h3>
-            <p>
-              Un classifieur de radiographies qui apprend un raccourci&nbsp;: démonstration,
-              mesure par interventions <code>do(biais)</code> et Grad-CAM, puis deux
-              stratégies de correction comparées.
-            </p>
-            <p class="card__key">
-              <strong>0.965</strong> d'exactitude publiée, <strong>0.495</strong> dès que
-              l'artefact change de classe. <strong>51,7&nbsp;%</strong> des diagnostics
-              basculent pour un glyphe couvrant 2&nbsp;% de l'image.
-            </p>
+            <h3>Apprentissage par raccourci en imagerie médicale</h3>
+            <p>Un classifieur d'images médicales peut afficher une excellente exactitude en s'appuyant sur un artefact d'acquisition plutôt que sur la pathologie. Le projet reproduit ce phénomène dans un cadre contrôlé, le détecte par interventions causales et Grad-CAM, puis compare deux stratégies de correction.</p>
             <div class="card__foot">
               <ul class="tags"><li>PyTorch</li><li>Grad-CAM</li><li>Causalité</li></ul>
-              <div class="card__links"><a href="machine-learning.html">Voir le projet →</a></div>
+              <div class="card__links">
+                <a href="https://github.com/lachance123-franccois/shortcut-audit" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
+              </div>
             </div>
           </div>
         </article>
@@ -277,15 +249,11 @@
           <div class="card__body">
             <p class="card__domain">Incertitude · IA médicale</p>
             <h3>umi&nbsp;: quand un modèle doit dire «&nbsp;je ne sais pas&nbsp;»</h3>
-            <p>
-              Quatre méthodes d'incertitude comparées sur images médicales, avec
-              rapport chiffré généré automatiquement.
-            </p>
+            <p>Un réseau qui se trompe annonce souvent une confiance proche de 1, et le praticien ne sait pas quels cas relire. umi compare quatre méthodes d'estimation d'incertitude sur un même protocole, pour savoir si l'on peut se fier à la confiance annoncée et à quel coût de calcul.</p>
             <div class="card__foot">
               <ul class="tags"><li>PyTorch</li><li>Calibration</li><li>MedMNIST</li></ul>
               <div class="card__links">
-                <a href="machine-learning.html">Voir le projet →</a>
-                <a href="assets/pdf/AWOUNANG_incertitude_imagerie_medicale.pdf" target="_blank" rel="noopener">Rapport</a>
+                <a href="https://github.com/lachance123-franccois/uncertainty-aware-medical-imaging" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -296,37 +264,26 @@
           <div class="card__body">
             <p class="card__domain">Signal biomédical</p>
             <h3>Détection de crises d'épilepsie sur EEG</h3>
-            <p>
-              Ondelettes discrètes, indicateurs par sous-bande, classification des
-              fenêtres suspectes&nbsp;: de l'enregistrement brut à l'alerte.
-            </p>
+            <p>Objectif&nbsp;: repérer automatiquement les crises dans un enregistrement EEG. La chaîne décompose le signal en ondelettes discrètes, calcule des indicateurs par sous-bande et classe les fenêtres suspectes.</p>
             <div class="card__foot">
               <ul class="tags"><li>EEG</li><li>PyWavelets</li><li>scikit-learn</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" rel="noopener">Lire le code →</a>
+                <a href="https://github.com/lachance123-franccois/detection-par-ondelette-des-epilepsie" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
               </div>
             </div>
           </div>
         </article>
 
         <article class="card reveal">
-          <div class="card__view">
-            <canvas id="viz-deconv" role="img"
-                    aria-label="Animation : un signal en marches, flouté et bruité, est progressivement restauré jusqu'à retrouver ses sauts nets."></canvas>
-          </div>
+          <div class="card__view"><canvas id="viz-deconv" aria-hidden="true"></canvas></div>
           <div class="card__body">
             <p class="card__domain">Problèmes inverses · optimisation</p>
             <h3>Déconvolution&nbsp;: du variationnel aux réseaux déroulés</h3>
-            <p>
-              Variation totale, Plug-and-Play, réseau déroulé et déconvolution aveugle,
-              comparés dans un cadre contrôlé.
-            </p>
-            <p class="card__key">Le réseau déroulé gagne à l'entraînement, perd son avance <strong>dès que le flou change</strong>.</p>
+            <p>Restaurer un signal flouté et bruité est un problème inverse mal posé. Le projet compare quatre approches dans un cadre contrôlé&nbsp;: variation totale, Plug-and-Play, réseau déroulé et déconvolution aveugle.</p>
             <div class="card__foot">
               <ul class="tags"><li>MATLAB</li><li>Proximal</li><li>Unrolling</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Lire le code →</a>
-                <a href="assets/pdf/note_technique_deconvolution.pdf" target="_blank" rel="noopener">Note technique</a>
+                <a href="https://github.com/lachance123-franccois/deconvolution-variational-to-unrolled" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -337,14 +294,11 @@
           <div class="card__body">
             <p class="card__domain">Maintenance prédictive</p>
             <h3>Classification de défauts de roulement</h3>
-            <p>
-              Enveloppe du signal, fréquences de défaut BPFI, BPFO et BSF, puis
-              classification du type de défaut et de sa sévérité.
-            </p>
+            <p>Objectif&nbsp;: détecter un défaut de roulement à partir du seul signal vibratoire. Analyse d'enveloppe, fréquences caractéristiques BPFI, BPFO et BSF, puis classification du type de défaut et de sa sévérité.</p>
             <div class="card__foot">
               <ul class="tags"><li>Enveloppe</li><li>FFT</li><li>scikit-learn</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" rel="noopener">Lire le code →</a>
+                <a href="https://github.com/lachance123-franccois/clasification-defaut-de-roulement-" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -355,14 +309,11 @@
           <div class="card__body">
             <p class="card__domain">Vision par ordinateur</p>
             <h3>VisionGuard&nbsp;: détection d'objets en temps réel</h3>
-            <p>
-              YOLOv8, suivi des objets entre images et interface affichant débit
-              et latence de bout en bout.
-            </p>
+            <p>Objectif&nbsp;: détecter et suivre des objets dans un flux vidéo en temps réel. Détection par YOLOv8, suivi entre images et interface de supervision du traitement.</p>
             <div class="card__foot">
               <ul class="tags"><li>YOLOv8</li><li>OpenCV</li><li>Temps réel</li></ul>
               <div class="card__links">
-                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" rel="noopener">Lire le code →</a>
+                <a href="https://github.com/lachance123-franccois/VisionGuard" target="_blank" rel="noopener">Voir le projet sur GitHub →</a>
               </div>
             </div>
           </div>
@@ -486,6 +437,7 @@
     </div>
     <div class="site-foot__base">
       <span>© 2026 François Lachance Awounang-Ngounou</span>
+      <span>Site construit à la main en HTML, CSS et JavaScript.</span>
     </div>
   </div>
 </footer>
@@ -545,7 +497,7 @@
     ctx.font = '11px "IBM Plex Mono", monospace';
     ctx.fillStyle = ink; ctx.globalAlpha = .6; ctx.fillText('mesure y = h * x + n', 18, 16);
     ctx.globalAlpha = 1; ctx.fillStyle = accent;
-    var lbl = 'restauration ' + Math.round(e * 100) + ' %';
+    var lbl = 'restauration';
     ctx.fillText(lbl, W - 18 - ctx.measureText(lbl).width, 16);
   }
   function loop(ts) {
