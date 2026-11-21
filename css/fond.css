@@ -1,55 +1,81 @@
 /* ==========================================================================
    Fond « coucher de soleil » commun à toutes les pages
-   À charger APRÈS css/theme.css (et après Bootstrap sur matlab.html) :
+   À charger juste APRÈS css/theme.css :
    <link rel="stylesheet" href="css/fond.css">
    ========================================================================== */
 
 :root {
-  --fond-image: url("../assets/fond-coucher-soleil.svg");
-  --fond-ciel: #12082e;              /* couleur affichée pendant le chargement */
-  --panneau: rgba(255, 255, 255, .90);
-  --panneau-bord: rgba(255, 255, 255, .55);
+  --fond-ciel: #12082e;                          /* affiché pendant le chargement */
+  --panneau: rgba(255, 255, 255, .92);
+  --panneau-bord: rgba(255, 255, 255, .6);
   --panneau-ombre: 0 18px 50px rgba(10, 4, 30, .35);
 }
-
-/* 1. Le décor, fixe derrière tout le contenu (fonctionne aussi sur mobile) */
-html, body { background: var(--fond-ciel) !important; }
-body { position: relative; }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--fond-image) 50% 50% / cover no-repeat, var(--fond-ciel);
-  pointer-events: none;
+[data-theme="dark"] {
+  --panneau: rgba(11, 26, 38, .88);
+  --panneau-bord: rgba(255, 255, 255, .12);
 }
-/* léger voile sombre en bas pour garder les textes lisibles */
+
+/* 1. Le décor, fixe derrière tout le contenu (fonctionne aussi sur mobile).
+      Le chemin de l'image est écrit en dur : dans une variable CSS, il serait
+      résolu depuis la page et non depuis ce fichier. */
+html { background: var(--fond-ciel) !important; }
+/* le body doit rester transparent : sinon son fond se peint par-dessus le décor */
+body { background: transparent !important; }
+body::before,
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(12, 6, 30, .15) 0%, rgba(12, 6, 30, 0) 40%, rgba(12, 6, 30, .35) 100%);
   pointer-events: none;
 }
+body::before {
+  background: url("../assets/fond-coucher-soleil.svg") 50% 50% / cover no-repeat, #12082e;
+}
+/* léger voile pour garder les textes clairs lisibles en haut et en bas */
+body::after {
+  background: linear-gradient(180deg, rgba(12, 6, 30, .30) 0%, rgba(12, 6, 30, 0) 35%,
+                                      rgba(12, 6, 30, 0) 65%, rgba(12, 6, 30, .35) 100%);
+}
 @media (max-width: 760px) {
-  /* sur téléphone, on recentre l'image sur le soleil */
-  body::before { background-position: 72% 50%, 0 0; }
+  body::before { background-position: 72% 50%, 0 0; }   /* recentré sur le soleil */
 }
 
-/* 2. Les grandes bandes de couleur deviennent transparentes pour laisser voir le décor */
+/* 2. Les bandes de couleur unie deviennent transparentes */
 .hero,
+.page-hero,
 .cta-band,
-main > section,
-#contenu > section,
-#contenu > header {
+.section,
+.section--alt,
+main > section {
   background: transparent !important;
+  border-block: 0 !important;
 }
-hr.rule { display: none; }   /* les panneaux suffisent à séparer les sections */
+/* l'ancien quadrillage de l'en-tête devient un voile sombre placé derrière le texte */
+.hero::after,
+.page-hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  background: linear-gradient(90deg, rgba(12, 6, 30, .55) 0%, rgba(12, 6, 30, .30) 50%, rgba(12, 6, 30, 0) 80%);
+}
+@media (max-width: 760px) {
+  .hero::after, .page-hero::after { background: rgba(12, 6, 30, .45); }
+}
+hr.rule { display: none; }        /* les panneaux suffisent à séparer les sections */
 
-/* 3. Le contenu des sections claires est posé sur un panneau givré */
-main > section:not(.cta-band) > .wrap,
-#contenu > section:not(:first-child) > .container {
+/* 3. Titres posés directement sur le ciel */
+.hero h1, .page-hero h1 { text-shadow: 0 2px 18px rgba(10, 4, 30, .45); }
+.hero p, .page-hero p { text-shadow: 0 1px 10px rgba(10, 4, 30, .6); }
+
+/* 4. Le contenu des sections est posé sur un panneau givré */
+main > section > .wrap,
+main.section > .wrap {
   background: var(--panneau);
   border: 1px solid var(--panneau-bord);
   border-radius: 22px;
@@ -58,26 +84,13 @@ main > section:not(.cta-band) > .wrap,
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-main > section:not(.cta-band),
-#contenu > section:not(:first-child) {
-  padding-block: clamp(1.25rem, 3vw, 2.5rem) !important;
+main > section,
+main.section {
+  padding-block: clamp(1rem, 2.5vw, 2rem) !important;
 }
+main.section { padding-block: clamp(2rem, 5vw, 4rem) !important; }
 
-/* 4. Bandes sombres (en-tête, appel à l'action) : texte blanc directement sur le décor */
-.hero h1, .cta-band h2,
-#contenu > section:first-child h1 {
-  text-shadow: 0 2px 18px rgba(10, 4, 30, .45);
-}
-.cta-band > .wrap {
-  background: rgba(14, 8, 34, .55);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 22px;
-  padding: clamp(1.25rem, 3vw, 2.75rem);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
-/* 5. Repli si le flou n'est pas pris en charge : panneaux un peu plus opaques */
+/* 5. Repli si le flou n'est pas pris en charge : panneaux plus opaques */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :root { --panneau: rgba(255, 255, 255, .96); }
+  :root { --panneau: rgba(255, 255, 255, .97); }
 }
