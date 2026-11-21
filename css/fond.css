@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Fond « coucher de soleil » commun à toutes les pages
+   À charger APRÈS css/theme.css (et après Bootstrap sur matlab.html) :
+   <link rel="stylesheet" href="css/fond.css">
+   ========================================================================== */
+
+:root {
+  --fond-image: url("../assets/fond-coucher-soleil.svg");
+  --fond-ciel: #12082e;              /* couleur affichée pendant le chargement */
+  --panneau: rgba(255, 255, 255, .90);
+  --panneau-bord: rgba(255, 255, 255, .55);
+  --panneau-ombre: 0 18px 50px rgba(10, 4, 30, .35);
+}
+
+/* 1. Le décor, fixe derrière tout le contenu (fonctionne aussi sur mobile) */
+html, body { background: var(--fond-ciel) !important; }
+body { position: relative; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--fond-image) 50% 50% / cover no-repeat, var(--fond-ciel);
+  pointer-events: none;
+}
+/* léger voile sombre en bas pour garder les textes lisibles */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(12, 6, 30, .15) 0%, rgba(12, 6, 30, 0) 40%, rgba(12, 6, 30, .35) 100%);
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  /* sur téléphone, on recentre l'image sur le soleil */
+  body::before { background-position: 72% 50%, 0 0; }
+}
+
+/* 2. Les grandes bandes de couleur deviennent transparentes pour laisser voir le décor */
+.hero,
+.cta-band,
+main > section,
+#contenu > section,
+#contenu > header {
+  background: transparent !important;
+}
+hr.rule { display: none; }   /* les panneaux suffisent à séparer les sections */
+
+/* 3. Le contenu des sections claires est posé sur un panneau givré */
+main > section:not(.cta-band) > .wrap,
+#contenu > section:not(:first-child) > .container {
+  background: var(--panneau);
+  border: 1px solid var(--panneau-bord);
+  border-radius: 22px;
+  box-shadow: var(--panneau-ombre);
+  padding: clamp(1.25rem, 3vw, 2.75rem);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+main > section:not(.cta-band),
+#contenu > section:not(:first-child) {
+  padding-block: clamp(1.25rem, 3vw, 2.5rem) !important;
+}
+
+/* 4. Bandes sombres (en-tête, appel à l'action) : texte blanc directement sur le décor */
+.hero h1, .cta-band h2,
+#contenu > section:first-child h1 {
+  text-shadow: 0 2px 18px rgba(10, 4, 30, .45);
+}
+.cta-band > .wrap {
+  background: rgba(14, 8, 34, .55);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 22px;
+  padding: clamp(1.25rem, 3vw, 2.75rem);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* 5. Repli si le flou n'est pas pris en charge : panneaux un peu plus opaques */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root { --panneau: rgba(255, 255, 255, .96); }
+}
