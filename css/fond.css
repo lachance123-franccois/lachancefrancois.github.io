@@ -73,22 +73,76 @@ hr.rule { display: none; }        /* les panneaux suffisent à séparer les sect
 .hero h1, .page-hero h1 { text-shadow: 0 2px 18px rgba(10, 4, 30, .45); }
 .hero p, .page-hero p { text-shadow: 0 1px 10px rgba(10, 4, 30, .6); }
 
-/* 4. Le contenu des sections est posé sur un panneau givré */
+/* 4. Seuls les blocs qui contiennent du texte sont blancs ; entre eux, le décor reste visible */
+
+/* 4a. Plus de grand panneau autour des sections */
 main > section > .wrap,
 main.section > .wrap {
-  background: var(--panneau);
-  border: 1px solid var(--panneau-bord);
-  border-radius: 22px;
-  box-shadow: var(--panneau-ombre);
-  padding: clamp(1.25rem, 3vw, 2.75rem);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0;
 }
 main > section,
 main.section {
-  padding-block: clamp(1rem, 2.5vw, 2rem) !important;
+  padding-block: clamp(2rem, 5vw, 3.5rem) !important;
 }
-main.section { padding-block: clamp(2rem, 5vw, 4rem) !important; }
+
+/* 4b. Titres et chapeaux posés directement sur le ciel : texte clair */
+.section-head h2,
+.section-head .lede,
+main > section:not(.cta-band) > .wrap > h2,
+main > section:not(.cta-band) > .wrap > .lede,
+main.section > .wrap > h1,
+main.section > .wrap > .lede,
+.cv-head h1,
+.cv-head .lede,
+.more > h3 {
+  color: #fff !important;
+  text-shadow: 0 2px 14px rgba(10, 4, 30, .55);
+}
+.section-head .lede,
+main > section:not(.cta-band) > .wrap > .lede,
+main.section > .wrap > .lede,
+.cv-head .lede { color: rgba(255, 255, 255, .86) !important; }
+main .eyebrow {
+  color: #67e8f9 !important;
+  text-shadow: 0 1px 10px rgba(10, 4, 30, .6);
+}
+main .eyebrow::before { background: #67e8f9; }
+
+/* 4c. Les blocs de texte : fond blanc, coins arrondis, légère ombre */
+.card,
+.pcard,
+.skill,
+.timeline li,
+.form-card,
+.contact-grid > div:not(.form-card),
+.cv-frame,
+.cta-band > .wrap {
+  background: #fff !important;
+  border: 1px solid rgba(255, 255, 255, .7) !important;
+  box-shadow: 0 12px 34px rgba(10, 4, 30, .28);
+}
+.contact-grid > div:not(.form-card),
+.cta-band > .wrap {
+  border-radius: var(--radius-lg, 16px);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+.cta-band > .wrap { max-width: 860px; }
+.cta-band { padding-block: clamp(2rem, 5vw, 3.5rem) !important; }
+
+/* boutons « contour » posés sur le décor : fond blanc pour rester lisibles */
+.work-more .act,
+.cv-actions .act--ghost,
+.more .act {
+  background: #fff !important;
+  color: var(--ink-900, #0b1a26) !important;
+  border-color: #fff !important;
+}
+
+/* 4d. Le bloc « contact » : son titre redevient sombre puisqu'il est dans une case blanche */
+.contact-grid > div:not(.form-card) h2 { color: var(--text, #0b1a26); }
 
 /* 5. Repli si le flou n'est pas pris en charge : panneaux plus opaques */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
